@@ -29,12 +29,15 @@
 {
     [super viewDidLoad];
     self.title = @"Assignments";
-    NSMutableArray *stringArray = [[NSMutableArray alloc] init];
-    for(int i=0; i< 10; i++){
-        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Assignment ", @"title", @"24/3/2012", @"date", nil];
-        [stringArray addObject:dict];
+    /* Fake data */
+    NSMutableArray *assignments = [[NSMutableArray alloc] init];
+    for(NSInteger i=1; i< 10; i++){
+        NSString *title = [@"Assignment " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
+        NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
+        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"24/3/2012", @"date", finished, @"finished", nil];
+        [assignments addObject:dict];
     }
-    self.assignments = stringArray;
+    self.assignments = assignments;
 	// Do any additional setup after loading the view.
 }
 
@@ -48,8 +51,11 @@
     static NSString *CellIdentifier = @"Assignment description";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     // Configure the cell
-    cell.textLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"title"]; //Title
-    cell.detailTextLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"date"]; //Date
+    cell.textLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"title"]; // Title
+    cell.detailTextLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"date"]; // Date
+    // Mark as checked if assignment is finished
+    if ([[[self.assignments objectAtIndex:indexPath.item] valueForKey:@"finished"] isEqualToString:@"yes"])
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     return cell;
 }
