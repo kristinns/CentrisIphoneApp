@@ -8,6 +8,7 @@
 
 #import "AssignmentsTableViewController.h"
 #import "CentrisDataFetcher.h"
+#import "AssignmentDetailViewController.h"
 
 @interface AssignmentsTableViewController ()
 @property (nonatomic, strong) NSArray *assignments;
@@ -57,6 +58,14 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if([segue.identifier isEqualToString:@"assignmentDetailSegue"]) {
+        //NSString *title = [[self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row] valueForKey:@"title"];
+        //[segue.destinationViewController setAssignmentTitle:title];
+    }
 }
 
 @end
