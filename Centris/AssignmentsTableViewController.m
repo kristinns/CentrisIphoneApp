@@ -31,7 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.title = @"Assignments";
+    self.title = @"Verkefni";
     // Get assignments and courses from CentrisDataFetcher
     self.assignments = [CentrisDataFetcher getAssignments];
     self.assignmentCourses = [CentrisDataFetcher getAssignmentCourses];

@@ -15,7 +15,7 @@
     /* Fake data */
     NSMutableArray *assignments = [[NSMutableArray alloc] init];
     for(NSInteger i=1; i<= 10; i++) {
-        NSString *title = [@"Assignment " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
+        NSString *title = [@"Verkefni " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
         NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
         NSDictionary *assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"24/3/2012", @"date", finished, @"finished", nil];
         [assignments addObject:assignment];
