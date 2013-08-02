@@ -21,6 +21,9 @@
 		194842E31799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
+		194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */; };
+		194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */; };
+		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +56,12 @@
 		194842E81799B0AB0016A5C0 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
 		194842EA1799B0AB0016A5C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
+		194842F8179AB7E40016A5C0 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
+		194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
+		194842FA179AB7E40016A5C0 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
+		194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
+		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +121,7 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
+				194842F6179AB7E40016A5C0 /* Vendor */,
 				194842D01799B0AB0016A5C0 /* AppDelegate.h */,
 				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
 				194842D31799B0AB0016A5C0 /* Main.storyboard */,
@@ -119,6 +129,8 @@
 				194842D71799B0AB0016A5C0 /* ViewController.m */,
 				194842D91799B0AB0016A5C0 /* Images.xcassets */,
 				194842C81799B0AB0016A5C0 /* Supporting Files */,
+				19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */,
+				19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */,
 			);
 			path = Centris;
 			sourceTree = "<group>";
@@ -150,6 +162,25 @@
 				194842E91799B0AB0016A5C0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		194842F6179AB7E40016A5C0 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				194842F7179AB7E40016A5C0 /* ECSlidingViewController */,
+			);
+			path = Vendor;
+			sourceTree = "<group>";
+		};
+		194842F7179AB7E40016A5C0 /* ECSlidingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				194842F8179AB7E40016A5C0 /* ECSlidingViewController.h */,
+				194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */,
+				194842FA179AB7E40016A5C0 /* UIImage+ImageWithUIView.h */,
+				194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */,
+			);
+			path = ECSlidingViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -249,8 +280,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */,
 				194842D81799B0AB0016A5C0 /* ViewController.m in Sources */,
+				194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +488,7 @@
 				194842F21799B0AB0016A5C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		194842F31799B0AB0016A5C0 /* Build configuration list for PBXNativeTarget "CentrisTests" */ = {
 			isa = XCConfigurationList;
@@ -462,6 +497,7 @@
 				194842F51799B0AB0016A5C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
