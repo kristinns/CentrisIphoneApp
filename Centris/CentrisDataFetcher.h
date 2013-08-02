@@ -10,4 +10,5 @@
 
 @interface CentrisDataFetcher : NSObject
 + (NSArray *)getAssignments;
++ (NSArray *)getAssignmentCourses;
 @end

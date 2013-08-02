@@ -14,7 +14,7 @@
 {
     /* Fake data */
     NSMutableArray *assignments = [[NSMutableArray alloc] init];
-    for(NSInteger i=1; i< 10; i++) {
+    for(NSInteger i=1; i<= 10; i++) {
         NSString *title = [@"Assignment " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
         NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
         NSDictionary *assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"24/3/2012", @"date", finished, @"finished", nil];
@@ -22,6 +22,19 @@
     }
 
     return assignments;
+}
+
++ (NSArray *)getAssignmentCourses
+{
+    /* Fake data */
+    NSMutableArray *courses = [[NSMutableArray alloc] init];
+    
+    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Markaðsfræði", @"title", @"3", @"count", nil]];
+    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Hagfræði", @"title", @"2", @"count", nil]];
+    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Þjóðhagfræði", @"title", @"2", @"count", nil]];
+    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Reikningshald", @"title", @"3", @"count", nil]];
+    
+    return courses;
 }
 
 @end

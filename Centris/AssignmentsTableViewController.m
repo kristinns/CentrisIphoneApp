@@ -12,6 +12,7 @@
 
 @interface AssignmentsTableViewController ()
 @property (nonatomic, strong) NSArray *assignments;
+@property (nonatomic, strong) NSArray *assignmentCourses;
 @end
 
 @implementation AssignmentsTableViewController
@@ -31,13 +32,25 @@
 {
     [super viewDidLoad];
     self.title = @"Assignments";
-    // Get assignments from CentrisDataFetcher
+    // Get assignments and courses from CentrisDataFetcher
     self.assignments = [CentrisDataFetcher getAssignments];
+    self.assignmentCourses = [CentrisDataFetcher getAssignmentCourses];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.assignments count];
+    return [[[self.assignmentCourses objectAtIndex:section] valueForKey:@"count"] integerValue];
+}
+
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return [self.assignmentCourses count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [[self.assignmentCourses objectAtIndex:section] valueForKey:@"title"];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
