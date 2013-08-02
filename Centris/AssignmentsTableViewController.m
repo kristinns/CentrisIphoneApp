@@ -7,6 +7,7 @@
 //
 
 #import "AssignmentsTableViewController.h"
+#import "CentrisDataFetcher.h"
 
 @interface AssignmentsTableViewController ()
 @property (nonatomic, strong) NSArray *assignments;
@@ -29,16 +30,8 @@
 {
     [super viewDidLoad];
     self.title = @"Assignments";
-    /* Fake data */
-    NSMutableArray *assignments = [[NSMutableArray alloc] init];
-    for(NSInteger i=1; i< 10; i++){
-        NSString *title = [@"Assignment " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
-        NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
-        NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"24/3/2012", @"date", finished, @"finished", nil];
-        [assignments addObject:dict];
-    }
-    self.assignments = assignments;
-	// Do any additional setup after loading the view.
+    // Get assignments from CentrisDataFetcher
+    self.assignments = [CentrisDataFetcher getAssignments];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

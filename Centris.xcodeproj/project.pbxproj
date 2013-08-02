@@ -24,6 +24,7 @@
 		194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */; };
 		194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
+		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
 		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
 		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
+		19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisDataFetcher.h; sourceTree = "<group>"; };
+		19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisDataFetcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +134,8 @@
 				194842C81799B0AB0016A5C0 /* Supporting Files */,
 				19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */,
 				19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */,
+				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
+				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
 			);
 			path = Centris;
 			sourceTree = "<group>";
@@ -282,6 +287,7 @@
 			files = (
 				194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */,
 				194842D81799B0AB0016A5C0 /* ViewController.m in Sources */,
+				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
