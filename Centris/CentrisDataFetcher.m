@@ -17,7 +17,11 @@
     for(NSInteger i=1; i<= 10; i++) {
         NSString *title = [@"Verkefni " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
         NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
-        NSDictionary *assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"24/3/2012", @"date", finished, @"finished", nil];
+        NSDictionary *assignment;
+        if (i == 1 || i == 3)
+            assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"Skilað 23. mars 22:32", @"date", finished, @"finished", nil];
+        else
+            assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"Skilafrestur: 24. mars 23:59", @"date", finished, @"finished", nil];
         [assignments addObject:assignment];
     }
 
