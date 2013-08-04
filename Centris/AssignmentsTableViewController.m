@@ -9,6 +9,7 @@
 #import "AssignmentsTableViewController.h"
 #import "CentrisDataFetcher.h"
 #import "AssignmentDetailViewController.h"
+#import "MFSideMenuContainerViewController.h"
 
 @interface AssignmentsTableViewController ()
 @property (nonatomic, strong) NSArray *assignments;
@@ -26,6 +27,11 @@
         // Custom initialization
     }
     return self;
+}
+
+// This is for MFSideMenuContainerViewController
+- (MFSideMenuContainerViewController *)menuContainerViewController {
+    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
 }
 
 - (void)viewDidLoad

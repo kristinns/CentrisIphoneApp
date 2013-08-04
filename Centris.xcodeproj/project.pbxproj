@@ -20,8 +20,8 @@
 		194842E31799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
-		194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */; };
-		194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */; };
+		19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */; };
+		19879C6F17AE79FF00FBC672 /* SideMenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C6E17AE79FF00FBC672 /* SideMenuViewController.m */; };
 		19A8135E17AC5B6700912728 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19A8135D17AC5B6700912728 /* ViewController.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
@@ -56,10 +56,11 @@
 		194842E81799B0AB0016A5C0 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
 		194842EA1799B0AB0016A5C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
-		194842F8179AB7E40016A5C0 /* ECSlidingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ECSlidingViewController.h; sourceTree = "<group>"; };
-		194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ECSlidingViewController.m; sourceTree = "<group>"; };
-		194842FA179AB7E40016A5C0 /* UIImage+ImageWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageWithUIView.h"; sourceTree = "<group>"; };
-		194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageWithUIView.m"; sourceTree = "<group>"; };
+		19879C6917AE79AC00FBC672 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
+		19879C6A17AE79AC00FBC672 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
+		19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
+		19879C6D17AE79FF00FBC672 /* SideMenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuViewController.h; sourceTree = "<group>"; };
+		19879C6E17AE79FF00FBC672 /* SideMenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuViewController.m; sourceTree = "<group>"; };
 		19A8135C17AC5B6700912728 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		19A8135D17AC5B6700912728 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
@@ -127,8 +128,12 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
-				194842F6179AB7E40016A5C0 /* Vendor */,
+				194842D01799B0AB0016A5C0 /* AppDelegate.h */,
+				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
+				19879C6817AE79AC00FBC672 /* MFSideMenu */,
 				194842D31799B0AB0016A5C0 /* Main.storyboard */,
+				19879C6D17AE79FF00FBC672 /* SideMenuViewController.h */,
+				19879C6E17AE79FF00FBC672 /* SideMenuViewController.m */,
 				19F62CDF17AC440800EEF08C /* AssignmentDetailViewController.h */,
 				19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */,
 				194842D91799B0AB0016A5C0 /* Images.xcassets */,
@@ -146,8 +151,6 @@
 			children = (
 				19A8135C17AC5B6700912728 /* ViewController.h */,
 				19A8135D17AC5B6700912728 /* ViewController.m */,
-				194842D01799B0AB0016A5C0 /* AppDelegate.h */,
-				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
 				194842C91799B0AB0016A5C0 /* Centris-Info.plist */,
 				194842CA1799B0AB0016A5C0 /* InfoPlist.strings */,
 				194842CD1799B0AB0016A5C0 /* main.m */,
@@ -174,23 +177,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		194842F6179AB7E40016A5C0 /* Vendor */ = {
+		19879C6817AE79AC00FBC672 /* MFSideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				194842F7179AB7E40016A5C0 /* ECSlidingViewController */,
+				19879C6917AE79AC00FBC672 /* MFSideMenu.h */,
+				19879C6A17AE79AC00FBC672 /* MFSideMenuContainerViewController.h */,
+				19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */,
 			);
-			path = Vendor;
-			sourceTree = "<group>";
-		};
-		194842F7179AB7E40016A5C0 /* ECSlidingViewController */ = {
-			isa = PBXGroup;
-			children = (
-				194842F8179AB7E40016A5C0 /* ECSlidingViewController.h */,
-				194842F9179AB7E40016A5C0 /* ECSlidingViewController.m */,
-				194842FA179AB7E40016A5C0 /* UIImage+ImageWithUIView.h */,
-				194842FB179AB7E40016A5C0 /* UIImage+ImageWithUIView.m */,
-			);
-			path = ECSlidingViewController;
+			path = MFSideMenu;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,13 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				194842FD179AB7E40016A5C0 /* UIImage+ImageWithUIView.m in Sources */,
+				19879C6F17AE79FF00FBC672 /* SideMenuViewController.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19A8135E17AC5B6700912728 /* ViewController.m in Sources */,
-				194842FC179AB7E40016A5C0 /* ECSlidingViewController.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
+				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
