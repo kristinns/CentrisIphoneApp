@@ -8,6 +8,6 @@
 
 #import "ViewController.h"
 
-@interface ScheduleViewController : ViewController
+@interface ScheduleTableViewController : UITableViewController
 - (IBAction)showMenuPressed:(id)sender;
 @end

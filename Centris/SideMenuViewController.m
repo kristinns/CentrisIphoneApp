@@ -37,7 +37,7 @@
     
     self.menuItems = [[NSMutableArray alloc] init];
     
-    [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleViewController", @"identifier", nil]];
+    [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];
     [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Verkefni", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
     [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Próf", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
 }
