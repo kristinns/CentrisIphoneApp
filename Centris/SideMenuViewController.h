@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "ViewController.h"
+#import <UIKit/UIKit.h>
 
-@interface SideMenuViewController : ViewController
+@interface SideMenuViewController : UITableViewController
 
 @end
