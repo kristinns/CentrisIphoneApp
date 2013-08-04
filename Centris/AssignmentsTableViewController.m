@@ -20,6 +20,16 @@
 
 @synthesize assignments = _assignments;
 
+// This is for MFSideMenuContainerViewController
+- (MFSideMenuContainerViewController *)menuContainerViewController {
+    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
+}
+
+- (IBAction)showMenuPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,11 +37,6 @@
         // Custom initialization
     }
     return self;
-}
-
-// This is for MFSideMenuContainerViewController
-- (MFSideMenuContainerViewController *)menuContainerViewController {
-    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
 }
 
 - (void)viewDidLoad

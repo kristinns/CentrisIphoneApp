@@ -103,7 +103,13 @@
                             <outlet property="delegate" destination="o2D-GY-hLr" id="dHT-oc-v5y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2r8-N9-3RI"/>
+                    <navigationItem key="navigationItem" id="2r8-N9-3RI">
+                        <barButtonItem key="leftBarButtonItem" image="menu-icon" id="rHk-GK-kmg">
+                            <connections>
+                                <action selector="showMenuPressed:" destination="o2D-GY-hLr" id="2fP-fY-O7h"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evR-pK-f6q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -158,10 +164,10 @@
             </objects>
             <point key="canvasLocation" x="-22" y="105"/>
         </scene>
-        <!--View Controller-->
+        <!--Schedule View Controller-->
         <scene sceneID="FY4-je-fDn">
             <objects>
-                <viewController storyboardIdentifier="ScheduleViewController" id="Cgd-Da-Yim" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ScheduleViewController" id="Cgd-Da-Yim" customClass="ScheduleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="NLT-nX-I43"/>
                         <viewControllerLayoutGuide type="bottom" id="ddP-hb-iz9"/>
@@ -179,12 +185,40 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="NtN-yr-dY0">
+                        <barButtonItem key="leftBarButtonItem" image="menu-icon" id="Hba-No-ZI2">
+                            <connections>
+                                <action selector="showMenuPressed:" destination="Cgd-Da-Yim" id="tpo-rw-KnZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWN-Nw-dVt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="385" y="803"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="J2D-eb-uaL">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6V2-Ql-v98" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CmO-tB-IfM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Cgd-Da-Yim" kind="relationship" relationship="rootViewController" id="p80-lI-Axi"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="91R-d8-iLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-22" y="803"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="menu-icon" width="22" height="17"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

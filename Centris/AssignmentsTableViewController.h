@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AssignmentsTableViewController : UITableViewController
-
+- (IBAction)showMenuPressed:(id)sender;
 @end
