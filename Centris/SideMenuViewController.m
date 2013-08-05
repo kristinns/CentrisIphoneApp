@@ -35,6 +35,10 @@
 {
     [super viewDidLoad];
     
+    // Top margin, move table 20 px down
+    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = inset;
+    
     self.menuItems = [[NSMutableArray alloc] init];
     
     [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];

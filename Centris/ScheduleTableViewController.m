@@ -29,6 +29,10 @@
     
     // Remove border
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    
+    // Top margin, move table 20 px down
+    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = inset;
 	
     // Timetablefrom MySchool
     self.timeTable = [[NSMutableArray alloc] init];
