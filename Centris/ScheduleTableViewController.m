@@ -26,12 +26,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    self.timeTable = [[NSMutableArray alloc] init];
     
-    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"8:30", @"fromTime", @"9:15", @"toTime", @"45", @"duration", nil]];
+    // Remove border
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+	
+    // Timetablefrom MySchool
+    self.timeTable = [[NSMutableArray alloc] init];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 8:30", @"fromTime", @" 9:15", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"9:20", @"fromTime", @"10:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 9:20", @"fromTime", @"10:05", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"15", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"10:20", @"fromTime", @"11:05", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
@@ -53,8 +56,8 @@
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"18:15", @"fromTime", @"19:00", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:05", @"fromTime", @"19:50", @"toTime", @"45", @"duration", nil]];
-    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:05", @"fromTime", @"", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:50", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"20:40", @"fromTime", @"21:45", @"toTime", @"45", @"duration", nil]];
 
@@ -78,10 +81,10 @@
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     // Configure the cell
     cell.fromTime.text = [[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"fromTime"];
-    cell.toTime.text = [[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"toTime"];
+    cell.toTime.text = @"";//[[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"toTime"];
     // Configure toTime position
     CGRect bounds = [cell.toTime bounds];
-    bounds.origin.y = cell.bounds.size.height-45;
+    bounds.origin.y = cell.bounds.size.height-37;
     cell.toTime.bounds = bounds;
     //NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
     
