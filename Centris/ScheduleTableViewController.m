@@ -95,8 +95,11 @@
     cell.toTime.bounds = bounds;
     //NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
     
-    if (indexPath.row == 2 || indexPath.row == 4)
+    if (indexPath.row == 2 || indexPath.row == 4) {
         cell.booking.hidden = NO;
+        cell.bookingTitle.text = @"Markaðsfræði";
+    }
+    
     
     return cell;
 }

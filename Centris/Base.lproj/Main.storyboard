@@ -204,13 +204,13 @@
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" 8:30" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ptX-TJ-vtU">
                                             <rect key="frame" x="6" y="-4" width="35" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" 9:15" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t31-Oa-BbA">
                                             <rect key="frame" x="6" y="26" width="99" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MXX-Mf-onh">
@@ -228,6 +228,13 @@
                                                     <color key="backgroundColor" red="0.25098040699958801" green="0.40784317255020142" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="tintColor" red="0.26666668057441711" green="0.42745101451873779" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
                                                 </view>
+                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqr-jZ-TO9">
+                                                    <rect key="frame" x="8" y="0.0" width="259" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <color key="textColor" red="0.25098040700000002" green="0.40784317260000003" blue="0.72156864399999998" alpha="1" colorSpace="deviceRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" red="0.79607850313186646" green="0.86274516582489014" blue="0.96078437566757202" alpha="1" colorSpace="deviceRGB"/>
                                         </view>
@@ -236,6 +243,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="booking" destination="zD3-YK-bvZ" id="Qhq-64-lyc"/>
+                                    <outlet property="bookingTitle" destination="jqr-jZ-TO9" id="wFy-en-Wty"/>
                                     <outlet property="fromTime" destination="ptX-TJ-vtU" id="bbo-Hw-OFf"/>
                                     <outlet property="toTime" destination="t31-Oa-BbA" id="JYK-3g-IG9"/>
                                 </connections>
