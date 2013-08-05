@@ -13,12 +13,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    /* Configure MFSlideMenu */
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"navigationController"];
     UIViewController *leftSideMenuViewController = [storyboard instantiateViewControllerWithIdentifier:@"leftSideMenuViewController"];
-    
+    // Connect navigationController and leftSideMenuController to MFSlideMenuContainer
     [container setLeftMenuViewController:leftSideMenuViewController];
     [container setCenterViewController:navigationController];
     

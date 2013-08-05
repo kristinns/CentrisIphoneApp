@@ -18,16 +18,21 @@
 
 @synthesize timeTable;
 
-// This is for MFSideMenuContainerViewController
+// Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
+}
+// Action when clicked on menu button
+- (IBAction)showMenuPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Remove border
+    // Remove border from table cells
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     // Top margin, move table 20 px down
@@ -67,34 +72,32 @@
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:50", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"20:40", @"fromTime", @"21:45", @"toTime", @"45", @"duration", nil]];
-
-
     
-}
-
-- (IBAction)showMenuPressed:(id)sender
-{
-    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    // Returns timeTable property length
     return [self.timeTable count];
 }
-
+// Configure each cell, this function is called for each cell
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Get cell from storyboard by identifier
     static NSString *CellIdentifier = @"Schedule item";
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     // Configure the cell
     cell.fromTime.text = [[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"fromTime"];
     cell.toTime.text = @"";//[[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"toTime"];
-    // Configure toTime position
+    // Configure toTime position, first get the bounds
     CGRect bounds = [cell.toTime bounds];
-    bounds.origin.y = cell.bounds.size.height-37;
+    // Then resize the height
+    bounds.origin.y = cell.bounds.size.height-37; // Not sure why 37 works here
+    // Assign the new bounds with the new height
     cell.toTime.bounds = bounds;
     //NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
     
+    // These are just for demo
     if (indexPath.row == 0 || indexPath.row == 2) {
         cell.booking.hidden = NO;
         cell.bookingTitle.text = @"Markaðsfræði";
@@ -104,7 +107,6 @@
         cell.booking.hidden = NO;
         cell.bookingTitle.text = @"Hagfræði";
     }
-    
     
     return cell;
 }

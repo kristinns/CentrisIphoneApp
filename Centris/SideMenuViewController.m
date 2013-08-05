@@ -17,7 +17,7 @@
 
 @implementation SideMenuViewController
 
-// This is for MFSideMenuContainerViewController
+// Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.parentViewController;
 }

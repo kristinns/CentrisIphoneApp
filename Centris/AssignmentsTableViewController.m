@@ -20,23 +20,14 @@
 
 @synthesize assignments = _assignments;
 
-// This is for MFSideMenuContainerViewController
+// Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
 }
-
+// Action when clicked on menu button
 - (IBAction)showMenuPressed:(id)sender
 {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
 }
 
 - (void)viewDidLoad
@@ -78,18 +69,27 @@
     return cell;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"assignmentDetailSegue"]) {
         //NSString *title = [[self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row] valueForKey:@"title"];
         //[segue.destinationViewController setAssignmentTitle:title];
     }
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end
