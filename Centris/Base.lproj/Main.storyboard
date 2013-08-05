@@ -218,12 +218,12 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </view>
-                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD3-YK-bvZ">
+                                        <view hidden="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD3-YK-bvZ">
                                             <rect key="frame" x="44" y="8" width="274" height="42"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rY7-Wk-hzH">
-                                                    <rect key="frame" x="1" y="0.0" width="3" height="43"/>
+                                                    <rect key="frame" x="1" y="0.0" width="2" height="42"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <color key="backgroundColor" red="0.25098040699958801" green="0.40784317255020142" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
                                                     <color key="tintColor" red="0.26666668057441711" green="0.42745101451873779" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
@@ -235,6 +235,7 @@
                                     <rect key="contentStretch" x="0.0" y="0.8500000000000002" width="1" height="1"/>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="booking" destination="zD3-YK-bvZ" id="Qhq-64-lyc"/>
                                     <outlet property="fromTime" destination="ptX-TJ-vtU" id="bbo-Hw-OFf"/>
                                     <outlet property="toTime" destination="t31-Oa-BbA" id="JYK-3g-IG9"/>
                                 </connections>
