@@ -221,6 +221,14 @@
                                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD3-YK-bvZ">
                                             <rect key="frame" x="44" y="8" width="274" height="42"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rY7-Wk-hzH">
+                                                    <rect key="frame" x="1" y="0.0" width="3" height="43"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="backgroundColor" red="0.25098040699958801" green="0.40784317255020142" blue="0.72156864404678345" alpha="1" colorSpace="deviceRGB"/>
+                                                    <color key="tintColor" red="0.26666668057441711" green="0.42745101451873779" blue="0.70196080207824707" alpha="1" colorSpace="deviceRGB"/>
+                                                </view>
+                                            </subviews>
                                             <color key="backgroundColor" red="0.79607850313186646" green="0.86274516582489014" blue="0.96078437566757202" alpha="1" colorSpace="deviceRGB"/>
                                         </view>
                                     </subviews>
