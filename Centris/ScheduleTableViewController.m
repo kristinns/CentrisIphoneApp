@@ -95,9 +95,14 @@
     cell.toTime.bounds = bounds;
     //NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
     
-    if (indexPath.row == 2 || indexPath.row == 4) {
+    if (indexPath.row == 0 || indexPath.row == 2) {
         cell.booking.hidden = NO;
         cell.bookingTitle.text = @"Markaðsfræði";
+    }
+    
+    if (indexPath.row == 4 || indexPath.row == 6) {
+        cell.booking.hidden = NO;
+        cell.bookingTitle.text = @"Hagfræði";
     }
     
     
