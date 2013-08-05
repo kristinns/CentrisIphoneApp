@@ -11,14 +11,55 @@
 #import "MFSideMenuContainerViewController.h"
 
 @interface ScheduleTableViewController ()
-
+@property NSMutableArray *timeTable;
 @end
 
 @implementation ScheduleTableViewController
 
+@synthesize timeTable;
+
 // This is for MFSideMenuContainerViewController
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	
+    self.timeTable = [[NSMutableArray alloc] init];
+    
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"8:30", @"fromTime", @"9:15", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"9:20", @"fromTime", @"10:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"15", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"10:20", @"fromTime", @"11:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"11:10", @"fromTime", @"11:55", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"25", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"12:20", @"fromTime", @"13:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"13:10", @"fromTime", @"13:55", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:00", @"fromTime", @"14:45", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"10", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:55", @"fromTime", @"15:40", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"15:45", @"fromTime", @"16:30", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"16:35", @"fromTime", @"17:20", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"17:25", @"fromTime", @"18:10", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"18:15", @"fromTime", @"19:00", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:05", @"fromTime", @"19:50", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"20:40", @"fromTime", @"21:45", @"toTime", @"45", @"duration", nil]];
+
+
+    
 }
 
 - (IBAction)showMenuPressed:(id)sender
@@ -28,7 +69,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;
+    return [self.timeTable count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -36,20 +77,21 @@
     static NSString *CellIdentifier = @"Schedule item";
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     // Configure the cell
-    cell.fromTime.text = @"9:30";
-    cell.toTime.text = @"10:05";
+    cell.fromTime.text = [[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"fromTime"];
+    cell.toTime.text = [[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"toTime"];
+    // Configure toTime position
     CGRect bounds = [cell.toTime bounds];
     bounds.origin.y = cell.bounds.size.height-45;
     cell.toTime.bounds = bounds;
-    
-    NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
+    //NSLog(@"%f, %f", cell.frame.size.height, cell.toTime.bounds.origin.y);
     
     return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return (CGFloat)(indexPath.row+2) * 20;
+    // Must be a better way to do this
+    return (CGFloat)[[[self.timeTable objectAtIndex:indexPath.item] valueForKey:@"duration"] intValue];
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -59,12 +101,6 @@
         // Custom initialization
     }
     return self;
-}
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
