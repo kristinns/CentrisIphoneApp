@@ -232,7 +232,13 @@
                             <outlet property="delegate" destination="gfV-UY-7E4" id="SwA-nq-H3M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="X2u-d7-JUD"/>
+                    <navigationItem key="navigationItem" id="X2u-d7-JUD">
+                        <barButtonItem key="leftBarButtonItem" image="menu-icon" id="m5W-WH-JeC">
+                            <connections>
+                                <action selector="showMenuPressed:" destination="gfV-UY-7E4" id="mcl-QM-nxp"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUd-TI-fwp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
