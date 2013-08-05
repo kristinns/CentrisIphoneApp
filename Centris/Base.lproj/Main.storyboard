@@ -218,6 +218,11 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         </view>
+                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zD3-YK-bvZ">
+                                            <rect key="frame" x="44" y="8" width="274" height="42"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <color key="backgroundColor" red="0.79607850313186646" green="0.86274516582489014" blue="0.96078437566757202" alpha="1" colorSpace="deviceRGB"/>
+                                        </view>
                                     </subviews>
                                     <rect key="contentStretch" x="0.0" y="0.8500000000000002" width="1" height="1"/>
                                 </tableViewCellContentView>
