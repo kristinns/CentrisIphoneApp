@@ -2,9 +2,6 @@
 //  AppDelegate.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 7/19/13.
-//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
-//
 
 #import "AppDelegate.h"
 #import "MFSideMenuContainerViewController.h"
