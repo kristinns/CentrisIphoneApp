@@ -15,8 +15,6 @@
 
 @implementation AssignmentsTableViewController
 
-@synthesize assignments = _assignments;
-
 // Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;

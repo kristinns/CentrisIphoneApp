@@ -13,8 +13,6 @@
 
 @implementation ScheduleTableViewController
 
-@synthesize timeTable;
-
 // Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
     return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
