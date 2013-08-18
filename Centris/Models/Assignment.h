@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Course.h"
 
 @interface Assignment : NSObject
 
@@ -14,5 +15,6 @@
 @property (strong, nonatomic) NSDate *deadline;
 @property (strong, nonatomic) NSDate *submitted; // If not submitted, this should point to NULL
 @property (strong, nonatomic) NSString *description;
+@property (strong, nonatomic) Course *course;
 
 @end

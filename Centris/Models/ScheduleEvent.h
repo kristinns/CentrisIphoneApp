@@ -7,10 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Course.h"
 
 @interface ScheduleEvent : NSObject
 
 @property (strong, nonatomic) NSDate *start;
 @property (strong, nonatomic) NSDate *end;
+@property (strong, nonatomic) Course *course;
 
 @end
