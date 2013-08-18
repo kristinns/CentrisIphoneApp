@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1935C7C617C13B7800D82EC9 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C517C13B7800D82EC9 /* Assignment.m */; };
+		1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		1935C7C417C13B7800D82EC9 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		1935C7C517C13B7800D82EC9 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		1935C7C717C1419A00D82EC9 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
+		1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -109,6 +112,8 @@
 			children = (
 				1935C7C417C13B7800D82EC9 /* Assignment.h */,
 				1935C7C517C13B7800D82EC9 /* Assignment.m */,
+				1935C7C717C1419A00D82EC9 /* ScheduleEvent.h */,
+				1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -328,6 +333,7 @@
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				19A8135E17AC5B6700912728 /* ViewController.m in Sources */,
+				1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
