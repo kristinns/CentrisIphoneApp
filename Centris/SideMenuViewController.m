@@ -28,6 +28,20 @@
     return self;
 }
 
+- (NSMutableArray *)menuItems
+{
+    // Lazy instantiation
+    if (!_menuItems) {
+        _menuItems = [[NSMutableArray alloc] init];
+        
+        [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];
+        [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Verkefni", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
+        [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Próf", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
+
+    }
+    return _menuItems;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -35,12 +49,6 @@
     // Top margin, move table 20 px down
     UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.contentInset = inset;
-    
-    self.menuItems = [[NSMutableArray alloc] init];
-    
-    [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];
-    [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Verkefni", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
-    [self.menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Próf", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

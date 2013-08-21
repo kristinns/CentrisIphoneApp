@@ -53,7 +53,6 @@
     return [[[self.assignmentCourses objectAtIndex:section] valueForKey:@"count"] integerValue];
 }
 
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return [self.assignmentCourses count];
