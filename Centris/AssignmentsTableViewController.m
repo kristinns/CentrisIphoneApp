@@ -24,14 +24,28 @@
 {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
+// Getter for assignmentCourses, uses lazy instantiation
+- (NSArray *)assignmentCourses
+{
+    // Get data from CentrisDataFetcher
+    if (!_assignmentCourses) _assignmentCourses = [CentrisDataFetcher getAssignmentCourses];
+    
+    return _assignmentCourses;
+}
+// Getter for assignments, uses lazy instantiation
+- (NSArray *)assignments
+{
+    // Get data from CentrisDataFetcher
+    if (!_assignments) _assignments = [CentrisDataFetcher getAssignments];
+    
+    return _assignments;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Change title for navigation controller
     self.title = @"Verkefni";
-    // Get assignments and courses from CentrisDataFetcher
-    self.assignments = [CentrisDataFetcher getAssignments];
-    self.assignmentCourses = [CentrisDataFetcher getAssignmentCourses];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
