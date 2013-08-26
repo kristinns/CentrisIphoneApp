@@ -31,6 +31,7 @@
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
+		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +85,8 @@
 		19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisDataFetcher.m; sourceTree = "<group>"; };
 		19F62CDF17AC440800EEF08C /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
 		19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
+		960827F817CB8E5D004741FD /* HomeFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
+		960827F917CB8E5D004741FD /* HomeFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,6 +159,7 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
+				960827FB17CB8E72004741FD /* HomeFeed */,
 				1935C7C317C13B5400D82EC9 /* Models */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
 				19879C7617AF143400FBC672 /* Schedule */,
@@ -234,6 +238,15 @@
 				19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */,
 			);
 			name = Assignment;
+			sourceTree = "<group>";
+		};
+		960827FB17CB8E72004741FD /* HomeFeed */ = {
+			isa = PBXGroup;
+			children = (
+				960827F817CB8E5D004741FD /* HomeFeedViewController.h */,
+				960827F917CB8E5D004741FD /* HomeFeedViewController.m */,
+			);
+			name = HomeFeed;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -345,6 +358,7 @@
 				1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,
 				19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */,

@@ -34,6 +34,7 @@
     if (!_menuItems) {
         _menuItems = [[NSMutableArray alloc] init];
         
+		[_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"HomeFeed", @"title", @"FeedViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Verkefni", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Próf", @"title", @"AssignmentsTableViewController", @"identifier", nil]];

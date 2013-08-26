@@ -62,6 +62,56 @@
             </objects>
             <point key="canvasLocation" x="385" y="-596"/>
         </scene>
+        <!--Home Feed View Controller-->
+        <scene sceneID="IBI-qs-p4c">
+            <objects>
+                <viewController storyboardIdentifier="FeedViewController" id="Ikg-ST-W14" customClass="HomeFeedViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="W3F-ii-BNY"/>
+                        <viewControllerLayoutGuide type="bottom" id="jYa-R0-HzW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="72D-OC-BNG">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mánudagur," lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ckV-l2-NmA">
+                                <rect key="frame" x="20" y="94" width="280" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="26. ágúst" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDl-0Y-7Hi">
+                                <rect key="frame" x="20" y="118" width="280" height="24"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ja2-4f-H34">
+                                <rect key="frame" x="20" y="145" width="280" height="1"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pUo-TA-QTW">
+                        <barButtonItem key="leftBarButtonItem" image="menu-icon" id="d7j-tH-KLp">
+                            <connections>
+                                <action selector="showMenuPressed:" destination="Ikg-ST-W14" id="cFz-Ku-15B"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="dayOfMonth" destination="LDl-0Y-7Hi" id="2DH-6J-0vg"/>
+                        <outlet property="dayOfWeek" destination="ckV-l2-NmA" id="PfQ-fK-CrA"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qVl-4X-fdH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="385" y="171"/>
+        </scene>
         <!--Assignments Table View Controller-->
         <scene sceneID="NT0-6a-Bun">
             <objects>
@@ -117,7 +167,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="evR-pK-f6q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="404" y="105"/>
+            <point key="canvasLocation" x="404" y="889"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="r85-CT-MAS">
@@ -151,12 +201,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywA-tl-FWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="789" y="105"/>
+            <point key="canvasLocation" x="789" y="889"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="8pZ-99-70b">
             <objects>
-                <navigationController storyboardIdentifier="navigationController" definesPresentationContext="YES" id="ufq-gm-gtl" sceneMemberID="viewController">
+                <navigationController definesPresentationContext="YES" id="ufq-gm-gtl" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h4L-2z-xiG">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -166,7 +216,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fBr-wi-yOd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-22" y="105"/>
+            <point key="canvasLocation" x="-22" y="889"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J2D-eb-uaL">
@@ -184,7 +234,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="91R-d8-iLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-22" y="803"/>
+            <point key="canvasLocation" x="-22" y="1587"/>
         </scene>
         <!--Schedule Table View Controller-->
         <scene sceneID="ogd-CU-4Ej">
@@ -265,7 +315,25 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUd-TI-fwp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="385" y="803"/>
+            <point key="canvasLocation" x="385" y="1587"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="I09-Op-EWP">
+            <objects>
+                <navigationController storyboardIdentifier="navigationController" automaticallyAdjustsScrollViewInsets="NO" id="0I3-yV-riP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aoo-aA-sPh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Ikg-ST-W14" kind="relationship" relationship="rootViewController" id="C4N-YT-DVY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d88-Lx-bww" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-22" y="171"/>
         </scene>
     </scenes>
     <resources>
