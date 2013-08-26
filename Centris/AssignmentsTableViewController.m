@@ -8,7 +8,7 @@
 #import "AssignmentDetailViewController.h"
 #import "MFSideMenuContainerViewController.h"
 
-@interface AssignmentsTableViewController ()
+@interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;
 @property (nonatomic, strong) NSArray *assignmentCourses;
 @end
@@ -44,6 +44,8 @@
 {
     return [self.assignmentCourses count];
 }
+
+
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
