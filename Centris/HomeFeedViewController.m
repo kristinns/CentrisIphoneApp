@@ -10,8 +10,8 @@
 #import "MFSideMenuContainerViewController.h"
 
 @interface HomeFeedViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *dayOfWeek;
-@property (weak, nonatomic) IBOutlet UILabel *dayOfMonth;
+@property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
+@property (weak, nonatomic) IBOutlet UILabel *dayOfMonthLabel;
 
 @end
 
@@ -53,14 +53,14 @@
 	formattedDayOfWeekString = [formattedDayOfWeekString stringByReplacingCharactersInRange:NSMakeRange(0,1)
 																				 withString:[[formattedDayOfWeekString substringToIndex:1]uppercaseString]];
 	//set the label
-	self.dayOfWeek.text = formattedDayOfWeekString;
+	self.dayOfWeekLabel.text = [NSString stringWithFormat:@"%@,",formattedDayOfWeekString];
 	
 	//format for the day of the month
 	formatString = [NSDateFormatter dateFormatFromTemplate:@"dMMMMYYYY" options:0 locale:[NSLocale currentLocale]];
 	[dateFormatter setDateFormat:formatString];
 	NSString *formattedDayOfNumberString = [dateFormatter stringFromDate:date];
 	//set the label
-	self.dayOfMonth.text = formattedDayOfNumberString;
+	self.dayOfMonthLabel.text = formattedDayOfNumberString;
 	
 //	NSLog(@"formattedDateString: %@", formattedDayOfWeekString);
 
