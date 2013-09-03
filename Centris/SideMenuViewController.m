@@ -50,6 +50,8 @@
     // Top margin, move table 20 px down
     UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.contentInset = inset;
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -62,7 +64,12 @@
     static NSString *CellIdentifier = @"Menu item";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     // Configure the cell
-    cell.textLabel.text = [[self.menuItems objectAtIndex:indexPath.item] valueForKey:@"title"]; // Title
+    
+    NSString *title = [[self.menuItems objectAtIndex:indexPath.item] valueForKey:@"title"];
+    cell.textLabel.text = [title uppercaseString]; // Title
+    cell.textLabel.textColor = [UIColor whiteColor];
+    
+    cell.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
     
     return cell;
 }
