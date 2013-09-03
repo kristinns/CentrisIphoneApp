@@ -27,25 +27,27 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 //	// Do any additional setup after loading the view.
 	
+	[self setTimeLabels];
+
+}
+
+
+// Gets the current date and sets it to the date labels
+-(void)setTimeLabels
+{
 	// get the date of today
 	NSDate *date = [NSDate date];
 	
 	//format for the name of the day
-	NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE" options:0 locale:[NSLocale currentLocale]];
+	NSString *formatString = [NSDateFormatter dateFormatFromTemplate:@"EEEE"
+															 options:0
+															  locale:[NSLocale currentLocale]];
+	
 	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
 	[dateFormatter setDateFormat:formatString];
 	
@@ -60,16 +62,8 @@
 	[dateFormatter setDateFormat:formatString];
 	NSString *formattedDayOfNumberString = [dateFormatter stringFromDate:date];
 	//set the label
-	self.dayOfMonthLabel.text = formattedDayOfNumberString;
-	
-//	NSLog(@"formattedDateString: %@", formattedDayOfWeekString);
+	self.dayOfMonth.text = formattedDayOfNumberString;
 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
