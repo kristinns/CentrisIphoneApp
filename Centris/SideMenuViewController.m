@@ -34,7 +34,7 @@
     if (!_menuItems) {
         _menuItems = [[NSMutableArray alloc] init];
         
-		[_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"HomeFeed", @"title", @"FeedViewController", @"identifier", nil]];
+		[_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Veitan", @"title", @"FeedViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Stundaskrá", @"title", @"ScheduleTableViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Verkefni", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
         [_menuItems addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Próf", @"title", @"AssignmentsTableViewController", @"identifier", nil]];
@@ -68,6 +68,10 @@
     NSString *title = [[self.menuItems objectAtIndex:indexPath.item] valueForKey:@"title"];
     cell.textLabel.text = [title uppercaseString]; // Title
     cell.textLabel.textColor = [UIColor whiteColor];
+    
+    UIView *selectionColor = [[UIView alloc] init];
+    selectionColor.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0];
+    cell.selectedBackgroundView = selectionColor;
     
     cell.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
     
