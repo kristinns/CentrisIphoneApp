@@ -62,7 +62,9 @@
 	[dateFormatter setDateFormat:formatString];
 	NSString *formattedDayOfNumberString = [dateFormatter stringFromDate:date];
 	//set the label
-	self.dayOfMonth.text = formattedDayOfNumberString;
+	self.dayOfMonthLabel.text = formattedDayOfNumberString;
+	
+//	NSLog(@"formattedDateString: %@", formattedDayOfWeekString);
 
 }
 
