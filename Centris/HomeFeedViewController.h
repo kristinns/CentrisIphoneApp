@@ -10,4 +10,6 @@
 
 @interface HomeFeedViewController : UIViewController
 
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+
 @end

@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
-		192F979017D74843007E2694 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F978F17D74843007E2694 /* User.m */; };
+		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
+		192F979C17D77055007E2694 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979B17D77055007E2694 /* User.m */; };
 		1935C7C617C13B7800D82EC9 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C517C13B7800D82EC9 /* Assignment.m */; };
 		1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */; };
 		1935C7CC17C1426500D82EC9 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7CB17C1426500D82EC9 /* Course.m */; };
@@ -48,8 +49,10 @@
 
 /* Begin PBXFileReference section */
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
-		192F978E17D74843007E2694 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
-		192F978F17D74843007E2694 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		192F979117D76B04007E2694 /* User+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Centris.h"; path = "Models/User+Centris.h"; sourceTree = "<group>"; };
+		192F979217D76B04007E2694 /* User+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Centris.m"; path = "Models/User+Centris.m"; sourceTree = "<group>"; };
+		192F979A17D77055007E2694 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		192F979B17D77055007E2694 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		1935C7C417C13B7800D82EC9 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		1935C7C517C13B7800D82EC9 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		1935C7C717C1419A00D82EC9 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
@@ -121,8 +124,10 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				192F978E17D74843007E2694 /* User.h */,
-				192F978F17D74843007E2694 /* User.m */,
+				192F979A17D77055007E2694 /* User.h */,
+				192F979B17D77055007E2694 /* User.m */,
+				192F979117D76B04007E2694 /* User+Centris.h */,
+				192F979217D76B04007E2694 /* User+Centris.m */,
 				1935C7C417C13B7800D82EC9 /* Assignment.h */,
 				1935C7C517C13B7800D82EC9 /* Assignment.m */,
 				1935C7CA17C1426500D82EC9 /* Course.h */,
@@ -357,17 +362,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				192F979017D74843007E2694 /* User.m in Sources */,
 				1935C7C617C13B7800D82EC9 /* Assignment.m in Sources */,
 				1935C7CC17C1426500D82EC9 /* Course.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				19879C6F17AE79FF00FBC672 /* SideMenuViewController.m in Sources */,
+				192F979C17D77055007E2694 /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				19A8135E17AC5B6700912728 /* ViewController.m in Sources */,
 				1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,

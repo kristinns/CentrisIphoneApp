@@ -9,6 +9,7 @@
 #import "HomeFeedViewController.h"
 #import "MFSideMenuContainerViewController.h"
 #import "CentrisDataFetcher.h"
+#import "User+Centris.h"
 
 @interface HomeFeedViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
@@ -28,11 +29,50 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
+
+// Either creates, opens or just uses the demo document
+//   (actually, it will never "just use" it since it just creates the UIManagedDocument instance here;
+//    the "just uses" case is just shown that if someone hands you a UIManagedDocument, it might already
+//    be open and so you can just use it if it's documentState is UIDocumentStateNormal).
+//
+// Creating and opening are asynchronous, so in the completion handler we set our Model (managedObjectContext).
+
+- (void)useDemoDocument
+{
+    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+    url = [url URLByAppendingPathComponent:@"Centris"];
+    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
+    
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+        [document saveToURL:url
+           forSaveOperation:UIDocumentSaveForCreating
+          completionHandler:^(BOOL success) {
+              if (success) {
+                  self.managedObjectContext = document.managedObjectContext;
+                  [self getUser];
+              }
+          }];
+    } else if (document.documentState == UIDocumentStateClosed) {
+        [document openWithCompletionHandler:^(BOOL success) {
+            if (success) {
+                self.managedObjectContext = document.managedObjectContext;
+            }
+        }];
+    } else {
+        self.managedObjectContext = document.managedObjectContext;
+    }
+}
+
+- (void)getUser
+{
+    
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 //	// Do any additional setup after loading the view.
-	NSLog([[CentrisDataFetcher getUser:@"2402912319"] valueForKeyPath:@"Person.Address"]);
+	
     //NSLog(@"test");
 	[self setTimeLabels];
 

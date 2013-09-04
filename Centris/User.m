@@ -11,8 +11,9 @@
 
 @implementation User
 
-@dynamic name;
 @dynamic address;
 @dynamic email;
+@dynamic name;
+@dynamic ssn;
 
 @end
