@@ -17,7 +17,10 @@
     //check to see if user does exist
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    request.predicate = [NSPredicate predicateWithFormat:@"unique = %@", [centrisInfo[@"Person.SSN"] description]];
+	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name"
+															  ascending:YES
+															   selector:@selector(localizedCaseInsensitiveCompare:)]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] description]];
     
     //execute the fetch
     
@@ -28,6 +31,7 @@
     
     if (!matches || ([matches count] > 1 )) { //nil means fetch failed; count > 1 means more than one
         // handle error
+		NSLog(@"Error from userWithCentrisInfo");
     } else if (![matches count]) {// noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         user.name = [[centrisInfo valueForKeyPath:@"Person.Name"] description];
@@ -39,6 +43,32 @@
         user = [matches lastObject];
     }
     return user;
+}
+
++(User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	User *user = nil;
+	
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name"
+															  ascending:YES
+															   selector:@selector(localizedCaseInsensitiveCompare:)]];
+	request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [SSN description]];
+	
+	// execute the fetch
+	NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+	
+	if (!matches) {
+		//handle error
+		NSLog(@"Error from userWith");
+		NSLog([error userInfo]);
+	} else if (![matches count]){ // nothing found
+		NSLog(@"Nothing found");
+	} else {
+		user = [matches lastObject];
+	}
+	return user;
 }
 
 @end

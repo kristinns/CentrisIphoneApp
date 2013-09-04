@@ -12,5 +12,5 @@
 
 + (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo
        inManagedObjectContext:(NSManagedObjectContext *)context;
-
++(User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

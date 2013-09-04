@@ -14,6 +14,7 @@
 @interface HomeFeedViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dayOfMonthLabel;
+@property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
 
 @end
 
@@ -29,6 +30,13 @@
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
 
+// Whenever the view is about to appear, if we have not yet opened/created a demo document, do so.
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    if (!self.managedObjectContext) [self useDemoDocument];
+}
 
 // Either creates, opens or just uses the demo document
 //   (actually, it will never "just use" it since it just creates the UIManagedDocument instance here;
@@ -43,16 +51,17 @@
     url = [url URLByAppendingPathComponent:@"Centris"];
     UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
     
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) { // the document DOES NOT exist
         [document saveToURL:url
            forSaveOperation:UIDocumentSaveForCreating
           completionHandler:^(BOOL success) {
               if (success) {
                   self.managedObjectContext = document.managedObjectContext;
                   [self getUser];
+				  [self greet:@"0805903269"];
               }
           }];
-    } else if (document.documentState == UIDocumentStateClosed) {
+    } else if (document.documentState == UIDocumentStateClosed) { // the document DOES exitst
         [document openWithCompletionHandler:^(BOOL success) {
             if (success) {
                 self.managedObjectContext = document.managedObjectContext;
@@ -65,7 +74,18 @@
 
 - (void)getUser
 {
-    
+	NSLog(@"getUser");
+	// put User in Core Data
+	dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+	dispatch_async(fetchQ, ^{
+		 NSDictionary * user = [CentrisDataFetcher getUser:@"0805903269"];
+		[self.managedObjectContext performBlock:^{
+			[User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
+			[self greet:[user valueForKey:@"Person.SSN"]];
+		}];
+	});
+
+//	NSLog([user description]);
 }
 
 - (void)viewDidLoad
@@ -75,10 +95,16 @@
 	
     //NSLog(@"test");
 	[self setTimeLabels];
-
+	//[self greet:@"0805903269"];
 }
 
-
+-(void)greet:(NSString *)SSN {
+	NSLog(@"greet");
+	id context = self.managedObjectContext;
+	User *user = [User userWith:SSN inManagedObjectContext:context];
+	NSLog([user description]);
+	self.greetingLabel.text = [user.name description];
+}
 // Gets the current date and sets it to the date labels
 -(void)setTimeLabels
 {
