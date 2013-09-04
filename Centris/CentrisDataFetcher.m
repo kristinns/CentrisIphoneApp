@@ -5,7 +5,24 @@
 
 #import "CentrisDataFetcher.h"
 
+#define CENTRIS_API_URL @"http://centris.dev.nem.ru.is/api/api/v1/"
+
 @implementation CentrisDataFetcher
+
++ (NSDictionary *)executeFetch:(NSString *)query
+{
+    query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+
+    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
+    NSError *error = nil;
+    
+    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
+    
+    if (error) NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
+    //NSLog(@"[%@ %@] received %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), results);
+    
+    return results;
+}
 
 + (NSArray *)getAssignments
 {
@@ -36,6 +53,11 @@
     [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Reikningshald", @"title", @"3", @"count", nil]];
     
     return courses;
+}
+
++ (NSDictionary *)getUser:(NSString *)bySSN
+{
+    return [self executeFetch:[NSString stringWithFormat:@"%@%@%@", CENTRIS_API_URL, @"students/", bySSN]];
 }
 
 @end

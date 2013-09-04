@@ -8,6 +8,7 @@
 
 #import "HomeFeedViewController.h"
 #import "MFSideMenuContainerViewController.h"
+#import "CentrisDataFetcher.h"
 
 @interface HomeFeedViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
@@ -31,7 +32,8 @@
 {
     [super viewDidLoad];
 //	// Do any additional setup after loading the view.
-	
+	NSLog([[CentrisDataFetcher getUser:@"2402912319"] valueForKeyPath:@"Person.Address"]);
+    //NSLog(@"test");
 	[self setTimeLabels];
 
 }
