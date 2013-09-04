@@ -54,6 +54,12 @@
     self.tableView.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+	[super viewDidAppear:animated];
+	NSIndexPath *indexpath = [NSIndexPath indexPathForRow:0 inSection:0];
+	[self.tableView selectRowAtIndexPath:indexpath animated:YES scrollPosition:UITableViewScrollPositionNone];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.menuItems count];
@@ -70,11 +76,10 @@
     cell.textLabel.textColor = [UIColor whiteColor];
     
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0];
+    selectionColor.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0]; //centris red
     cell.selectedBackgroundView = selectionColor;
     
-    cell.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
-    
+    cell.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0]; //centris navigation grey
     return cell;
 }
 
@@ -88,10 +93,10 @@
     [self.menuContainerViewController setMenuState:MFSideMenuStateClosed];
 }
 
-- (void)didReceiveMemoryWarning
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	return @"Centris";
 }
+
 
 @end
