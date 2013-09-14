@@ -37,13 +37,6 @@
     [super viewWillAppear:animated];
 }
 
-// Either creates, opens or just uses the demo document
-//   (actually, it will never "just use" it since it just creates the UIManagedDocument instance here;
-//    the "just uses" case is just shown that if someone hands you a UIManagedDocument, it might already
-//    be open and so you can just use it if it's documentState is UIDocumentStateNormal).
-//
-// Creating and opening are asynchronous, so in the completion handler we set our Model (managedObjectContext).
-
 - (void)getUser
 {
 	NSLog(@"getUser");
