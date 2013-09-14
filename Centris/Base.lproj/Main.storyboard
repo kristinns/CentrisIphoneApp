@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4504" systemVersion="12E55" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YNI-hd-7zj">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="YNI-hd-7zj">
     <dependencies>
         <deployment defaultVersion="1552" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3734.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
         <!--Side Menu Container View Controller-->
         <scene sceneID="gsY-x1-ut1">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="m24-F2-ipO" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController storyboardIdentifier="MFSideMenuContainerViewController" id="YNI-hd-7zj" customClass="MFSideMenuContainerViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6AK-6z-Peh"/>
@@ -19,7 +20,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="m24-F2-ipO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-22" y="-596"/>
         </scene>
@@ -339,7 +339,7 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Ikg-ST-W14" kind="relationship" relationship="rootViewController" id="C4N-YT-DVY"/>
+                        <segue destination="Ikg-ST-W14" kind="relationship" relationship="rootViewController" id="hRZ-Ll-qPJ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d88-Lx-bww" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -348,8 +348,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu-icon" width="44" height="34"/>
-        <image name="menu-icon" width="44" height="34"/>
         <image name="menu-icon" width="44" height="34"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>

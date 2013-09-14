@@ -14,8 +14,7 @@
 {
     User *user = nil;
     
-    //check to see if user does exist
-    
+    // Check to see if user does exist
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
 	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name"
 															  ascending:YES
@@ -53,7 +52,7 @@
 	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"name"
 															  ascending:YES
 															   selector:@selector(localizedCaseInsensitiveCompare:)]];
-	request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [SSN description]];
+	request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", SSN];
 	
 	// execute the fetch
 	NSError *error = nil;
@@ -62,7 +61,7 @@
 	if (!matches) {
 		//handle error
 		NSLog(@"Error from userWith");
-		NSLog([error userInfo]);
+		NSLog(@"%@", [error userInfo]);
 	} else if (![matches count]){ // nothing found
 		NSLog(@"Nothing found");
 	} else {

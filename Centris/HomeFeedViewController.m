@@ -35,7 +35,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    if (!self.managedObjectContext) [self useDemoDocument];
 }
 
 // Either creates, opens or just uses the demo document
@@ -45,33 +44,6 @@
 //
 // Creating and opening are asynchronous, so in the completion handler we set our Model (managedObjectContext).
 
-- (void)useDemoDocument
-{
-    NSURL *url = [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-    url = [url URLByAppendingPathComponent:@"Centris"];
-    UIManagedDocument *document = [[UIManagedDocument alloc] initWithFileURL:url];
-    
-    if (![[NSFileManager defaultManager] fileExistsAtPath:[url path]]) { // the document DOES NOT exist
-        [document saveToURL:url
-           forSaveOperation:UIDocumentSaveForCreating
-          completionHandler:^(BOOL success) {
-              if (success) {
-                  self.managedObjectContext = document.managedObjectContext;
-                  [self getUser];
-				  [self greet:@"0805903269"];
-              }
-          }];
-    } else if (document.documentState == UIDocumentStateClosed) { // the document DOES exitst
-        [document openWithCompletionHandler:^(BOOL success) {
-            if (success) {
-                self.managedObjectContext = document.managedObjectContext;
-            }
-        }];
-    } else {
-        self.managedObjectContext = document.managedObjectContext;
-    }
-}
-
 - (void)getUser
 {
 	NSLog(@"getUser");
@@ -80,8 +52,10 @@
 	dispatch_async(fetchQ, ^{
 		 NSDictionary * user = [CentrisDataFetcher getUser:@"0805903269"];
 		[self.managedObjectContext performBlock:^{
+            NSLog(@"Thread started");
 			[User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
-			[self greet:[user valueForKey:@"Person.SSN"]];
+			[self greet:[user valueForKeyPath:@"Person.SSN"]];
+            NSLog(@"%@", user);
 		}];
 	});
 
@@ -95,6 +69,8 @@
 	
     //NSLog(@"test");
 	[self setTimeLabels];
+    [self getUser];
+    
 	//[self greet:@"0805903269"];
 }
 
@@ -102,7 +78,7 @@
 	NSLog(@"greet");
 	id context = self.managedObjectContext;
 	User *user = [User userWith:SSN inManagedObjectContext:context];
-	NSLog([user description]);
+	NSLog(@"%@", user);
 	self.greetingLabel.text = [user.name description];
 }
 // Gets the current date and sets it to the date labels
