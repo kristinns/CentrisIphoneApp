@@ -3,16 +3,18 @@
 //  Centris
 //
 
-#import "SideMenuViewController.h"
+#import "SideMenuTableViewController.h"
 #import "MFSideMenuContainerViewController.h"
+#import "BaseViewController.h"
+#import "BaseTableViewController.h"
 
-@interface SideMenuViewController ()
+@interface SideMenuTableViewController ()
 
 @property (nonatomic, strong) NSMutableArray *menuItems;
 
 @end
 
-@implementation SideMenuViewController
+@implementation SideMenuTableViewController
 
 // Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
@@ -85,7 +87,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *identifier = [[self.menuItems objectAtIndex:indexPath.item] valueForKey:@"identifier"];
-    UIViewController *frontViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+    id frontViewController = [self.storyboard instantiateViewControllerWithIdentifier:identifier];
+    if ([frontViewController isKindOfClass:[BaseViewController class]]) {
+        BaseViewController *baseVC = (BaseViewController *)frontViewController;
+        baseVC.managedObjectContext = self.managedObjectContext;
+    } else if ([frontViewController isKindOfClass:[BaseTableViewController class]]) {
+        BaseTableViewController *baseTVC = (BaseTableViewController *)frontViewController;
+        baseTVC.managedObjectContext = self.managedObjectContext;
+    }
     
     UINavigationController *navigationController = self.menuContainerViewController.centerViewController;
     NSArray *controllers = [NSArray arrayWithObject:frontViewController];

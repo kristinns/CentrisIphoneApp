@@ -25,13 +25,15 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
     MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *)self.window.rootViewController;
     UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"navigationController"];
-    UIViewController *leftSideMenuViewController = [storyboard instantiateViewControllerWithIdentifier:@"leftSideMenuViewController"];
+    BaseViewController *leftSideMenuViewController = [storyboard instantiateViewControllerWithIdentifier:@"leftSideMenuViewController"];
     // Connect navigationController and leftSideMenuController to MFSlideMenuContainer
     [container setLeftMenuViewController:leftSideMenuViewController];
     [container setCenterViewController:navigationController];
     
-    HomeFeedViewController *topViewController = (HomeFeedViewController *)navigationController.topViewController;
+    BaseViewController *topViewController = (BaseViewController *)navigationController.topViewController;
     topViewController.managedObjectContext = self.managedObjectContext;
+    
+    leftSideMenuViewController.managedObjectContext = self.managedObjectContext;
     
     return YES;
 }
