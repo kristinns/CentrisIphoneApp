@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
-@interface HomeFeedViewController : UIViewController
-
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@interface HomeFeedViewController : ViewController
 
 @end

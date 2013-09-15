@@ -20,18 +20,7 @@
 
 @implementation HomeFeedViewController
 
-// Get menuContainer ( MFSlideMenuContainer )
-- (MFSideMenuContainerViewController *)menuContainerViewController {
-    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
-}
-// Action when clicked on menu button
-- (IBAction)showMenuPressed:(id)sender
-{
-    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
-}
-
 // Whenever the view is about to appear, if we have not yet opened/created a demo document, do so.
-
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];

@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
-
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+- (IBAction)showMenuPressed:(id)sender;
 @end

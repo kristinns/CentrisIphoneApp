@@ -7,12 +7,23 @@
 //
 
 #import "ViewController.h"
+#import "MFSideMenuContainerViewController.h"
 
 @interface ViewController ()
 
 @end
 
 @implementation ViewController
+
+// Get menuContainer ( MFSlideMenuContainer )
+- (MFSideMenuContainerViewController *)menuContainerViewController {
+    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
+}
+// Action when clicked on menu button
+- (IBAction)showMenuPressed:(id)sender
+{
+    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
+}
 
 - (void)viewDidLoad
 {
