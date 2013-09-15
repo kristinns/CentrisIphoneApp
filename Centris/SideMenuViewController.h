@@ -4,7 +4,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface SideMenuViewController : UITableViewController
+@interface SideMenuViewController : BaseTableViewController
 
 @end

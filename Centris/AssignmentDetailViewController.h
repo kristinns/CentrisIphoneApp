@@ -3,7 +3,7 @@
 //  Centris
 //
 
-#import "ViewController.h"
+#import "BaseViewController.h"
 
-@interface AssignmentDetailViewController : ViewController
+@interface AssignmentDetailViewController : BaseViewController
 @end

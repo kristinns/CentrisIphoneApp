@@ -4,7 +4,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseTableViewController.h"
 
-@interface AssignmentsTableViewController : UITableViewController
-- (IBAction)showMenuPressed:(id)sender;
+@interface AssignmentsTableViewController : BaseTableViewController
 @end

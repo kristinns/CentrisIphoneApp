@@ -15,15 +15,6 @@
 
 @implementation AssignmentsTableViewController
 
-// Get menuContainer ( MFSlideMenuContainer )
-- (MFSideMenuContainerViewController *)menuContainerViewController {
-    return (MFSideMenuContainerViewController *)self.navigationController.parentViewController;
-}
-// Action when clicked on menu button
-- (IBAction)showMenuPressed:(id)sender
-{
-    [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
-}
 // Getter for assignmentCourses, uses lazy instantiation
 - (NSArray *)assignmentCourses
 {

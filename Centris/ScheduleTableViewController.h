@@ -3,8 +3,7 @@
 //  Centris
 //
 
-#import "ViewController.h"
+#import "BaseTableViewController.h"
 
-@interface ScheduleTableViewController : UITableViewController
-- (IBAction)showMenuPressed:(id)sender;
+@interface ScheduleTableViewController : BaseTableViewController
 @end

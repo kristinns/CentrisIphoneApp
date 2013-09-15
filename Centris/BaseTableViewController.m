@@ -1,19 +1,19 @@
 //
-//  ViewController.m
+//  BaseTableViewController.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 7/19/13.
+//  Created by Kristinn Svansson on 9/15/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "BaseTableViewController.h"
 #import "MFSideMenuContainerViewController.h"
 
-@interface ViewController ()
+@interface BaseTableViewController ()
 
 @end
 
-@implementation ViewController
+@implementation BaseTableViewController
 
 // Get menuContainer ( MFSlideMenuContainer )
 - (MFSideMenuContainerViewController *)menuContainerViewController {
@@ -24,17 +24,4 @@
 {
     [self.menuContainerViewController toggleLeftSideMenuCompletion:nil];
 }
-
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 @end
