@@ -9,10 +9,6 @@
 /* Begin PBXBuildFile section */
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
-		192F979C17D77055007E2694 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979B17D77055007E2694 /* User.m */; };
-		1935C7C617C13B7800D82EC9 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C517C13B7800D82EC9 /* Assignment.m */; };
-		1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */; };
-		1935C7CC17C1426500D82EC9 /* Course.m in Sources */ = {isa = PBXBuildFile; fileRef = 1935C7CB17C1426500D82EC9 /* Course.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -37,6 +33,9 @@
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
+		9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A93E17E9E3A500BB2A96 /* CourseInstance.m */; };
+		9647A94217E9E3A600BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94117E9E3A600BB2A96 /* User.m */; };
+		9647A94517E9E3A600BB2A96 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
 /* End PBXBuildFile section */
 
@@ -54,14 +53,6 @@
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		192F979117D76B04007E2694 /* User+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Centris.h"; path = "Models/User+Centris.h"; sourceTree = "<group>"; };
 		192F979217D76B04007E2694 /* User+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Centris.m"; path = "Models/User+Centris.m"; sourceTree = "<group>"; };
-		192F979A17D77055007E2694 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		192F979B17D77055007E2694 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		1935C7C417C13B7800D82EC9 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
-		1935C7C517C13B7800D82EC9 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
-		1935C7C717C1419A00D82EC9 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
-		1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
-		1935C7CA17C1426500D82EC9 /* Course.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Course.h; path = Models/Course.h; sourceTree = "<group>"; };
-		1935C7CB17C1426500D82EC9 /* Course.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Course.m; path = Models/Course.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -101,6 +92,12 @@
 		960827F817CB8E5D004741FD /* HomeFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		960827F917CB8E5D004741FD /* HomeFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
 		9621008817D7795400D60C06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		9647A93D17E9E3A500BB2A96 /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
+		9647A93E17E9E3A500BB2A96 /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
+		9647A94017E9E3A600BB2A96 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
+		9647A94117E9E3A600BB2A96 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		9647A94317E9E3A600BB2A96 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
+		9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,14 +131,12 @@
 			isa = PBXGroup;
 			children = (
 				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
-				192F979A17D77055007E2694 /* User.h */,
-				192F979B17D77055007E2694 /* User.m */,
-				1935C7C417C13B7800D82EC9 /* Assignment.h */,
-				1935C7C517C13B7800D82EC9 /* Assignment.m */,
-				1935C7CA17C1426500D82EC9 /* Course.h */,
-				1935C7CB17C1426500D82EC9 /* Course.m */,
-				1935C7C717C1419A00D82EC9 /* ScheduleEvent.h */,
-				1935C7C817C1419A00D82EC9 /* ScheduleEvent.m */,
+				9647A94317E9E3A600BB2A96 /* ScheduleEvent.h */,
+				9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */,
+				9647A94017E9E3A600BB2A96 /* User.h */,
+				9647A94117E9E3A600BB2A96 /* User.m */,
+				9647A93D17E9E3A500BB2A96 /* CourseInstance.h */,
+				9647A93E17E9E3A500BB2A96 /* CourseInstance.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -181,11 +176,11 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
-				966A499917E9B68F009C342B /* Categories */,
 				966A499317E9B47A009C342B /* Views */,
 				966A499217E9B330009C342B /* API */,
 				966A499017E9B2DD009C342B /* Controllers */,
 				966A498C17E9AD82009C342B /* App */,
+				966A499917E9B68F009C342B /* Categories */,
 				1935C7C317C13B5400D82EC9 /* Models */,
 				194842D91799B0AB0016A5C0 /* Images.xcassets */,
 				194842C81799B0AB0016A5C0 /* Supporting Files */,
@@ -458,14 +453,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */,
-				1935C7C617C13B7800D82EC9 /* Assignment.m in Sources */,
-				1935C7CC17C1426500D82EC9 /* Course.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
+				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
+				9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */,
 				19879C6F17AE79FF00FBC672 /* SideMenuTableViewController.m in Sources */,
-				192F979C17D77055007E2694 /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
-				1935C7C917C1419A00D82EC9 /* ScheduleEvent.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
@@ -476,6 +469,7 @@
 				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,
 				19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
+				9647A94517E9E3A600BB2A96 /* ScheduleEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

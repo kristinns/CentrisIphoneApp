@@ -9,4 +9,5 @@
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
 + (NSDictionary *)getUser:(NSString *)bySSN;
++ (NSDictionary *)getSchedule:(NSString*)bySSN;
 @end

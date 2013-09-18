@@ -2,17 +2,20 @@
 //  ScheduleEvent.h
 //  Centris
 //
-//  Created by Kristinn Svansson on 8/18/13.
+//  Created by Bjarki Sörens on 9/18/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "Course.h"
+#import <CoreData/CoreData.h>
 
-@interface ScheduleEvent : NSObject
+@class CourseInstance;
 
-@property (strong, nonatomic) NSDate *start;
-@property (strong, nonatomic) NSDate *end;
-@property (strong, nonatomic) Course *course;
+@interface ScheduleEvent : NSManagedObject
+
+@property (nonatomic, retain) NSDate * starts;
+@property (nonatomic, retain) NSDate * ends;
+@property (nonatomic, retain) NSString * roomName;
+@property (nonatomic, retain) CourseInstance *hasCourseInstance;
 
 @end

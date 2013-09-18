@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3394" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3394" systemVersion="12F37" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="CourseInstance" representedClassName="CourseInstance" syncable="YES">
+        <attribute name="courseID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasScheduleEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasCourseInstance" inverseEntity="ScheduleEvent" syncable="YES"/>
+        <relationship name="hasUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isInCourseInstance" inverseEntity="User" syncable="YES"/>
+    </entity>
+    <entity name="ScheduleEvent" representedClassName="ScheduleEvent" syncable="YES">
+        <attribute name="ends" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="roomName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="starts" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="hasCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasScheduleEvents" inverseEntity="CourseInstance" syncable="YES"/>
+    </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ssn" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="160" positionY="192" width="128" height="103"/>
+        <element name="User" positionX="306" positionY="153" width="128" height="118"/>
+        <element name="ScheduleEvent" positionX="234" positionY="32" width="128" height="103"/>
+        <element name="CourseInstance" positionX="502" positionY="41" width="128" height="118"/>
     </elements>
 </model>
