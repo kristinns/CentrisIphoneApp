@@ -37,6 +37,7 @@
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
+		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		960827F817CB8E5D004741FD /* HomeFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		960827F917CB8E5D004741FD /* HomeFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
 		9621008817D7795400D60C06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
+		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,12 +182,11 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
+				966A498C17E9AD82009C342B /* App */,
 				960827FB17CB8E72004741FD /* HomeFeed */,
 				1935C7C317C13B5400D82EC9 /* Models */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
 				19879C7617AF143400FBC672 /* Schedule */,
-				194842D01799B0AB0016A5C0 /* AppDelegate.h */,
-				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
 				194842D31799B0AB0016A5C0 /* Main.storyboard */,
 				19879C6D17AE79FF00FBC672 /* SideMenuTableViewController.h */,
 				19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */,
@@ -269,6 +271,17 @@
 				960827F917CB8E5D004741FD /* HomeFeedViewController.m */,
 			);
 			name = HomeFeed;
+			sourceTree = "<group>";
+		};
+		966A498C17E9AD82009C342B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				194842D01799B0AB0016A5C0 /* AppDelegate.h */,
+				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
+				966A498D17E9ADB4009C342B /* CentrisTheme.h */,
+				966A498E17E9ADB4009C342B /* CentrisTheme.m */,
+			);
+			name = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -384,6 +397,7 @@
 				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
+				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,

@@ -7,6 +7,7 @@
 #import "MFSideMenuContainerViewController.h"
 #import "BaseViewController.h"
 #import "BaseTableViewController.h"
+#import "CentrisTheme.h"
 
 @interface SideMenuTableViewController ()
 
@@ -52,8 +53,8 @@
     // Top margin, move table 20 px down
     UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
     self.tableView.contentInset = inset;
-    
-    self.tableView.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0];
+    // set the background color
+    self.tableView.backgroundColor = [CentrisTheme sideMenuBackgroundColor];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
@@ -78,10 +79,10 @@
     cell.textLabel.textColor = [UIColor whiteColor];
     
     UIView *selectionColor = [[UIView alloc] init];
-    selectionColor.backgroundColor = [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0]; //centris red
+    selectionColor.backgroundColor = [CentrisTheme sideMenuSelectedRowColor]; //centris red
     cell.selectedBackgroundView = selectionColor;
     
-    cell.backgroundColor = [UIColor colorWithRed:76.0/255.0 green:76.0/255.0 blue:78.0/255.0 alpha:1.0]; //centris navigation grey
+    cell.backgroundColor = [CentrisTheme sideMenuBackgroundColor]; //centris navigation grey
     return cell;
 }
 
