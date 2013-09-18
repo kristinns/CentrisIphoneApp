@@ -12,9 +12,9 @@
 + (NSDictionary *)executeFetch:(NSString *)query
 {
 	NSString *url = [NSString stringWithFormat:@"%@%@", CENTRIS_API_URL, query];
-	NSLog(url);
+	NSLog(@"from exectuefetch %@",url);
 	
-    url = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
     NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;

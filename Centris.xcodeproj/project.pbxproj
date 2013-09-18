@@ -34,8 +34,6 @@
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
 		9647A92D17E9C9B500BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A92C17E9C9B500BB2A96 /* User.m */; };
-		9647A93017E9C9B500BB2A96 /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A92F17E9C9B500BB2A96 /* CourseInstance.m */; };
-		9647A93317E9CAC400BB2A96 /* Schedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A93217E9CAC400BB2A96 /* Schedule.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
 /* End PBXBuildFile section */
 
@@ -94,10 +92,6 @@
 		9621008817D7795400D60C06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9647A92B17E9C9B500BB2A96 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		9647A92C17E9C9B500BB2A96 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		9647A92E17E9C9B500BB2A96 /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInstance.h; sourceTree = "<group>"; };
-		9647A92F17E9C9B500BB2A96 /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstance.m; sourceTree = "<group>"; };
-		9647A93117E9CAC400BB2A96 /* Schedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Schedule.h; path = Models/Schedule.h; sourceTree = "<group>"; };
-		9647A93217E9CAC400BB2A96 /* Schedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Schedule.m; path = Models/Schedule.m; sourceTree = "<group>"; };
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,12 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
-				9647A92E17E9C9B500BB2A96 /* CourseInstance.h */,
-				9647A92F17E9C9B500BB2A96 /* CourseInstance.m */,
 				9647A92B17E9C9B500BB2A96 /* User.h */,
 				9647A92C17E9C9B500BB2A96 /* User.m */,
-				9647A93117E9CAC400BB2A96 /* Schedule.h */,
-				9647A93217E9CAC400BB2A96 /* Schedule.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -463,8 +453,6 @@
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
-				9647A93017E9C9B500BB2A96 /* CourseInstance.m in Sources */,
-				9647A93317E9CAC400BB2A96 /* Schedule.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,
