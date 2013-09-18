@@ -28,41 +28,37 @@
 
 - (void)getUser
 {
-	NSLog(@"getUser");
-	// put User in Core Data
-	dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-	dispatch_async(fetchQ, ^{
-		 NSDictionary * user = [CentrisDataFetcher getUser:@"0805903269"];
-		[self.managedObjectContext performBlock:^{
-            NSLog(@"Thread started");
-			[User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
-			[self greet:[user valueForKeyPath:@"Person.SSN"]];
-            NSLog(@"%@", user);
-		}];
-	});
-
-//	NSLog([user description]);
+    NSString *ssn = @"0805903269";
+	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
+	if(user)
+        self.greetingLabel.text = [user.name description];
+    else {
+        // Get user from centris
+        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+        dispatch_async(fetchQ, ^{
+            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
+            [self.managedObjectContext performBlock:^{
+                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
+                self.greetingLabel.text = newUser.name;
+            }];
+        });
+    }
+	
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-//	// Do any additional setup after loading the view.
+	// Do any additional setup after loading the view.
 	
     //NSLog(@"test");
 	[self setTimeLabels];
     [self getUser];
+    self.title = @"Veitan";
     
 	//[self greet:@"0805903269"];
 }
 
--(void)greet:(NSString *)SSN {
-	NSLog(@"greet");
-	id context = self.managedObjectContext;
-	User *user = [User userWith:SSN inManagedObjectContext:context];
-	NSLog(@"%@", user);
-	self.greetingLabel.text = [user.name description];
-}
 // Gets the current date and sets it to the date labels
 -(void)setTimeLabels
 {
