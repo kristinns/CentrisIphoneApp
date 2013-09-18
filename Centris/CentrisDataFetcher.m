@@ -5,15 +5,18 @@
 
 #import "CentrisDataFetcher.h"
 
-#define CENTRIS_API_URL @"http://centris.dev.nem.ru.is/api/api/v1/"
+#define CENTRIS_API_URL @"http://centris.dev.nem.ru.is/api2/api/v1/"
 
 @implementation CentrisDataFetcher
 
 + (NSDictionary *)executeFetch:(NSString *)query
 {
-    query = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString *url = [NSString stringWithFormat:@"%@%@", CENTRIS_API_URL, query];
+	NSLog(url);
+	
+    url = [query stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
-    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
+    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     NSError *error = nil;
     
     NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
@@ -57,7 +60,11 @@
 
 + (NSDictionary *)getUser:(NSString *)bySSN
 {
-    return [self executeFetch:[NSString stringWithFormat:@"%@%@%@", CENTRIS_API_URL, @"students/", bySSN]];
+    return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"students/", bySSN]];
+}
+
++(NSDictionary *)getSchedule:(NSString *)bySSN {
+	return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"schedule/", bySSN]];
 }
 
 @end
