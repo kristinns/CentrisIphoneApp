@@ -133,10 +133,9 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
 				192F979A17D77055007E2694 /* User.h */,
 				192F979B17D77055007E2694 /* User.m */,
-				192F979117D76B04007E2694 /* User+Centris.h */,
-				192F979217D76B04007E2694 /* User+Centris.m */,
 				1935C7C417C13B7800D82EC9 /* Assignment.h */,
 				1935C7C517C13B7800D82EC9 /* Assignment.m */,
 				1935C7CA17C1426500D82EC9 /* Course.h */,
@@ -150,8 +149,8 @@
 		194842B51799B0AB0016A5C0 = {
 			isa = PBXGroup;
 			children = (
-				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
 				194842C71799B0AB0016A5C0 /* Centris */,
+				966A499517E9B4CB009C342B /* Libraries */,
 				194842E61799B0AB0016A5C0 /* CentrisTests */,
 				194842C01799B0AB0016A5C0 /* Frameworks */,
 				194842BF1799B0AB0016A5C0 /* Products */,
@@ -182,18 +181,13 @@
 		194842C71799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXGroup;
 			children = (
+				966A499917E9B68F009C342B /* Categories */,
+				966A499317E9B47A009C342B /* Views */,
+				966A499217E9B330009C342B /* API */,
+				966A499017E9B2DD009C342B /* Controllers */,
 				966A498C17E9AD82009C342B /* App */,
-				960827FB17CB8E72004741FD /* HomeFeed */,
 				1935C7C317C13B5400D82EC9 /* Models */,
-				19879C7717AF1AB500FBC672 /* Assignment */,
-				19879C7617AF143400FBC672 /* Schedule */,
-				194842D31799B0AB0016A5C0 /* Main.storyboard */,
-				19879C6D17AE79FF00FBC672 /* SideMenuTableViewController.h */,
-				19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */,
-				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
-				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
 				194842D91799B0AB0016A5C0 /* Images.xcassets */,
-				19879C6817AE79AC00FBC672 /* MFSideMenu */,
 				194842C81799B0AB0016A5C0 /* Supporting Files */,
 			);
 			path = Centris;
@@ -202,10 +196,6 @@
 		194842C81799B0AB0016A5C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				19816B1F17E60A3900D08C60 /* BaseViewController.h */,
-				19816B2017E60A3900D08C60 /* BaseViewController.m */,
-				19816B1C17E609F000D08C60 /* BaseTableViewController.h */,
-				19816B1D17E609F000D08C60 /* BaseTableViewController.m */,
 				194842C91799B0AB0016A5C0 /* Centris-Info.plist */,
 				194842CA1799B0AB0016A5C0 /* InfoPlist.strings */,
 				194842CD1799B0AB0016A5C0 /* main.m */,
@@ -239,18 +229,8 @@
 				19879C6A17AE79AC00FBC672 /* MFSideMenuContainerViewController.h */,
 				19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */,
 			);
-			path = MFSideMenu;
-			sourceTree = "<group>";
-		};
-		19879C7617AF143400FBC672 /* Schedule */ = {
-			isa = PBXGroup;
-			children = (
-				19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */,
-				19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */,
-				19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */,
-				19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */,
-			);
-			name = Schedule;
+			name = MFSideMenu;
+			path = Centris/MFSideMenu;
 			sourceTree = "<group>";
 		};
 		19879C7717AF1AB500FBC672 /* Assignment */ = {
@@ -282,6 +262,99 @@
 				966A498E17E9ADB4009C342B /* CentrisTheme.m */,
 			);
 			name = App;
+			sourceTree = "<group>";
+		};
+		966A499017E9B2DD009C342B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				966A499817E9B632009C342B /* Schedule */,
+				966A499617E9B524009C342B /* Base */,
+				19879C7717AF1AB500FBC672 /* Assignment */,
+				966A499117E9B30D009C342B /* SideMenu */,
+				960827FB17CB8E72004741FD /* HomeFeed */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		966A499117E9B30D009C342B /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				19879C6D17AE79FF00FBC672 /* SideMenuTableViewController.h */,
+				19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */,
+			);
+			name = SideMenu;
+			sourceTree = "<group>";
+		};
+		966A499217E9B330009C342B /* API */ = {
+			isa = PBXGroup;
+			children = (
+				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
+				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
+		966A499317E9B47A009C342B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				966A499717E9B619009C342B /* Cells */,
+				966A499417E9B482009C342B /* Storyboards */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		966A499417E9B482009C342B /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				194842D31799B0AB0016A5C0 /* Main.storyboard */,
+			);
+			name = Storyboards;
+			sourceTree = "<group>";
+		};
+		966A499517E9B4CB009C342B /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				19879C6817AE79AC00FBC672 /* MFSideMenu */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		966A499617E9B524009C342B /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				19816B1F17E60A3900D08C60 /* BaseViewController.h */,
+				19816B2017E60A3900D08C60 /* BaseViewController.m */,
+				19816B1C17E609F000D08C60 /* BaseTableViewController.h */,
+				19816B1D17E609F000D08C60 /* BaseTableViewController.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		966A499717E9B619009C342B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */,
+				19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		966A499817E9B632009C342B /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */,
+				19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		966A499917E9B68F009C342B /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				192F979117D76B04007E2694 /* User+Centris.h */,
+				192F979217D76B04007E2694 /* User+Centris.m */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -633,7 +706,8 @@
 				192F978C17D746C1007E2694 /* CoreData.xcdatamodel */,
 			);
 			currentVersion = 192F978C17D746C1007E2694 /* CoreData.xcdatamodel */;
-			path = CoreData.xcdatamodeld;
+			name = CoreData.xcdatamodeld;
+			path = ../CoreData.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
