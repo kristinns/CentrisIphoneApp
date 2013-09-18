@@ -7,7 +7,6 @@
 #import "MFSideMenuContainerViewController.h"
 #import "BaseViewController.h"
 #import "BaseTableViewController.h"
-#import "CentrisTheme.h"
 
 @interface SideMenuTableViewController ()
 

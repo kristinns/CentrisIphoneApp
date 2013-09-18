@@ -12,7 +12,6 @@
 + (NSDictionary *)executeFetch:(NSString *)query
 {
 	NSString *url = [NSString stringWithFormat:@"%@%@", CENTRIS_API_URL, query];
-	NSLog(@"from exectuefetch %@",url);
 	
     url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 
@@ -63,8 +62,18 @@
     return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"students/", bySSN]];
 }
 
-+(NSDictionary *)getSchedule:(NSString *)bySSN {
-	return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"schedule/", bySSN]];
++(NSDictionary *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
+{
+	
+//	NSCalendar *calendar = [NSCalendar currentCalendar];
+//	NSDateComponents *components = [calendar components:(NSSecondCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit fromDate:<#(NSDate *)#>];
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+	
+	NSString *fromDateString = [formatter stringFromDate:fromDate];
+	NSString *toDateString = [formatter stringFromDate:toDate];
+	
+	return [self executeFetch:[NSString stringWithFormat:@"students/%@/schedule?range=%@,%@",bySSN, fromDateString, toDateString]];
 }
 
 @end

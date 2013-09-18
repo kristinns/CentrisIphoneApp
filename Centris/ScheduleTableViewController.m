@@ -6,12 +6,39 @@
 #import "ScheduleTableViewController.h"
 #import "ScheduleTableViewCell.h"
 #import "MFSideMenuContainerViewController.h"
+#import "ScheduleEvent+Centris.h"
+#import "CentrisDataFetcher.h"
+#import "User+Centris.h"
 
 @interface ScheduleTableViewController ()
 @property NSMutableArray *timeTable;
 @end
 
 @implementation ScheduleTableViewController
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[super viewWillAppear:animated];
+	[self getScheduledEvents];
+}
+
+-(void)getScheduledEvents
+{
+	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
+	if (user) {
+		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+		dispatch_async(fetchQ, ^{
+			NSDateComponents *comps = [[NSDateComponents alloc] init];
+			[comps setYear:2012];
+			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
+			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
+            NSDictionary * schedule = [CentrisDataFetcher getSchedule:user.ssn from:[NSDate ] to:[NSDate date]];
+            [self.managedObjectContext performBlock:^{
+                NSLog(@"%@",schedule);
+            }];
+        });
+	}
+}
 
 - (void)viewDidLoad
 {

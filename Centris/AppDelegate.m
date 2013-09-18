@@ -170,7 +170,7 @@
          Lightweight migration will only work for a limited set of schema changes; consult "Core Data Model Versioning and Data Migration Programming Guide" for details.
          
          */
-		[[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil];
+		[[NSFileManager defaultManager] removeItemAtURL:storeURL error:nil]; // This is just a temporary solution and should not ship
 		
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();

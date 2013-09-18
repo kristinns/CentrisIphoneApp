@@ -30,8 +30,10 @@
 {
     NSString *ssn = @"0805903269";
 	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
-	if(user)
+	if(user) {
+		NSLog(@"%@", "User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
+	}
     else {
         // Get user from centris
         dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);

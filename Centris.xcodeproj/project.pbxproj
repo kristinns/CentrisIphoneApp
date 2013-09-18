@@ -36,6 +36,7 @@
 		9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A93E17E9E3A500BB2A96 /* CourseInstance.m */; };
 		9647A94217E9E3A600BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94117E9E3A600BB2A96 /* User.m */; };
 		9647A94517E9E3A600BB2A96 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */; };
+		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
 /* End PBXBuildFile section */
 
@@ -98,6 +99,8 @@
 		9647A94117E9E3A600BB2A96 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		9647A94317E9E3A600BB2A96 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
 		9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
+		9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ScheduleEvent+Centris.h"; path = "Models/ScheduleEvent+Centris.h"; sourceTree = "<group>"; };
+		9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ScheduleEvent+Centris.m"; path = "Models/ScheduleEvent+Centris.m"; sourceTree = "<group>"; };
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -348,6 +351,8 @@
 			children = (
 				192F979117D76B04007E2694 /* User+Centris.h */,
 				192F979217D76B04007E2694 /* User+Centris.m */,
+				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
+				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -455,6 +460,7 @@
 				19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
+				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */,
 				19879C6F17AE79FF00FBC672 /* SideMenuTableViewController.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
