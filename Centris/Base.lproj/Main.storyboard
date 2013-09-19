@@ -257,7 +257,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Schedule item" id="OG2-2k-sbb" customClass="ScheduleTableViewCell">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OG2-2k-sbb" id="zSI-7Q-cKn">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -348,6 +348,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="menu-icon" width="44" height="34"/>
+        <image name="menu-icon" width="44" height="34"/>
         <image name="menu-icon" width="44" height="34"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>

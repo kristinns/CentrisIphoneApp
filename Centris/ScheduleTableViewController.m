@@ -32,7 +32,7 @@
 			[comps setYear:2012];
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSDictionary * schedule = [CentrisDataFetcher getSchedule:user.ssn from:[NSDate ] to:[NSDate date]];
+            NSDictionary * schedule = [CentrisDataFetcher getSchedule:user.ssn from: from to: to];
             [self.managedObjectContext performBlock:^{
                 NSLog(@"%@",schedule);
             }];

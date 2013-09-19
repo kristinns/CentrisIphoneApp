@@ -31,7 +31,7 @@
     NSString *ssn = @"0805903269";
 	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
 	if(user) {
-		NSLog(@"%@", "User found, no need to fetch");
+		NSLog(@"%@", @"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
 	}
     else {
