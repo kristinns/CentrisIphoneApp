@@ -13,5 +13,7 @@
 						   to:(NSDate *)toDate
 	   inManagedObjectContext:(NSManagedObjectContext *)context;
 
++(ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo
+			   inManagedObjectContext:(NSManagedObjectContext *) context;
 
 @end

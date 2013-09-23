@@ -323,6 +323,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="KFp-Ph-vBr">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gUd-TI-fwp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -348,7 +351,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="menu-icon" width="44" height="34"/>
+        <image name="menu-icon" width="26" height="19"/>
+        <image name="menu-icon" width="26" height="19"/>
+        <image name="menu-icon" width="26" height="19"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

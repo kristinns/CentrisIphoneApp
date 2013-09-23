@@ -37,4 +37,13 @@
 	}
 	return scheduledEvents;
 }
+
++(ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	ScheduleEvent *event = nil;
+	
+	
+	
+	return event;
+}
 @end
