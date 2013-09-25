@@ -6,7 +6,6 @@
 #import "AssignmentsTableViewController.h"
 #import "CentrisDataFetcher.h"
 #import "AssignmentDetailViewController.h"
-#import "MFSideMenuContainerViewController.h"
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;

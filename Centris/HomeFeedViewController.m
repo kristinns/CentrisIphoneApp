@@ -7,7 +7,6 @@
 //
 
 #import "HomeFeedViewController.h"
-#import "MFSideMenuContainerViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 

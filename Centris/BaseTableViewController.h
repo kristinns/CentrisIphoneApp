@@ -10,5 +10,4 @@
 
 @interface BaseTableViewController : UITableViewController
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-- (IBAction)showMenuPressed:(id)sender;
 @end

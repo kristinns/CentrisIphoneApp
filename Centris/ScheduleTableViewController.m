@@ -5,7 +5,6 @@
 
 #import "ScheduleTableViewController.h"
 #import "ScheduleTableViewCell.h"
-#import "MFSideMenuContainerViewController.h"
 #import "ScheduleEvent+Centris.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
