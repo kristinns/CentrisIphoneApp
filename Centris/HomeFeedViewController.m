@@ -56,6 +56,9 @@
 	[self setTimeLabels];
     [self getUser];
     self.title = @"Veitan";
+	
+//	self.navigationController.navigationBar.tintColor = [UIColor redColor];
+//	self.navigationController.navigationBar.translucent = NO;
     
 	//[self greet:@"0805903269"];
 }
