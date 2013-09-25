@@ -77,7 +77,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VG0-dB-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-33" y="176"/>
+            <point key="canvasLocation" x="-297" y="874"/>
         </scene>
         <!--Assignments Table View Controller-->
         <scene sceneID="NT0-6a-Bun">
@@ -162,7 +162,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywA-tl-FWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1317" y="176"/>
+            <point key="canvasLocation" x="1313" y="176"/>
         </scene>
         <!--Navigation Controller - Verkefni-->
         <scene sceneID="8pZ-99-70b">
@@ -361,10 +361,10 @@
             </objects>
             <point key="canvasLocation" x="506" y="1549"/>
         </scene>
-        <!--Navigation View Controller - Veitan-->
+        <!--Navigation Controller - Veitan-->
         <scene sceneID="BvD-NT-oGy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xx5-nK-leG" customClass="NavigationViewController" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xx5-nK-leG" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Veitan" image="home-icon" id="DdX-09-hZw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Wq-sp-uXs">
