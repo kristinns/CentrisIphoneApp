@@ -11,4 +11,5 @@
 @interface CentrisTheme : NSObject
 + (UIColor *)sideMenuBackgroundColor;
 + (UIColor *)sideMenuSelectedRowColor;
++ (UIColor *)navigationBarColor;
 @end

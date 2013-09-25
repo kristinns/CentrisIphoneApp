@@ -361,10 +361,10 @@
             </objects>
             <point key="canvasLocation" x="506" y="1549"/>
         </scene>
-        <!--Navigation Controller - Veitan-->
+        <!--Navigation View Controller - Veitan-->
         <scene sceneID="BvD-NT-oGy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xx5-nK-leG" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Xx5-nK-leG" customClass="NavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Veitan" image="home-icon" id="DdX-09-hZw"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Wq-sp-uXs">

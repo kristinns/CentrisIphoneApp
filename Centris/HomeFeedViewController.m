@@ -52,13 +52,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
 	
-    //NSLog(@"test");
+	// set the header color
+	self.navigationController.navigationBar.barTintColor = [CentrisTheme navigationBarColor];
+	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+	self.navigationController.navigationBar.translucent = NO;
+	
 	[self setTimeLabels];
     [self getUser];
     self.title = @"Veitan";
-	
-//	self.navigationController.navigationBar.tintColor = [UIColor redColor];
-//	self.navigationController.navigationBar.translucent = NO;
     
 	//[self greet:@"0805903269"];
 }

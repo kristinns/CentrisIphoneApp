@@ -22,6 +22,7 @@
 {
 	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
 	[tabController setSelectedIndex:2]; // Veitan
+	
     return YES;
 }
 							

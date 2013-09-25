@@ -18,4 +18,8 @@
 + (UIColor *)sideMenuSelectedRowColor {
 	return [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0]; // Centris red
 }
+
++ (UIColor *)navigationBarColor {
+	return [UIColor colorWithRed:219.0/255.0 green:46.0/255.0 blue:53.0/255.0 alpha:1.0]; // Centris red
+}
 @end
