@@ -36,7 +36,6 @@
 		9647A94517E9E3A600BB2A96 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94417E9E3A600BB2A96 /* ScheduleEvent.m */; };
 		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
-		967206F517F38B3600957E8E /* TabBarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967206F417F38B3600957E8E /* TabBarViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +96,6 @@
 		9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ScheduleEvent+Centris.m"; path = "Models/ScheduleEvent+Centris.m"; sourceTree = "<group>"; };
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
-		967206F317F38B3600957E8E /* TabBarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabBarViewController.h; sourceTree = "<group>"; };
-		967206F417F38B3600957E8E /* TabBarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabBarViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -250,7 +247,6 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				967206F617F38B4700957E8E /* Tab Bar */,
 				966A499817E9B632009C342B /* Schedule */,
 				966A499617E9B524009C342B /* Base */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
@@ -330,15 +326,6 @@
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 			);
 			name = Categories;
-			sourceTree = "<group>";
-		};
-		967206F617F38B4700957E8E /* Tab Bar */ = {
-			isa = PBXGroup;
-			children = (
-				967206F317F38B3600957E8E /* TabBarViewController.h */,
-				967206F417F38B3600957E8E /* TabBarViewController.m */,
-			);
-			name = "Tab Bar";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -457,7 +444,6 @@
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
-				967206F517F38B3600957E8E /* TabBarViewController.m in Sources */,
 				9647A94517E9E3A600BB2A96 /* ScheduleEvent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

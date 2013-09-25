@@ -57,10 +57,10 @@
             </objects>
             <point key="canvasLocation" x="913" y="-526"/>
         </scene>
-        <!--Tab Bar View Controller-->
+        <!--Tab Bar Controller-->
         <scene sceneID="b5A-5U-3x2">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="DlB-07-hk5" customClass="TabBarViewController" sceneMemberID="viewController">
+                <tabBarController definesPresentationContext="YES" id="DlB-07-hk5" sceneMemberID="viewController">
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="fln-KZ-wgc">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
