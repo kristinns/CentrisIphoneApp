@@ -59,42 +59,42 @@
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     
     // Top margin, move table 20 px down
-//    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
-//    self.tableView.contentInset = inset;
+    UIEdgeInsets inset = UIEdgeInsetsMake(20, 0, 0, 0);
+    self.tableView.contentInset = inset;
     
     // Title
     self.title = @"Stundaskrá";
 	
 //    // Timetablefrom MySchool
-//    self.timeTable = [[NSMutableArray alloc] init];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 8:30", @"fromTime", @" 9:15", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 9:20", @"fromTime", @"10:05", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"15", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"10:20", @"fromTime", @"11:05", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"11:10", @"fromTime", @"11:55", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"12:00", @"fromTime", @"", @"toTime", @"25", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"12:20", @"fromTime", @"13:05", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"13:10", @"fromTime", @"13:55", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:00", @"fromTime", @"14:45", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"10", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:55", @"fromTime", @"15:40", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"15:45", @"fromTime", @"16:30", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"16:35", @"fromTime", @"17:20", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"17:25", @"fromTime", @"18:10", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"18:15", @"fromTime", @"19:00", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:05", @"fromTime", @"", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:50", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
-//    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"20:40", @"fromTime", @"21:45", @"toTime", @"45", @"duration", nil]];
+    self.timeTable = [[NSMutableArray alloc] init];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 8:30", @"fromTime", @" 9:15", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 9:20", @"fromTime", @"10:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"15", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"10:20", @"fromTime", @"11:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"11:10", @"fromTime", @"11:55", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"12:00", @"fromTime", @"", @"toTime", @"25", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"12:20", @"fromTime", @"13:05", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"13:10", @"fromTime", @"13:55", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:00", @"fromTime", @"14:45", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"10", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"14:55", @"fromTime", @"15:40", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"15:45", @"fromTime", @"16:30", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"16:35", @"fromTime", @"17:20", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"17:25", @"fromTime", @"18:10", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"18:15", @"fromTime", @"19:00", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:05", @"fromTime", @"", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"19:50", @"fromTime", @"20:35", @"toTime", @"45", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
+    [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"20:40", @"fromTime", @"21:45", @"toTime", @"45", @"duration", nil]];
     
 }
 

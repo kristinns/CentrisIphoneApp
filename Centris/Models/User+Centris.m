@@ -58,7 +58,7 @@
 		// Handle error
 		NSLog(@"%@", [error userInfo]);
 	} else if (![matches count]) { // Nothing found
-		NSLog(@"Nothing found");
+		NSLog(@"Nothing found here");
 	} else { // Found user, return him
 		user = [matches lastObject];
 	}

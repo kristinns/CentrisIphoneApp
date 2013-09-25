@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleEvent+Centris.h"
+#import "CourseInstance+Centris.h"
 
 @implementation ScheduleEvent (Centris)
 
@@ -42,7 +43,38 @@
 {
 	ScheduleEvent *event = nil;
 	
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScheduleEvent"];
 	
+	request.predicate = [NSPredicate predicateWithFormat:@"eventID = %@", eventInfo[@"ID"]];
+	
+	// Execute the fetch
+    
+    NSError *error = nil;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+	
+	if (!matches) { // error
+		NSLog(@"%@", [error userInfo]);
+	}
+	else if (![matches count]) { // no result, put the event in core data
+		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+		event.starts = eventInfo[@"StartTime"];
+		event.ends = eventInfo[@"EndTime"];
+		event.eventID = eventInfo[@"ID"];
+		event.roomName = eventInfo[@"RoomName"];
+		event.typeOfClass = eventInfo[@"TypeOfClass"];
+		
+		NSInteger *courseID = (NSInteger)eventInfo[@"CourseID"];
+		
+		CourseInstance *courseInstance = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
+		if (!courseInstance) {
+			// TODO , this is a bit dependant on existance of courses in core data
+		}
+		event.hasCourseInstance = courseInstance;
+		
+	}
+	else { // event found, return it
+		event = [matches lastObject];
+	}
 	
 	return event;
 }
