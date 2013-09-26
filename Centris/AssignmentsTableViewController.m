@@ -6,7 +6,6 @@
 #import "AssignmentsTableViewController.h"
 #import "CentrisDataFetcher.h"
 #import "AssignmentDetailViewController.h"
-#import "MFSideMenuContainerViewController.h"
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;
@@ -37,6 +36,10 @@
     [super viewDidLoad];
     // Change title for navigation controller
     self.title = @"Verkefni";
+	// set the header color
+	self.navigationController.navigationBar.barTintColor = [CentrisTheme navigationBarColor];
+	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+	self.navigationController.navigationBar.translucent = NO;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section

@@ -5,7 +5,6 @@
 
 #import "ScheduleTableViewController.h"
 #import "ScheduleTableViewCell.h"
-#import "MFSideMenuContainerViewController.h"
 #import "ScheduleEvent+Centris.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
@@ -54,6 +53,11 @@
 	[self.refreshControl addTarget:self
                             action:@selector(getScheduledEvents)
                   forControlEvents:UIControlEventValueChanged];
+	
+	// set the header color
+	self.navigationController.navigationBar.barTintColor = [CentrisTheme navigationBarColor];
+	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+	self.navigationController.navigationBar.translucent = NO;
     
     // Remove border from table cells
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];

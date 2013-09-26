@@ -4,7 +4,6 @@
 //
 
 #import "AppDelegate.h"
-#import "MFSideMenuContainerViewController.h"
 #import "HomeFeedViewController.h"
 
 @interface AppDelegate()
@@ -21,20 +20,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /* Configure MFSlideMenu */
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    MFSideMenuContainerViewController *container = (MFSideMenuContainerViewController *)self.window.rootViewController;
-    UINavigationController *navigationController = [storyboard instantiateViewControllerWithIdentifier:@"navigationController"];
-    BaseViewController *leftSideMenuViewController = [storyboard instantiateViewControllerWithIdentifier:@"leftSideMenuViewController"];
-    // Connect navigationController and leftSideMenuController to MFSlideMenuContainer
-    [container setLeftMenuViewController:leftSideMenuViewController];
-    [container setCenterViewController:navigationController];
-    
-    BaseViewController *topViewController = (BaseViewController *)navigationController.topViewController;
-    topViewController.managedObjectContext = self.managedObjectContext;
-    
-    leftSideMenuViewController.managedObjectContext = self.managedObjectContext;
-    
+	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
+	[tabController setSelectedIndex:2]; // Veitan
+	
     return YES;
 }
 							

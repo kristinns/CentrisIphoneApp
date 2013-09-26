@@ -24,8 +24,6 @@
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
 		19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B1D17E609F000D08C60 /* BaseTableViewController.m */; };
 		19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B2017E60A3900D08C60 /* BaseViewController.m */; };
-		19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */; };
-		19879C6F17AE79FF00FBC672 /* SideMenuTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */; };
 		19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
@@ -76,11 +74,6 @@
 		19816B1D17E609F000D08C60 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
 		19816B1F17E60A3900D08C60 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		19816B2017E60A3900D08C60 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		19879C6917AE79AC00FBC672 /* MFSideMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenu.h; sourceTree = "<group>"; };
-		19879C6A17AE79AC00FBC672 /* MFSideMenuContainerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MFSideMenuContainerViewController.h; sourceTree = "<group>"; };
-		19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MFSideMenuContainerViewController.m; sourceTree = "<group>"; };
-		19879C6D17AE79FF00FBC672 /* SideMenuTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SideMenuTableViewController.h; sourceTree = "<group>"; };
-		19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SideMenuTableViewController.m; sourceTree = "<group>"; };
 		19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
 		19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
@@ -223,17 +216,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		19879C6817AE79AC00FBC672 /* MFSideMenu */ = {
-			isa = PBXGroup;
-			children = (
-				19879C6917AE79AC00FBC672 /* MFSideMenu.h */,
-				19879C6A17AE79AC00FBC672 /* MFSideMenuContainerViewController.h */,
-				19879C6B17AE79AC00FBC672 /* MFSideMenuContainerViewController.m */,
-			);
-			name = MFSideMenu;
-			path = Centris/MFSideMenu;
-			sourceTree = "<group>";
-		};
 		19879C7717AF1AB500FBC672 /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
@@ -271,19 +253,9 @@
 				966A499817E9B632009C342B /* Schedule */,
 				966A499617E9B524009C342B /* Base */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
-				966A499117E9B30D009C342B /* SideMenu */,
 				960827FB17CB8E72004741FD /* HomeFeed */,
 			);
 			name = Controllers;
-			sourceTree = "<group>";
-		};
-		966A499117E9B30D009C342B /* SideMenu */ = {
-			isa = PBXGroup;
-			children = (
-				19879C6D17AE79FF00FBC672 /* SideMenuTableViewController.h */,
-				19879C6E17AE79FF00FBC672 /* SideMenuTableViewController.m */,
-			);
-			name = SideMenu;
 			sourceTree = "<group>";
 		};
 		966A499217E9B330009C342B /* API */ = {
@@ -315,7 +287,6 @@
 		966A499517E9B4CB009C342B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
-				19879C6817AE79AC00FBC672 /* MFSideMenu */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -479,7 +450,6 @@
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
-				19879C6C17AE79AC00FBC672 /* MFSideMenuContainerViewController.m in Sources */,
 				19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 			);
