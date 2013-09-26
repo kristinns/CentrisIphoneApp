@@ -10,7 +10,6 @@
 
 @interface CentrisManagedObjectContext()
 @property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 @end
 
@@ -27,25 +26,16 @@
     return _sharedObject;
 }
 
-#pragma mark Core Data stack
-
-/*
- Returns the managed object context for the application.
- If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
- */
-- (NSManagedObjectContext *) managedObjectContext
+- (id)init
 {
-    if (_managedObjectContext != nil) {
-        return _managedObjectContext;
+    self = [super initWithConcurrencyType:NSMainQueueConcurrencyType];
+    if (self) {
+        [self setPersistentStoreCoordinator: self.persistentStoreCoordinator];
     }
-    
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_managedObjectContext setPersistentStoreCoordinator: coordinator];
-    }
-    return _managedObjectContext;
+    return self;
 }
+
+#pragma mark Core Data stack
 
 
 // Returns the managed object model for the application.
