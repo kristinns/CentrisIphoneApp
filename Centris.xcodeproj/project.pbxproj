@@ -438,7 +438,7 @@
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
-				19879C6F17AE79FF00FBC672 /* SideMenuTableViewController.m in Sources */,
+				9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,

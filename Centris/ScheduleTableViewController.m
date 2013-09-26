@@ -69,7 +69,7 @@
     // Title
     self.title = @"Stundaskrá";
 	
-//    // Timetablefrom MySchool
+    // Timetablefrom MySchool
     self.timeTable = [[NSMutableArray alloc] init];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@" 8:30", @"fromTime", @" 9:15", @"toTime", @"45", @"duration", nil]];
     [self.timeTable addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"", @"fromTime", @"", @"toTime", @"5", @"duration", nil]];
