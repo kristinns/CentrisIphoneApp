@@ -38,6 +38,8 @@
 		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
 		966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */; };
+		966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966B2D0F17FC39F000F3D170 /* Configuration.plist */; };
+		966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D1217FC498C00F3D170 /* AppFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +105,9 @@
 		966B2D0B17FC261A00F3D170 /* DataFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
 		966B2D0C17FC28D000F3D170 /* CDFServiceStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFServiceStub.h; sourceTree = "<group>"; };
 		966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFServiceStub.m; sourceTree = "<group>"; };
+		966B2D0F17FC39F000F3D170 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		966B2D1117FC498C00F3D170 /* AppFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppFactory.h; sourceTree = "<group>"; };
+		966B2D1217FC498C00F3D170 /* AppFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFactory.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,6 +252,9 @@
 				194842D11799B0AB0016A5C0 /* AppDelegate.m */,
 				966A498D17E9ADB4009C342B /* CentrisTheme.h */,
 				966A498E17E9ADB4009C342B /* CentrisTheme.m */,
+				966B2D0F17FC39F000F3D170 /* Configuration.plist */,
+				966B2D1117FC498C00F3D170 /* AppFactory.h */,
+				966B2D1217FC498C00F3D170 /* AppFactory.m */,
 			);
 			name = App;
 			sourceTree = "<group>";
@@ -420,6 +428,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				194842DA1799B0AB0016A5C0 /* Images.xcassets in Resources */,
+				966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */,
 				194842CC1799B0AB0016A5C0 /* InfoPlist.strings in Resources */,
 				194842D51799B0AB0016A5C0 /* Main.storyboard in Resources */,
 			);
@@ -440,6 +449,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */,
 				19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
