@@ -10,24 +10,23 @@
 
 @implementation CourseInstance (Centris)
 
-+(CourseInstance *)courseInstanceWithID:(NSInteger *)courseID inManagedObjectContext:(NSManagedObjectContext *)context
++(CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	CourseInstance *instance = nil;
 	
-	if (courseID != nil) {
-		NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"CourseInstance"];
-        
-        request.predicate = [NSPredicate predicateWithFormat:@"id = %@", courseID];
-        
-        NSError *error;
-        NSArray *matches = [context executeFetchRequest:request error:&error];
-        
-        if (!matches) { // error
-            NSLog(@"%@", [error userInfo]);
-        }
-		
-		instance = [matches lastObject];
-	}
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"CourseInstance"];
+    
+    request.predicate = [NSPredicate predicateWithFormat:@"id = %@", courseID];
+    
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    if (!matches) { // error
+        NSLog(@"%@", [error userInfo]);
+    }
+    
+    instance = [matches lastObject];
+	
 	return instance;
 }
 

@@ -21,7 +21,6 @@
     __strong static id _sharedObject = nil;
     dispatch_once(&pred, ^{
         _sharedObject = [[self alloc] init];
-        // Additional initialization can go here
     });
     return _sharedObject;
 }
