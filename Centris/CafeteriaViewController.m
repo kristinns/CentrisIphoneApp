@@ -7,6 +7,7 @@
 //
 
 #import "CafeteriaViewController.h"
+#import "CafeteriaFetcher.h"
 
 @interface CafeteriaViewController ()
 
@@ -26,7 +27,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	NSLog(@"hello");
+	self.title = @"Málið";
+	[CafeteriaFetcher getMenu];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  

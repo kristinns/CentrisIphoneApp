@@ -41,6 +41,7 @@
 		9672070D17F45F1B00957E8E /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9672070C17F45F1B00957E8E /* libxml2.dylib */; };
 		9672071817F45F9E00957E8E /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9672071517F45F9E00957E8E /* HTMLNode.m */; };
 		9672071917F45F9E00957E8E /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 9672071717F45F9E00957E8E /* HTMLParser.m */; };
+		9672071D17F461D100957E8E /* CafeteriaFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 9672071C17F461D100957E8E /* CafeteriaFetcher.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,8 @@
 		9672071517F45F9E00957E8E /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
 		9672071617F45F9E00957E8E /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
 		9672071717F45F9E00957E8E /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
+		9672071B17F461D100957E8E /* CafeteriaFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CafeteriaFetcher.h; sourceTree = "<group>"; };
+		9672071C17F461D100957E8E /* CafeteriaFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CafeteriaFetcher.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -277,6 +280,8 @@
 			children = (
 				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
 				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
+				9672071B17F461D100957E8E /* CafeteriaFetcher.h */,
+				9672071C17F461D100957E8E /* CafeteriaFetcher.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -472,6 +477,7 @@
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				9672071D17F461D100957E8E /* CafeteriaFetcher.m in Sources */,
 				961BB6E917F0676400912C0D /* ScheduleEvent.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
