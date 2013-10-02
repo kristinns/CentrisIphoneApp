@@ -39,8 +39,8 @@
         dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
         dispatch_async(fetchQ, ^{
             NSDictionary * user = [CentrisDataFetcher getUser:ssn];
-            [self.managedObjectContext performBlock:^{
-                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
+            [[CentrisManagedObjectContext sharedContext] performBlock:^{
+                User *newUser = [User userWithCentrisInfo:user];
                 self.greetingLabel.text = newUser.name;
             }];
         });
