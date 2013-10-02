@@ -9,6 +9,7 @@
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
+#import "CentrisManagedObjectContext.h"
 
 @interface HomeFeedViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
@@ -28,7 +29,7 @@
 - (void)getUser
 {
     NSString *ssn = @"0805903269";
-	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
+	User *user = [User userWith:ssn inManagedObjectContext:[CentrisManagedObjectContext sharedContext]];
 	if(user) {
 		NSLog(@"%@", @"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
