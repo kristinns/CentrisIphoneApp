@@ -18,7 +18,12 @@
 	[tabController setSelectedIndex:2]; // Veitan
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
-	
+    [[UINavigationBar appearance] setTitleTextAttributes:@{
+                                                           UITextAttributeTextColor: [UIColor whiteColor],
+                                                           UITextAttributeFont: [UIFont fontWithName:@"Helvetica Neue" size:17]}];
+    [[UINavigationBar appearance] setBarTintColor:[CentrisTheme navigationBarColor]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+
     return YES;
 }
 							
