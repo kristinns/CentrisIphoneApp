@@ -37,6 +37,7 @@
 		9647A94217E9E3A600BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94117E9E3A600BB2A96 /* User.m */; };
 		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
 		966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = 966A498E17E9ADB4009C342B /* CentrisTheme.m */; };
+		966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,8 @@
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
 		966B2D0B17FC261A00F3D170 /* DataFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
+		966B2D0C17FC28D000F3D170 /* CDFServiceStub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDFServiceStub.h; sourceTree = "<group>"; };
+		966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDFServiceStub.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -265,6 +268,8 @@
 				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
 				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
 				966B2D0B17FC261A00F3D170 /* DataFetcher.h */,
+				966B2D0C17FC28D000F3D170 /* CDFServiceStub.h */,
+				966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -442,6 +447,7 @@
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
+				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,

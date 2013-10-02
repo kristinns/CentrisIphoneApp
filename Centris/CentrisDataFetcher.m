@@ -62,7 +62,7 @@
     return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"students/", bySSN]];
 }
 
-+ (NSDictionary *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
++ (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
 {
 	
 //	NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -73,6 +73,9 @@
 	NSString *fromDateString = [formatter stringFromDate:fromDate];
 	NSString *toDateString = [formatter stringFromDate:toDate];
 	
+	
+	// TODO: This should return list of dictionaries... or a single dictionary.
+	// Might be buggy!
 	return [self executeFetch:[NSString stringWithFormat:@"students/%@/schedule?range=%@,%@",bySSN, fromDateString, toDateString]];
 }
 

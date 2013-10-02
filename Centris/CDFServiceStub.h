@@ -1,5 +1,5 @@
 //
-//  DataFetcher.h
+//  CDFServiceStub.h
 //  Centris
 //
 //  Created by Bjarki Sörens on 10/2/13.
@@ -7,13 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DataFetcher.h"
 
-@protocol DataFetcher <NSObject>
-
+@interface CDFServiceStub : NSObject <DataFetcher>
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
 + (NSDictionary *)getUser:(NSString *)bySSN;
-+ (NSArray *)getSchedule:(NSString *)bySSN
-						 from:(NSDate *)fromDate
-						   to:(NSDate *)toDate;
++ (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate;
 @end
