@@ -3,11 +3,14 @@
 //  Centris
 //
 
+#pragma mark - Imports
+
 #import "AssignmentsTableViewController.h"
 #import "DataFetcher.h"
-#import "CDFServiceStub.h"
 #import "AppFactory.h"
 #import "AssignmentDetailViewController.h"
+
+#pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;
@@ -17,6 +20,7 @@
 
 @implementation AssignmentsTableViewController
 
+#pragma mark - Getters
 // Getter for assignmentCourses, uses lazy instantiation
 - (NSArray *)assignmentCourses
 {
@@ -42,6 +46,8 @@
 	return _dataFetcher;
 }
 
+#pragma mark - Setup
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -52,6 +58,8 @@
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
 }
+
+#pragma mark - Table methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -84,27 +92,14 @@
     return cell;
 }
 
+#pragma mark - Segue methods
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"assignmentDetailSegue"]) {
         //NSString *title = [[self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row] valueForKey:@"title"];
         //[segue.destinationViewController setAssignmentTitle:title];
     }
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
