@@ -6,8 +6,8 @@
 #pragma mark - Imports
 
 #import "AssignmentsTableViewController.h"
-#import "DataFetcher.h"
 #import "AppFactory.h"
+#import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
 
 #pragma mark - Interface
