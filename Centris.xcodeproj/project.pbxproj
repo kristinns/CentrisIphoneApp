@@ -99,6 +99,7 @@
 		9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ScheduleEvent+Centris.m"; path = "Models/ScheduleEvent+Centris.m"; sourceTree = "<group>"; };
 		966A498D17E9ADB4009C342B /* CentrisTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisTheme.h; sourceTree = "<group>"; };
 		966A498E17E9ADB4009C342B /* CentrisTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisTheme.m; sourceTree = "<group>"; };
+		966B2D0B17FC261A00F3D170 /* DataFetcher.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataFetcher.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +264,7 @@
 			children = (
 				19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */,
 				19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */,
+				966B2D0B17FC261A00F3D170 /* DataFetcher.h */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -438,7 +440,6 @@
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
-				9647A93F17E9E3A500BB2A96 /* CourseInstance.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,

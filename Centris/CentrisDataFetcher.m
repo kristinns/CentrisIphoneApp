@@ -62,7 +62,7 @@
     return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"students/", bySSN]];
 }
 
-+(NSDictionary *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
++ (NSDictionary *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
 {
 	
 //	NSCalendar *calendar = [NSCalendar currentCalendar];
