@@ -20,7 +20,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dayOfMonthLabel;
 @property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
-
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation HomeFeedViewController
@@ -49,8 +49,9 @@
 #pragma mark - Methods
 - (void)getUser
 {
+	self.managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
     NSString *ssn = @"0805903269";
-	User *user = [User userWith:ssn inManagedObjectContext:[CentrisManagedObjectContext sharedContext]];
+	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
@@ -60,8 +61,8 @@
         dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
         dispatch_async(fetchQ, ^{
             NSDictionary * user = [CentrisDataFetcher getUser:ssn];
-            [[CentrisManagedObjectContext sharedContext] performBlock:^{
-                User *newUser = [User userWithCentrisInfo:user];
+            [self.managedObjectContext performBlock:^{
+                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
                 self.greetingLabel.text = newUser.name;
             }];
         });

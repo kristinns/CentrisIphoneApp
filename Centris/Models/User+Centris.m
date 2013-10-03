@@ -11,9 +11,8 @@
 
 @implementation User (Centris)
 // Get User from Dictionary and store in context if it's not already in it
-+ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo
++ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-	NSManagedObjectContext *context = [CentrisManagedObjectContext sharedContext];
     User *user = nil;
     
     // Create fetch request
