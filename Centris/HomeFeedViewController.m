@@ -6,10 +6,15 @@
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
+
+#pragma mark - Imports
+
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 #import "CentrisManagedObjectContext.h"
+
+#pragma mark - Properties
 
 @interface HomeFeedViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
@@ -20,32 +25,11 @@
 
 @implementation HomeFeedViewController
 
-// Whenever the view is about to appear, if we have not yet opened/created a demo document, do so.
+#pragma mark - Setup
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-}
-
-- (void)getUser
-{
-    NSString *ssn = @"0805903269";
-	User *user = [User userWith:ssn inManagedObjectContext:[CentrisManagedObjectContext sharedContext]];
-	if(user) {
-		NSLog(@"%@", @"User found, no need to fetch");
-        self.greetingLabel.text = [user.name description];
-	}
-    else {
-        // Get user from centris
-        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-        dispatch_async(fetchQ, ^{
-            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
-            [[CentrisManagedObjectContext sharedContext] performBlock:^{
-                User *newUser = [User userWithCentrisInfo:user];
-                self.greetingLabel.text = newUser.name;
-            }];
-        });
-    }
-	
 }
 
 - (void)viewDidLoad
@@ -60,6 +44,29 @@
     self.title = @"Veitan";
     
 	//[self greet:@"0805903269"];
+}
+
+#pragma mark - Methods
+- (void)getUser
+{
+    NSString *ssn = @"0805903269";
+	User *user = [User userWith:ssn inManagedObjectContext:[CentrisManagedObjectContext sharedContext]];
+	if(user) {
+		NSLog(@"User found, no need to fetch");
+        self.greetingLabel.text = [user.name description];
+	}
+    else {
+        // Get user from centris
+        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+        dispatch_async(fetchQ, ^{
+            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
+            [[CentrisManagedObjectContext sharedContext] performBlock:^{
+                User *newUser = [User userWithCentrisInfo:user];
+                self.greetingLabel.text = newUser.name;
+            }];
+        });
+    }
+	
 }
 
 // Gets the current date and sets it to the date labels
@@ -88,9 +95,6 @@
 	NSString *formattedDayOfNumberString = [dateFormatter stringFromDate:date];
 	//set the label
 	self.dayOfMonthLabel.text = formattedDayOfNumberString;
-	
-//	NSLog(@"formattedDateString: %@", formattedDayOfWeekString);
-
 }
 
 @end

@@ -19,15 +19,14 @@
     // Create fetch request
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     
-    // Get only user with ssn
     request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
     
     // Execute query on Core Data
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
-    // Check what happened to the fetch
-    if (!matches || ([matches count] > 1 )) { // nil means fetch failed; count > 1 means more than one
+    // Check results
+    if (!matches) { // nil means fetch failed
         // Handle error
 		NSLog(@"%@", error);
     } else if (![matches count]) { // Noone found, let's create a User from CentrisInfo
