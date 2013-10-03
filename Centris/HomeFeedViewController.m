@@ -46,6 +46,13 @@
 	//[self greet:@"0805903269"];
 }
 
+#pragma mark - Getters
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+	return nil;
+}
+
 #pragma mark - Methods
 - (void)getUser
 {
