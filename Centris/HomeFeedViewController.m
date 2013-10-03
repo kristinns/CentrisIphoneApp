@@ -50,13 +50,13 @@
 
 - (NSManagedObjectContext *)managedObjectContext
 {
-	return nil;
+	if (!_managedObjectContext) _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
+	return _managedObjectContext;
 }
 
 #pragma mark - Methods
 - (void)getUser
 {
-	self.managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
     NSString *ssn = @"0805903269";
 	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
 	if(user) {
