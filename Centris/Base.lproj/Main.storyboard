@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
-        <!--Home Feed View Controller-->
+        <!--Home Feed View Controller - Veitan-->
         <scene sceneID="IBI-qs-p4c">
             <objects>
                 <viewController storyboardIdentifier="FeedViewController" id="Ikg-ST-W14" customClass="HomeFeedViewController" sceneMemberID="viewController">
@@ -46,7 +46,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="pUo-TA-QTW"/>
+                    <navigationItem key="navigationItem" title="Veitan" id="pUo-TA-QTW">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="6ED-MK-dRj"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="dayOfMonthLabel" destination="sbf-2W-alx" id="TSp-oU-2Qb"/>
                         <outlet property="dayOfWeekLabel" destination="jHF-Gs-GrG" id="I7d-Z0-QaC"/>
@@ -79,7 +81,7 @@
             </objects>
             <point key="canvasLocation" x="-297" y="874"/>
         </scene>
-        <!--Assignments Table View Controller-->
+        <!--Assignments Table View Controller - Verkefni-->
         <scene sceneID="NT0-6a-Bun">
             <objects>
                 <tableViewController storyboardIdentifier="AssignmentsTableViewController" id="o2D-GY-hLr" customClass="AssignmentsTableViewController" sceneMemberID="viewController">
@@ -121,7 +123,9 @@
                             <outlet property="delegate" destination="o2D-GY-hLr" id="dHT-oc-v5y"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="2r8-N9-3RI"/>
+                    <navigationItem key="navigationItem" title="Verkefni" id="2r8-N9-3RI">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="k4a-7B-m7V"/>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="uTo-Qf-pg0">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -171,6 +175,10 @@
                     <tabBarItem key="tabBarItem" title="Verkefni" image="assignment-icon" id="L8l-FL-l87"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="h4L-2z-xiG">
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="o2D-GY-hLr" kind="relationship" relationship="rootViewController" id="Pth-Z8-b2u"/>
@@ -268,7 +276,9 @@
                             <outlet property="delegate" destination="gfV-UY-7E4" id="SwA-nq-H3M"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="X2u-d7-JUD"/>
+                    <navigationItem key="navigationItem" id="X2u-d7-JUD">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="sZW-Vl-zee"/>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="KFp-Ph-vBr">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -370,6 +380,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="9Wq-sp-uXs">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="25"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -387,6 +401,9 @@
         <image name="home-icon" width="30" height="30"/>
         <image name="malid-icon" width="30" height="30"/>
         <image name="more-icon" width="30" height="30"/>
+        <image name="profile-icon" width="44" height="44"/>
+        <image name="profile-icon" width="44" height="44"/>
+        <image name="profile-icon" width="44" height="44"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

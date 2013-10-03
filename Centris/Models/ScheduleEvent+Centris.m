@@ -63,7 +63,7 @@
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		
-		NSInteger *courseID = (NSInteger)eventInfo[@"CourseID"];
+		NSInteger courseID = [eventInfo[@"CourseID"] integerValue];
 		
 		CourseInstance *courseInstance = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
 		if (!courseInstance) {
