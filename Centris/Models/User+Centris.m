@@ -7,27 +7,28 @@
 //
 
 #import "User+Centris.h"
+#import "CentrisManagedObjectContext.h"
 
 @implementation User (Centris)
 // Get User from Dictionary and store in context if it's not already in it
-+ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo
 {
+	NSManagedObjectContext *context = [CentrisManagedObjectContext sharedContext];
     User *user = nil;
     
     // Create fetch request
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
     
-    // Get only user with ssn
-    request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] description]];
+    request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
     
     // Execute query on Core Data
     NSError *error = nil;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
-    // Check what happened to the fetch
-    if (!matches || ([matches count] > 1 )) { // nil means fetch failed; count > 1 means more than one
+    // Check results
+    if (!matches) { // nil means fetch failed
         // Handle error
-		NSLog(@"%@", [error userInfo]);
+		NSLog(@"%@", error);
     } else if (![matches count]) { // Noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         user.name = [[centrisInfo valueForKeyPath:@"Person.Name"] description];

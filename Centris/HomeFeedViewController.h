@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface HomeFeedViewController : BaseViewController
-
+@interface HomeFeedViewController : UIViewController
 @end

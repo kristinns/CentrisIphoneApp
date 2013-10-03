@@ -4,7 +4,6 @@
 //
 
 #import "AppDelegate.h"
-#import "HomeFeedViewController.h"
 #import "CentrisManagedObjectContext.h"
 
 @interface AppDelegate()
