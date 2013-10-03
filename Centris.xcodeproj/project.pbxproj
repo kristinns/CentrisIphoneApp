@@ -24,7 +24,6 @@
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
 		19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B1D17E609F000D08C60 /* BaseTableViewController.m */; };
-		19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B2017E60A3900D08C60 /* BaseViewController.m */; };
 		19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
@@ -78,8 +77,6 @@
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
 		19816B1C17E609F000D08C60 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		19816B1D17E609F000D08C60 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
-		19816B1F17E60A3900D08C60 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
-		19816B2017E60A3900D08C60 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
 		19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
 		19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
@@ -314,8 +311,6 @@
 		966A499617E9B524009C342B /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				19816B1F17E60A3900D08C60 /* BaseViewController.h */,
-				19816B2017E60A3900D08C60 /* BaseViewController.m */,
 				19816B1C17E609F000D08C60 /* BaseTableViewController.h */,
 				19816B1D17E609F000D08C60 /* BaseTableViewController.m */,
 			);
@@ -456,7 +451,6 @@
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */,
-				19816B2117E60A3900D08C60 /* BaseViewController.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,

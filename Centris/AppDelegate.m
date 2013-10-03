@@ -58,7 +58,7 @@
 - (void)saveContext
 {
     NSError *error;
-    id context = [CentrisManagedObjectContext sharedContext];
+    id context = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
     
     if (context != nil) {
         if ([context hasChanges] && ![context save:&error]) {

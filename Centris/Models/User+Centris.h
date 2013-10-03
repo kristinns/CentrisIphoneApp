@@ -10,7 +10,7 @@
 
 @interface User (Centris)
 
-+ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo;
++ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
