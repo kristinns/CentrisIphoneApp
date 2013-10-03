@@ -22,7 +22,7 @@
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
     if (!matches) { // error
-        NSLog(@"%@", [error userInfo]);
+        NSLog(@"Error: %@", [error userInfo]);
     }
     
     instance = [matches lastObject];
