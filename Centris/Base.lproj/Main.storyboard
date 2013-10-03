@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="DlB-07-hk5">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
     </dependencies>
     <scenes>
@@ -215,9 +215,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="scheduleDemo" id="qvV-RT-q2a">
+                            <rect key="frame" x="0.0" y="64" width="320" height="337"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Schedule item" id="OG2-2k-sbb" customClass="ScheduleTableViewCell">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="423" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OG2-2k-sbb" id="zSI-7Q-cKn">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
@@ -401,9 +405,8 @@
         <image name="home-icon" width="30" height="30"/>
         <image name="malid-icon" width="30" height="30"/>
         <image name="more-icon" width="30" height="30"/>
-        <image name="profile-icon" width="44" height="44"/>
-        <image name="profile-icon" width="44" height="44"/>
-        <image name="profile-icon" width="44" height="44"/>
+        <image name="profile-icon" width="66" height="66"/>
+        <image name="scheduleDemo" width="320" height="337"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
