@@ -1,9 +1,12 @@
 //
-//  ScheduleViewController.h
+//  ScheduleTableViewController.h
 //  Centris
 //
+//  Created by Bjarki Sörens on 8/26/13.
+//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
+//
 
-#import "BaseTableViewController.h"
+#import "CentrisManagedObjectContext.h"
 
-@interface ScheduleTableViewController : BaseTableViewController
+@interface ScheduleTableViewController : UITableViewController
 @end

@@ -1,6 +1,9 @@
 //
-//  ScheduleViewController.m
+//  ScheduleTableViewController.m
 //  Centris
+//
+//  Created by Bjarki Sörens on 8/26/13.
+//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #pragma mark - Imports
@@ -16,6 +19,7 @@
 @interface ScheduleTableViewController ()
 @property NSMutableArray *timeTable;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation ScheduleTableViewController
@@ -27,6 +31,12 @@
 		_dataFetcher = [AppFactory getFetcherFromConfiguration];
 	}
 	return _dataFetcher;
+}
+
+- (NSManagedObjectContext *)managedObjectContext
+{
+	if (!_managedObjectContext) _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
+	return _managedObjectContext;
 }
 
 #pragma mark - Setup
