@@ -43,14 +43,13 @@
 - (void)viewWillAppear:(BOOL)animated
 {
 	[super viewWillAppear:animated];
-	[self getScheduledEvents];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	[self.refreshControl addTarget:self
-                            action:@selector(getScheduledEvents)
+                            action:@selector(refresh)
                   forControlEvents:UIControlEventValueChanged];
 	
 	// set the header color
@@ -67,6 +66,8 @@
     
     // Title
     self.title = @"Stundaskrá";
+	
+	
 	
 //    // Timetablefrom MySchool
 //    self.timeTable = [[NSMutableArray alloc] init];
@@ -103,9 +104,11 @@
 
 #pragma mark - Other methods
 
--(void)getScheduledEvents
+// Fetches scheduled events and stores them in Core Data
+-(IBAction)refresh
 {
-	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
+	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext]; // This is a temporary solution
+	
 	if (user) {
 		[self.refreshControl beginRefreshing];
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
@@ -123,7 +126,9 @@
 				for (NSDictionary *event in schedule) { // this okay ?
 					[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
 				}
-				[self.refreshControl endRefreshing];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					[self.refreshControl endRefreshing];
+				});
             }];
         });
 	}
