@@ -24,8 +24,8 @@
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
 		19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B1D17E609F000D08C60 /* BaseTableViewController.m */; };
-		19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
+		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
@@ -74,10 +74,10 @@
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
 		19816B1C17E609F000D08C60 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
 		19816B1D17E609F000D08C60 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
-		19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewController.h; sourceTree = "<group>"; };
-		19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
 		19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
+		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
+		199F72C61802E16F009A724A /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
 		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
 		19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisDataFetcher.h; sourceTree = "<group>"; };
@@ -314,8 +314,8 @@
 		966A499817E9B632009C342B /* Schedule */ = {
 			isa = PBXGroup;
 			children = (
-				19879C7017AEB4FD00FBC672 /* ScheduleTableViewController.h */,
-				19879C7117AEB4FD00FBC672 /* ScheduleTableViewController.m */,
+				199F72C51802E16F009A724A /* ScheduleViewController.h */,
+				199F72C61802E16F009A724A /* ScheduleViewController.m */,
 			);
 			name = Schedule;
 			sourceTree = "<group>";
@@ -440,6 +440,7 @@
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
+				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				1944A82C17FC5E6A00DEE146 /* CentrisManagedObjectContext.m in Sources */,
 				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
@@ -449,7 +450,6 @@
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
-				19879C7217AEB4FD00FBC672 /* ScheduleTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
