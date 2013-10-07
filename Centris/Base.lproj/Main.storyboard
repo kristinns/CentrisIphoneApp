@@ -210,7 +210,6 @@
         <!--Schedule View Controller-->
         <scene sceneID="GRK-c5-S9u">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="39G-qE-x4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="acg-mG-s3C" customClass="ScheduleViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="RZf-Iu-a1b"/>
@@ -221,7 +220,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35c-pk-J83">
-                                <rect key="frame" x="0.0" y="53" width="320" height="410"/>
+                                <rect key="frame" x="0.0" y="79" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RhD-3z-iX4">
@@ -240,8 +239,8 @@
                                     <constraint firstItem="RhD-3z-iX4" firstAttribute="centerX" secondItem="35c-pk-J83" secondAttribute="centerX" id="xbi-Ri-YCJ"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBH-ch-EbC">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="45"/>
+                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBH-ch-EbC" customClass="DatePickerView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -258,13 +257,16 @@
                             <constraint firstItem="35c-pk-J83" firstAttribute="trailing" secondItem="fBH-ch-EbC" secondAttribute="trailing" id="uow-q6-zOJ"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Wvy-pb-aQS"/>
+                    <navigationItem key="navigationItem" id="Wvy-pb-aQS">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="Bbk-Zm-CSO"/>
+                    </navigationItem>
                     <connections>
-                        <outlet property="datePicker" destination="fBH-ch-EbC" id="1Vr-5i-Wbg"/>
+                        <outlet property="datePickerView" destination="fBH-ch-EbC" id="d0h-y6-YWl"/>
                         <outlet property="scrollView" destination="35c-pk-J83" id="kGQ-di-HHF"/>
-                        <outlet property="tableView" destination="RhD-3z-iX4" id="Txl-9g-Lr0"/>
+                        <outlet property="tableView" destination="RhD-3z-iX4" id="daI-zB-DrU"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="39G-qE-x4x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="913" y="874"/>
         </scene>
@@ -382,6 +384,7 @@
         <image name="home-icon" width="30" height="30"/>
         <image name="malid-icon" width="30" height="30"/>
         <image name="more-icon" width="30" height="30"/>
+        <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
     </resources>

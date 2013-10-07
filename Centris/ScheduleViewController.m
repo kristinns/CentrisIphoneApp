@@ -10,17 +10,19 @@
 #import "User+Centris.h"
 #import "CentrisDataFetcher.h"
 #import "ScheduleEvent+Centris.h"
+#import "DatePickerView.h"
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (weak, nonatomic) IBOutlet UIView *datePicker;
+@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation ScheduleViewController
 
--(NSManagedObjectContext *)managedObjectContext
+- (NSManagedObjectContext *)managedObjectContext
 {
     if(!_managedObjectContext)
         _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
@@ -28,7 +30,7 @@
     return _managedObjectContext;
 }
 
--(void)getScheduledEvents
+- (void)getScheduledEvents
 {
 	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
 	if (user) {
@@ -55,8 +57,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	[self.datePicker setBackgroundColor:[UIColor greenColor]];
     self.navigationController.navigationBar.translucent = NO;
+    self.title = @"Stundaskrá";
 }
 
 
