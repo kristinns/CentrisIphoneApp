@@ -32,7 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Setup circle for selected view
-        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake(11, 17.5, 23.0, 23.0)];
+        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake(12, 17.5, 23.0, 23.0)];
         self.selectedCircleView.layer.cornerRadius = self.selectedCircleView.frame.size.width/2;
         [self addSubview:self.selectedCircleView];
         // Setup labels

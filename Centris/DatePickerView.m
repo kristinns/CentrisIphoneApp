@@ -67,7 +67,7 @@
         CGRect dayViewFrame = CGRectMake(dayWidth*i, 0, dayWidth, 50);
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:dayViewFrame];
         dayView.dayOfWeek = @"F";
-        dayView.dayOfMonth = i;
+        dayView.dayOfMonth = i+10;
         if (i == 3)
             dayView.selected = YES;
         [self.dayViews addSubview:dayView];
