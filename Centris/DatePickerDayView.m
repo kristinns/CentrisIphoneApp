@@ -78,6 +78,12 @@
     [self addSubview:self.dayOfMonthLabel];
 }
 
+- (void)tap:(UITapGestureRecognizer *)gesture
+{
+    [self setSelected:YES];
+    [self.delegate tappedOnDatePickerDayView:self];
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

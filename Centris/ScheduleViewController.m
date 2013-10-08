@@ -14,9 +14,9 @@
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 
 @end
 

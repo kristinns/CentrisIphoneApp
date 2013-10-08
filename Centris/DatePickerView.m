@@ -7,7 +7,6 @@
 //
 
 #import "DatePickerView.h"
-#import "DatePickerDayView.h"
 
 #define daysInView 7
 
@@ -16,6 +15,7 @@
 @property (nonatomic, strong) UIView *dayViews;
 @property (nonatomic, strong) UILabel *weekNumberLabel;
 @property (nonatomic, strong) UILabel *dateRangeLabel;
+@property (nonatomic, strong) NSMutableArray *dayViewsArray;
 @end
 
 @implementation DatePickerView
@@ -34,12 +34,27 @@
     [self setup];
 }
 
+- (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
+{
+    for (DatePickerDayView *dayView in self.dayViewsArray) {
+        if(dayView != datePickerDayView)
+            dayView.selected = NO;
+    }
+}
+
 - (void)setup
 {
+    self.pagingEnabled = YES;
+    self.showsVerticalScrollIndicator = NO;
+    self.dayViewsArray = [[NSMutableArray alloc] init];
+    self.contentSize = CGSizeMake(self.bounds.size.width*3, self.bounds.size.height);
+    //self.contentOffset = CGPointMake(60, 0);
+    self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width*3, self.bounds.size.height)];
+    [self addSubview:self.view];
     // Setup information view
     self.informationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 21)];
     self.informationView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1.0];
-    [self addSubview:self.informationView];
+    [self.view addSubview:self.informationView];
     // Add week number label to information view
     self.weekNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, 64, 21)];
     self.weekNumberLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
@@ -55,21 +70,22 @@
     [self.informationView addSubview:self.dateRangeLabel];
     
     self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 21, self.bounds.size.width, 50)];
-    [self addSubview:self.dayViews];
+    [self.view addSubview:self.dayViews];
     
     CGFloat dayWidth = self.bounds.size.width / daysInView;
-    for(int i = 0; i < daysInView; i++) {
+    for(int i = 0; i < daysInView*2; i++) {
         CGRect dayViewFrame = CGRectMake(dayWidth*i, 0, dayWidth, 50);
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:dayViewFrame];
         dayView.dayOfWeek = @"F";
         dayView.dayOfMonth = i+10;
+        dayView.delegate = self;
         if (i == 3)
             dayView.selected = YES;
         [self.dayViews addSubview:dayView];
-        
+        [self.dayViewsArray addObject:dayView];
+        [dayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:dayView
+                                                                                          action:@selector(tap:)]];
     }
-    
-    
 }
 
 /*

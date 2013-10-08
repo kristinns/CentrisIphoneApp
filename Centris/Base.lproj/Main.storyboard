@@ -219,11 +219,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35c-pk-J83">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="35c-pk-J83">
                                 <rect key="frame" x="0.0" y="79" width="320" height="410"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RhD-3z-iX4">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="RhD-3z-iX4">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="410"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -239,29 +239,21 @@
                                     <constraint firstItem="RhD-3z-iX4" firstAttribute="centerX" secondItem="35c-pk-J83" secondAttribute="centerX" id="xbi-Ri-YCJ"/>
                                 </constraints>
                             </scrollView>
-                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBH-ch-EbC" customClass="DatePickerView">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="aaU-w7-IbI" customClass="DatePickerView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="71"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="EwZ-aU-tOa"/>
-                                    <constraint firstAttribute="height" constant="45" id="TDb-ar-T6c"/>
-                                </constraints>
-                            </view>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="35c-pk-J83" firstAttribute="leading" secondItem="fBH-ch-EbC" secondAttribute="leading" id="Ac1-E6-LUt"/>
-                            <constraint firstItem="fBH-ch-EbC" firstAttribute="top" secondItem="FFN-AO-hlm" secondAttribute="top" id="X0E-HT-IVm"/>
                             <constraint firstItem="35c-pk-J83" firstAttribute="leading" secondItem="FFN-AO-hlm" secondAttribute="leading" id="eWS-gS-dgz"/>
-                            <constraint firstItem="35c-pk-J83" firstAttribute="trailing" secondItem="fBH-ch-EbC" secondAttribute="trailing" id="uow-q6-zOJ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Wvy-pb-aQS">
                         <barButtonItem key="rightBarButtonItem" image="profile-icon" id="Bbk-Zm-CSO"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="datePickerView" destination="fBH-ch-EbC" id="d0h-y6-YWl"/>
+                        <outlet property="datePickerView" destination="aaU-w7-IbI" id="zdk-Gl-fbU"/>
                         <outlet property="scrollView" destination="35c-pk-J83" id="kGQ-di-HHF"/>
                         <outlet property="tableView" destination="RhD-3z-iX4" id="daI-zB-DrU"/>
                     </connections>
@@ -384,6 +376,8 @@
         <image name="home-icon" width="30" height="30"/>
         <image name="malid-icon" width="30" height="30"/>
         <image name="more-icon" width="30" height="30"/>
+        <image name="profile-icon" width="66" height="66"/>
+        <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
