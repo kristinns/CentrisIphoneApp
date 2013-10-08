@@ -29,20 +29,15 @@
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (void)awakeFromNib
 {
-    self = [super initWithCoder:aDecoder];
-    if (self) {
-        [self setup];
-    }
-    
-    return self;
+    [self setup];
 }
 
 - (void)setup
 {
     // Setup information view
-    self.informationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 21)];
+    self.informationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 21)];
     self.informationView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1.0];
     [self addSubview:self.informationView];
     // Add week number label to information view
@@ -59,10 +54,10 @@
     self.dateRangeLabel.textAlignment = NSTextAlignmentRight;
     [self.informationView addSubview:self.dateRangeLabel];
     
-    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 21, self.frame.size.width, 50)];
+    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 21, self.bounds.size.width, 50)];
     [self addSubview:self.dayViews];
     
-    CGFloat dayWidth = self.frame.size.width / daysInView;
+    CGFloat dayWidth = self.bounds.size.width / daysInView;
     for(int i = 0; i < daysInView; i++) {
         CGRect dayViewFrame = CGRectMake(dayWidth*i, 0, dayWidth, 50);
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:dayViewFrame];
@@ -73,6 +68,7 @@
         [self.dayViews addSubview:dayView];
         
     }
+    
     
 }
 

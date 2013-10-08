@@ -33,7 +33,8 @@
     if (self) {
         // Setup circle for selected view
         self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake(12, 17.5, 23.0, 23.0)];
-        self.selectedCircleView.layer.cornerRadius = self.selectedCircleView.frame.size.width/2;
+        self.selectedCircleView.layer.cornerRadius = self.selectedCircleView.bounds.size.width/2;
+        self.selectedCircleView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:23.0/255.0 blue:41.0/255.0 alpha:1.0];
         [self addSubview:self.selectedCircleView];
         // Setup labels
         [self setupDayOfWeekLabel];
@@ -48,18 +49,18 @@
     _selected = selected;
     if (selected) {
         self.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1];
-        self.selectedCircleView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:23.0/255.0 blue:41.0/255.0 alpha:1.0];
+        self.selectedCircleView.hidden = NO;
         self.dayOfMonthLabel.textColor = [UIColor whiteColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
-        self.selectedCircleView.backgroundColor = [UIColor whiteColor];
+        self.selectedCircleView.hidden = YES;
         self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
     }
 }
 
 - (void)setupDayOfWeekLabel
 {
-    CGRect frame = CGRectMake(0, 4, self.frame.size.width, 10);
+    CGRect frame = CGRectMake(0, 4, self.bounds.size.width, 10);
     self.dayOfWeekLabel = [[UILabel alloc] initWithFrame:frame];
     self.dayOfWeekLabel.textColor = [UIColor colorWithRed:99.0/255.0 green:100.0/255.0 blue:102.0/255.0 alpha:1];
     self.dayOfWeekLabel.textAlignment = NSTextAlignmentCenter;
@@ -69,7 +70,7 @@
 
 - (void)setupDayOfMonthLabel
 {
-    CGRect frame = CGRectMake(0, 19, self.frame.size.width, 20);
+    CGRect frame = CGRectMake(0, 19, self.bounds.size.width, 20);
     self.dayOfMonthLabel = [[UILabel alloc] initWithFrame:frame];
     self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
     self.dayOfMonthLabel.textAlignment = NSTextAlignmentCenter;
