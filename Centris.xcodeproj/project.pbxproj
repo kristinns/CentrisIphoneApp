@@ -114,8 +114,6 @@
 		966B2D1217FC498C00F3D170 /* AppFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFactory.m; sourceTree = "<group>"; };
 		967A3AB51802D71500A083BC /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
 		967A3AB61802D71500A083BC /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
-		96D33146180433D600EF4227 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Centris/Models/ScheduleEvent.h; sourceTree = "<group>"; };
-		96D33147180433D600EF4227 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Centris/Models/ScheduleEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,8 +157,6 @@
 		194842B51799B0AB0016A5C0 = {
 			isa = PBXGroup;
 			children = (
-				96D33146180433D600EF4227 /* ScheduleEvent.h */,
-				96D33147180433D600EF4227 /* ScheduleEvent.m */,
 				194842C71799B0AB0016A5C0 /* Centris */,
 				966A499517E9B4CB009C342B /* Libraries */,
 				194842E61799B0AB0016A5C0 /* CentrisTests */,
