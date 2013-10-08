@@ -8,7 +8,8 @@
 
 #import "ScheduleViewController.h"
 #import "User+Centris.h"
-#import "CentrisDataFetcher.h"
+#import "DataFetcher.h"
+#import "AppFactory.h"
 #import "ScheduleEvent+Centris.h"
 #import "DatePickerView.h"
 
@@ -17,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) id<DataFetcher> dataFetcher;
+@property (nonatomic, strong) NSMutableArray *scheduleEvents;
 
 @end
 
@@ -28,6 +31,13 @@
         _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
     
     return _managedObjectContext;
+}
+
+- (id<DataFetcher>)dataFetcher
+{
+    if(!_dataFetcher)
+        _dataFetcher = [AppFactory getFetcherFromConfiguration];
+    return _dataFetcher;
 }
 
 - (void)getScheduledEvents
@@ -44,21 +54,40 @@
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			[comps setHour:18];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSDictionary * schedule = [CentrisDataFetcher getSchedule:user.ssn from: from to: to];
+            NSArray *schedule = [self.dataFetcher getSchedule:user.ssn from: from to: to];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
-					[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+					[self.scheduleEvents addObject:[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext]];
 				}
+                [self.tableView reloadData];
             }];
         });
 	}
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.scheduleEvents count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleEventCell"];
+    ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
+    cell.textLabel.text = scheduleEvent.roomName;
+    
+    return cell;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.scheduleEvents = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"Stundaskrá";
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    [self getScheduledEvents];
 }
 
 
