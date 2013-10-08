@@ -2,7 +2,7 @@
 //  ScheduleEvent.h
 //  Centris
 //
-//  Created by Bjarki Sörens on 10/7/13.
+//  Created by Bjarki Sörens on 10/8/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * roomName;
 @property (nonatomic, retain) NSDate * starts;
 @property (nonatomic, retain) NSString * typeOfClass;
+@property (nonatomic, retain) NSString * courseName;
 @property (nonatomic, retain) CourseInstance *hasCourseInstance;
 
 @end

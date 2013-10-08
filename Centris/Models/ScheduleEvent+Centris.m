@@ -65,6 +65,7 @@
 		event.eventID = [self convertToNumberFromString:eventInfo[@"ID"]];
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
+		event.courseName = eventInfo[@"CourseName"];
 		
 //		NSInteger courseID = [eventInfo[@"CourseID"] integerValue];
 //		

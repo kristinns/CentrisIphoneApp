@@ -44,6 +44,8 @@
 		967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3AB61802D71500A083BC /* ScheduleEvent.m */; };
 		967A3ABC180312B300A083BC /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3ABB180312B300A083BC /* CoreDataTableViewController.m */; };
 		96D3313E1804094B00EF4227 /* ScheduleCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3313D1804094B00EF4227 /* ScheduleCDTVC.m */; };
+		96D33148180433D600EF4227 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D33147180433D600EF4227 /* ScheduleEvent.m */; };
+		96D3314B180436CE00EF4227 /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3314A180436CE00EF4227 /* ScheduleEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -120,6 +122,10 @@
 		967A3ABB180312B300A083BC /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		96D3313C1804094B00EF4227 /* ScheduleCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCDTVC.h; sourceTree = "<group>"; };
 		96D3313D1804094B00EF4227 /* ScheduleCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCDTVC.m; sourceTree = "<group>"; };
+		96D33146180433D600EF4227 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Centris/Models/ScheduleEvent.h; sourceTree = "<group>"; };
+		96D33147180433D600EF4227 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Centris/Models/ScheduleEvent.m; sourceTree = "<group>"; };
+		96D33149180436CE00EF4227 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
+		96D3314A180436CE00EF4227 /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,8 @@
 		194842B51799B0AB0016A5C0 = {
 			isa = PBXGroup;
 			children = (
+				96D33146180433D600EF4227 /* ScheduleEvent.h */,
+				96D33147180433D600EF4227 /* ScheduleEvent.m */,
 				194842C71799B0AB0016A5C0 /* Centris */,
 				966A499517E9B4CB009C342B /* Libraries */,
 				194842E61799B0AB0016A5C0 /* CentrisTests */,
@@ -375,6 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
+				96D33149180436CE00EF4227 /* ScheduleEvent.h */,
+				96D3314A180436CE00EF4227 /* ScheduleEvent.m */,
 				1944A82A17FC5E6A00DEE146 /* CentrisManagedObjectContext.h */,
 				1944A82B17FC5E6A00DEE146 /* CentrisManagedObjectContext.m */,
 				967A3ABA180312B300A083BC /* CoreDataTableViewController.h */,
@@ -494,6 +504,7 @@
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
+				96D3314B180436CE00EF4227 /* ScheduleEvent.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
@@ -503,6 +514,7 @@
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
+				96D33148180433D600EF4227 /* ScheduleEvent.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,

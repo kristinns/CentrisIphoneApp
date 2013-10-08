@@ -74,7 +74,8 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleEventCell"];
     ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
-    cell.textLabel.text = scheduleEvent.roomName;
+    cell.textLabel.text = scheduleEvent.courseName;
+	cell.detailTextLabel.text = scheduleEvent.roomName;
     
     return cell;
 }

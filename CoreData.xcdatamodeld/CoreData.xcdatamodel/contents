@@ -9,6 +9,7 @@
         <relationship name="hasUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isInCourseInstance" inverseEntity="User" syncable="YES"/>
     </entity>
     <entity name="ScheduleEvent" representedClassName="ScheduleEvent" syncable="YES">
+        <attribute name="courseName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ends" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eventID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="roomName" optional="YES" attributeType="String" syncable="YES"/>
