@@ -72,6 +72,10 @@
     self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 21, self.bounds.size.width, 50)];
     [self.view addSubview:self.dayViews];
     
+    UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-1, self.bounds.size.width, 1)];
+    bottomBorder.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1.0];
+    [self addSubview:bottomBorder];
+    
     CGFloat dayWidth = self.bounds.size.width / daysInView;
     for(int i = 0; i < daysInView*2; i++) {
         CGRect dayViewFrame = CGRectMake(dayWidth*i, 0, dayWidth, 50);
