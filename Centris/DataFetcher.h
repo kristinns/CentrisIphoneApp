@@ -1,12 +1,15 @@
 //
-//  CentrisDataFetcher.h
+//  DataFetcher.h
 //  Centris
+//
+//  Created by Bjarki Sörens on 10/2/13.
+//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
-#import "DataFetcher.h"
 
-@interface CentrisDataFetcher : NSObject <DataFetcher>
+@protocol DataFetcher <NSObject>
+
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
 + (NSDictionary *)getUser:(NSString *)bySSN;

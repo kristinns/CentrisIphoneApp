@@ -3,22 +3,29 @@
 //  Centris
 //
 
+#pragma mark - Imports
+
 #import "AssignmentsTableViewController.h"
-#import "CentrisDataFetcher.h"
+#import "AppFactory.h"
+#import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
+
+#pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;
 @property (nonatomic, strong) NSArray *assignmentCourses;
+@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @end
 
 @implementation AssignmentsTableViewController
 
+#pragma mark - Getters
 // Getter for assignmentCourses, uses lazy instantiation
 - (NSArray *)assignmentCourses
 {
     // Get data from CentrisDataFetcher
-    if (!_assignmentCourses) _assignmentCourses = [CentrisDataFetcher getAssignmentCourses];
+    if (!_assignmentCourses) _assignmentCourses = [self.dataFetcher getAssignmentCourses];
     
     return _assignmentCourses;
 }
@@ -26,10 +33,20 @@
 - (NSArray *)assignments
 {
     // Get data from CentrisDataFetcher
-    if (!_assignments) _assignments = [CentrisDataFetcher getAssignments];
+    if (!_assignments) _assignments = [self.dataFetcher getAssignments];
     
     return _assignments;
 }
+
+- (id<DataFetcher>)dataFetcher
+{
+	if (!_dataFetcher) {
+		_dataFetcher = [AppFactory getFetcherFromConfiguration];
+	}
+	return _dataFetcher;
+}
+
+#pragma mark - Setup
 
 - (void)viewDidLoad
 {
@@ -41,6 +58,8 @@
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
 }
+
+#pragma mark - Table methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -73,27 +92,14 @@
     return cell;
 }
 
+#pragma mark - Segue methods
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if([segue.identifier isEqualToString:@"assignmentDetailSegue"]) {
         //NSString *title = [[self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row] valueForKey:@"title"];
         //[segue.destinationViewController setAssignmentTitle:title];
     }
-}
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
