@@ -27,7 +27,7 @@
     // Check results
     if (!matches) { // nil means fetch failed
         // Handle error
-		NSLog(@"%@", error);
+		NSLog(@"Error: %@", error);
     } else if (![matches count]) { // Noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         user.name = [[centrisInfo valueForKeyPath:@"Person.Name"] description];
@@ -56,7 +56,7 @@
 	
 	if (!matches) {
 		// Handle error
-		NSLog(@"%@", [error userInfo]);
+		NSLog(@"Error: %@", [error userInfo]);
 	} else if (![matches count]) { // Nothing found
 		NSLog(@"Nothing found here");
 	} else { // Found user, return him

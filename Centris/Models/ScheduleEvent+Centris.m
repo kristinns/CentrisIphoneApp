@@ -28,7 +28,7 @@
 	NSArray *matches = [context executeFetchRequest:request error:&error];
 	
 	if (!matches) { // error
-		NSLog(@"%@",[error userInfo]);
+		NSLog(@"Error: %@",[error userInfo]);
 	}
 	else if (![matches count]) { // no result
 		NSLog(@"No scheduled events found");
@@ -53,7 +53,7 @@
     NSArray *matches = [context executeFetchRequest:request error:&error];
 	
 	if (!matches) { // error
-		NSLog(@"%@", [error userInfo]);
+		NSLog(@"Error: %@", [error userInfo]);
 	}
 	else if (![matches count]) { // no result, put the event in core data
 		
