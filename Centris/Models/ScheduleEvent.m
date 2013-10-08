@@ -2,7 +2,7 @@
 //  ScheduleEvent.m
 //  Centris
 //
-//  Created by Bjarki Sörens on 9/23/13.
+//  Created by Bjarki Sörens on 10/7/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -13,9 +13,9 @@
 @implementation ScheduleEvent
 
 @dynamic ends;
+@dynamic eventID;
 @dynamic roomName;
 @dynamic starts;
-@dynamic eventID;
 @dynamic typeOfClass;
 @dynamic hasCourseInstance;
 

@@ -2,7 +2,7 @@
 //  ScheduleEvent.h
 //  Centris
 //
-//  Created by Bjarki Sörens on 9/23/13.
+//  Created by Bjarki Sörens on 10/7/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @interface ScheduleEvent : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * ends;
+@property (nonatomic, retain) NSDate * ends;
+@property (nonatomic, retain) NSNumber * eventID;
 @property (nonatomic, retain) NSString * roomName;
 @property (nonatomic, retain) NSDate * starts;
-@property (nonatomic, retain) NSNumber * eventID;
 @property (nonatomic, retain) NSString * typeOfClass;
 @property (nonatomic, retain) CourseInstance *hasCourseInstance;
 

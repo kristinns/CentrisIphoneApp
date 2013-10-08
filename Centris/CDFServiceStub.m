@@ -59,7 +59,8 @@
 	NSMutableArray *schedule = [[NSMutableArray alloc] init];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-						 @"24484", @"CourseID"
+						 @"1", @"ID",
+						 @"24484", @"CourseID",
 						 @"Vefforritun II", @"CourseName",
 						 @"M106", @"RoomName",
 						 @"2013-02-13T08:30:00", @"StartTime",
@@ -67,7 +68,8 @@
 						 @"Dæmatímar",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-						 @"24419", @"CourseID"
+						 @"2", @"ID",
+						 @"24419", @"CourseID",
 						 @"Forritunarmál", @"CourseName",
 						 @"M106", @"RoomName",
 						 @"2013-02-13T13:10:00", @"StartTime",

@@ -39,7 +39,7 @@
 	return scheduledEvents;
 }
 
-+(ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	ScheduleEvent *event = nil;
 	
@@ -56,20 +56,23 @@
 		NSLog(@"%@", [error userInfo]);
 	}
 	else if (![matches count]) { // no result, put the event in core data
+		
+		
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
-		event.starts = eventInfo[@"StartTime"];
-		event.ends = eventInfo[@"EndTime"];
-		event.eventID = eventInfo[@"ID"];
+		
+		event.starts = [self icelandicFormatWithDateString:eventInfo[@"StartTime"]];
+		event.ends = [self icelandicFormatWithDateString:eventInfo[@"EndTime"]];
+		event.eventID = [self convertToNumberFromString:eventInfo[@"ID"]];
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		
-		NSInteger courseID = [eventInfo[@"CourseID"] integerValue];
-		
-		CourseInstance *courseInstance = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
-		if (!courseInstance) {
-			// TODO , this is a bit dependant on existance of courses in core data
-		}
-		event.hasCourseInstance = courseInstance;
+//		NSInteger courseID = [eventInfo[@"CourseID"] integerValue];
+//		
+//		CourseInstance *courseInstance = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
+//		if (!courseInstance) {
+//			// TODO , this is a bit dependant on existance of courses in core data
+//		}
+//		event.hasCourseInstance = courseInstance;
 		
 	}
 	else { // event found, return it
@@ -78,4 +81,20 @@
 	
 	return event;
 }
+
++ (NSNumber *)convertToNumberFromString:(NSString *)numberString
+{
+	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
+	[f setNumberStyle:NSNumberFormatterDecimalStyle];
+	
+	return [f numberFromString:numberString];
+}
+
++ (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
+{
+	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+	return [formatter dateFromString:dateString];
+}
+
 @end
