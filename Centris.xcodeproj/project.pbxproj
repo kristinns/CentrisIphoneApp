@@ -42,7 +42,6 @@
 		966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966B2D0F17FC39F000F3D170 /* Configuration.plist */; };
 		966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D1217FC498C00F3D170 /* AppFactory.m */; };
 		967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3AB61802D71500A083BC /* ScheduleEvent.m */; };
-		967A3ABC180312B300A083BC /* CoreDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3ABB180312B300A083BC /* CoreDataTableViewController.m */; };
 		96D3313E1804094B00EF4227 /* ScheduleCDTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 96D3313D1804094B00EF4227 /* ScheduleCDTVC.m */; };
 /* End PBXBuildFile section */
 
@@ -116,8 +115,6 @@
 		966B2D1217FC498C00F3D170 /* AppFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFactory.m; sourceTree = "<group>"; };
 		967A3AB51802D71500A083BC /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
 		967A3AB61802D71500A083BC /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
-		967A3ABA180312B300A083BC /* CoreDataTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataTableViewController.h; sourceTree = "<group>"; };
-		967A3ABB180312B300A083BC /* CoreDataTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataTableViewController.m; sourceTree = "<group>"; };
 		96D3313C1804094B00EF4227 /* ScheduleCDTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCDTVC.h; sourceTree = "<group>"; };
 		96D3313D1804094B00EF4227 /* ScheduleCDTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCDTVC.m; sourceTree = "<group>"; };
 		96D33146180433D600EF4227 /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Centris/Models/ScheduleEvent.h; sourceTree = "<group>"; };
@@ -381,8 +378,6 @@
 				192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */,
 				1944A82A17FC5E6A00DEE146 /* CentrisManagedObjectContext.h */,
 				1944A82B17FC5E6A00DEE146 /* CentrisManagedObjectContext.m */,
-				967A3ABA180312B300A083BC /* CoreDataTableViewController.h */,
-				967A3ABB180312B300A083BC /* CoreDataTableViewController.m */,
 				1935C7C317C13B5400D82EC9 /* Models */,
 			);
 			name = "Core Data";
@@ -491,7 +486,6 @@
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */,
-				967A3ABC180312B300A083BC /* CoreDataTableViewController.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
@@ -507,7 +501,6 @@
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
-				96D33148180433D600EF4227 /* ScheduleEvent.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,

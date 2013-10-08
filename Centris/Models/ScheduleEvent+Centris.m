@@ -67,19 +67,10 @@
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		event.courseName = eventInfo[@"CourseName"];
 		
-//		NSInteger courseID = [eventInfo[@"CourseID"] integerValue];
-//		
-//		CourseInstance *courseInstance = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
-//		if (!courseInstance) {
-//			// TODO , this is a bit dependant on existance of courses in core data
-//		}
-//		event.hasCourseInstance = courseInstance;
-		
-	}
-	else { // event found, return it
+		// TODO , hook up course instance here
+	} else { // event found, return it
 		event = [matches lastObject];
 	}
-	
 	return event;
 }
 
