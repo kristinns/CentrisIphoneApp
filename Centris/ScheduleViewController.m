@@ -75,12 +75,17 @@
     return [self.scheduleEvents count];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 61.0;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleEventCell"];
     ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
-    cell.textLabel.text = scheduleEvent.courseName;
-	cell.detailTextLabel.text = scheduleEvent.roomName;
+//    cell.textLabel.text = scheduleEvent.courseName;
+//	cell.detailTextLabel.text = scheduleEvent.roomName;
     
     return cell;
 }
