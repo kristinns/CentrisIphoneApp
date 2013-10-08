@@ -25,6 +25,7 @@
 
 @implementation ScheduleViewController
 
+#pragma mark - Getters
 - (NSManagedObjectContext *)managedObjectContext
 {
     if(!_managedObjectContext)
@@ -40,6 +41,7 @@
     return _dataFetcher;
 }
 
+#pragma mark - Methods
 - (void)getScheduledEvents
 {
 	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
@@ -62,8 +64,11 @@
                 [self.tableView reloadData];
             }];
         });
+
 	}
 }
+
+#pragma mark - Table methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -80,6 +85,7 @@
     return cell;
 }
 
+#pragma mark - Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
