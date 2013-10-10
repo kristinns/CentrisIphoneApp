@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 @property (strong, nonatomic) NSDate *datePickerDate;
 @property (strong, nonatomic) NSDate *datePickerSelectedDate;
+@property (strong, nonatomic) NSDate *datePickerToday;
 
 @end
 
@@ -38,13 +39,15 @@
 
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
-    if(right)
+    if(right) {
         self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:60*60*24*7];
-    else
+        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingTimeInterval:60*60*24*7];
+    } else {
         self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:-60*60*24*7];
+        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingTimeInterval:-60*60*24*7];
+    }
     
     [self updateDatePicker];
-        
 }
 
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
@@ -71,11 +74,18 @@
 {
     for (int i=0; i < [self.datePickerView.dayViewsList count]; i++) {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:[self.datePickerDate dateByAddingTimeInterval:60*60*24*i]];
+        NSDate *dateForDayView = [self.datePickerDate dateByAddingTimeInterval:60*60*24*i];
+        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:dateForDayView];
         // Update dayView
         DatePickerDayView *dayView = [self.datePickerView.dayViewsList objectAtIndex:i];
         dayView.dayOfMonth = [comps day];
         dayView.dayOfWeek = [self weekDayFromInteger:[comps weekday]];
+        dayView.selected = NO;
+        dayView.today = NO;
+        if ([dateForDayView compare:self.datePickerToday] == NSOrderedSame)
+            dayView.today = YES;
+        if ([dateForDayView compare:self.datePickerSelectedDate] == NSOrderedSame)
+            dayView.selected = YES;
     }
 }
 
@@ -89,8 +99,8 @@
 #pragma mark - Methods
 - (void)getScheduledEvents
 {
-	User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
-	if (user) {
+	//User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
+	//if (user) {
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
 		dispatch_async(fetchQ, ^{
 			NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -101,7 +111,7 @@
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			[comps setHour:18];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSArray *schedule = [self.dataFetcher getSchedule:user.ssn from: from to: to];
+            NSArray *schedule = [self.dataFetcher getSchedule:@"0805903269" from: from to: to];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
 					[self.scheduleEvents addObject:[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext]];
@@ -110,7 +120,7 @@
             }];
         });
 
-	}
+	//}
 }
 
 #pragma mark - Table methods
@@ -148,8 +158,13 @@
     // Set start date to Sunday this week
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    [comps setWeekday:1];
-    self.datePickerDate = [gregorian dateFromComponents:comps];
+    [comps setMinute:0];
+    [comps setHour:0];
+    [comps setSecond:0];
+    NSInteger weekday = [comps weekday];
+    self.datePickerToday = [gregorian dateFromComponents:comps];
+    self.datePickerSelectedDate = self.datePickerToday;
+    self.datePickerDate = [self.datePickerSelectedDate dateByAddingTimeInterval:-60*60*24*(weekday+6)];
     
     [self getScheduledEvents];
     [self updateDatePicker];

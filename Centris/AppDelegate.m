@@ -14,7 +14,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
-	[tabController setSelectedIndex:2]; // Veitan
+	[tabController setSelectedIndex:0]; // Veitan
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
