@@ -44,16 +44,22 @@
     return self;
 }
 
+- (void)setToday:(BOOL)today
+{
+    if (today)
+        self.selectedCircleView.hidden = YES;
+    else
+        self.selectedCircleView.hidden = NO;
+}
+
 - (void)setSelected:(BOOL)selected
 {
     _selected = selected;
     if (selected) {
         self.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1];
-        self.selectedCircleView.hidden = NO;
         self.dayOfMonthLabel.textColor = [UIColor whiteColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
-        self.selectedCircleView.hidden = YES;
         self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
     }
 }

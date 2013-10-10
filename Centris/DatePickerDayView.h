@@ -10,7 +10,6 @@
 @class DatePickerDayView;
 @protocol DatePickerDayViewProtocol <NSObject>
 - (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
-
 @end
 
 @interface DatePickerDayView : UIView

@@ -9,6 +9,7 @@
 #import "DatePickerView.h"
 
 #define daysInView 7
+#define datePickerWeeks 3
 
 @interface DatePickerView()
 @property (nonatomic, strong) UIView *informationView;
@@ -46,7 +47,6 @@
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    NSLog(@"%f", self.scrollView.contentOffset.x);
     CGFloat page = self.scrollView.contentOffset.x;
     if (page < self.bounds.size.width) {
         // Go left
@@ -62,34 +62,49 @@
         // User did not switch page
         return;
     }
-    NSLog(@"%d",self.date);
 }
 
 - (void)changeDates
 {
+    
     for (int i=0; i < [self.dayViewsArray count]; i++) {
         DatePickerDayView *dayView = [self.dayViewsArray objectAtIndex:i];
         dayView.dayOfMonth = self.date+i;
-        [dayView setNeedsDisplay];
     }
+    
 }
 
 - (void)setup
 {
+    self.dayViewsArray = [[NSMutableArray alloc] init];
     self.date = 1;
+    
+    // Setup scroll view
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 26, self.bounds.size.width, 50)];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.bounces = NO;
     self.scrollView.delegate = self;
-    self.dayViewsArray = [[NSMutableArray alloc] init];
-    self.scrollView.contentSize = CGSizeMake(self.bounds.size.width*3, 50);
-    [self addSubview:self.scrollView];
-    
+    self.scrollView.contentSize = CGSizeMake(self.bounds.size.width * datePickerWeeks, 50);
     self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
-    
-    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width*3, self.bounds.size.height)];
+    [self addSubview:self.scrollView];
+    // Setup dayViews view in scroll view
+    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width * datePickerWeeks, self.bounds.size.height)];
     [self.scrollView addSubview:self.dayViews];
+    
+    // Add dayViews to self.dayViews
+    CGFloat dayWidth = self.bounds.size.width / daysInView;
+    for(int i = 0; i < daysInView * datePickerWeeks; i++) {
+        DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:CGRectMake(dayWidth*i, 0, dayWidth, 50)];
+        dayView.dayOfWeek = @"F";
+        dayView.dayOfMonth = i+1;
+        dayView.delegate = self;
+        [self.dayViews addSubview:dayView];
+        [self.dayViewsArray addObject:dayView];
+        [dayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:dayView
+                                                                              action:@selector(tap:)]];
+    }
+    
     // Setup information view
     self.informationView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, 26)];
     self.informationView.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1.0];
@@ -107,39 +122,11 @@
     self.dateRangeLabel.text = [@"30 September - 6 Október" uppercaseString];
     self.dateRangeLabel.textAlignment = NSTextAlignmentRight;
     [self.informationView addSubview:self.dateRangeLabel];
-    
-    //self.dayViews = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 21, self.bounds.size.width, 50)];
-    //[self.view addSubview:self.dayViews];
-    
+    // Add bottom border
     UIView *bottomBorder = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-1, self.bounds.size.width, 1)];
     bottomBorder.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1.0];
     [self addSubview:bottomBorder];
     
-    CGFloat dayWidth = self.bounds.size.width / daysInView;
-    for(int i = 0; i < daysInView*5; i++) {
-        CGRect dayViewFrame = CGRectMake(dayWidth*i, 0, dayWidth, 50);
-        DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:dayViewFrame];
-        dayView.dayOfWeek = @"F";
-        dayView.dayOfMonth = i+1;
-        dayView.delegate = self;
-        if (i == 3)
-            dayView.selected = YES;
-        [self.dayViews addSubview:dayView];
-        [self.dayViewsArray addObject:dayView];
-        [dayView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:dayView
-                                                                                          action:@selector(tap:)]];
-    }
 }
-
-
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
