@@ -17,9 +17,9 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 @property (strong, nonatomic) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSMutableArray *scheduleEvents;
+@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
 
 @end
 

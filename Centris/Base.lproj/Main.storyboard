@@ -290,10 +290,11 @@
                                     <constraint firstItem="RhD-3z-iX4" firstAttribute="centerX" secondItem="35c-pk-J83" secondAttribute="centerX" id="xbi-Ri-YCJ"/>
                                 </constraints>
                             </scrollView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="aaU-w7-IbI" customClass="DatePickerView">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="72"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </scrollView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hOp-Hv-PLN" customClass="DatePickerView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -304,7 +305,7 @@
                         <barButtonItem key="rightBarButtonItem" image="profile-icon" id="Bbk-Zm-CSO"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="datePickerView" destination="aaU-w7-IbI" id="zdk-Gl-fbU"/>
+                        <outlet property="datePickerView" destination="hOp-Hv-PLN" id="5eX-Sb-nWu"/>
                         <outlet property="scrollView" destination="35c-pk-J83" id="kGQ-di-HHF"/>
                         <outlet property="tableView" destination="RhD-3z-iX4" id="daI-zB-DrU"/>
                     </connections>

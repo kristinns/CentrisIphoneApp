@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "DatePickerDayView.h"
 
-@interface DatePickerView : UIScrollView<DatePickerDayViewProtocol>
+@interface DatePickerView : UIView<DatePickerDayViewProtocol, UIScrollViewDelegate>
 @property (nonatomic, strong) UIView *view;
-- (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
 @end
