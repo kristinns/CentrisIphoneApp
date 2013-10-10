@@ -20,6 +20,8 @@
 @property (strong, nonatomic) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSMutableArray *scheduleEvents;
 @property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
+@property (strong, nonatomic) NSDate *datePickerDate;
+@property (strong, nonatomic) NSDate *datePickerSelectedDate;
 
 @end
 
@@ -32,6 +34,49 @@
         _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
     
     return _managedObjectContext;
+}
+
+- (void)datePickerDidScrollToRight:(BOOL)right
+{
+    if(right)
+        self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:60*60*24*7];
+    else
+        self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:-60*60*24*7];
+    
+    [self updateDatePicker];
+        
+}
+
+- (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
+{
+    if (weekdayInteger == 1)
+        return @"S";
+    else if (weekdayInteger == 2)
+        return @"M";
+    else if (weekdayInteger == 3)
+        return @"Þ";
+    else if (weekdayInteger == 4)
+        return @"M";
+    else if (weekdayInteger == 5)
+        return @"F";
+    else if (weekdayInteger == 6)
+        return @"F";
+    else if (weekdayInteger == 7)
+        return @"L";
+    else
+        return @"";
+}
+
+- (void)updateDatePicker
+{
+    for (int i=0; i < [self.datePickerView.dayViewsList count]; i++) {
+        NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:[self.datePickerDate dateByAddingTimeInterval:60*60*24*i]];
+        // Update dayView
+        DatePickerDayView *dayView = [self.datePickerView.dayViewsList objectAtIndex:i];
+        dayView.dayOfMonth = [comps day];
+        dayView.dayOfWeek = [self weekDayFromInteger:[comps weekday]];
+    }
 }
 
 - (id<DataFetcher>)dataFetcher
@@ -99,7 +144,15 @@
     self.title = @"Stundaskrá";
     self.tableView.dataSource = self;
     self.tableView.delegate = self;
+    self.datePickerView.delegate = self;
+    // Set start date to Sunday this week
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    [comps setWeekday:1];
+    self.datePickerDate = [gregorian dateFromComponents:comps];
+    
     [self getScheduledEvents];
+    [self updateDatePicker];
 }
 
 

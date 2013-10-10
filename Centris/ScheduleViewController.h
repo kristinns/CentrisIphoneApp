@@ -7,6 +7,7 @@
 //
 
 #import "CentrisManagedObjectContext.h"
+#import "DatePickerView.h"
 
-@interface ScheduleViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface ScheduleViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, DatePickerViewDelegateProtocol>
 @end

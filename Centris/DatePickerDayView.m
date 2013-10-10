@@ -40,6 +40,7 @@
         [self setupDayOfWeekLabel];
         [self setupDayOfMonthLabel];
         self.selected = NO;
+        self.selectedCircleView.hidden = YES;
     }
     return self;
 }
@@ -47,9 +48,9 @@
 - (void)setToday:(BOOL)today
 {
     if (today)
-        self.selectedCircleView.hidden = YES;
-    else
         self.selectedCircleView.hidden = NO;
+    else
+        self.selectedCircleView.hidden = YES;
 }
 
 - (void)setSelected:(BOOL)selected

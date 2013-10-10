@@ -15,8 +15,6 @@
 @property (nonatomic, strong) UIView *informationView;
 @property (nonatomic, strong) UIScrollView *scrollView;
 @property (nonatomic, strong) UIView *dayViews;
-@property (nonatomic, strong) UILabel *weekNumberLabel;
-@property (nonatomic, strong) UILabel *dateRangeLabel;
 @property (nonatomic, strong) NSMutableArray *dayViewsArray;
 @property (nonatomic) NSInteger date;
 @end
@@ -37,6 +35,11 @@
     [self setup];
 }
 
+- (NSArray *)dayViewsList
+{
+    return [self.dayViewsArray copy];
+}
+
 - (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
 {
     for (DatePickerDayView *dayView in self.dayViewsArray) {
@@ -50,26 +53,15 @@
     CGFloat page = self.scrollView.contentOffset.x;
     if (page < self.bounds.size.width) {
         // Go left
-        self.date -= 7;
-        [self changeDates];
         self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
+        [self.delegate datePickerDidScrollToRight:NO];
     } else if (page > self.bounds.size.width) {
         // Go right
-        self.date += 7;
-        [self changeDates];
         self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
+        [self.delegate datePickerDidScrollToRight:YES];
     } else {
         // User did not switch page
         return;
-    }
-}
-
-- (void)changeDates
-{
-    
-    for (int i=0; i < [self.dayViewsArray count]; i++) {
-        DatePickerDayView *dayView = [self.dayViewsArray objectAtIndex:i];
-        dayView.dayOfMonth = self.date+i;
     }
     
 }
@@ -96,8 +88,8 @@
     CGFloat dayWidth = self.bounds.size.width / daysInView;
     for(int i = 0; i < daysInView * datePickerWeeks; i++) {
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:CGRectMake(dayWidth*i, 0, dayWidth, 50)];
-        dayView.dayOfWeek = @"F";
-        dayView.dayOfMonth = i+1;
+//        dayView.dayOfWeek = @"F";
+//        dayView.dayOfMonth = i+1;
         dayView.delegate = self;
         [self.dayViews addSubview:dayView];
         [self.dayViewsArray addObject:dayView];
