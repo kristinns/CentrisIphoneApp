@@ -50,18 +50,33 @@
     CGFloat page = self.scrollView.contentOffset.x;
     if (page < self.bounds.size.width) {
         // Go left
+        self.date -= 7;
+        [self changeDates];
         self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
     } else if (page > self.bounds.size.width) {
         // Go right
+        self.date += 7;
+        [self changeDates];
         self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
     } else {
         // User did not switch page
         return;
     }
+    NSLog(@"%d",self.date);
+}
+
+- (void)changeDates
+{
+    for (int i=0; i < [self.dayViewsArray count]; i++) {
+        DatePickerDayView *dayView = [self.dayViewsArray objectAtIndex:i];
+        dayView.dayOfMonth = self.date+i;
+        [dayView setNeedsDisplay];
+    }
 }
 
 - (void)setup
 {
+    self.date = 1;
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 26, self.bounds.size.width, 50)];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = NO;
