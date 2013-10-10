@@ -42,9 +42,13 @@
 
 - (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
 {
+    NSInteger index = [self.dayViewsArray indexOfObject:datePickerDayView];
+    [self.delegate datePickerDidSelectDayAtIndex:index];
     for (DatePickerDayView *dayView in self.dayViewsArray) {
         if(dayView != datePickerDayView)
             dayView.selected = NO;
+        else
+            dayView.selected = YES;
     }
 }
 
@@ -88,8 +92,6 @@
     CGFloat dayWidth = self.bounds.size.width / daysInView;
     for(int i = 0; i < daysInView * datePickerWeeks; i++) {
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:CGRectMake(dayWidth*i, 0, dayWidth, 50)];
-//        dayView.dayOfWeek = @"F";
-//        dayView.dayOfMonth = i+1;
         dayView.delegate = self;
         [self.dayViews addSubview:dayView];
         [self.dayViewsArray addObject:dayView];

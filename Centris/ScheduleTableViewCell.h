@@ -7,11 +7,11 @@
 
 @interface ScheduleTableViewCell : UITableViewCell
 
-//@property (strong, nonatomic) NSString *fromTime;
-//@property (strong, nonatomic) NSString *toTime;
-//@property (strong, nonatomic) NSString *courseName;
-//@property (strong, nonatomic) NSString *typeOfClass;
-//@property (strong, nonatomic) NSString *location;
+@property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fromTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *typeOfClassLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 
 @property (nonatomic) BOOL status;
 @end

@@ -11,6 +11,7 @@
 
 @protocol DatePickerViewDelegateProtocol <NSObject>
 - (void)datePickerDidScrollToRight:(BOOL)right;
+- (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex;
 @end
 
 @interface DatePickerView : UIView<DatePickerDayViewProtocol, UIScrollViewDelegate>

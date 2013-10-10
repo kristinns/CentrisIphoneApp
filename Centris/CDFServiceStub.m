@@ -65,7 +65,7 @@
 						 @"M106", @"RoomName",
 						 @"2013-02-13T08:30:00", @"StartTime",
 						 @"2013-02-13T10:05:00", @"EndTime",
-						 @"Dæmatímar",@"TypeOfClass", nil]];
+						 @"Dæmatími",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"2", @"ID",
@@ -74,7 +74,7 @@
 						 @"M106", @"RoomName",
 						 @"2013-02-13T13:10:00", @"StartTime",
 						 @"2013-02-13T14:45:00", @"EndTime",
-						 @"Fyrirlestrar",@"TypeOfClass", nil]];
+						 @"Fyrirlestur",@"TypeOfClass", nil]];
 	
 	return schedule;
 }

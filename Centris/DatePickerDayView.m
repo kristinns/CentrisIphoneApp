@@ -61,10 +61,8 @@
     _selected = selected;
     if (selected) {
         self.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1];
-        //self.dayOfMonthLabel.textColor = [UIColor whiteColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
-        //self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
     }
 }
 
@@ -93,14 +91,5 @@
     [self setSelected:YES];
     [self.delegate tappedOnDatePickerDayView:self];
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end
