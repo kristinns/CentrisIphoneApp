@@ -32,7 +32,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Setup circle for selected view
-        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake(12, 17.5, 23.0, 23.0)];
+        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake((self.bounds.size.width-26)/2, 17, 26.0, 26.0)];
         self.selectedCircleView.layer.cornerRadius = self.selectedCircleView.bounds.size.width/2;
         self.selectedCircleView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:23.0/255.0 blue:41.0/255.0 alpha:1.0];
         [self addSubview:self.selectedCircleView];
@@ -64,7 +64,7 @@
     self.dayOfWeekLabel = [[UILabel alloc] initWithFrame:frame];
     self.dayOfWeekLabel.textColor = [UIColor colorWithRed:99.0/255.0 green:100.0/255.0 blue:102.0/255.0 alpha:1];
     self.dayOfWeekLabel.textAlignment = NSTextAlignmentCenter;
-    self.dayOfWeekLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:8.5];
+    self.dayOfWeekLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:9];
     [self addSubview:self.dayOfWeekLabel];
 }
 
