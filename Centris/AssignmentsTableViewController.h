@@ -4,7 +4,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BaseTableViewController.h"
 
-@interface AssignmentsTableViewController : BaseTableViewController
+@interface AssignmentsTableViewController : UIViewController
 @end

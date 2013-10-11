@@ -23,7 +23,7 @@
 		194842E31799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
-		19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19816B1D17E609F000D08C60 /* BaseTableViewController.m */; };
+		194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 194F9AB6180806790099A3E6 /* NSDate+Helper.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
@@ -77,8 +77,8 @@
 		194842E81799B0AB0016A5C0 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
 		194842EA1799B0AB0016A5C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
-		19816B1C17E609F000D08C60 /* BaseTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseTableViewController.h; sourceTree = "<group>"; };
-		19816B1D17E609F000D08C60 /* BaseTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseTableViewController.m; sourceTree = "<group>"; };
+		194F9AB5180806790099A3E6 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
+		194F9AB6180806790099A3E6 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
 		19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
 		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
@@ -279,7 +279,6 @@
 			isa = PBXGroup;
 			children = (
 				966A499817E9B632009C342B /* Schedule */,
-				966A499617E9B524009C342B /* Base */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
 				960827FB17CB8E72004741FD /* HomeFeed */,
 			);
@@ -323,15 +322,6 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		966A499617E9B524009C342B /* Base */ = {
-			isa = PBXGroup;
-			children = (
-				19816B1C17E609F000D08C60 /* BaseTableViewController.h */,
-				19816B1D17E609F000D08C60 /* BaseTableViewController.m */,
-			);
-			name = Base;
-			sourceTree = "<group>";
-		};
 		966A499717E9B619009C342B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,6 +349,8 @@
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 				961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */,
 				961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */,
+				194F9AB5180806790099A3E6 /* NSDate+Helper.h */,
+				194F9AB6180806790099A3E6 /* NSDate+Helper.m */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -487,9 +479,9 @@
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				1944A82C17FC5E6A00DEE146 /* CentrisManagedObjectContext.m in Sources */,
-				19816B1E17E609F000D08C60 /* BaseTableViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
+				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,

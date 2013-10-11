@@ -59,7 +59,7 @@
 	
 	// TODO: This should return list of dictionaries... or a single dictionary.
 	// Might be buggy!
-	return [self executeFetch:[NSString stringWithFormat:@"students/%@/schedule?range=%@,%@",bySSN, fromDateString, toDateString]];
+	return @[[self executeFetch:[NSString stringWithFormat:@"students/%@/schedule?range=%@,%@",bySSN, fromDateString, toDateString]]];
 }
 
 @end

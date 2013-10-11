@@ -5,10 +5,6 @@
 
 #import "AssignmentDetailViewController.h"
 
-@interface AssignmentDetailViewController ()
-
-@end
-
 @implementation AssignmentDetailViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil

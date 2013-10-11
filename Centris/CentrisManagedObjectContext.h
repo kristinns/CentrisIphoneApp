@@ -10,18 +10,6 @@
 #import <CoreData/CoreData.h>
 
 @interface CentrisManagedObjectContext : NSObject
-{
-    NSPersistentStoreCoordinator *persistentStoreCoordinator;
-    NSManagedObjectModel *managedObjectModel;
-    NSManagedObjectContext *managedObjectContext;
-}
-
-@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property (nonatomic, readonly) NSString *applicationDocumentsDirectory;
-
 - (NSManagedObjectContext *) managedObjectContext;
 + (id)sharedInstance;
-
 @end

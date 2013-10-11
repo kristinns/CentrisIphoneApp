@@ -9,8 +9,6 @@
 #import "CourseInstance.h"
 
 @interface CourseInstance (Centris)
-
 +(CourseInstance *)courseInstanceWithID:(NSInteger)courseID
 				 inManagedObjectContext:(NSManagedObjectContext *) context;
-
 @end

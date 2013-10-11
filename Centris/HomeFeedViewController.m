@@ -17,10 +17,10 @@
 #pragma mark - Properties
 
 @interface HomeFeedViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *dayOfWeekLabel;
-@property (weak, nonatomic) IBOutlet UILabel *dayOfMonthLabel;
-@property (weak, nonatomic) IBOutlet UILabel *greetingLabel;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, weak) IBOutlet UILabel *dayOfWeekLabel;
+@property (nonatomic, weak) IBOutlet UILabel *dayOfMonthLabel;
+@property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation HomeFeedViewController
