@@ -65,8 +65,7 @@
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
-	}
-    else {
+	} else {
 		// If there is no user available then something in
 		// login controller went wrong. TODO: handle that error
 		NSLog(@"Something went horribly wrong");

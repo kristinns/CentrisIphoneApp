@@ -57,7 +57,7 @@
 	if (userInfo) { // found a user with given email
 		NSLog(@"user found from API");
 		// store info in keychain
-		KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:@"CentrisLogin" accessGroup:nil];
+		KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
 		[keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
 		[keychainItem setObject:pass forKey:(__bridge id)(kSecValueData)];
 		
