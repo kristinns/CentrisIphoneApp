@@ -68,20 +68,29 @@
 //		NSLog(@"FROM KEYCHAIN: %@, %@", username, password);
 		
 		// store user in Core Data
-//		[User userWithCentrisInfo:userInfo inManagedObjectContext:[self.managedObjectContext]];
+		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
+		if (user) {
+			// do segue
+		} else {
+			
+		}
 		
 	} else {
-		NSString *title = @"Notandi fannst ekki";
-		NSString *message = @"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur.";
-		NSString *cancelButton = @"OK";
-		
-		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-														message:message
-													   delegate:nil
-											  cancelButtonTitle:cancelButton
-											  otherButtonTitles:nil];
-		[alert show];
+		[self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
+							  title:@"Notandi fannst ekki"
+				  cancelButtonTitle:@"OK"];
 	}
+}
+
+- (void)promptUserWithMessage:(NSString *)message title:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle
+{
+	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+													message:message
+												   delegate:nil
+										  cancelButtonTitle:cancelButtonTitle
+										  otherButtonTitles:nil];
+	[alert show];
+
 }
 
 #pragma mark - Segue
