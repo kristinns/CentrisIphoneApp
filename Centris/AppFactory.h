@@ -13,5 +13,5 @@
 @interface AppFactory : NSObject
 
 + (id<DataFetcher>)fetcherFromConfiguration;
-
++ (NSString *)keychainFromConfiguration;
 @end

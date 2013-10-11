@@ -65,4 +65,29 @@
 	return user;
 }
 
++ (User *)userWithEmail:(NSString *)email inManagedObjectContext:(NSManagedObjectContext *)context
+{
+	NSPredicate *pred = [NSPredicate predicateWithFormat:@"email = %@", email];
+	return [self fetchFromDatabaseWithEntity:@"User" predicate:pred inManagedObjectContext:context];
+}
+
++(User *)fetchFromDatabaseWithEntity:(NSString *)entity predicate:(NSPredicate *)predicate inManagedObjectContext:context
+{
+	// Create fetch request
+	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity];
+	request.predicate = predicate;
+	
+	// Execute fetch
+	NSError *error = nil;
+	NSArray *matches = [context executeFetchRequest:request error:&error];
+	
+	if (!matches) {
+		NSLog(@"Error: %@", [error userInfo]);
+		return nil;
+	} else {
+		return [matches lastObject];
+	}
+}
+
+
 @end

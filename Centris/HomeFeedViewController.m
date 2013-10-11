@@ -13,6 +13,8 @@
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 #import "CentrisManagedObjectContext.h"
+#import "KeychainItemWrapper.h"
+#import "AppFactory.h"
 
 #pragma mark - Properties
 
@@ -40,7 +42,7 @@
 	self.navigationController.navigationBar.translucent = NO;
 	
 	[self setTimeLabels];
-    [self getUser];
+    [self getUserFromDatabase];
     self.title = @"Veitan";
     
 	//[self greet:@"0805903269"];
@@ -55,24 +57,28 @@
 }
 
 #pragma mark - Methods
-- (void)getUser
+- (void)getUserFromDatabase
 {
-    NSString *ssn = @"0805903269";
-	User *user = [User userWith:ssn inManagedObjectContext:self.managedObjectContext];
+	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+	NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+	User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];
 	}
     else {
-        // Get user from centris
-        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-        dispatch_async(fetchQ, ^{
-            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
-            [self.managedObjectContext performBlock:^{
-                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
-                self.greetingLabel.text = newUser.name;
-            }];
-        });
+		// If there is no user available then something in
+		// login controller went wrong. TODO: handle that error
+		NSLog(@"Something went horribly wrong");
+//        // Get user from centris
+//        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+//        dispatch_async(fetchQ, ^{
+//            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
+//            [self.managedObjectContext performBlock:^{
+//                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
+//                self.greetingLabel.text = newUser.name;
+//            }];
+//        });
     }
 	
 }

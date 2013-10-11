@@ -27,7 +27,7 @@
 - (id<DataFetcher>)dataFetcher
 {
     if(!_dataFetcher)
-        _dataFetcher = [AppFactory getFetcherFromConfiguration];
+        _dataFetcher = [AppFactory fetcherFromConfiguration];
     return _dataFetcher;
 }
 
@@ -63,8 +63,8 @@
 		
 		// test to see if it was stored
 //		NSString *password = [keychainItem objectForKey:(__bridge id)(kSecValueData)];
-//		NSString *username = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
-//		NSLog(@"FROM KEYCHAIN: %@, %@", username, password);
+//		NSString *email = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
+//		NSLog(@"FROM KEYCHAIN: %@, %@", email, password);
 		
 		// store user in Core Data
 		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];

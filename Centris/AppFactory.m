@@ -21,4 +21,9 @@
 	return (id<DataFetcher>)[NSClassFromString(className) class];
 }
 
++ (NSString *)keychainFromConfiguration
+{
+	return [[self configuration] objectForKey:@"KeychainFile"];
+}
+
 @end
