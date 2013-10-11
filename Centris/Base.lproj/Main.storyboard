@@ -210,7 +210,7 @@
                         <outlet property="emailInput" destination="Yru-ri-A8s" id="2Rc-Fg-1CY"/>
                         <outlet property="loginButton" destination="DI9-Hr-hg7" id="Ub3-Vs-4Bq"/>
                         <outlet property="passwordInput" destination="fEA-8a-AFT" id="Owu-MI-jpe"/>
-                        <segue destination="DlB-07-hk5" kind="push" identifier="Login" id="GTo-TH-6HQ"/>
+                        <segue destination="DlB-07-hk5" kind="push" identifier="userLogin" id="GTo-TH-6HQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAj-FM-5fN" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -476,8 +476,6 @@
         <image name="malid-icon" width="30" height="30"/>
         <image name="map-icon" width="16" height="25"/>
         <image name="more-icon" width="30" height="30"/>
-        <image name="profile-icon" width="66" height="66"/>
-        <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>

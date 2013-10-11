@@ -14,11 +14,11 @@
 #import "CentrisManagedObjectContext.h"
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *emailInput;
-@property (weak, nonatomic) IBOutlet UITextField *passwordInput;
-@property (weak, nonatomic) IBOutlet UIButton *loginButton;
-@property (strong, nonatomic) id<DataFetcher> dataFetcher;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, weak) IBOutlet UITextField *emailInput;
+@property (nonatomic, weak) IBOutlet UITextField *passwordInput;
+@property (nonatomic, weak) IBOutlet UIButton *loginButton;
+@property (nonatomic, strong) id<DataFetcher> dataFetcher;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end
 
@@ -71,8 +71,12 @@
 		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
 		if (user) {
 			// do segue
+			NSLog(@"doing the segue");
+			[self performSegueWithIdentifier:@"userLogin" sender:self];
 		} else {
-			
+			[self promptUserWithMessage:@"Æj! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
+								  title:@"Innskráning mistókst"
+					  cancelButtonTitle:@"OK"];
 		}
 		
 	} else {
@@ -96,7 +100,14 @@
 #pragma mark - Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-	
+	if ([segue.identifier isEqualToString:@"userLogin"]) {
+//		if ([segue.destinationViewController respondsToSelector:@selector(userLogin)]) {
+//			[segue.destinationViewController performSelector@selector(userLogin)];
+//		}
+		if ([segue.destinationViewController respondsToSelector:@selector(userLogin)]) {
+			[segue.destinationViewController performSelector:@selector(userLogin) withObject:nil];
+		}
+	}
 }
 
 @end
