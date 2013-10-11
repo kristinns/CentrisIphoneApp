@@ -8,6 +8,9 @@
 
 #import "DatePickerDayView.h"
 
+#define TODAY_CIRCLE_DIAMETER 26.0
+#define TODAY_CIRCLE_POSITION 17.0
+
 @interface DatePickerDayView()
 @property (nonatomic, strong) UILabel *dayOfWeekLabel;
 @property (nonatomic, strong) UILabel *dayOfMonthLabel;
@@ -32,13 +35,14 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Setup circle for selected view
-        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake((self.bounds.size.width-26)/2, 17, 26.0, 26.0)];
+        self.selectedCircleView = [[UIView alloc] initWithFrame:CGRectMake((self.bounds.size.width-TODAY_CIRCLE_DIAMETER)/2, TODAY_CIRCLE_POSITION, TODAY_CIRCLE_DIAMETER, TODAY_CIRCLE_DIAMETER)];
         self.selectedCircleView.layer.cornerRadius = self.selectedCircleView.bounds.size.width/2;
-        self.selectedCircleView.backgroundColor = [UIColor colorWithRed:208.0/255.0 green:23.0/255.0 blue:41.0/255.0 alpha:1.0];
+        self.selectedCircleView.backgroundColor = [CentrisTheme navigationBarColor];
         [self addSubview:self.selectedCircleView];
         // Setup labels
         [self setupDayOfWeekLabel];
         [self setupDayOfMonthLabel];
+        // Set defaults
         self.selected = NO;
         self.selectedCircleView.hidden = YES;
     }
@@ -52,7 +56,7 @@
         self.dayOfMonthLabel.textColor = [UIColor whiteColor];
     } else {
         self.selectedCircleView.hidden = YES;
-        self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
+        self.dayOfMonthLabel.textColor = [CentrisTheme blackLightTextColor];
     }
 }
 
@@ -60,7 +64,7 @@
 {
     _selected = selected;
     if (selected) {
-        self.backgroundColor = [UIColor colorWithRed:244.0/255.0 green:236.0/255.0 blue:237.0/255.0 alpha:1];
+        self.backgroundColor = [CentrisTheme grayLightColor];
     } else {
         self.backgroundColor = [UIColor whiteColor];
     }
@@ -70,7 +74,7 @@
 {
     CGRect frame = CGRectMake(0, 4, self.bounds.size.width, 10);
     self.dayOfWeekLabel = [[UILabel alloc] initWithFrame:frame];
-    self.dayOfWeekLabel.textColor = [UIColor colorWithRed:99.0/255.0 green:100.0/255.0 blue:102.0/255.0 alpha:1];
+    self.dayOfWeekLabel.textColor = [CentrisTheme grayLightTextColor];
     self.dayOfWeekLabel.textAlignment = NSTextAlignmentCenter;
     self.dayOfWeekLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:9];
     [self addSubview:self.dayOfWeekLabel];
@@ -80,7 +84,7 @@
 {
     CGRect frame = CGRectMake(0, 19, self.bounds.size.width, 20);
     self.dayOfMonthLabel = [[UILabel alloc] initWithFrame:frame];
-    self.dayOfMonthLabel.textColor = [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
+    self.dayOfMonthLabel.textColor = [CentrisTheme blackLightTextColor];
     self.dayOfMonthLabel.textAlignment = NSTextAlignmentCenter;
     self.dayOfMonthLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:16];
     [self addSubview:self.dayOfMonthLabel];

@@ -12,4 +12,11 @@
 + (UIColor *)sideMenuBackgroundColor;
 + (UIColor *)sideMenuSelectedRowColor;
 + (UIColor *)navigationBarColor;
++ (UIColor *)grayLightColor;
++ (UIColor *)blackLightTextColor;
++ (UIColor *)grayLightTextColor;
+
++ (UIFont *)headingBigFont;
++ (UIFont *)headingMediumFont;
++ (UIFont *)headingSmallFont;
 @end
