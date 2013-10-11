@@ -9,9 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface CentrisTheme : NSObject
-+ (UIColor *)sideMenuBackgroundColor;
-+ (UIColor *)sideMenuSelectedRowColor;
-+ (UIColor *)navigationBarColor;
++ (UIColor *)redColor;
 + (UIColor *)grayLightColor;
 + (UIColor *)blackLightTextColor;
 + (UIColor *)grayLightTextColor;
@@ -19,4 +17,7 @@
 + (UIFont *)headingBigFont;
 + (UIFont *)headingMediumFont;
 + (UIFont *)headingSmallFont;
+
++ (UIFont *)datePickerDayOfMonthFont;
++ (UIFont *)datePickerDayOfWeekFont;
 @end

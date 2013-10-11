@@ -15,17 +15,18 @@
 #import "ScheduleTableViewCell.h"
 #import "NSDate+Helper.h"
 
+#define ROW_HEIGHT 61.0
+
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) id<DataFetcher> dataFetcher;
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+@property (nonatomic, weak) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSMutableArray *scheduleEvents;
-@property (weak, nonatomic) IBOutlet DatePickerView *datePickerView;
-@property (strong, nonatomic) NSDate *datePickerDate;
-@property (strong, nonatomic) NSDate *datePickerSelectedDate;
-@property (strong, nonatomic) NSDate *datePickerToday;
-
+@property (nonatomic, weak) IBOutlet DatePickerView *datePickerView;
+@property (nonatomic, strong) NSDate *datePickerDate;
+@property (nonatomic, strong) NSDate *datePickerSelectedDate;
+@property (nonatomic, strong) NSDate *datePickerToday;
 @end
 
 @implementation ScheduleViewController
@@ -42,7 +43,7 @@
 - (id<DataFetcher>)dataFetcher
 {
     if(!_dataFetcher)
-        _dataFetcher = [AppFactory getFetcherFromConfiguration];
+        _dataFetcher = [AppFactory fetcherFromConfiguration];
     return _dataFetcher;
 }
 
@@ -82,7 +83,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 61.0;
+    return ROW_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -92,6 +93,9 @@
     cell.courseNameLabel.text = scheduleEvent.courseName;
     cell.locationLabel.text = scheduleEvent.roomName;
     cell.typeOfClassLabel.text = scheduleEvent.typeOfClass;
+    // Hide row at top
+    if (indexPath.row == 0)
+        cell.topBorderIsHidden = YES;
     
     return cell;
 }
@@ -124,20 +128,17 @@
 #pragma DatePicker methods
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
-    if(right) {
-        self.datePickerDate = [self.datePickerDate dateByAddingWeeks:1];
-        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:1];
-    } else {
-        self.datePickerDate = [self.datePickerDate dateByAddingWeeks:-1];
-        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:-1];
-    }
+    // If right, add 1 week, if left, subtract 1 week
+    NSInteger addWeeks = right ? 1 : -1;
+    self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];
+    self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:addWeeks];
     
     [self updateDatePicker];
 }
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
 {
-    self.datePickerSelectedDate = [self.datePickerDate dateByAddingDays:1];
+    self.datePickerSelectedDate = [self.datePickerDate dateByAddingDays:dayIndex];
 }
 
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger

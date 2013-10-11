@@ -18,5 +18,6 @@
 @property (nonatomic, strong) UILabel *weekNumberLabel;
 @property (nonatomic, strong) UILabel *dateRangeLabel;
 @property (nonatomic, strong) id<DatePickerViewDelegateProtocol> delegate;
+
 - (NSArray *)dayViewsList;
 @end

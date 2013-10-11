@@ -41,7 +41,7 @@
 - (id<DataFetcher>)dataFetcher
 {
 	if (!_dataFetcher) {
-		_dataFetcher = [AppFactory getFetcherFromConfiguration];
+		_dataFetcher = [AppFactory fetcherFromConfiguration];
 	}
 	return _dataFetcher;
 }
@@ -54,7 +54,7 @@
     // Change title for navigation controller
     self.title = @"Verkefni";
 	// set the header color
-	self.navigationController.navigationBar.barTintColor = [CentrisTheme navigationBarColor];
+	self.navigationController.navigationBar.barTintColor = [CentrisTheme redColor];
 	self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
 }

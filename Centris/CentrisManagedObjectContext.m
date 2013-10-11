@@ -8,61 +8,65 @@
 
 #import "CentrisManagedObjectContext.h"
 
+@interface CentrisManagedObjectContext()
+@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, strong) NSString *applicationDocumentsDirectory;
+@end
+
 @implementation CentrisManagedObjectContext
 
 static CentrisManagedObjectContext *sharedInstance = nil;
 
 + (CentrisManagedObjectContext *)sharedInstance {
-    if (nil != sharedInstance) {
-        return sharedInstance;
+    if (!sharedInstance) {
+        static dispatch_once_t pred;
+        dispatch_once(&pred, ^{
+            sharedInstance = [[CentrisManagedObjectContext alloc] init];
+        });
     }
-	
-    static dispatch_once_t pred;
-    dispatch_once(&pred, ^{
-        sharedInstance = [[CentrisManagedObjectContext alloc] init];
-    });
-	
+
     return sharedInstance;
 }
 
 - (NSManagedObjectContext *) managedObjectContext {
 	
-    if (managedObjectContext != nil) {
-        return managedObjectContext;
+    if (!_managedObjectContext) {
+        NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+        if (coordinator != nil) {
+            _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+            [_managedObjectContext setPersistentStoreCoordinator: coordinator];
+        }
     }
 	
-    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
-    if (coordinator != nil) {
-        managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [managedObjectContext setPersistentStoreCoordinator: coordinator];
-    }
-    return managedObjectContext;
+    return _managedObjectContext;
 }
 
 - (NSManagedObjectModel *)managedObjectModel {
 	
-    if (managedObjectModel != nil) {
-        return managedObjectModel;
-    }
-    managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
-    return managedObjectModel;
+    if (!_managedObjectModel)
+        _managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil];
+    
+    
+    return _managedObjectModel;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
 	
-    if (persistentStoreCoordinator != nil) {
-        return persistentStoreCoordinator;
+    if (!_persistentStoreCoordinator) {
+        NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"Database.sqlite"]];
+        
+        NSError *error;
+        _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
+            // Handle the error.
+        }
     }
 	
-    NSURL *storeUrl = [NSURL fileURLWithPath: [[self applicationDocumentsDirectory] stringByAppendingPathComponent: @"Database.sqlite"]];
+    
 	
-    NSError *error;
-    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel: [self managedObjectModel]];
-    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:nil error:&error]) {
-        // Handle the error.
-    }
-	
-    return persistentStoreCoordinator;
+    return _persistentStoreCoordinator;
 }
 
 #pragma mark -

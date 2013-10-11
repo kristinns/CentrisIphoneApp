@@ -12,11 +12,11 @@ typedef enum ScheduleEventStateTypes {
 } ScheduleEventState;
 
 @interface ScheduleTableViewCell : UITableViewCell
-
-@property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *fromTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *toTimeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *typeOfClassLabel;
-@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
+@property (nonatomic, weak) IBOutlet UILabel *courseNameLabel;
+@property (nonatomic, weak) IBOutlet UILabel *fromTimeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *toTimeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *typeOfClassLabel;
+@property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 @property (nonatomic) ScheduleEventState scheduleEventState;
+@property (nonatomic) BOOL topBorderIsHidden;
 @end

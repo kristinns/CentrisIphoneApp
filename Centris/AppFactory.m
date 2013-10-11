@@ -8,10 +8,6 @@
 
 #import "AppFactory.h"
 
-@interface AppFactory ()
-
-@end
-
 @implementation AppFactory
 
 + (NSDictionary *)configuration
@@ -19,7 +15,7 @@
 	return [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"]];
 }
 
-+ (id<DataFetcher>)getFetcherFromConfiguration
++ (id<DataFetcher>)fetcherFromConfiguration
 {
 	NSString *className = [[self configuration] objectForKey:@"DataFetcher"];
 	return (id<DataFetcher>)[NSClassFromString(className) class];

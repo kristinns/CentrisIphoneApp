@@ -19,4 +19,6 @@
 @property (nonatomic, getter = isSelected) BOOL selected;
 @property (nonatomic, getter = isToday) BOOL today;
 @property (nonatomic) id<DatePickerDayViewProtocol> delegate;
+
+- (void)tap:(UITapGestureRecognizer *)gesture;
 @end

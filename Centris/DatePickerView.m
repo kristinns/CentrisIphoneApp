@@ -60,6 +60,7 @@
     CGFloat dayWidth = self.bounds.size.width / DAYS_IN_WEEK;
     for(int i = 0; i < DAYS_IN_WEEK * DATE_PICKER_WEEKS_TO_LOAD; i++) {
         DatePickerDayView *dayView = [[DatePickerDayView alloc] initWithFrame:CGRectMake(dayWidth*i, 0, dayWidth, DAY_VIEW_HEIGHT)];
+        // Set this view as delegate for DatePickerDayView
         dayView.delegate = self;
         [self.dayViews addSubview:dayView];
         [self.dayViewsArray addObject:dayView];
@@ -73,13 +74,13 @@
     [self addSubview:self.informationView];
     // Add week number label to information view
     self.weekNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(INFORMATION_VIEW_PADDING, 0, self.bounds.size.width-INFORMATION_VIEW_PADDING, INFORMATION_VIEW_HEIGHT)];
-    self.weekNumberLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    self.weekNumberLabel.font = [CentrisTheme headingSmallFont];
     self.weekNumberLabel.textColor = [CentrisTheme grayLightTextColor];
     self.weekNumberLabel.text = [@"Vika 25" uppercaseString];
     // Add dateRange label to information view
     [self.informationView addSubview:self.weekNumberLabel];
     self.dateRangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width-INFORMATION_VIEW_PADDING, INFORMATION_VIEW_HEIGHT)];
-    self.dateRangeLabel.font = [UIFont fontWithName:@"Helvetica Neue" size:14];
+    self.dateRangeLabel.font = [CentrisTheme headingSmallFont];
     self.dateRangeLabel.textColor = [CentrisTheme grayLightTextColor];
     self.dateRangeLabel.text = [@"30 September - 6 Október" uppercaseString];
     self.dateRangeLabel.textAlignment = NSTextAlignmentRight;
@@ -93,7 +94,7 @@
 
 #pragma Get methods
 - (NSArray *)dayViewsList
-{
+{   // Return copy of array to prevent others from resizing this array
     return [self.dayViewsArray copy];
 }
 
@@ -102,30 +103,20 @@
 {
     NSInteger index = [self.dayViewsArray indexOfObject:datePickerDayView];
     [self.delegate datePickerDidSelectDayAtIndex:index];
-    for (DatePickerDayView *dayView in self.dayViewsArray) {
-        if(dayView != datePickerDayView)
-            dayView.selected = NO;
-        else
-            dayView.selected = YES;
-    }
+    // Unselect every dayView except the dayView which wastapped on
+    for (DatePickerDayView *dayView in self.dayViewsArray)
+        dayView.selected = dayView == datePickerDayView;
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
 {
-    CGFloat page = self.scrollView.contentOffset.x;
-    if (page < self.bounds.size.width) {
-        // Go left
-        self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
-        [self.delegate datePickerDidScrollToRight:NO];
-    } else if (page > self.bounds.size.width) {
-        // Go right
-        self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
-        [self.delegate datePickerDidScrollToRight:YES];
-    } else {
-        // User did not switch page
+    CGFloat contentOffset = self.scrollView.contentOffset.x;
+    // If scroll view did not go to another page, then return
+    if (contentOffset == self.bounds.size.width)
         return;
-    }
-    
+    // Else move contentOffset back to center
+    self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
+    [self.delegate datePickerDidScrollToRight:(contentOffset > self.bounds.size.width)];
 }
 
 @end
