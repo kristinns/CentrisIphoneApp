@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WRN-6v-t8I">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WR6-vQ-jew">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -62,7 +62,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="b5A-5U-3x2">
             <objects>
-                <tabBarController definesPresentationContext="YES" id="DlB-07-hk5" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" definesPresentationContext="YES" id="DlB-07-hk5" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="JeQ-oX-D7Z"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="fln-KZ-wgc">
@@ -80,7 +80,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VG0-dB-hgq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-297" y="874"/>
+            <point key="canvasLocation" x="-31" y="874"/>
         </scene>
         <!--Assignments Table View Controller - Verkefni-->
         <scene sceneID="NT0-6a-Bun">
@@ -169,21 +169,6 @@
             </objects>
             <point key="canvasLocation" x="1313" y="176"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="J5l-qE-qIB">
-            <objects>
-                <navigationController definesPresentationContext="YES" id="WRN-6v-t8I" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="tJq-zW-BJt">
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="WR6-vQ-jew" kind="relationship" relationship="rootViewController" id="7s2-Kx-8eW"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="bsr-x1-oJN" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1204" y="874"/>
-        </scene>
         <!--Login View Controller-->
         <scene sceneID="JSC-4q-hs8">
             <objects>
@@ -226,12 +211,11 @@
                         <outlet property="emailInput" destination="Yru-ri-A8s" id="2Rc-Fg-1CY"/>
                         <outlet property="loginButton" destination="DI9-Hr-hg7" id="Ub3-Vs-4Bq"/>
                         <outlet property="passwordInput" destination="fEA-8a-AFT" id="Owu-MI-jpe"/>
-                        <segue destination="DlB-07-hk5" kind="push" identifier="userLogin" id="WTU-dZ-phx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SAj-FM-5fN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-757" y="874"/>
+            <point key="canvasLocation" x="-475" y="874"/>
         </scene>
         <!--Navigation Controller - Verkefni-->
         <scene sceneID="8pZ-99-70b">
@@ -492,6 +476,8 @@
         <image name="malid-icon" width="30" height="30"/>
         <image name="map-icon" width="16" height="25"/>
         <image name="more-icon" width="30" height="30"/>
+        <image name="profile-icon" width="66" height="66"/>
+        <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>

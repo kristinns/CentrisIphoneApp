@@ -5,8 +5,8 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+#import "LoginViewController.h"
+@interface AppDelegate : UIResponder <UIApplicationDelegate, LoginViewControllerDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
 @end

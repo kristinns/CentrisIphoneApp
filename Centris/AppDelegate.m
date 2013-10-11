@@ -15,6 +15,12 @@
 {
 //	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
 //	[tabController setSelectedIndex:2]; // Veitan
+	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
+	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
+		LoginViewController *loginController = (LoginViewController *)rootViewController;
+		loginController.delegate = self;
+	}
+	
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
@@ -24,6 +30,14 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     return YES;
+}
+
+-(void)didFinishLoginWithValidUser
+{
+	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+	[tabBarController setSelectedIndex:2]; // Veitan
+	[self.window setRootViewController:tabBarController];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

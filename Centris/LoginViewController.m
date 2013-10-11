@@ -19,7 +19,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-
 @end
 
 @implementation LoginViewController
@@ -71,8 +70,8 @@
 		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
 		if (user) {
 			// do segue
-			NSLog(@"doing the segue");
-			[self performSegueWithIdentifier:@"userLogin" sender:self];
+			NSLog(@"doing the switch");
+			[self.delegate didFinishLoginWithValidUser];
 		} else {
 			[self promptUserWithMessage:@"Æj! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
 								  title:@"Innskráning mistókst"
@@ -97,17 +96,6 @@
 
 }
 
-#pragma mark - Segue
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-	if ([segue.identifier isEqualToString:@"userLogin"]) {
-//		if ([segue.destinationViewController respondsToSelector:@selector(userLogin)]) {
-//			[segue.destinationViewController performSelector@selector(userLogin)];
-//		}
-		if ([segue.destinationViewController respondsToSelector:@selector(userLogin)]) {
-			[segue.destinationViewController performSelector:@selector(userLogin) withObject:nil];
-		}
-	}
-}
+#pragma mark - Delegates
 
 @end
