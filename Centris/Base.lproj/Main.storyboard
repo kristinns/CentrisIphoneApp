@@ -285,7 +285,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tölvuhögun" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-b5-t05">
-                                                            <rect key="frame" x="68" y="15" width="102" height="21"/>
+                                                            <rect key="frame" x="68" y="15" width="232" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17.5"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -306,7 +306,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Fyrirlestur" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2QQ-Bz-OSb">
-                                                            <rect key="frame" x="68" y="32" width="65" height="21"/>
+                                                            <rect key="frame" x="68" y="32" width="68" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -325,6 +325,13 @@
                                                         </label>
                                                     </subviews>
                                                 </tableViewCellContentView>
+                                                <connections>
+                                                    <outlet property="courseNameLabel" destination="InH-b5-t05" id="tM7-uk-FeW"/>
+                                                    <outlet property="fromTimeLabel" destination="elo-HT-mvy" id="5Fq-el-rLp"/>
+                                                    <outlet property="locationLabel" destination="nIL-qr-4PX" id="LX7-gY-PiK"/>
+                                                    <outlet property="toTimeLabel" destination="NhB-D8-el9" id="yoK-fg-Db4"/>
+                                                    <outlet property="typeOfClassLabel" destination="2QQ-Bz-OSb" id="wI1-2D-gK6"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
                                     </tableView>

@@ -12,6 +12,6 @@
 
 @interface AppFactory : NSObject
 
-+ (id<DataFetcher>)getFetcherFromConfiguration;
++ (id<DataFetcher>)fetcherFromConfiguration;
 
 @end

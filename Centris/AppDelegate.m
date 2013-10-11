@@ -6,11 +6,8 @@
 #import "AppDelegate.h"
 #import "CentrisManagedObjectContext.h"
 
-@interface AppDelegate()
-
-@end
-
 @implementation AppDelegate
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
@@ -24,9 +21,10 @@
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
-                                                           UITextAttributeTextColor: [UIColor whiteColor],
-                                                           UITextAttributeFont: [UIFont fontWithName:@"Helvetica Neue" size:17]}];
-    [[UINavigationBar appearance] setBarTintColor:[CentrisTheme navigationBarColor]];
+                                                           NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                           NSFontAttributeName: [CentrisTheme headingMediumFont]
+                                                           }];
+    [[UINavigationBar appearance] setBarTintColor:[CentrisTheme redColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
 
     return YES;
