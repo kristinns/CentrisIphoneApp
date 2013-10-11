@@ -70,15 +70,6 @@
 		// If there is no user available then something in
 		// login controller went wrong. TODO: handle that error
 		NSLog(@"Something went horribly wrong");
-//        // Get user from centris
-//        dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-//        dispatch_async(fetchQ, ^{
-//            NSDictionary * user = [CentrisDataFetcher getUser:ssn];
-//            [self.managedObjectContext performBlock:^{
-//                User *newUser = [User userWithCentrisInfo:user inManagedObjectContext:self.managedObjectContext];
-//                self.greetingLabel.text = newUser.name;
-//            }];
-//        });
     }
 	
 }
