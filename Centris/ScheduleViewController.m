@@ -13,6 +13,7 @@
 #import "ScheduleEvent+Centris.h"
 #import "DatePickerView.h"
 #import "ScheduleTableViewCell.h"
+#import "NSDate+Helper.h"
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
@@ -91,8 +92,6 @@
     cell.courseNameLabel.text = scheduleEvent.courseName;
     cell.locationLabel.text = scheduleEvent.roomName;
     cell.typeOfClassLabel.text = scheduleEvent.typeOfClass;
-//    cell.textLabel.text = scheduleEvent.courseName;
-//	cell.detailTextLabel.text = scheduleEvent.roomName;
     
     return cell;
 }
@@ -113,10 +112,10 @@
     [comps setMinute:0];
     [comps setHour:0];
     [comps setSecond:0];
-    NSInteger weekday = [comps weekday];
+    NSInteger weekday = [comps weekday]-1;
     self.datePickerToday = [gregorian dateFromComponents:comps];
     self.datePickerSelectedDate = self.datePickerToday;
-    self.datePickerDate = [self.datePickerSelectedDate dateByAddingTimeInterval:-60*60*24*(weekday+6)];
+    self.datePickerDate = [[self.datePickerSelectedDate dateByAddingDays:-weekday] dateByAddingWeeks:-1];
     
     [self getScheduledEvents];
     [self updateDatePicker];
@@ -126,11 +125,11 @@
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
     if(right) {
-        self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:60*60*24*7];
-        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingTimeInterval:60*60*24*7];
+        self.datePickerDate = [self.datePickerDate dateByAddingWeeks:1];
+        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:1];
     } else {
-        self.datePickerDate = [self.datePickerDate dateByAddingTimeInterval:-60*60*24*7];
-        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingTimeInterval:-60*60*24*7];
+        self.datePickerDate = [self.datePickerDate dateByAddingWeeks:-1];
+        self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:-1];
     }
     
     [self updateDatePicker];
@@ -138,7 +137,7 @@
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
 {
-    self.datePickerSelectedDate = [self.datePickerDate dateByAddingTimeInterval:dayIndex*60*60*24];
+    self.datePickerSelectedDate = [self.datePickerDate dateByAddingDays:1];
 }
 
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
@@ -165,7 +164,7 @@
 {
     for (int i=0; i < [self.datePickerView.dayViewsList count]; i++) {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDate *dateForDayView = [self.datePickerDate dateByAddingTimeInterval:60*60*24*i];
+        NSDate *dateForDayView = [self.datePickerDate dateByAddingDays:i];
         NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit | NSDayCalendarUnit fromDate:dateForDayView];
         // Update dayView
         DatePickerDayView *dayView = [self.datePickerView.dayViewsList objectAtIndex:i];
