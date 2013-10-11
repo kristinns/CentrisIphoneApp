@@ -42,6 +42,7 @@
 		966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966B2D0F17FC39F000F3D170 /* Configuration.plist */; };
 		966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D1217FC498C00F3D170 /* AppFactory.m */; };
 		967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3AB61802D71500A083BC /* ScheduleEvent.m */; };
+		969C94DD180807E100356C7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94DC180807E100356C7C /* LoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -114,6 +115,8 @@
 		966B2D1217FC498C00F3D170 /* AppFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFactory.m; sourceTree = "<group>"; };
 		967A3AB51802D71500A083BC /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
 		967A3AB61802D71500A083BC /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
+		969C94DB180807E100356C7C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		969C94DC180807E100356C7C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -278,6 +281,7 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				969C94DA180807C600356C7C /* Login */,
 				966A499817E9B632009C342B /* Schedule */,
 				966A499617E9B524009C342B /* Base */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
@@ -372,6 +376,15 @@
 				1935C7C317C13B5400D82EC9 /* Models */,
 			);
 			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		969C94DA180807C600356C7C /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				969C94DB180807E100356C7C /* LoginViewController.h */,
+				969C94DC180807E100356C7C /* LoginViewController.m */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,6 +489,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
+				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
 				961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				9647A94217E9E3A600BB2A96 /* User.m in Sources */,

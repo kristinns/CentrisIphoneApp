@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="DlB-07-hk5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4510" systemVersion="12F37" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="WR6-vQ-jew">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3742"/>
@@ -63,6 +63,7 @@
         <scene sceneID="b5A-5U-3x2">
             <objects>
                 <tabBarController definesPresentationContext="YES" id="DlB-07-hk5" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="JeQ-oX-D7Z"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="fln-KZ-wgc">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -167,6 +168,54 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ywA-tl-FWd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1313" y="176"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="JSC-4q-hs8">
+            <objects>
+                <viewController id="WR6-vQ-jew" customClass="LoginViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Wzl-dh-M62"/>
+                        <viewControllerLayoutGuide type="bottom" id="Hea-4j-iDK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qsx-Re-tTu" customClass="Login">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" placeholder="Netfang" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Yru-ri-A8s">
+                                <rect key="frame" x="20" y="210" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" keyboardAppearance="alert"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" borderStyle="line" placeholder="Lykilorð" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="fEA-8a-AFT">
+                                <rect key="frame" x="20" y="248" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardAppearance="alert" secureTextEntry="YES"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DI9-Hr-hg7">
+                                <rect key="frame" x="20" y="297" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Innskrá">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="loginButtonPushed:" destination="WR6-vQ-jew" eventType="touchUpInside" id="E6P-df-QVo"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="emailInput" destination="Yru-ri-A8s" id="2Rc-Fg-1CY"/>
+                        <outlet property="loginButton" destination="DI9-Hr-hg7" id="Ub3-Vs-4Bq"/>
+                        <outlet property="passwordInput" destination="fEA-8a-AFT" id="Owu-MI-jpe"/>
+                        <segue destination="DlB-07-hk5" kind="push" identifier="Login" id="GTo-TH-6HQ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="SAj-FM-5fN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-757" y="874"/>
         </scene>
         <!--Navigation Controller - Verkefni-->
         <scene sceneID="8pZ-99-70b">
@@ -427,6 +476,8 @@
         <image name="malid-icon" width="30" height="30"/>
         <image name="map-icon" width="16" height="25"/>
         <image name="more-icon" width="30" height="30"/>
+        <image name="profile-icon" width="66" height="66"/>
+        <image name="profile-icon" width="66" height="66"/>
         <image name="profile-icon" width="66" height="66"/>
     </resources>
     <color key="tintColor" red="0.85882352941176465" green="0.1803921568627451" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>

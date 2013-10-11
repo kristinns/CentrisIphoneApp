@@ -54,6 +54,36 @@
 	return user;
 }
 
++ (NSDictionary *)getUserByEmail:(NSString *)email
+{
+	NSMutableDictionary *user = nil;
+	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+		user = [[NSMutableDictionary alloc] init];
+		[user setObject:[NSArray arrayWithObjects:@"Tröllhólum 12", nil] forKey:@"Address"];
+		[user setObject:[NSArray arrayWithObjects:@"kristinns11@ru.is", nil] forKey:@"Email"];
+		[user setObject:[NSArray arrayWithObjects:@"18748", nil] forKey:@"ID"];
+		[user setObject:[NSArray arrayWithObjects:@"8657231", nil] forKey:@"MobilePhone"];
+		[user setObject:[NSArray arrayWithObjects:@"Kristinn Svansson", nil] forKey:@"Name"];
+		[user setObject:[NSArray arrayWithObjects:@"800", nil] forKey:@"Postal"];
+		[user setObject:[NSArray arrayWithObjects:@"2402912319", nil] forKey:@"SSN"];
+
+	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
+		user = [[NSMutableDictionary alloc] init];
+		[user setObject:[NSArray arrayWithObjects:@"Ljósheimum 2", nil] forKey:@"Address"];
+		[user setObject:[NSArray arrayWithObjects:@"bjarkim11@ru.is", nil] forKey:@"Email"];
+		[user setObject:[NSArray arrayWithObjects:@"18703", nil] forKey:@"ID"];
+		[user setObject:[NSArray arrayWithObjects:@"8698649", nil] forKey:@"MobilePhone"];
+		[user setObject:[NSArray arrayWithObjects:@"Bjarki Sörens Madsen", nil] forKey:@"Name"];
+		[user setObject:[NSArray arrayWithObjects:@"104", nil] forKey:@"Postal"];
+		[user setObject:[NSArray arrayWithObjects:@"0805903269", nil] forKey:@"SSN"];
+	}
+	else {
+		return nil;
+	}
+	
+	return user;
+}
+
 + (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
 {
 	NSMutableArray *schedule = [[NSMutableArray alloc] init];
