@@ -43,6 +43,8 @@
 		966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D1217FC498C00F3D170 /* AppFactory.m */; };
 		967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3AB61802D71500A083BC /* ScheduleEvent.m */; };
 		969C94DD180807E100356C7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94DC180807E100356C7C /* LoginViewController.m */; };
+		969C94DF18082A3700356C7C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969C94DE18082A3700356C7C /* Security.framework */; };
+		969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94E518082DDD00356C7C /* KeychainItemWrapper.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -117,6 +119,9 @@
 		967A3AB61802D71500A083BC /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		969C94DB180807E100356C7C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		969C94DC180807E100356C7C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		969C94DE18082A3700356C7C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		969C94E418082DDD00356C7C /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
+		969C94E518082DDD00356C7C /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +129,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				969C94DF18082A3700356C7C /* Security.framework in Frameworks */,
 				9621008917D7795400D60C06 /* CoreData.framework in Frameworks */,
 				194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */,
 				194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */,
@@ -180,6 +186,7 @@
 		194842C01799B0AB0016A5C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				969C94DE18082A3700356C7C /* Security.framework */,
 				9621008817D7795400D60C06 /* CoreData.framework */,
 				194842C11799B0AB0016A5C0 /* Foundation.framework */,
 				194842C31799B0AB0016A5C0 /* CoreGraphics.framework */,
@@ -207,6 +214,7 @@
 		194842C81799B0AB0016A5C0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				969C94E018082B4F00356C7C /* Keychain */,
 				194842C91799B0AB0016A5C0 /* Centris-Info.plist */,
 				194842CA1799B0AB0016A5C0 /* InfoPlist.strings */,
 				194842CD1799B0AB0016A5C0 /* main.m */,
@@ -387,6 +395,15 @@
 			name = Login;
 			sourceTree = "<group>";
 		};
+		969C94E018082B4F00356C7C /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				969C94E418082DDD00356C7C /* KeychainItemWrapper.h */,
+				969C94E518082DDD00356C7C /* KeychainItemWrapper.m */,
+			);
+			name = Keychain;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -508,6 +525,7 @@
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
+				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 				199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */,
