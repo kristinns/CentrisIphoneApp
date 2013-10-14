@@ -57,31 +57,36 @@
 + (NSDictionary *)getUserByEmail:(NSString *)email
 {
 	NSMutableDictionary *user = nil;
+	NSMutableDictionary *person = nil;
 	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+		person = [[NSMutableDictionary alloc] init];
 		user = [[NSMutableDictionary alloc] init];
-		[user setObject:[NSArray arrayWithObjects:@"Tröllhólum 12", nil] forKey:@"Address"];
-		[user setObject:[NSArray arrayWithObjects:@"kristinns11@ru.is", nil] forKey:@"Email"];
-		[user setObject:[NSArray arrayWithObjects:@"18748", nil] forKey:@"ID"];
-		[user setObject:[NSArray arrayWithObjects:@"8657231", nil] forKey:@"MobilePhone"];
-		[user setObject:[NSArray arrayWithObjects:@"Kristinn Svansson", nil] forKey:@"Name"];
-		[user setObject:[NSArray arrayWithObjects:@"800", nil] forKey:@"Postal"];
-		[user setObject:[NSArray arrayWithObjects:@"2402912319", nil] forKey:@"SSN"];
+		[user setObject:@"Tröllhólum 12" forKey:@"Address"];
+		[user setObject:@"kristinns11@ru.is" forKey:@"Email"];
+		[user setObject:@"18748" forKey:@"ID"];
+		[user setObject:@"8657231" forKey:@"MobilePhone"];
+		[user setObject:@"Kristinn Svansson" forKey:@"Name"];
+		[user setObject:@"800" forKey:@"Postal"];
+		[user setObject:@"2402912319" forKey:@"SSN"];
+		[person setObject:user forKey:@"Person"];
 
 	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
+		person = [[NSMutableDictionary alloc] init];
 		user = [[NSMutableDictionary alloc] init];
-		[user setObject:[NSArray arrayWithObjects:@"Ljósheimum 2", nil] forKey:@"Address"];
-		[user setObject:[NSArray arrayWithObjects:@"bjarkim11@ru.is", nil] forKey:@"Email"];
-		[user setObject:[NSArray arrayWithObjects:@"18703", nil] forKey:@"ID"];
-		[user setObject:[NSArray arrayWithObjects:@"8698649", nil] forKey:@"MobilePhone"];
-		[user setObject:[NSArray arrayWithObjects:@"Bjarki Sörens Madsen", nil] forKey:@"Name"];
-		[user setObject:[NSArray arrayWithObjects:@"104", nil] forKey:@"Postal"];
-		[user setObject:[NSArray arrayWithObjects:@"0805903269", nil] forKey:@"SSN"];
+		[user setObject:@"Ljósheimum 2" forKey:@"Address"];
+		[user setObject:@"bjarkim11@ru.is" forKey:@"Email"];
+		[user setObject:@"18703" forKey:@"ID"];
+		[user setObject:@"8698649" forKey:@"MobilePhone"];
+		[user setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
+		[user setObject:@"104" forKey:@"Postal"];
+		[user setObject:@"0805903269" forKey:@"SSN"];
+		[person setObject:user forKey:@"Person"];
 	}
 	else {
 		return nil;
 	}
 	
-	return user;
+	return person;
 }
 
 + (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
