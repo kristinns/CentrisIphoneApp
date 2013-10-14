@@ -17,6 +17,12 @@
 		LoginViewController *loginController = (LoginViewController *)rootViewController;
 		loginController.delegate = self;
 	}
+    
+    // Debug
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+//	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
+//    [self.window setRootViewController:tabBarController];
+
 	
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];

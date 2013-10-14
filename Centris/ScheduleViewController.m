@@ -163,6 +163,17 @@
 
 - (void)updateDatePicker
 {
+    // Update week label
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekCalendarUnit fromDate:self.datePickerSelectedDate];
+    self.datePickerView.weekNumberLabel.text = [NSString stringWithFormat:@"Vika %d", [comps week]];
+    // Update dateRange label
+    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"d MMMM"];
+    self.datePickerView.dateRangeLabel.text = [NSString stringWithFormat:@"%@ - %@",
+                                               [dateFormatter stringFromDate:[self.datePickerDate dateByAddingWeeks:1]],
+                                               [dateFormatter stringFromDate:[self.datePickerDate dateByAddingDays:13]]];
+    
     for (int i=0; i < [self.datePickerView.dayViewsList count]; i++) {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDate *dateForDayView = [self.datePickerDate dateByAddingDays:i];
