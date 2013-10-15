@@ -38,7 +38,7 @@
     // Styling
     self.typeOfClassLabel.textColor = [CentrisTheme grayLightTextColor];
     self.typeOfClassLabel.font = [CentrisTheme headingSmallFont];
-    self.fromTimeLabel.textColor = [CentrisTheme blackLightTextColor];
+    self.fromTimeLabel.textColor = [CentrisTheme redColor];
     self.fromTimeLabel.font = [CentrisTheme headingMediumFont];
     self.toTimeLabel.textColor = [CentrisTheme grayLightTextColor];
     self.toTimeLabel.font = [CentrisTheme headingSmallFont];

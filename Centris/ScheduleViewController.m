@@ -31,6 +31,18 @@
 
 @implementation ScheduleViewController
 
+- (IBAction)GoBackToToday:(id)sender {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self.datePickerToday];
+    NSInteger weekDay = [comps weekday]-1;
+    
+    self.datePickerSelectedDate = self.datePickerToday;
+    self.datePickerDate = [[self.datePickerToday dateByAddingDays:-weekDay] dateByAddingWeeks:-1];
+
+    [self updateDatePicker];
+}
+
+
 #pragma mark - Getters
 - (NSManagedObjectContext *)managedObjectContext
 {
@@ -143,22 +155,8 @@
 
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
 {
-    if (weekdayInteger == 1)
-        return @"S";
-    else if (weekdayInteger == 2)
-        return @"M";
-    else if (weekdayInteger == 3)
-        return @"Þ";
-    else if (weekdayInteger == 4)
-        return @"M";
-    else if (weekdayInteger == 5)
-        return @"F";
-    else if (weekdayInteger == 6)
-        return @"F";
-    else if (weekdayInteger == 7)
-        return @"L";
-    else
-        return @"";
+    NSArray *weekDays = @[@"S", @"M", @"Þ", @"M", @"F", @"F", @"L"];
+    return [weekDays objectAtIndex:weekdayInteger-1];
 }
 
 - (void)updateDatePicker
