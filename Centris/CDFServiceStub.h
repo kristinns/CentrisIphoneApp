@@ -13,6 +13,6 @@
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
 + (NSDictionary *)getUser:(NSString *)bySSN;
-+ (NSDictionary *)getUserByEmail:(NSString *)email;
++ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 + (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate;
 @end

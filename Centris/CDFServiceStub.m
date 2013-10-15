@@ -2,6 +2,9 @@
 //  CDFServiceStub.m
 //  Centris
 //
+//	This is a service stub API that provides fake data to immitate the actual API.
+//	To be used only for developing
+//
 //  Created by Bjarki Sörens on 10/2/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
@@ -54,39 +57,60 @@
 	return user;
 }
 
-+ (NSDictionary *)getUserByEmail:(NSString *)email
+// This function is immitating the post request. Given an email (and password when ready), the fetcher
+// should try to login the user and get user details back.
++ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 {
-	NSMutableDictionary *user = nil;
-	NSMutableDictionary *person = nil;
+	NSMutableDictionary *info = nil;
+	
 	if ([@"kristinns11@ru.is" isEqualToString:email]) {
-		person = [[NSMutableDictionary alloc] init];
-		user = [[NSMutableDictionary alloc] init];
-		[user setObject:@"Tröllhólum 12" forKey:@"Address"];
-		[user setObject:@"kristinns11@ru.is" forKey:@"Email"];
-		[user setObject:@"18748" forKey:@"ID"];
-		[user setObject:@"8657231" forKey:@"MobilePhone"];
-		[user setObject:@"Kristinn Svansson" forKey:@"Name"];
-		[user setObject:@"800" forKey:@"Postal"];
-		[user setObject:@"2402912319" forKey:@"SSN"];
-		[person setObject:user forKey:@"Person"];
+		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *personInfo = [[NSMutableDictionary alloc] init];
+		[personInfo setObject:@"Tröllhólum 12" forKey:@"Address"];
+		[personInfo setObject:@"kristinns11@ru.is" forKey:@"Email"];
+		[personInfo setObject:@"18748" forKey:@"ID"];
+		[personInfo setObject:@"8657231" forKey:@"MobilePhone"];
+		[personInfo setObject:@"Kristinn Svansson" forKey:@"Name"];
+		[personInfo setObject:@"800" forKey:@"Postal"];
+		[personInfo setObject:@"2402912319" forKey:@"SSN"];
+		[person setObject:personInfo forKey:@"Person"];
 
 	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
-		person = [[NSMutableDictionary alloc] init];
-		user = [[NSMutableDictionary alloc] init];
-		[user setObject:@"Ljósheimum 2" forKey:@"Address"];
-		[user setObject:@"bjarkim11@ru.is" forKey:@"Email"];
-		[user setObject:@"18703" forKey:@"ID"];
-		[user setObject:@"8698649" forKey:@"MobilePhone"];
-		[user setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
-		[user setObject:@"104" forKey:@"Postal"];
-		[user setObject:@"0805903269" forKey:@"SSN"];
-		[person setObject:user forKey:@"Person"];
+		info = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
+		[person setObject:@"Ljósheimum 2" forKey:@"Address"];
+		[person setObject:@"bjarkim11@ru.is" forKey:@"Email"];
+		[person setObject:@"18703" forKey:@"ID"];
+		[person setObject:@"8698649" forKey:@"MobilePhone"];
+		[person setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
+		[person setObject:@"104" forKey:@"Postal"];
+		[person setObject:@"0805903269" forKey:@"SSN"];
+		
+		NSMutableDictionary *registration = [[NSMutableDictionary  alloc] init];
+		NSMutableDictionary *studentRegistration = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *major = [[NSMutableDictionary alloc] init];
+		
+		[registration setObject:@"Tölvunarfræðideild" forKey:@"DepartmentName"];
+		[registration setObject:@"Staðarnám" forKey:@"StudentTypeName"];
+		
+		[studentRegistration setObject:[NSNumber numberWithInteger:24] forKey:@"ECTSActive"];
+		[studentRegistration setObject:[NSNumber numberWithInteger:66] forKey:@"ECTSFinished"];
+		[studentRegistration setObject:[NSNumber numberWithDouble:7.5] forKey:@"AverageGrade"];
+		[registration setObject:studentRegistration forKey:@"StudentRegistration"];
+		
+		[major setObject:@"BSc í tölvunarfræði" forKey:@"Name"];
+		[major setObject:@"BSc in Computer Science" forKey:@"NameEnglish"];
+		[major setObject:[NSNumber numberWithInteger:180] forKey:@"Credits"];
+		[registration setObject:major forKey:@"Major"];
+		
+		[info setObject:person forKey:@"Person"];
+		[info setObject:registration forKey:@"Registration"];
 	}
 	else {
 		return nil;
 	}
 	
-	return person;
+	return info;
 }
 
 + (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate

@@ -52,7 +52,7 @@
 	//     - DISPATCH THREAD
 	//     - SHOW NETWORK INDICATOR
 	//     - SHOW LOADING WHEEL
-	NSDictionary *userInfo = [self.dataFetcher getUserByEmail:email]; // this really should be post to API to login
+	NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
 	
 	if (userInfo) { // found a user with given email
 		NSLog(@"user found from API");
