@@ -34,6 +34,18 @@
         user.ssn = [[centrisInfo valueForKeyPath:@"Person.SSN"] description];
         user.address = [[centrisInfo valueForKeyPath:@"Person.Address"] description];
         user.email = [[centrisInfo valueForKeyPath:@"Person.Email"] description];
+		
+		user.finishedECTS = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.ECTSFinished"];
+		user.activeECTS = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.ECTSActive"];
+		user.averageGrade = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.AverageGrade"];
+		
+		user.department = [centrisInfo valueForKeyPath:@"Registration.DepartmentName"];
+		user.majorIS = [centrisInfo valueForKeyPath:@"Registration.Major.Name"];
+		user.majorEN = [centrisInfo valueForKeyPath:@"Registrationn.Major.NameEnglish"];
+		user.majorCredits = [centrisInfo valueForKeyPath:@"Registration.Major.Credits"];
+		
+		user.type = [centrisInfo valueForKeyPath:@"Registraton.StudentTypeName"];
+		
     } else { // Found
         // Just return that User
         user = [matches lastObject];
