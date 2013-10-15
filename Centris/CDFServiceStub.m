@@ -64,16 +64,36 @@
 	NSMutableDictionary *info = nil;
 	
 	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
-		NSMutableDictionary *personInfo = [[NSMutableDictionary alloc] init];
-		[personInfo setObject:@"Tröllhólum 12" forKey:@"Address"];
-		[personInfo setObject:@"kristinns11@ru.is" forKey:@"Email"];
-		[personInfo setObject:@"18748" forKey:@"ID"];
-		[personInfo setObject:@"8657231" forKey:@"MobilePhone"];
-		[personInfo setObject:@"Kristinn Svansson" forKey:@"Name"];
-		[personInfo setObject:@"800" forKey:@"Postal"];
-		[personInfo setObject:@"2402912319" forKey:@"SSN"];
-		[person setObject:personInfo forKey:@"Person"];
+		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
+		[person setObject:@"kristinns11@ru.is" forKey:@"Email"];
+		[person setObject:@"18748" forKey:@"ID"];
+		[person setObject:@"8657231" forKey:@"MobilePhone"];
+		[person setObject:@"Kristinn Svansson" forKey:@"Name"];
+		[person setObject:@"800" forKey:@"Postal"];
+		[person setObject:@"2402912319" forKey:@"SSN"];
+		[info setObject:person forKey:@"Person"];
+		
+		NSMutableDictionary *registration = [[NSMutableDictionary  alloc] init];
+		NSMutableDictionary *studentRegistration = [[NSMutableDictionary alloc] init];
+		NSMutableDictionary *major = [[NSMutableDictionary alloc] init];
+		
+		[registration setObject:@"Tölvunarfræðideild" forKey:@"DepartmentName"];
+		[registration setObject:@"Staðarnám" forKey:@"StudentTypeName"];
+		
+		[studentRegistration setObject:[NSNumber numberWithInteger:18] forKey:@"ECTSActive"];
+		[studentRegistration setObject:[NSNumber numberWithInteger:72] forKey:@"ECTSFinished"];
+		[studentRegistration setObject:[NSNumber numberWithDouble:9] forKey:@"AverageGrade"];
+		[registration setObject:studentRegistration forKey:@"StudentRegistration"];
+		
+		[major setObject:@"BSc í tölvunarfræði" forKey:@"Name"];
+		[major setObject:@"BSc in Computer Science" forKey:@"NameEnglish"];
+		[major setObject:[NSNumber numberWithInteger:180] forKey:@"Credits"];
+		[registration setObject:major forKey:@"Major"];
+		
+		[info setObject:registration forKey:@"Registration"];
+		
 
 	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
@@ -85,6 +105,7 @@
 		[person setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
 		[person setObject:@"104" forKey:@"Postal"];
 		[person setObject:@"0805903269" forKey:@"SSN"];
+		[info setObject:person forKey:@"Person"];
 		
 		NSMutableDictionary *registration = [[NSMutableDictionary  alloc] init];
 		NSMutableDictionary *studentRegistration = [[NSMutableDictionary alloc] init];
@@ -103,7 +124,6 @@
 		[major setObject:[NSNumber numberWithInteger:180] forKey:@"Credits"];
 		[registration setObject:major forKey:@"Major"];
 		
-		[info setObject:person forKey:@"Person"];
 		[info setObject:registration forKey:@"Registration"];
 	}
 	else {
