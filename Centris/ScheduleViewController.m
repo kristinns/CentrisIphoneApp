@@ -137,7 +137,7 @@
     [self updateDatePicker];
 }
 
-#pragma DatePicker methods
+#pragma DatePicker delegate methods
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
     // If right, add 1 week, if left, subtract 1 week
@@ -151,6 +151,7 @@
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
 {
     self.datePickerSelectedDate = [self.datePickerDate dateByAddingDays:dayIndex];
+	
 }
 
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
