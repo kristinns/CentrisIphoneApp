@@ -4,6 +4,7 @@
 //
 
 #import "CentrisDataFetcher.h"
+#import <AFNetworking/AFNetworking.h>
 
 #define CENTRIS_API_URL @"http://centris.dev.nem.ru.is/api2/api/v1/"
 

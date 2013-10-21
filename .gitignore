@@ -22,6 +22,11 @@
 *.lock
 profile
 
+#####
+# PODS
+Pods
+Podfile.lock
+
 
 ####
 # Xcode temporary files that should never be committed
