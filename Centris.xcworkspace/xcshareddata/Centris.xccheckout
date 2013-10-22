@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>68B6467C-031B-4A5E-B811-8F1E198160F7</string>
+	<string>B39F6E8A-1D28-4F20-8D8E-21DD0A3B0F0E</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Centris</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>0FBB8AA8-2016-4230-816B-9E384BEB118B</key>
+		<key>401CDCDC-5374-4C09-8734-9B5E37478DF0</key>
 		<string>https://github.com/kristinns/CentrisIphoneApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Centris.xcodeproj/project.xcworkspace</string>
+	<string>Centris.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>0FBB8AA8-2016-4230-816B-9E384BEB118B</key>
-		<string>../..</string>
+		<key>401CDCDC-5374-4C09-8734-9B5E37478DF0</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/kristinns/CentrisIphoneApp.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>0FBB8AA8-2016-4230-816B-9E384BEB118B</string>
+	<string>401CDCDC-5374-4C09-8734-9B5E37478DF0</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>0FBB8AA8-2016-4230-816B-9E384BEB118B</string>
+			<string>401CDCDC-5374-4C09-8734-9B5E37478DF0</string>
 			<key>IDESourceControlWCCName</key>
 			<string>CentrisIphoneApp</string>
 		</dict>
