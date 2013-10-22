@@ -33,22 +33,22 @@
 
 + (UIFont *)headingBigFont
 {
-    return [UIFont fontWithName:@"Helvetica Neue" size:20];
+    return [UIFont fontWithName:@"HelveticaNeue" size:20];
 }
 
 + (UIFont *)headingMediumFont
 {
-    return [UIFont fontWithName:@"Helvetica Neue" size:17.5];
+    return [UIFont fontWithName:@"HelveticaNeue-Light" size:17.5];
 }
 
 + (UIFont *)headingSmallFont
 {
-    return [UIFont fontWithName:@"Helvetica Neue" size:14];
+    return [UIFont fontWithName:@"HelveticaNeue-Light" size:14];
 }
 
 + (UIFont *)datePickerDayOfMonthFont
 {
-    return [UIFont fontWithName:@"Helvetica Neue" size:16];
+    return [UIFont fontWithName:@"HelveticaNeue-Light" size:16];
 }
 
 + (UIFont *)datePickerDayOfWeekFont
