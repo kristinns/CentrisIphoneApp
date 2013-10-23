@@ -63,8 +63,6 @@
 		NSLog(@"Error: %@", [error userInfo]);
 	}
 	else if (![matches count]) { // no result, put the event in core data
-		
-		
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
 		
 		event.starts = [self icelandicFormatWithDateString:eventInfo[@"StartTime"]];
