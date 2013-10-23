@@ -18,23 +18,15 @@
         <relationship name="hasCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasScheduleEvents" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
-        <attribute name="activeECTS" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="averageGrade" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="department" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="finishedECTS" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="majorCredits" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="majorEN" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="majorIS" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ssn" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CourseInstance" positionX="133" positionY="-261" width="128" height="135"/>
-        <element name="ScheduleEvent" positionX="-54" positionY="-261" width="128" height="150"/>
-        <element name="User" positionX="306" positionY="-261" width="128" height="208"/>
+        <element name="CourseInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEvent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

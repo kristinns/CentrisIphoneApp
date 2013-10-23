@@ -5,5 +5,5 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AssignmentsTableViewController : UIViewController
+@interface AssignmentsTableViewController : UITableViewController
 @end
