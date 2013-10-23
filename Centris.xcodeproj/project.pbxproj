@@ -46,7 +46,8 @@
 		969C94DD180807E100356C7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94DC180807E100356C7C /* LoginViewController.m */; };
 		969C94DF18082A3700356C7C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969C94DE18082A3700356C7C /* Security.framework */; };
 		969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94E518082DDD00356C7C /* KeychainItemWrapper.m */; };
-		96EA3C791816BD86003C214B /* Assignments.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA3C781816BD86003C214B /* Assignments.m */; };
+		96EA3C871816C0E9003C214B /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA3C861816C0E9003C214B /* Assignment.m */; };
+		96EA3C8A1816C10E003C214B /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 96EA3C891816C10E003C214B /* Assignment+Centris.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,8 +126,10 @@
 		969C94DE18082A3700356C7C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		969C94E418082DDD00356C7C /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		969C94E518082DDD00356C7C /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
-		96EA3C771816BD86003C214B /* Assignments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignments.h; path = Models/Assignments.h; sourceTree = "<group>"; };
-		96EA3C781816BD86003C214B /* Assignments.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignments.m; path = Models/Assignments.m; sourceTree = "<group>"; };
+		96EA3C851816C0E9003C214B /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
+		96EA3C861816C0E9003C214B /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		96EA3C881816C10E003C214B /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
+		96EA3C891816C10E003C214B /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		AEEF260E04B34BA2A6F68072 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -160,8 +163,8 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				96EA3C771816BD86003C214B /* Assignments.h */,
-				96EA3C781816BD86003C214B /* Assignments.m */,
+				96EA3C851816C0E9003C214B /* Assignment.h */,
+				96EA3C861816C0E9003C214B /* Assignment.m */,
 				967A3AB51802D71500A083BC /* ScheduleEvent.h */,
 				967A3AB61802D71500A083BC /* ScheduleEvent.m */,
 				961BB6E417F0676300912C0D /* CourseInstance.h */,
@@ -366,14 +369,11 @@
 		966A499917E9B68F009C342B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				192F979117D76B04007E2694 /* User+Centris.h */,
-				192F979217D76B04007E2694 /* User+Centris.m */,
-				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
-				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
-				961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */,
-				961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */,
-				194F9AB5180806790099A3E6 /* NSDate+Helper.h */,
-				194F9AB6180806790099A3E6 /* NSDate+Helper.m */,
+				96EA3C7E1816BF84003C214B /* Assignment */,
+				96EA3C7D1816BF76003C214B /* NSDate */,
+				96EA3C7C1816BEF2003C214B /* CourseInstance */,
+				96EA3C7B1816BEE7003C214B /* Schedule */,
+				96EA3C7A1816BEDC003C214B /* User */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -405,6 +405,51 @@
 				969C94E518082DDD00356C7C /* KeychainItemWrapper.m */,
 			);
 			name = Keychain;
+			sourceTree = "<group>";
+		};
+		96EA3C7A1816BEDC003C214B /* User */ = {
+			isa = PBXGroup;
+			children = (
+				192F979117D76B04007E2694 /* User+Centris.h */,
+				192F979217D76B04007E2694 /* User+Centris.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		96EA3C7B1816BEE7003C214B /* Schedule */ = {
+			isa = PBXGroup;
+			children = (
+				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
+				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
+			);
+			name = Schedule;
+			sourceTree = "<group>";
+		};
+		96EA3C7C1816BEF2003C214B /* CourseInstance */ = {
+			isa = PBXGroup;
+			children = (
+				961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */,
+				961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */,
+			);
+			name = CourseInstance;
+			sourceTree = "<group>";
+		};
+		96EA3C7D1816BF76003C214B /* NSDate */ = {
+			isa = PBXGroup;
+			children = (
+				194F9AB5180806790099A3E6 /* NSDate+Helper.h */,
+				194F9AB6180806790099A3E6 /* NSDate+Helper.m */,
+			);
+			name = NSDate;
+			sourceTree = "<group>";
+		};
+		96EA3C7E1816BF84003C214B /* Assignment */ = {
+			isa = PBXGroup;
+			children = (
+				96EA3C881816C10E003C214B /* Assignment+Centris.h */,
+				96EA3C891816C10E003C214B /* Assignment+Centris.m */,
+			);
+			name = Assignment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -556,16 +601,17 @@
 				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				1944A82C17FC5E6A00DEE146 /* CentrisManagedObjectContext.m in Sources */,
+				96EA3C871816C0E9003C214B /* Assignment.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
+				96EA3C8A1816C10E003C214B /* Assignment+Centris.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
-				96EA3C791816BD86003C214B /* Assignments.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 				199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */,
 			);
