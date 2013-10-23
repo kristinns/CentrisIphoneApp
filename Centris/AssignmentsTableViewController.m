@@ -29,6 +29,7 @@
     
     return _assignmentCourses;
 }
+
 // Getter for assignments, uses lazy instantiation
 - (NSArray *)assignments
 {

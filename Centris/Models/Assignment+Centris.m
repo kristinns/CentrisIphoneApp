@@ -36,6 +36,11 @@
 		assignment.maxGroupSize = assignmentInfo[@"MaxStudentsInGroup"];
 		assignment.datePublished = [self icelandicFormatWithDateString:assignmentInfo[@"DatePublished"]];
 		assignment.dateClosed = [self icelandicFormatWithDateString:assignmentInfo[@"DateClosed"]];
+		
+		// TODO, hook it up to a courseinstance
+		
+	} else { // assignment found, return it.
+		assignment = [matches lastObject];
 	}
 	
 	return assignment;
