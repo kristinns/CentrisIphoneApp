@@ -10,6 +10,7 @@
 #import "User+Centris.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
+#import "KeychainItemWrapper.h"
 #import "ScheduleEvent+Centris.h"
 #import "DatePickerView.h"
 #import "ScheduleTableViewCell.h"
@@ -60,10 +61,13 @@
 }
 
 #pragma mark - Methods
+// Function that calls the API and stores events in Core data
 - (void)getScheduledEvents
 {
-	//User *user = [User userWith:@"0805903269" inManagedObjectContext:self.managedObjectContext];
-	//if (user) {
+	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+	if (user) {
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
 		dispatch_async(fetchQ, ^{
 			NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -74,7 +78,7 @@
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			[comps setHour:18];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSArray *schedule = [self.dataFetcher getSchedule:@"0805903269" from: from to: to];
+            NSArray *schedule = [self.dataFetcher getSchedule:user.ssn from: from to: to];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
 					[self.scheduleEvents addObject:[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext]];
@@ -82,8 +86,7 @@
                 [self.tableView reloadData];
             }];
         });
-
-	//}
+	}
 }
 
 #pragma mark - Table methods
