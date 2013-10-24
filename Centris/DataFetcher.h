@@ -12,7 +12,6 @@
 
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
-+ (NSArray *)getActiveAssignments;
 + (NSDictionary *)getUser:(NSString *)bySSN;
 + (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 + (NSArray *)getSchedule:(NSString *)bySSN

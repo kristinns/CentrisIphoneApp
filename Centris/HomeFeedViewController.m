@@ -70,7 +70,6 @@
 		// login controller went wrong. TODO: handle that error
 		NSLog(@"Something went horribly wrong");
     }
-	
 }
 
 // Gets the current date and sets it to the date labels

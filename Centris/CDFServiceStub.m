@@ -13,7 +13,7 @@
 
 @implementation CDFServiceStub
 
-+ (NSArray *)getActiveAssignments
++ (NSArray *)getAssignments
 {
 	NSMutableArray *assignments = [[NSMutableArray alloc] init];
 	
@@ -50,23 +50,6 @@
 	[assignments addObject:assignment1];
 	[assignments addObject:assignment2];
 	return assignments;
-}
-
-+ (NSArray *)getAssignments
-{
-    NSMutableArray *assignments = [[NSMutableArray alloc] init];
-    for(NSInteger i=1; i<= 10; i++) {
-        NSString *title = [@"Verkefni " stringByAppendingString:[NSString stringWithFormat: @"%d", i]];
-        NSString *finished = i == 1 || i == 3 ? @"yes" : @"no";
-        NSDictionary *assignment;
-        if (i == 1 || i == 3)
-            assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"Skilað 23. mars 22:32", @"date", finished, @"finished", nil];
-        else
-            assignment = [[NSDictionary alloc] initWithObjectsAndKeys:title, @"title", @"Skilafrestur: 24. mars 23:59", @"date", finished, @"finished", nil];
-        [assignments addObject:assignment];
-    }
-	
-    return assignments;
 }
 
 + (NSArray *) getAssignmentCourses
