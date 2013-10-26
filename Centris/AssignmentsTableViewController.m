@@ -7,6 +7,7 @@
 
 #import "AssignmentsTableViewController.h"
 #import "Assignment+Centris.h"
+#import "CentrisManagedObjectContext.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
@@ -18,9 +19,10 @@
 #pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
-@property (nonatomic, strong) NSArray *assignments;
+@property (nonatomic, strong) NSMutableArray *assignments;
 @property (nonatomic, strong) NSArray *courses;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
+@property (nonatomic, strong) NSDate *lastUpdated;
 @end
 
 @implementation AssignmentsTableViewController
@@ -35,14 +37,14 @@
     return _courses;
 }
 
-// Getter for assignments, uses lazy instantiation
-- (NSArray *)assignments
-{
-    // Get data from CentrisDataFetcher
-    if (!_assignments) _assignments = [self.dataFetcher getAssignments];
-    
-    return _assignments;
-}
+//// Getter for assignments, uses lazy instantiation
+//- (NSArray *)assignments
+//{
+//    // Get data from CentrisDataFetcher
+//    if (!_assignments) _assignments = [self.dataFetcher getAssignments];
+//    
+//    return _assignments;
+//}
 
 - (id<DataFetcher>)dataFetcher
 {
@@ -61,6 +63,7 @@
     self.title = @"Verkefni";
     self.tableView.backgroundColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
+    [self setupAssignments];
 }
 
 #pragma mark - Methods
@@ -73,10 +76,43 @@
     return;
 }
 
-- (NSMutableArray *)activeAssignments
+- (void)setupAssignments
 {
-    // TODO
-    return nil;
+    NSArray *coreDataAssignments = [self fetchAssignmentsFromCoreData];
+    if ([coreDataAssignments count] == 0) { // means there is nothing in core data
+        // DO API CALL
+        [self fetchAssignmentsFromAPI];
+    } else {
+        for (Assignment *assignment in coreDataAssignments) {
+            [self.assignments addObject:assignment];
+        }
+    }
+}
+
+// Will do a fetch request to Core data and add the assignments
+// (if any) to self.assignments
+- (NSArray *)fetchAssignmentsFromCoreData
+{
+    NSDate *today = [NSDate date];
+    return [Assignment assignmentsWithDueDateThatExceeds:today
+                                              inManagedObjectContext:[CentrisManagedObjectContext sharedInstance]];
+}
+
+// Will do a fetch request to the API for assignments
+// and add the assignments (if any) to self.assignments
+-(void)fetchAssignmentsFromAPI
+{
+    dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+    dispatch_async(fetchQ, ^{
+        NSArray *apiAssignments = [self.dataFetcher getAssignments];
+        [[CentrisManagedObjectContext sharedInstance] performBlock:^{
+            for (NSDictionary *assignment in apiAssignments) {
+                [self.assignments addObject:[Assignment addAssignmentWithCentrisInfo:assignment
+                                                              inManagedObjectContext:[CentrisManagedObjectContext sharedInstance]]];
+            }
+            [self.tableView reloadData];
+        }];
+    });
 }
 
 #pragma mark - Table methods
@@ -95,14 +131,6 @@
 {
     static NSString *CellIdentifier = @"AssignmentCell";
     AssignmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    if (indexPath.row == 1)
-        cell.assignmentEventState = AssignmentIsFinished;
-    // Configure the cell
-    //cell.textLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"title"]; // Title
-    //cell.detailTextLabel.text = [[self.assignments objectAtIndex:indexPath.item] valueForKey:@"date"]; // Date
-    // Mark as checked if assignment is finished
-    //if ([[[self.assignments objectAtIndex:indexPath.item] valueForKey:@"finished"] isEqualToString:@"yes"])
-    //    cell.accessoryType = UITableViewCellAccessoryCheckmark;
     
     return cell;
 }
