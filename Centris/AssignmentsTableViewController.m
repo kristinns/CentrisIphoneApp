@@ -23,9 +23,15 @@
 @property (nonatomic, strong) NSArray *courses;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSDate *lastUpdated;
+@property (nonatomic) BOOL allAssignments;
 @end
 
 @implementation AssignmentsTableViewController
+
+- (IBAction)togglerWasPushed:(UISegmentedControl *)sender {
+    self.allAssignments = sender.selectedSegmentIndex == 1;
+    [self.tableView reloadData];
+}
 
 #pragma mark - Getters
 // Getter for assignmentCourses, uses lazy instantiation
@@ -60,6 +66,7 @@
     [super viewDidLoad];
     // Change title for navigation controller
     self.title = @"Verkefni";
+    self.allAssignments = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
     [self setupAssignments];
@@ -89,9 +96,14 @@
 - (void )fetchAssignmentsFromCoreData
 {
     // TODO, check toggler
-    NSDate *today = [NSDate date];
-    self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
-                                                          inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+    if (self.allAssignments == YES) {
+        self.assignments = [Assignment assignmentsInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+    } else {
+        NSDate *today = [NSDate date];
+        self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
+                                                  inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+
+    }
 }
 
 // Will do a fetch request to the API for assignments
@@ -121,7 +133,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [self.courses count];
+    if (self.allAssignments == YES)
+        return [self.courses count];
+    else
+        return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -142,7 +157,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return SECTION_HEIGHT;
+    if (self.allAssignments == YES)
+        return SECTION_HEIGHT;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -152,15 +169,18 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    CGRect frame = CGRectMake(15, 0, tableView.bounds.size.width-15, 26);
-    UIView *view = [[UIView alloc] initWithFrame:frame];
-    view.backgroundColor = [CentrisTheme grayLightColor];
-    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:frame];
-    sectionHeader.textColor = [CentrisTheme grayLightTextColor];
-    sectionHeader.font = [CentrisTheme headingSmallFont];
-    sectionHeader.text = [[[self.courses objectAtIndex:section] valueForKey:@"title"] uppercaseString];
-    [view addSubview:sectionHeader];
-    return view;
+    if (self.allAssignments == YES) {
+        CGRect frame = CGRectMake(15, 0, tableView.bounds.size.width-15, 26);
+        UIView *view = [[UIView alloc] initWithFrame:frame];
+        view.backgroundColor = [CentrisTheme grayLightColor];
+        UILabel *sectionHeader = [[UILabel alloc] initWithFrame:frame];
+        sectionHeader.textColor = [CentrisTheme grayLightTextColor];
+        sectionHeader.font = [CentrisTheme headingSmallFont];
+        sectionHeader.text = [[[self.courses objectAtIndex:section] valueForKey:@"title"] uppercaseString];
+        [view addSubview:sectionHeader];
+        return view;
+    }
+    return nil;
 }
 
 #pragma mark - Segue methods

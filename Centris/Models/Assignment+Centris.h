@@ -14,4 +14,6 @@
 
 + (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
                         inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context;
 @end

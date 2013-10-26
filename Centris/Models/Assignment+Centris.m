@@ -55,6 +55,14 @@
                       inManagedObjectContext:context];
 }
 
++ (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    return [self fetchEventsFromDBWithEntity:@"Assignment"
+                                      forKey:@"dateClosed"
+                               withPredicate:nil
+                      inManagedObjectContext:context];
+}
+
 #pragma mark - Helpers
 
 + (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
