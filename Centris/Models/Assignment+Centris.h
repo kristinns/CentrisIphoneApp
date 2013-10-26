@@ -12,5 +12,6 @@
 + (Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
 					  inManagedObjectContext:(NSManagedObjectContext *)context;
 
-+ (NSSet *)assignmentsWithDueDateThatExceeds:(NSDate *)date;
++ (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
+                        inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

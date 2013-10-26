@@ -46,9 +46,35 @@
 	return assignment;
 }
 
-+(NSSet *)assignmentsWithDueDateThatExceeds:(NSDate *)date
++(NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    return nil;
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed > %@", date];
+    return [self fetchEventsFromDBWithEntity:@"Assigment"
+                                      forKey:@"dateClosed"
+                               withPredicate:pred
+                      inManagedObjectContext:context];
+}
+
+#pragma mark - Helpers
+
++ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [request setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+	
+    if (predicate != nil)
+        [request setPredicate:predicate];
+	
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"%@", error);
+    }
+    return mutableFetchResults;
 }
 
 + (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
