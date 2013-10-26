@@ -19,7 +19,7 @@
 #pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
-@property (nonatomic, strong) NSMutableArray *assignments;
+@property (nonatomic, strong) NSArray *assignments;
 @property (nonatomic, strong) NSArray *courses;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSDate *lastUpdated;
@@ -38,7 +38,7 @@
 }
 
 // Getter for assignments, uses lazy instantiation
-- (NSMutableArray *)assignments
+- (NSArray *)assignments
 {
     // Get data from CentrisDataFetcher
     if (!_assignments) _assignments = [[NSMutableArray alloc] init];
@@ -77,24 +77,21 @@
 
 - (void)setupAssignments
 {
-    NSArray *coreDataAssignments = [self fetchAssignmentsFromCoreData];
-    if ([coreDataAssignments count] == 0) { // means there is nothing in core data
+    [self fetchAssignmentsFromCoreData];
+    if ([self.assignments count] == 0) { // means there is nothing in core data
         // DO API CALL
         [self fetchAssignmentsFromAPI];
-    } else {
-        for (Assignment *assignment in coreDataAssignments) {
-            [self.assignments addObject:assignment];
-        }
     }
 }
 
 // Will do a fetch request to Core data and add the assignments
 // (if any) to self.assignments
-- (NSArray *)fetchAssignmentsFromCoreData
+- (void )fetchAssignmentsFromCoreData
 {
+    // TODO, check toggler
     NSDate *today = [NSDate date];
-    return [Assignment assignmentsWithDueDateThatExceeds:today
-                                   inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+    self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
+                                                          inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
 }
 
 // Will do a fetch request to the API for assignments
@@ -106,9 +103,10 @@
         NSArray *apiAssignments = [self.dataFetcher getAssignments];
         [[[CentrisManagedObjectContext sharedInstance] managedObjectContext] performBlock:^{
             for (NSDictionary *assignment in apiAssignments) {
-                [self.assignments addObject:[Assignment addAssignmentWithCentrisInfo:assignment
-                                                              inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]]];
+                [Assignment addAssignmentWithCentrisInfo:assignment
+                                                              inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
             }
+            [self fetchAssignmentsFromCoreData];
             [self.tableView reloadData];
         }];
     });
