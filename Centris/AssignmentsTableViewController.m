@@ -37,14 +37,13 @@
     return _courses;
 }
 
-//// Getter for assignments, uses lazy instantiation
-//- (NSArray *)assignments
-//{
-//    // Get data from CentrisDataFetcher
-//    if (!_assignments) _assignments = [self.dataFetcher getAssignments];
-//    
-//    return _assignments;
-//}
+// Getter for assignments, uses lazy instantiation
+- (NSMutableArray *)assignments
+{
+    // Get data from CentrisDataFetcher
+    if (!_assignments) _assignments = [[NSMutableArray alloc] init];
+    return _assignments;
+}
 
 - (id<DataFetcher>)dataFetcher
 {
@@ -95,7 +94,7 @@
 {
     NSDate *today = [NSDate date];
     return [Assignment assignmentsWithDueDateThatExceeds:today
-                                              inManagedObjectContext:[CentrisManagedObjectContext sharedInstance]];
+                                   inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
 }
 
 // Will do a fetch request to the API for assignments
@@ -105,10 +104,10 @@
     dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
     dispatch_async(fetchQ, ^{
         NSArray *apiAssignments = [self.dataFetcher getAssignments];
-        [[CentrisManagedObjectContext sharedInstance] performBlock:^{
+        [[[CentrisManagedObjectContext sharedInstance] managedObjectContext] performBlock:^{
             for (NSDictionary *assignment in apiAssignments) {
                 [self.assignments addObject:[Assignment addAssignmentWithCentrisInfo:assignment
-                                                              inManagedObjectContext:[CentrisManagedObjectContext sharedInstance]]];
+                                                              inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]]];
             }
             [self.tableView reloadData];
         }];
@@ -119,7 +118,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[self.courses objectAtIndex:section] valueForKey:@"count"] integerValue];
+    return [self.assignments count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -131,6 +130,14 @@
 {
     static NSString *CellIdentifier = @"AssignmentCell";
     AssignmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    Assignment *assignment = [self.assignments objectAtIndex:indexPath.row];
+    cell.titleLabel.text = assignment.title;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale currentLocale];
+    formatter.dateFormat = @"d. MMMM HH:mm";
+    cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
+    cell.detailUpperLabel.text = @"9.0";
+    cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     
     return cell;
 }

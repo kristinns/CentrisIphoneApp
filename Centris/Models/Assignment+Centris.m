@@ -49,7 +49,7 @@
 +(NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed > %@", date];
-    return [self fetchEventsFromDBWithEntity:@"Assigment"
+    return [self fetchEventsFromDBWithEntity:@"Assignment"
                                       forKey:@"dateClosed"
                                withPredicate:pred
                       inManagedObjectContext:context];
