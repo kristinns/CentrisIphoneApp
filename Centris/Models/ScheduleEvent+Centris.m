@@ -21,29 +21,6 @@
 												   withPredicate:pred
 										  inManagedObjectContext:context];
 	return scheduledEvents;
-	
-//	// create fetch request
-//	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScheduledEvent"];
-//	
-//	// determine what sort
-//	request.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"starts" ascending:YES]];
-//	// create the query / predicate
-//	request.predicate = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", fromDate, toDate ];
-//	
-//	// execute the query
-//	NSError *error = nil;
-//	NSArray *matches = [context executeFetchRequest:request error:&error];
-//	
-//	if (!matches) { // error
-//		NSLog(@"Error: %@",[error userInfo]);
-//	}
-//	else if (![matches count]) { // no result
-//		NSLog(@"No scheduled events found");
-//	}
-//	else { // something was found!
-//		scheduledEvents = matches;
-//	}
-//	return scheduledEvents;
 }
 
 + (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context

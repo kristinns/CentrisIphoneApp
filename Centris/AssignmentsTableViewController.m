@@ -6,6 +6,7 @@
 #pragma mark - Imports
 
 #import "AssignmentsTableViewController.h"
+#import "Assignment+Centris.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
@@ -60,6 +61,22 @@
     self.title = @"Verkefni";
     self.tableView.backgroundColor = [UIColor whiteColor];
 	self.navigationController.navigationBar.translucent = NO;
+}
+
+#pragma mark - Methods
+
+// Function that gets called when there is nothing in the database or
+// when the user decides to update the information by manually refreshing.
+-(void)reloadData
+{
+    // TODO
+    return;
+}
+
+- (NSMutableArray *)activeAssignments
+{
+    // TODO
+    return nil;
 }
 
 #pragma mark - Table methods

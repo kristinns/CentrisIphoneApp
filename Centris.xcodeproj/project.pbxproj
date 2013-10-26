@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1813DD75181BDA6D00BEC90E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813DD74181BDA6D00BEC90E /* Assignment.m */; };
+		1813DD78181BDA7900BEC90E /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813DD77181BDA7900BEC90E /* Assignment+Centris.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
@@ -60,6 +62,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1813DD73181BDA6D00BEC90E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
+		1813DD74181BDA6D00BEC90E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		1813DD76181BDA7900BEC90E /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
+		1813DD77181BDA7900BEC90E /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentTableViewCell.h; sourceTree = "<group>"; };
 		190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentTableViewCell.m; sourceTree = "<group>"; };
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -160,6 +166,8 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				1813DD73181BDA6D00BEC90E /* Assignment.h */,
+				1813DD74181BDA6D00BEC90E /* Assignment.m */,
 				967A3AB51802D71500A083BC /* ScheduleEvent.h */,
 				967A3AB61802D71500A083BC /* ScheduleEvent.m */,
 				961BB6E417F0676300912C0D /* CourseInstance.h */,
@@ -366,6 +374,8 @@
 		966A499917E9B68F009C342B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				1813DD76181BDA7900BEC90E /* Assignment+Centris.h */,
+				1813DD77181BDA7900BEC90E /* Assignment+Centris.m */,
 				192F979117D76B04007E2694 /* User+Centris.h */,
 				192F979217D76B04007E2694 /* User+Centris.m */,
 				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
@@ -560,6 +570,7 @@
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
+				1813DD78181BDA7900BEC90E /* Assignment+Centris.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
@@ -567,6 +578,7 @@
 				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
+				1813DD75181BDA6D00BEC90E /* Assignment.m in Sources */,
 				199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

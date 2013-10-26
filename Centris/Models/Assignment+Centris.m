@@ -46,6 +46,11 @@
 	return assignment;
 }
 
++(NSSet *)assignmentsWithDueDateThatExceeds:(NSDate *)date
+{
+    return nil;
+}
+
 + (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
 {
 	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

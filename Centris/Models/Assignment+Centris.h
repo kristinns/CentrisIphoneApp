@@ -11,4 +11,6 @@
 @interface Assignment (Centris)
 + (Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
 					  inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (NSSet *)assignmentsWithDueDateThatExceeds:(NSDate *)date;
 @end
