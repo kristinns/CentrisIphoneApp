@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1813DD75181BDA6D00BEC90E /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1813DD74181BDA6D00BEC90E /* Assignment.m */; };
+		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
@@ -63,10 +64,10 @@
 /* Begin PBXFileReference section */
 		1813DD73181BDA6D00BEC90E /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		1813DD74181BDA6D00BEC90E /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
+		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentTableViewCell.h; sourceTree = "<group>"; };
 		190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentTableViewCell.m; sourceTree = "<group>"; };
-		192B772E1819748900BA4203 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
-		192B772F1819748900BA4203 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		192F979117D76B04007E2694 /* User+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Centris.h"; path = "Models/User+Centris.h"; sourceTree = "<group>"; };
 		192F979217D76B04007E2694 /* User+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Centris.m"; path = "Models/User+Centris.m"; sourceTree = "<group>"; };
@@ -373,10 +374,10 @@
 		966A499917E9B68F009C342B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				18372E71181C2DA8005CEC18 /* Assignment+Centris.h */,
+				18372E72181C2DA8005CEC18 /* Assignment+Centris.m */,
 				192F979117D76B04007E2694 /* User+Centris.h */,
 				192F979217D76B04007E2694 /* User+Centris.m */,
-				192B772E1819748900BA4203 /* Assignment+Centris.h */,
-				192B772F1819748900BA4203 /* Assignment+Centris.m */,
 				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 				961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */,
@@ -569,6 +570,7 @@
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
+				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				961BB6E617F0676300912C0D /* CourseInstance.m in Sources */,
