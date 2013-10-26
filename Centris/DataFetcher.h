@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol DataFetcher <NSObject>
-
 + (NSArray *)getAssignments;
 + (NSArray *)getAssignmentCourses;
 + (NSDictionary *)getUser:(NSString *)bySSN;
