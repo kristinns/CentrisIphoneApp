@@ -17,17 +17,19 @@
 #import "NSDate+Helper.h"
 
 #define ROW_HEIGHT 61.0
+#define SEPERATOR_HEIGHT 26.0
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
-@property (nonatomic, strong) NSMutableArray *scheduleEvents;
+@property (nonatomic, strong) NSArray *scheduleEvents;
 @property (nonatomic, weak) IBOutlet DatePickerView *datePickerView;
 @property (nonatomic, strong) NSDate *datePickerDate;
 @property (nonatomic, strong) NSDate *datePickerSelectedDate;
 @property (nonatomic, strong) NSDate *datePickerToday;
+@property (nonatomic) BOOL updated;
 @end
 
 @implementation ScheduleViewController
@@ -53,6 +55,13 @@
     return _managedObjectContext;
 }
 
+- (NSArray *)scheduleEvents
+{
+    if (!_scheduleEvents)
+        _scheduleEvents = [[NSArray alloc] init];
+    return _scheduleEvents;
+}
+
 - (id<DataFetcher>)dataFetcher
 {
     if(!_dataFetcher)
@@ -61,13 +70,24 @@
 }
 
 #pragma mark - Methods
-// Function that calls the API and stores events in Core data
-- (void)getScheduledEvents
+- (void )fetchScheduleEventsFromCoreData
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
-	if (user) {
+    if (!self.updated) {
+        [self fetchScheduledEventsFromAPI];
+        self.updated = YES;
+    } else {
+        self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:self.managedObjectContext];
+        [self.tableView reloadData];
+    }
+}
+
+// Function that calls the API and stores events in Core data
+- (void)fetchScheduledEventsFromAPI
+{
+//	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+//    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+//    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+//	if (user) {
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
 		dispatch_async(fetchQ, ^{
 			NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -78,15 +98,15 @@
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			[comps setHour:18];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSArray *schedule = [self.dataFetcher getSchedule:user.ssn from: from to: to];
+            NSArray *schedule = [self.dataFetcher getSchedule:@"2402912319" from: from to: to];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
-					[self.scheduleEvents addObject:[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext]];
+					[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
 				}
-                [self.tableView reloadData];
+                [self fetchScheduleEventsFromCoreData];
             }];
         });
-	}
+//	}
 }
 
 #pragma mark - Table methods
@@ -98,6 +118,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row != [self.scheduleEvents count]-1) {
+        NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
+        if (minutes != 0) {
+            return ROW_HEIGHT + SEPERATOR_HEIGHT;
+        }
+    }
     return ROW_HEIGHT;
 }
 
@@ -108,17 +134,42 @@
     cell.courseNameLabel.text = scheduleEvent.courseName;
     cell.locationLabel.text = scheduleEvent.roomName;
     cell.typeOfClassLabel.text = scheduleEvent.typeOfClass;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"HH:mm";
+    cell.fromTimeLabel.text = [formatter stringFromDate:scheduleEvent.starts];
+    cell.toTimeLabel.text = [formatter stringFromDate:scheduleEvent.ends];
     // Hide row at top
     if (indexPath.row == 0)
         cell.topBorderIsHidden = YES;
+    if (indexPath.row != [self.scheduleEvents count]-1) {
+        NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
+        if (minutes != 0) {
+            cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
+            //[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+        }
+        
+    }
     
     return cell;
+}
+
+- (NSInteger)breakMinutesForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
+    ScheduleEvent *nextScheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row+1];
+    NSInteger breakTime = [nextScheduleEvent.starts timeIntervalSinceDate:scheduleEvent.ends];
+    NSInteger minutes = breakTime/60;
+    if (minutes <= 5)
+        return 0;
+    else
+    return minutes;
 }
 
 #pragma mark - Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.updated = NO;
     self.scheduleEvents = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"Stundaskrá";
@@ -136,7 +187,7 @@
     self.datePickerSelectedDate = self.datePickerToday;
     self.datePickerDate = [[self.datePickerSelectedDate dateByAddingDays:-weekday] dateByAddingWeeks:-1];
     
-    [self getScheduledEvents];
+    [self fetchScheduleEventsFromCoreData];
     [self updateDatePicker];
 }
 
@@ -154,6 +205,7 @@
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
 {
     self.datePickerSelectedDate = [self.datePickerDate dateByAddingDays:dayIndex];
+    [self fetchScheduleEventsFromCoreData];
 	
 }
 

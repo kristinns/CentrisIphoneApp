@@ -12,15 +12,28 @@
 
 @implementation ScheduleEvent (Centris)
 
-+(NSArray *)scheduledEventsFrom:(NSDate *)fromDate to:(NSDate *)toDate inManagedObjectContext:(NSManagedObjectContext *)context
++(NSArray *)scheduleEventsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    [comps setMinute:0];
+    [comps setHour:0];
+    [comps setSecond:0];
+    NSDate *fromDate = [gregorian dateFromComponents:comps];
+    [comps setHour:23];
+    [comps setMinute:59];
+    [comps setSecond:59];
+    NSDate *toDate = [gregorian dateFromComponents:comps];
+    
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", fromDate, toDate ];
 	
-	NSArray *scheduledEvents = [self fetchEventsFromDBWithEntity:@"ScheduledEvent"
+	NSArray *scheduleEvents = [self fetchEventsFromDBWithEntity:@"ScheduleEvent"
 														  forKey:@"starts"
+                                                  sortAscending:YES
 												   withPredicate:pred
 										  inManagedObjectContext:context];
-	return scheduledEvents;
+    
+	return scheduleEvents;
 }
 
 + (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
@@ -29,7 +42,7 @@
 	
 	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScheduleEvent"];
 	
-	request.predicate = [NSPredicate predicateWithFormat:@"eventID = %@", eventInfo[@"ID"]];
+	request.predicate = [NSPredicate predicateWithFormat:@"eventID = %d", [eventInfo[@"ID"] integerValue]];
 	
 	// Execute the fetch
     
@@ -57,12 +70,12 @@
 }
 
 #pragma mark - Helpers
-+ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName sortAscending:(BOOL)ascending withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [request setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [request setSortDescriptors:sortDescriptors];
 	
