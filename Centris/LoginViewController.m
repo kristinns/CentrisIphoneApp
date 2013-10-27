@@ -65,34 +65,40 @@
 	//     - SHOW NETWORK INDICATOR
 	//     - SHOW LOADING WHEEL
     
-	NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
-	if (userInfo) { // found a user with given email
-		// store info in keychain
-		[self storeInKeychainEmail:email andPassword:pass];
-		// store user in Core Data
-		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
-		if (user) {
-            [self displayHUDWithText:@"Sæki upplýsingar"];
-            dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-            dispatch_async(fetchQ, ^{
+    [self displayHUDWithText:@"Skrái þig inn"];
+    dispatch_queue_t workQ = dispatch_queue_create("Centris fetch", NULL);
+    dispatch_async(workQ, ^{
+        NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
+        if (userInfo) { // found a user with given email
+            // store info in keychain
+            [self storeInKeychainEmail:email andPassword:pass];
+            // store user in Core Data
+            User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
+            if (user) { // this really should not happen unless there is something wrong with core data
+                [self displayHUDWithText:@"Sæki notandaupplýsingar"];
+                sleep(3);
+                [self displayHUDWithText:@"Sæki áfanga"];
                 sleep(3);
                 dispatch_async(dispatch_get_main_queue(), ^{ // And finally
                     [self.HUD hideWithAnimation:YES];
                     // and finish by delegate that we want to switch to the app
                     [self.delegate didFinishLoginWithValidUser];
                 });
+            } else {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self promptUserWithMessage:@"Vúps! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
+                                          title:@"Innskráning mistókst"
+                              cancelButtonTitle:@"OK"];
+                });
+            }
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
+                                      title:@"Notandi fannst ekki"
+                          cancelButtonTitle:@"OK"];
             });
-		} else {
-			[self promptUserWithMessage:@"Æj! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
-								  title:@"Innskráning mistókst"
-					  cancelButtonTitle:@"OK"];
-		}
-		
-	} else {
-		[self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
-							  title:@"Notandi fannst ekki"
-				  cancelButtonTitle:@"OK"];
-	}
+        }
+    });
 }
 
 #pragma mark - Data module setups
