@@ -12,6 +12,9 @@
 #import "KeychainItemWrapper.h"
 #import "User+Centris.h"
 #import "CentrisManagedObjectContext.h"
+#import <HTProgressHUD/HTProgressHUD.h>
+#import "HTProgressHUDFadeZoomAnimation.h"
+#import "HTProgressHUDIndicatorView.h"
 
 @interface LoginViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *emailInput;
@@ -53,24 +56,16 @@
 	//     - SHOW NETWORK INDICATOR
 	//     - SHOW LOADING WHEEL
 	NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
-	
 	if (userInfo) { // found a user with given email
-		NSLog(@"user found from API");
 		// store info in keychain
-		KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-		[keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
-		[keychainItem setObject:pass forKey:(__bridge id)(kSecValueData)];
-		
-		// test to see if it was stored
-//		NSString *password = [keychainItem objectForKey:(__bridge id)(kSecValueData)];
-//		NSString *email = [keychainItem objectForKey:(__bridge id)(kSecAttrAccount)];
-//		NSLog(@"FROM KEYCHAIN: %@, %@", email, password);
-		
+		[self storeInKeychainEmail:email andPassword:pass];
 		// store user in Core Data
 		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
 		if (user) {
-			// do segue
-			NSLog(@"doing the switch");
+            // Setup all the shit
+            [self setUpDataModules];
+            
+            // and finish by delegate that we want to switch to the app
 			[self.delegate didFinishLoginWithValidUser];
 		} else {
 			[self promptUserWithMessage:@"Æj! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
@@ -83,6 +78,36 @@
 							  title:@"Notandi fannst ekki"
 				  cancelButtonTitle:@"OK"];
 	}
+}
+
+#pragma mark - Data module setups
+
+- (void)setUpDataModules
+{
+    __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
+    progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
+    progressHUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypePie];
+    progressHUD.text = @"Loading...";
+    
+    [progressHUD showWithAnimation:YES inView:self.view whileExecutingBlock:^{
+        float r = 0.01;
+        for (int i = 0; i <= 1 / r; i++) {
+            [NSThread sleepForTimeInterval:r];
+            progressHUD.progress = i * r;
+            if (progressHUD.progress > 0.5) {
+                progressHUD.text = @"Almost done";
+            }
+        }
+    }];
+}
+
+#pragma mark - Helper methods
+
+- (void)storeInKeychainEmail:(NSString *)email andPassword:(NSString *)password
+{
+    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+    [keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
+    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 
 - (void)promptUserWithMessage:(NSString *)message title:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle
