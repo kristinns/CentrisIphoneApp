@@ -54,7 +54,7 @@
 #pragma mark - Setup
 // Not using any setup at this point.
 
-#pragma mark - Handlers
+#pragma mark - UI Handlers
 - (IBAction)loginButtonPushed:(id)sender {
 	NSString *email = self.emailInput.text;
 	NSString *pass = self.passwordInput.text;
@@ -74,34 +74,41 @@
             [self storeInKeychainEmail:email andPassword:pass];
             // store user in Core Data
             User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
-            if (user) { // this really should not happen unless there is something wrong with core data
-                [self displayHUDWithText:@"Sæki notandaupplýsingar"];
+            if (user) {
+                [self updateHUDWithText:@"Sæki notandaupplýsingar"];
                 sleep(3);
-                [self displayHUDWithText:@"Sæki áfanga"];
+                [self updateHUDWithText:@"Sæki áfanga"];
                 sleep(3);
                 dispatch_async(dispatch_get_main_queue(), ^{ // And finally
-                    [self.HUD hideWithAnimation:YES];
-                    // and finish by delegate that we want to switch to the app
-                    [self.delegate didFinishLoginWithValidUser];
+                    [self hideHUD];
+                    // and finish by delegate that we want to go inside (TWSS)
+                    [self delegateFinishedLoggingInWithValidUser];
                 });
-            } else {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self promptUserWithMessage:@"Vúps! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
-                                          title:@"Innskráning mistókst"
-                              cancelButtonTitle:@"OK"];
-                });
-            }
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
-                                      title:@"Notandi fannst ekki"
+            } else { // ERROR, this really should not happen unless there is something wrong with core data.
+                [self promptUserWithMessage:@"Vúps! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
+                                      title:@"Innskráning mistókst"
                           cancelButtonTitle:@"OK"];
-            });
+                [self hideHUD];
+            }
+        } else { // ERROR
+            [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
+                                  title:@"Notandi fannst ekki"
+                      cancelButtonTitle:@"OK"];
+            [self hideHUD];
         }
     });
 }
 
-#pragma mark - Data module setups
+#pragma mark - Data methods
+
+#pragma mark - Helper methods
+
+-(void)delegateFinishedLoggingInWithValidUser
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate didFinishLoginWithValidUser];
+    });
+}
 
 - (void)displayHUDWithText:(NSString *)text
 {
@@ -109,12 +116,19 @@
     [self.HUD showInView:self.view animated:YES];
 }
 
--(void)updateHUDWithText:(NSString *)text
+- (void)updateHUDWithText:(NSString *)text
 {
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.HUD.text = text;
+    });
 }
 
-#pragma mark - Helper methods
+- (void)hideHUD
+{
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.HUD hideWithAnimation:YES];
+    });
+}
 
 - (void)storeInKeychainEmail:(NSString *)email andPassword:(NSString *)password
 {
@@ -125,15 +139,15 @@
 
 - (void)promptUserWithMessage:(NSString *)message title:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle
 {
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
-													message:message
-												   delegate:nil
-										  cancelButtonTitle:cancelButtonTitle
-										  otherButtonTitles:nil];
-	[alert show];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:title
+                                                        message:message
+                                                       delegate:nil
+                                              cancelButtonTitle:cancelButtonTitle
+                                              otherButtonTitles:nil];
+        [alert show];
+    });
 
 }
-
-#pragma mark - Delegates
 
 @end
