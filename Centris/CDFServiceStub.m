@@ -64,6 +64,54 @@
     return courses;
 }
 
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
+{
+    NSMutableArray  *courseInstArray = [[NSMutableArray alloc] init];
+    
+    // T-109-INTO
+    NSMutableDictionary *courseInst1 = [[NSMutableDictionary alloc] init];
+    [courseInst1 setObject:[NSNumber numberWithInt:22363] forKey:@"ID"];
+    [courseInst1 setObject:@"T-109-INTO" forKey:@"CourseID"];
+    [courseInst1 setObject:@"Inngangur að tölvunarfræði" forKey:@"Name"];
+    [courseInst1 setObject:@"20113" forKey:@"Semester"];
+    [courseInstArray addObject:courseInst1];
+    
+    // T-111-PROG
+    NSMutableDictionary *courseInst2 = [[NSMutableDictionary alloc] init];
+    [courseInst2 setObject:[NSNumber numberWithInt:22212] forKey:@"ID"];
+    [courseInst2 setObject:@"T-111-PROG" forKey:@"CourseID"];
+    [courseInst2 setObject:@"Forritun" forKey:@"Name"];
+    [courseInst2 setObject:@"20113" forKey:@"Semester"];
+    [courseInstArray addObject:courseInst2];
+    
+    // T-117-STR1
+    NSMutableDictionary *courseInst3 = [[NSMutableDictionary alloc] init];
+    [courseInst3 setObject:[NSNumber numberWithInt:22218] forKey:@"ID"];
+    [courseInst3 setObject:@"T-117-STR1" forKey:@"CourseID"];
+    [courseInst3 setObject:@"Strjál Stærðfræði I" forKey:@"Name"];
+    [courseInst3 setObject:@"20113" forKey:@"Semester"];
+    [courseInstArray addObject:courseInst3];
+    
+    // T-107-TOLH
+    NSMutableDictionary *courseInst4 = [[NSMutableDictionary alloc] init];
+    [courseInst4 setObject:[NSNumber numberWithInt:22219] forKey:@"ID"];
+    [courseInst4 setObject:@"T-107-TOLH" forKey:@"CourseID"];
+    [courseInst4 setObject:@"Tölvuhögun" forKey:@"Name"];
+    [courseInst4 setObject:@"20113" forKey:@"Semester"];
+    [courseInstArray addObject:courseInst4];
+    
+    // T-110-VERK
+    NSMutableDictionary *courseInst5 = [[NSMutableDictionary alloc] init];
+    [courseInst5 setObject:[NSNumber numberWithInt:22219] forKey:@"ID"];
+    [courseInst5 setObject:@"T-110-VERK" forKey:@"CourseID"];
+    [courseInst5 setObject:@"Verkefnalausnir" forKey:@"Name"];
+    [courseInst5 setObject:@"20113" forKey:@"Semester"];
+    [courseInstArray addObject:courseInst5];
+    
+    // Finally, return courseInstArray
+    return courseInstArray;
+}
+
 + (NSDictionary *)getUser:(NSString *)bySSN
 {
 	NSMutableDictionary *user = [[NSMutableDictionary alloc] init];

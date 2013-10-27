@@ -30,6 +30,7 @@
 
 - (IBAction)togglerWasPushed:(UISegmentedControl *)sender {
     self.allAssignments = sender.selectedSegmentIndex == 1;
+    [self fetchAssignmentsFromCoreData];
     [self.tableView reloadData];
 }
 
