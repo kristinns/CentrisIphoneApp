@@ -352,11 +352,11 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ScheduleEventCell" rowHeight="78" id="FQD-Wm-YSg" customClass="ScheduleTableViewCell">
-                                                <rect key="frame" x="0.0" y="22" width="320" height="78"/>
+                                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ScheduleEventCell" rowHeight="87" id="FQD-Wm-YSg" customClass="ScheduleTableViewCell">
+                                                <rect key="frame" x="0.0" y="22" width="320" height="87"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FQD-Wm-YSg" id="9IP-2a-e9p">
-                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="87"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tölvuhögun" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-b5-t05">
@@ -577,6 +577,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5o8-79-b56"/>
+        <segue reference="YSS-QB-Ftm"/>
     </inferredMetricsTieBreakers>
 </document>

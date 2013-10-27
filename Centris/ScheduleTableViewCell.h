@@ -19,4 +19,5 @@ typedef enum ScheduleEventStateTypes {
 @property (nonatomic, weak) IBOutlet UILabel *locationLabel;
 @property (nonatomic) ScheduleEventState scheduleEventState;
 @property (nonatomic) BOOL topBorderIsHidden;
+@property (nonatomic, strong) NSString *seperatorBreakText;
 @end

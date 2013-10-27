@@ -8,9 +8,13 @@
 #define CIRCLE_POSITION_X 275
 #define CIRCLE_POSITION_Y 19
 #define TOP_BORDER_HEIGHT 1
+#define SEPERATOR_HEIGHT 26.0
+#define ROW_HEIGHT 61.0
 
 @interface ScheduleTableViewCell()
 @property (nonatomic, strong) UIView *topBorder;
+@property (nonatomic, strong) UIView *seperatorView;
+@property (nonatomic, strong) UILabel *seperatorLabel;
 @end
 
 @implementation ScheduleTableViewCell
@@ -27,6 +31,16 @@
         [self setup];
     }
     return self;
+}
+
+- (void)prepareForReuse
+{
+    [self.seperatorLabel removeFromSuperview];
+    [self.seperatorView removeFromSuperview];
+    self.seperatorView = nil;
+    self.seperatorLabel = nil;
+    NSLog(@"Reuse");
+    //self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, ROW_HEIGHT);
 }
 
 - (void)setup
@@ -54,7 +68,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    [super setSelected:selected animated:animated];
+    //[super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
 }
@@ -79,6 +93,27 @@
     selectedImage.frame = CGRectMake(CIRCLE_POSITION_X, CIRCLE_POSITION_Y, selectedImage.bounds.size.width, selectedImage.bounds.size.height);
     
     [self addSubview:selectedImage];
+}
+
+- (void)setSeperatorBreakText:(NSString *)seperatorBreakText
+{
+    if (self.bounds.size.height > 87)
+        self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
+    NSLog(@"%@ - %f", seperatorBreakText, self.bounds.size.height);
+    if (!_seperatorBreakText) {
+        //if (self.bounds.size.height == 87) {
+            self.seperatorView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-SEPERATOR_HEIGHT, self.bounds.size.width, SEPERATOR_HEIGHT)];
+            self.seperatorView.backgroundColor = [CentrisTheme grayLightColor];
+            self.seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.bounds.size.width, SEPERATOR_HEIGHT)];
+            self.seperatorLabel.text = seperatorBreakText;
+            self.seperatorLabel.textColor = [CentrisTheme grayLightTextColor];
+            self.seperatorLabel.font = [CentrisTheme headingSmallFont];
+            [self.seperatorView addSubview:self.seperatorLabel];
+            [self addSubview:self.seperatorView];
+       // }
+    } else {
+        self.seperatorLabel.text = seperatorBreakText;
+    }
 }
 
 @end

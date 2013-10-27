@@ -9,8 +9,7 @@
 #import "ScheduleEvent.h"
 
 @interface ScheduleEvent (Centris)
-+ (NSSet *)scheduledEventsFrom:(NSDate *)fromDate
-						   to:(NSDate *)toDate
++ (NSArray *)scheduleEventsFromDay:(NSDate *)fromDate
 	   inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo

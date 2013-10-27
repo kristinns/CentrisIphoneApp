@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3396" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assignment" representedClassName="Assignment" syncable="YES">
         <attribute name="assignmentDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="dateClosed" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fileExtensions" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="maxGroupSize" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -47,7 +47,7 @@
     <elements>
         <element name="Assignment" positionX="135" positionY="-45" width="128" height="178"/>
         <element name="CourseInstance" positionX="133" positionY="-261" width="128" height="148"/>
-        <element name="ScheduleEvent" positionX="-54" positionY="-261" width="128" height="150"/>
+        <element name="ScheduleEvent" positionX="-54" positionY="-261" width="128" height="148"/>
         <element name="User" positionX="324" positionY="-261" width="128" height="58"/>
     </elements>
 </model>
