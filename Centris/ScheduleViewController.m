@@ -84,10 +84,10 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-//	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-//    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-//    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
-//	if (user) {
+	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+	if (user) {
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
 		dispatch_async(fetchQ, ^{
 			NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -106,7 +106,7 @@
                 [self fetchScheduleEventsFromCoreData];
             }];
         });
-//	}
+	}
 }
 
 #pragma mark - Table methods
