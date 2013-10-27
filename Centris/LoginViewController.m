@@ -22,6 +22,7 @@
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) HTProgressHUD *HUD;
 @end
 
 @implementation LoginViewController
@@ -42,6 +43,14 @@
     return _managedObjectContext;
 }
 
+// Lazy instantiate
+- (HTProgressHUD *)HUD
+{
+    if (!_HUD)
+        _HUD = [[HTProgressHUD alloc] init];
+    return _HUD;
+}
+
 #pragma mark - Setup
 // Not using any setup at this point.
 
@@ -55,6 +64,7 @@
 	//     - DISPATCH THREAD
 	//     - SHOW NETWORK INDICATOR
 	//     - SHOW LOADING WHEEL
+    
 	NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
 	if (userInfo) { // found a user with given email
 		// store info in keychain
@@ -62,11 +72,16 @@
 		// store user in Core Data
 		User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
 		if (user) {
-            // Setup all the shit
-            [self setUpDataModules];
-            
-            // and finish by delegate that we want to switch to the app
-			[self.delegate didFinishLoginWithValidUser];
+            [self displayHUDWithText:@"Sæki upplýsingar"];
+            dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+            dispatch_async(fetchQ, ^{
+                sleep(3);
+                dispatch_async(dispatch_get_main_queue(), ^{ // And finally
+                    [self.HUD hideWithAnimation:YES];
+                    // and finish by delegate that we want to switch to the app
+                    [self.delegate didFinishLoginWithValidUser];
+                });
+            });
 		} else {
 			[self promptUserWithMessage:@"Æj! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
 								  title:@"Innskráning mistókst"
@@ -82,23 +97,15 @@
 
 #pragma mark - Data module setups
 
-- (void)setUpDataModules
+- (void)displayHUDWithText:(NSString *)text
 {
-    __block HTProgressHUD *progressHUD = [[HTProgressHUD alloc] init];
-    progressHUD.animation = [HTProgressHUDFadeZoomAnimation animation];
-    progressHUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypePie];
-    progressHUD.text = @"Loading...";
+    self.HUD.text = text;
+    [self.HUD showInView:self.view animated:YES];
+}
+
+-(void)updateHUDWithText:(NSString *)text
+{
     
-    [progressHUD showWithAnimation:YES inView:self.view whileExecutingBlock:^{
-        float r = 0.01;
-        for (int i = 0; i <= 1 / r; i++) {
-            [NSThread sleepForTimeInterval:r];
-            progressHUD.progress = i * r;
-            if (progressHUD.progress > 0.5) {
-                progressHUD.text = @"Almost done";
-            }
-        }
-    }];
 }
 
 #pragma mark - Helper methods
