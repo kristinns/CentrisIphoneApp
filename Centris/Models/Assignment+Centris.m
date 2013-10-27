@@ -7,10 +7,11 @@
 //
 
 #import "Assignment+Centris.h"
+#import "CourseInstance+Centris.h"
 
 @implementation Assignment (Centris)
 
-+(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context
++(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo withCourseInstanceID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	Assignment *assignment = nil;
 	
@@ -36,9 +37,8 @@
 		assignment.maxGroupSize = assignmentInfo[@"MaxStudentsInGroup"];
 		assignment.datePublished = [self icelandicFormatWithDateString:assignmentInfo[@"DatePublished"]];
 		assignment.dateClosed = [self icelandicFormatWithDateString:assignmentInfo[@"DateClosed"]];
-		
-		// TODO, hook it up to a courseinstance
-		
+		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
+        assignment.isInCourseInstance = courseInst;
 	} else { // assignment found, return it.
 		assignment = [matches lastObject];
 	}

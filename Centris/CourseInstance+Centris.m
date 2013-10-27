@@ -16,16 +16,16 @@
 	
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"CourseInstance"];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"id = %@", courseID];
+    request.predicate = [NSPredicate predicateWithFormat:@"id = %d", courseID];
     
     NSError *error;
     NSArray *matches = [context executeFetchRequest:request error:&error];
     
     if (!matches) { // error
         NSLog(@"Error: %@", [error userInfo]);
+    } else {
+        instance = [matches lastObject];
     }
-    
-    instance = [matches lastObject];
 	
 	return instance;
 }
@@ -55,6 +55,35 @@
         return [matches lastObject];
     }
     return courseInstance;
+}
+
++ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
+{
+    return [self fetchEventsFromDBWithEntity:@"CourseInstance"
+                                      forKey:@"name"
+                               withPredicate:nil
+                      inManagedObjectContext:context];
+}
+
+#pragma mark - Helpers
++ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
+{
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
+    [request setEntity:entity];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    [request setSortDescriptors:sortDescriptors];
+	
+    if (predicate != nil)
+        [request setPredicate:predicate];
+	
+    NSError *error = nil;
+    NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
+    if (mutableFetchResults == nil) {
+        NSLog(@"%@", error);
+    }
+    return mutableFetchResults;
 }
 
 @end

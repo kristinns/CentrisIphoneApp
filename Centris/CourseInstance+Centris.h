@@ -14,4 +14,6 @@
 
 + (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo
                            inManagedObjectContext:(NSManagedObjectContext *)context;
+
++ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
 @end

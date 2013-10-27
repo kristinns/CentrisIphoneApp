@@ -78,7 +78,7 @@
 			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
 			[comps setHour:18];
 			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSArray *schedule = [self.dataFetcher getSchedule:user.ssn from: from to: to];
+            NSArray *schedule = [self.dataFetcher getScheduleBySSN:user.ssn];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
 					[self.scheduleEvents addObject:[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext]];

@@ -13,7 +13,7 @@
 
 @implementation CDFServiceStub
 
-+ (NSArray *)getAssignments
++ (NSArray *)getAssignmentsForUserWithSSN:(NSString *)SSN
 {
 	NSMutableArray *assignments = [[NSMutableArray alloc] init];
 	
@@ -102,7 +102,7 @@
     
     // T-110-VERK
     NSMutableDictionary *courseInst5 = [[NSMutableDictionary alloc] init];
-    [courseInst5 setObject:[NSNumber numberWithInt:22219] forKey:@"ID"];
+    [courseInst5 setObject:[NSNumber numberWithInt:22220] forKey:@"ID"];
     [courseInst5 setObject:@"T-110-VERK" forKey:@"CourseID"];
     [courseInst5 setObject:@"Verkefnalausnir" forKey:@"Name"];
     [courseInst5 setObject:@"20113" forKey:@"Semester"];
@@ -203,14 +203,14 @@
 	return info;
 }
 
-+ (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
++ (NSArray *)getScheduleBySSN:(NSString *)SSN
 {
 	NSMutableArray *schedule = [[NSMutableArray alloc] init];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"1", @"ID",
-						 @"24484", @"CourseID",
-						 @"Vefforritun II", @"CourseName",
+						 @"22363", @"CourseID",
+						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
 						 @"2013-02-13T08:30:00", @"StartTime",
 						 @"2013-02-13T10:05:00", @"EndTime",
@@ -218,8 +218,8 @@
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"2", @"ID",
-						 @"24419", @"CourseID",
-						 @"Forritunarmál", @"CourseName",
+						 @"22212", @"CourseID",
+						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
 						 @"2013-02-13T13:10:00", @"StartTime",
 						 @"2013-02-13T14:45:00", @"EndTime",

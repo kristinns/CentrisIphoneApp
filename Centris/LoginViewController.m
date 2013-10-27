@@ -11,6 +11,9 @@
 #import "AppFactory.h"
 #import "KeychainItemWrapper.h"
 #import "User+Centris.h"
+#import "CourseInstance+Centris.h"
+#import "ScheduleEvent+Centris.h"
+#import "Assignment+Centris.h"
 #import "CentrisManagedObjectContext.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "HTProgressHUDFadeZoomAnimation.h"
@@ -24,6 +27,7 @@
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) HTProgressHUD *HUD;
 @end
+
 
 @implementation LoginViewController
 
@@ -68,6 +72,16 @@
         if (user) {
             [self updateHUDWithText:@"Sæki áfanga"];
             sleep(3);
+            [self fetchCourseInstancesForUserWithSSN:user.ssn];
+            
+            [self updateHUDWithText:@"Sæki stundatöflu"];
+            sleep(3);
+            [self fetchScheduleForUserWithSSN:user.ssn];
+            
+            [self updateHUDWithText:@"Sæki verkefni"];
+            sleep(3);
+            [self fetchAssignmentsForUserWithSSN:user.ssn];
+            
             dispatch_async(dispatch_get_main_queue(), ^{ // And finally
                 [self hideHUD];
                 // and finish by delegate that we want to go inside (TWSS)
@@ -85,7 +99,7 @@
 #pragma mark - Data methods
 
 // Authenticates user to API and stores him in Core Data. Returns a
--(User *)doUserLoginWithEmail:(NSString *)email andPassword:(NSString *)password
+- (User *)doUserLoginWithEmail:(NSString *)email andPassword:(NSString *)password
 {
     User *user = nil;
     NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:password];
@@ -96,16 +110,39 @@
     return user;
 }
 
-// Will make a fetch request to the API and store the results (if any)
+// Will make a fetch request to the API for a given SSN and store the results (if any)
 // in Core Data
--(void)fetchCourseInstancesFromAPI
+- (void)fetchCourseInstancesForUserWithSSN:(NSString *)SSN
 {
-    
+    NSArray *courseInstances = [self.dataFetcher getCoursesForStudentWithSSN:SSN];
+    for (NSDictionary *courseInst in courseInstances) {
+        [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:self.managedObjectContext];
+    }
+}
+
+- (void)fetchScheduleForUserWithSSN:(NSString *)SSN
+{
+    NSArray *schedule = [self.dataFetcher getScheduleBySSN:SSN];
+    for (NSDictionary *event in schedule) {
+        [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+    }
+}
+
+- (void)fetchAssignmentsForUserWithSSN:(NSString *)SSN
+{
+    NSArray *courseInstances = [CourseInstance courseInstancesInManagedObjectContext:self.managedObjectContext];
+    for (CourseInstance *inst in courseInstances) {
+        NSArray *assignments = [self.dataFetcher getAssignmentsForUserWithSSN:SSN];
+        for (NSDictionary *assignment in assignments) {
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[inst.courseID intValue] inManagedObjectContext:self.managedObjectContext];
+        }
+
+    }
 }
 
 #pragma mark - Helper methods
 
--(void)delegateFinishedLoggingInWithValidUser
+- (void)delegateFinishedLoggingInWithValidUser
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.delegate didFinishLoginWithValidUser];

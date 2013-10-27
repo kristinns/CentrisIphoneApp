@@ -48,8 +48,8 @@
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		event.courseName = eventInfo[@"CourseName"];
-		
-		// TODO , hook up course instance here
+		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[eventInfo[@"CourseID"] intValue] inManagedObjectContext:context];
+        event.hasCourseInstance = courseInst;
 	} else { // event found, return it
 		event = [matches lastObject];
 	}

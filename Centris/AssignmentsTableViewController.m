@@ -8,6 +8,7 @@
 #import "AssignmentsTableViewController.h"
 #import "Assignment+Centris.h"
 #import "CentrisManagedObjectContext.h"
+#import "CourseInstance.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
@@ -88,7 +89,7 @@
     [self fetchAssignmentsFromCoreData];
     if ([self.assignments count] == 0) { // means there is nothing in core data
         // DO API CALL
-        [self fetchAssignmentsFromAPI];
+        [self fetchAssignmentsFromAPIForUserWithSSN:nil];
     }
 }
 
@@ -109,20 +110,20 @@
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPI
+-(void)fetchAssignmentsFromAPIForUserWithSSN:(NSString *)SSN
 {
-    dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-    dispatch_async(fetchQ, ^{
-        NSArray *apiAssignments = [self.dataFetcher getAssignments];
-        [[[CentrisManagedObjectContext sharedInstance] managedObjectContext] performBlock:^{
-            for (NSDictionary *assignment in apiAssignments) {
-                [Assignment addAssignmentWithCentrisInfo:assignment
-                                                              inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
-            }
-            [self fetchAssignmentsFromCoreData];
-            [self.tableView reloadData];
-        }];
-    });
+//    dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
+//    dispatch_async(fetchQ, ^{
+//        NSArray *apiAssignments = [self.dataFetcher getAssignmentsForUserWithSSN:SSN];
+//        [[[CentrisManagedObjectContext sharedInstance] managedObjectContext] performBlock:^{
+//            for (NSDictionary *assignment in apiAssignments) {
+//                [Assignment addAssignmentWithCentrisInfo:assignment
+//                                  inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+//            }
+//            [self fetchAssignmentsFromCoreData];
+//            [self.tableView reloadData];
+//        }];
+//    });
 }
 
 #pragma mark - Table methods
@@ -150,7 +151,8 @@
     formatter.locale = [NSLocale currentLocale];
     formatter.dateFormat = @"d. MMMM HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
-    cell.detailUpperLabel.text = @"9.0";
+    CourseInstance *courseInst = assignment.isInCourseInstance;
+    cell.detailUpperLabel.text = courseInst.name;
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     
     return cell;

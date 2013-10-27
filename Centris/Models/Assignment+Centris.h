@@ -9,8 +9,9 @@
 #import "Assignment.h"
 
 @interface Assignment (Centris)
-+ (Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
-					  inManagedObjectContext:(NSManagedObjectContext *)context;
++(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
+                       withCourseInstanceID:(NSInteger)courseID
+                     inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
                         inManagedObjectContext:(NSManagedObjectContext *)context;
