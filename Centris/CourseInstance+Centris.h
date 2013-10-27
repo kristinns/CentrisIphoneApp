@@ -11,4 +11,7 @@
 @interface CourseInstance (Centris)
 +(CourseInstance *)courseInstanceWithID:(NSInteger)courseID
 				 inManagedObjectContext:(NSManagedObjectContext *) context;
+
++ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo
+                           inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
