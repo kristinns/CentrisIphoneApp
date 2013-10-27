@@ -144,8 +144,8 @@
     if (indexPath.row != [self.scheduleEvents count]-1) {
         NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
         if (minutes != 0) {
+            cell.bounds = CGRectMake(cell.bounds.origin.x, cell.bounds.origin.y, cell.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
             cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
-            //[tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
         }
         
     }
