@@ -58,39 +58,22 @@
 - (IBAction)loginButtonPushed:(id)sender {
 	NSString *email = self.emailInput.text;
 	NSString *pass = self.passwordInput.text;
-	// FETCH REQUEST SENDING.
-	// TODO:
-	//	   - CHECK IF PASSWORD IS CORRECT
-	//     - DISPATCH THREAD
-	//     - SHOW NETWORK INDICATOR
-	//     - SHOW LOADING WHEEL
     
     [self displayHUDWithText:@"Skrái þig inn"];
     dispatch_queue_t workQ = dispatch_queue_create("Centris fetch", NULL);
     dispatch_async(workQ, ^{
-        NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:pass]; // this really should be post to API to login
-        if (userInfo) { // found a user with given email
-            // store info in keychain
-            [self storeInKeychainEmail:email andPassword:pass];
-            // store user in Core Data
-            User *user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
-            if (user) {
-                [self updateHUDWithText:@"Sæki notandaupplýsingar"];
-                sleep(3);
-                [self updateHUDWithText:@"Sæki áfanga"];
-                sleep(3);
-                dispatch_async(dispatch_get_main_queue(), ^{ // And finally
-                    [self hideHUD];
-                    // and finish by delegate that we want to go inside (TWSS)
-                    [self delegateFinishedLoggingInWithValidUser];
-                });
-            } else { // ERROR, this really should not happen unless there is something wrong with core data.
-                [self promptUserWithMessage:@"Vúps! Eitthvað fór úrskeiðis þannig ekki náðist að skrá þig inn. Vinsamlegast reyndu aftur."
-                                      title:@"Innskráning mistókst"
-                          cancelButtonTitle:@"OK"];
+        [self updateHUDWithText:@"Sæki notandaupplýsingar"];
+        sleep(3);
+        User *user = [self doUserLoginWithEmail:email andPassword:pass];
+        if (user) {
+            [self updateHUDWithText:@"Sæki áfanga"];
+            sleep(3);
+            dispatch_async(dispatch_get_main_queue(), ^{ // And finally
                 [self hideHUD];
-            }
-        } else { // ERROR
+                // and finish by delegate that we want to go inside (TWSS)
+                [self delegateFinishedLoggingInWithValidUser];
+            });
+        } else {
             [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
                                   title:@"Notandi fannst ekki"
                       cancelButtonTitle:@"OK"];
@@ -100,6 +83,25 @@
 }
 
 #pragma mark - Data methods
+
+// Authenticates user to API and stores him in Core Data. Returns a
+-(User *)doUserLoginWithEmail:(NSString *)email andPassword:(NSString *)password
+{
+    User *user = nil;
+    NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:password];
+    if (userInfo) {
+        [self storeInKeychainEmail:email andPassword:password];
+        user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
+    }
+    return user;
+}
+
+// Will make a fetch request to the API and store the results (if any)
+// in Core Data
+-(void)fetchCourseInstancesFromAPI
+{
+    
+}
 
 #pragma mark - Helper methods
 
