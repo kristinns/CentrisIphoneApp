@@ -13,6 +13,7 @@
 #import "DataFetcher.h"
 #import "AssignmentDetailViewController.h"
 #import "AssignmentTableViewCell.h"
+#import "CourseInstance+Centris.h"
 
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
@@ -40,7 +41,7 @@
 - (NSArray *)courses
 {
     // Get data from CentrisDataFetcher
-    if (!_courses) _courses = [self.dataFetcher getAssignmentCourses];
+    if (!_courses) _courses = [CourseInstance courseInstancesInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
     
     return _courses;
 }
@@ -130,7 +131,13 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.assignments count];
+    if (self.allAssignments == NO)
+        return [self.assignments count];
+    else {
+        CourseInstance *courseInstance = [self.courses objectAtIndex:section];
+        return [courseInstance.hasAssignments count];
+    }
+    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -145,7 +152,10 @@
 {
     static NSString *CellIdentifier = @"AssignmentCell";
     AssignmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    Assignment *assignment = [self.assignments objectAtIndex:indexPath.row];
+    CourseInstance *courseInstance = [self.courses objectAtIndex:indexPath.section];
+    NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
+    NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
+    Assignment *assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
     cell.titleLabel.text = assignment.title;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale currentLocale];
