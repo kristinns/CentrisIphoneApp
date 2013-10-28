@@ -20,4 +20,5 @@ typedef enum AssignmentEventState {
 @property (weak, nonatomic) IBOutlet UILabel *detailLowerLabel;
 @property (nonatomic) AssignmentEventState assignmentEventState;
 @property (nonatomic) BOOL topBorderIsHidden;
+@property (nonatomic) BOOL displayGrade;
 @end

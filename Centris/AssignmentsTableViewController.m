@@ -152,8 +152,12 @@
     formatter.dateFormat = @"d. MMMM HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
     CourseInstance *courseInst = assignment.isInCourseInstance;
-    cell.detailUpperLabel.text = courseInst.courseID;
+    if (self.allAssignments)
+        cell.detailUpperLabel.text = @"7.5";
+    else
+        cell.detailUpperLabel.text = courseInst.courseID;
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
+    cell.displayGrade = self.allAssignments;
     
     return cell;
 }

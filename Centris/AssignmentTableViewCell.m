@@ -54,6 +54,17 @@
     [self addSubview:self.circleImageView];
 }
 
+- (void)setDisplayGrade:(BOOL)displayGrade
+{
+    if (displayGrade) {
+        self.detailUpperLabel.textColor = [CentrisTheme redColor];
+        self.detailUpperLabel.font = [CentrisTheme headingMediumFont];
+    } else {
+        self.detailUpperLabel.textColor = [CentrisTheme blackLightTextColor];
+        self.detailUpperLabel.font = [CentrisTheme headingSmallFont];
+    }
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
