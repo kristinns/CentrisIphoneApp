@@ -152,20 +152,24 @@
 {
     static NSString *CellIdentifier = @"AssignmentCell";
     AssignmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    CourseInstance *courseInstance = [self.courses objectAtIndex:indexPath.section];
-    NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
-    NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
-    Assignment *assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
+    Assignment *assignment;
+    if (self.allAssignments == NO)
+    {
+        assignment = [self.assignments objectAtIndex:indexPath.row];
+        cell.detailUpperLabel.text = assignment.isInCourseInstance.courseID;
+    } else {
+        CourseInstance *courseInstance = [self.courses objectAtIndex:indexPath.section];
+        NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
+        NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
+        assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
+        cell.detailUpperLabel.text = @"7.5";
+    }
+    
     cell.titleLabel.text = assignment.title;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale currentLocale];
     formatter.dateFormat = @"d. MMMM HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
-    CourseInstance *courseInst = assignment.isInCourseInstance;
-    if (self.allAssignments)
-        cell.detailUpperLabel.text = @"7.5";
-    else
-        cell.detailUpperLabel.text = courseInst.courseID;
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     cell.displayGrade = self.allAssignments;
     
@@ -193,7 +197,7 @@
         UILabel *sectionHeader = [[UILabel alloc] initWithFrame:frame];
         sectionHeader.textColor = [CentrisTheme grayLightTextColor];
         sectionHeader.font = [CentrisTheme headingSmallFont];
-        sectionHeader.text = [[[self.courses objectAtIndex:section] valueForKey:@"title"] uppercaseString];
+        sectionHeader.text = [[[self.courses objectAtIndex:section] name] uppercaseString];
         [view addSubview:sectionHeader];
         return view;
     }
