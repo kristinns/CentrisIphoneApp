@@ -13,43 +13,48 @@
 
 @implementation CDFServiceStub
 
-+ (NSArray *)getAssignmentsForUserWithSSN:(NSString *)SSN
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester
 {
-	NSMutableArray *assignments = [[NSMutableArray alloc] init];
-	
-	NSMutableDictionary *assignment1 = [[NSMutableDictionary alloc] init];
-	[assignment1 setObject:[NSNumber numberWithInteger:28947] forKey:@"ID"];
-	[assignment1 setObject:@"7. Essay" forKey:@"Title"];
-	[assignment1 setObject:@"<p>Write a short paper (approximately 2-3 pages) about a person who has contributed to computer science. You may choose to write about any one of the persons mentioned in the slides, or you could pick someone which isn't mentioned there, but in that case you need to get a permission (basically so we can ensure that the person in question is somewhat connected to computer science!).</p>\r\n<p>The paper should be roughly 2-3 pages long (excluding the front page), students should use their own judgement with regards to spacing, font sizes etc. You should pick your own style, i.e. APA, MLA etc, and stick to it.</p>\r\n<p>You may write in either Icelandic or English, just stick to either language.</p>\r\n<p>You should use at least 2&nbsp;sources (other than Wikipedia), and at least one of them should be a regular book (not just a web page). However, the book may be in electronic form (for instance, found at books.google.com).</p>\r\n<p>Hand in a single document, either in Microsoft Word format (.doc,.docx), Open Document Format (.odt), .pdf or .html.</p>" forKey:@"Description"];
-	NSMutableArray *l1 = [[NSMutableArray alloc] init];
-	[l1 addObject:@"doc"];
-	[l1 addObject:@"docx"];
-	[l1 addObject:@"pdf"];
-	[l1 addObject:@"html"];
-	[l1 addObject:@"odt"];
-	[assignment1 setObject:l1 forKey:@"AllowedFileExtensions"];
-	[assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
-	[assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
-	[assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-	[assignment1 setObject:@"2013-11-02T23:59:00" forKey:@"DateClosed"];
-	
-	NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
-	[assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
-	[assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];
-	[assignment2 setObject:@"<h3>First practical assignment</h3>\r\n<p>1. Keep a diary for one day, and record everything you do. For each activity, try to determine if some computation was involved, either in the activity itself, or in the required infrastructure.</p>\r\n<p>2. Which of your activities did you follow mechanically? For instance, is there a lot of thinking involved in brushing your teeth? Do you always brush your teeth the same way? If not, why?</p>\r\n<p>&nbsp;</p>\r\n<p>Hand in a single text document (with the .txt extension), containing your answers to these questions.</p>" forKey:@"Description"];
-	NSMutableArray *l2 = [[NSMutableArray alloc] init];
-	[l2 addObject:@"txt"];
-	[l2 addObject:@"zip"];
-	[l2 addObject:@"rar"];
-	[assignment2 setObject:l2 forKey:@"AllowedFileExtensions"];
-	[assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
-	[assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
-	[assignment2 setObject:@"2013-09-20T15:00:00" forKey:@"DatePublished"];
-	[assignment2 setObject:@"2013-09-27T23:59:00" forKey:@"DateClosed"];
-	
-	[assignments addObject:assignment1];
-	[assignments addObject:assignment2];
-	return assignments;
+    if ([courseID isEqualToString:@"T-109-INTO"] && [semester isEqualToString:@"20113"])
+    {
+        NSMutableArray *assignments = [[NSMutableArray alloc] init];
+        
+        NSMutableDictionary *assignment1 = [[NSMutableDictionary alloc] init];
+        [assignment1 setObject:[NSNumber numberWithInteger:28947] forKey:@"ID"];
+        [assignment1 setObject:@"7. Essay" forKey:@"Title"];
+        [assignment1 setObject:@"<p>Write a short paper (approximately 2-3 pages) about a person who has contributed to computer science. You may choose to write about any one of the persons mentioned in the slides, or you could pick someone which isn't mentioned there, but in that case you need to get a permission (basically so we can ensure that the person in question is somewhat connected to computer science!).</p>\r\n<p>The paper should be roughly 2-3 pages long (excluding the front page), students should use their own judgement with regards to spacing, font sizes etc. You should pick your own style, i.e. APA, MLA etc, and stick to it.</p>\r\n<p>You may write in either Icelandic or English, just stick to either language.</p>\r\n<p>You should use at least 2&nbsp;sources (other than Wikipedia), and at least one of them should be a regular book (not just a web page). However, the book may be in electronic form (for instance, found at books.google.com).</p>\r\n<p>Hand in a single document, either in Microsoft Word format (.doc,.docx), Open Document Format (.odt), .pdf or .html.</p>" forKey:@"Description"];
+        NSMutableArray *l1 = [[NSMutableArray alloc] init];
+        [l1 addObject:@"doc"];
+        [l1 addObject:@"docx"];
+        [l1 addObject:@"pdf"];
+        [l1 addObject:@"html"];
+        [l1 addObject:@"odt"];
+        [assignment1 setObject:l1 forKey:@"AllowedFileExtensions"];
+        [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
+        [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
+        [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
+        [assignment1 setObject:@"2013-11-02T23:59:00" forKey:@"DateClosed"];
+        
+        NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
+        [assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
+        [assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];
+        [assignment2 setObject:@"<h3>First practical assignment</h3>\r\n<p>1. Keep a diary for one day, and record everything you do. For each activity, try to determine if some computation was involved, either in the activity itself, or in the required infrastructure.</p>\r\n<p>2. Which of your activities did you follow mechanically? For instance, is there a lot of thinking involved in brushing your teeth? Do you always brush your teeth the same way? If not, why?</p>\r\n<p>&nbsp;</p>\r\n<p>Hand in a single text document (with the .txt extension), containing your answers to these questions.</p>" forKey:@"Description"];
+        NSMutableArray *l2 = [[NSMutableArray alloc] init];
+        [l2 addObject:@"txt"];
+        [l2 addObject:@"zip"];
+        [l2 addObject:@"rar"];
+        [assignment2 setObject:l2 forKey:@"AllowedFileExtensions"];
+        [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
+        [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
+        [assignment2 setObject:@"2013-09-20T15:00:00" forKey:@"DatePublished"];
+        [assignment2 setObject:@"2013-09-27T23:59:00" forKey:@"DateClosed"];
+        
+        [assignments addObject:assignment1];
+        [assignments addObject:assignment2];
+        return assignments;
+    } else {
+        return nil;
+    }
 }
 
 + (NSArray *) getAssignmentCourses

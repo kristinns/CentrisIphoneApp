@@ -152,7 +152,7 @@
     formatter.dateFormat = @"d. MMMM HH:mm";
     cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
     CourseInstance *courseInst = assignment.isInCourseInstance;
-    cell.detailUpperLabel.text = courseInst.name;
+    cell.detailUpperLabel.text = courseInst.courseID;
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     
     return cell;

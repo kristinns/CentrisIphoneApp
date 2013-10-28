@@ -11,7 +11,7 @@
 
 @implementation Assignment (Centris)
 
-+(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo withCourseInstanceID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *)context
++(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo withCourseInstanceID:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	Assignment *assignment = nil;
 	
@@ -37,7 +37,7 @@
 		assignment.maxGroupSize = assignmentInfo[@"MaxStudentsInGroup"];
 		assignment.datePublished = [self icelandicFormatWithDateString:assignmentInfo[@"DatePublished"]];
 		assignment.dateClosed = [self icelandicFormatWithDateString:assignmentInfo[@"DateClosed"]];
-		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseID inManagedObjectContext:context];
+		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
         assignment.isInCourseInstance = courseInst;
 	} else { // assignment found, return it.
 		assignment = [matches lastObject];

@@ -10,7 +10,7 @@
 
 @interface Assignment (Centris)
 +(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
-                       withCourseInstanceID:(NSInteger)courseID
+                       withCourseInstanceID:(NSInteger)courseInstanceID
                      inManagedObjectContext:(NSManagedObjectContext *)context;
 
 + (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date

@@ -130,11 +130,12 @@
 
 - (void)fetchAssignmentsForUserWithSSN:(NSString *)SSN
 {
+    // Get all courseInstances from Core Data
     NSArray *courseInstances = [CourseInstance courseInstancesInManagedObjectContext:self.managedObjectContext];
     for (CourseInstance *inst in courseInstances) {
-        NSArray *assignments = [self.dataFetcher getAssignmentsForUserWithSSN:SSN];
+        NSArray *assignments = [self.dataFetcher getAssignmentsForCourseWithCourseID:inst.courseID inSemester:inst.semester];
         for (NSDictionary *assignment in assignments) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[inst.courseID intValue] inManagedObjectContext:self.managedObjectContext];
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[inst.id intValue] inManagedObjectContext:self.managedObjectContext];
         }
 
     }
