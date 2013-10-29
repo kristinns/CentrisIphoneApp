@@ -8,27 +8,19 @@
 
 #import "User+Centris.h"
 #import "CentrisManagedObjectContext.h"
+#import "CDDataFetcher.h"
 
 @implementation User (Centris)
+
 // Get User from Dictionary and store in context if it's not already in it
 + (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     User *user = nil;
     
-    // Create fetch request
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
-    
-    // Execute query on Core Data
-    NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    // Check results
-    if (!matches) { // nil means fetch failed
-        // Handle error
-		NSLog(@"Error: %@", error);
-    } else if (![matches count]) { // Noone found, let's create a User from CentrisInfo
+    if (![matches count]) { // Noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
         user.name = [[centrisInfo valueForKeyPath:@"Person.Name"] description];
         user.ssn = [[centrisInfo valueForKeyPath:@"Person.SSN"] description];
@@ -57,48 +49,21 @@
 +(User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	User *user = nil;
-	// Create fetch request
-	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    // Get only user with ssn
-	request.predicate = [NSPredicate predicateWithFormat:@"ssn = %@", SSN];
-	
-	// Execute the fetch on context
-	NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-	
-	if (!matches) {
-		// Handle error
-		NSLog(@"Error: %@", [error userInfo]);
-	} else if (![matches count]) { // Nothing found
-		NSLog(@"Nothing found here");
-	} else { // Found user, return him
-		user = [matches lastObject];
-	}
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", SSN];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
+    user = [matches lastObject];
+    
 	return user;
 }
 
 + (User *)userWithEmail:(NSString *)email inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"email = %@", email];
-	return [self fetchFromDatabaseWithEntity:@"User" predicate:pred inManagedObjectContext:context];
-}
-
-+(User *)fetchFromDatabaseWithEntity:(NSString *)entity predicate:(NSPredicate *)predicate inManagedObjectContext:context
-{
-	// Create fetch request
-	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:entity];
-	request.predicate = predicate;
-	
-	// Execute fetch
-	NSError *error = nil;
-	NSArray *matches = [context executeFetchRequest:request error:&error];
-	
-	if (!matches) {
-		NSLog(@"Error: %@", [error userInfo]);
-		return nil;
-	} else {
-		return [matches lastObject];
-	}
+    
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
+    NSAssert([matches count] == 1, @"Should only return one user");
+    return [matches lastObject];
 }
 
 
