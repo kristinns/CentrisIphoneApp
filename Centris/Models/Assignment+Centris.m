@@ -8,23 +8,18 @@
 
 #import "Assignment+Centris.h"
 #import "CourseInstance+Centris.h"
+#import "CDDataFetcher.h"
 
 @implementation Assignment (Centris)
 
 +(Assignment *)addAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo withCourseInstanceID:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	Assignment *assignment = nil;
+
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[@"ID"]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" withPredicate:pred inManagedObjectContext:context];
 	
-	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Assignment"];
-	
-	request.predicate = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[@"ID"]];
-	
-	NSError *error = nil;
-	NSArray *matches = [context executeFetchRequest:request error:&error];
-	
-	if (!matches) { // error
-		NSLog(@"Error %@", error);
-	} else if (![matches count]) { // no results
+	if (![matches count]) { // no results
 		assignment = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
 		assignment.id = assignmentInfo[@"ID"];
 		assignment.title = assignmentInfo[@"Title"];
@@ -49,7 +44,7 @@
 +(NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed > %@", date];
-    return [self fetchEventsFromDBWithEntity:@"Assignment"
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                       forKey:@"dateClosed"
                                withPredicate:pred
                       inManagedObjectContext:context];
@@ -57,33 +52,13 @@
 
 + (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context
 {
-    return [self fetchEventsFromDBWithEntity:@"Assignment"
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                       forKey:@"dateClosed"
                                withPredicate:nil
                       inManagedObjectContext:context];
 }
 
 #pragma mark - Helpers
-
-+ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    [request setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setSortDescriptors:sortDescriptors];
-	
-    if (predicate != nil)
-        [request setPredicate:predicate];
-	
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"%@", error);
-    }
-    return mutableFetchResults;
-}
 
 + (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
 {
