@@ -17,7 +17,7 @@
 	Assignment *assignment = nil;
 
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[@"ID"]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" withPredicate:pred inManagedObjectContext:context];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
 	
 	if (![matches count]) { // no results
 		assignment = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
@@ -45,17 +45,19 @@
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed > %@", date];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
-                                      forKey:@"dateClosed"
-                               withPredicate:pred
-                      inManagedObjectContext:context];
+                                                forKey:@"dateClosed"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
 }
 
 + (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context
 {
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
-                                      forKey:@"dateClosed"
-                               withPredicate:nil
-                      inManagedObjectContext:context];
+                                                forKey:@"dateClosed"
+                                         sortAscending:NO
+                                         withPredicate:nil
+                                inManagedObjectContext:context];
 }
 
 #pragma mark - Helpers

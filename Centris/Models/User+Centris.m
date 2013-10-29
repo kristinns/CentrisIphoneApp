@@ -18,7 +18,7 @@
     User *user = nil;
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
     
     if (![matches count]) { // Noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
@@ -51,7 +51,7 @@
 	User *user = nil;
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", SSN];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
     user = [matches lastObject];
     
 	return user;
@@ -61,7 +61,7 @@
 {
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"email = %@", email];
     
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" withPredicate:pred inManagedObjectContext:context];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:YES withPredicate:pred inManagedObjectContext:context];
     NSAssert([matches count] == 1, @"Should only return one user");
     return [matches lastObject];
 }

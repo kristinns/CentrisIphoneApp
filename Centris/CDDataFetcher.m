@@ -10,12 +10,12 @@
 
 @implementation CDDataFetcher
 
-+ (NSMutableArray*)fetchObjectsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSMutableArray*)fetchObjectsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName sortAscending:(BOOL)ascending withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
 {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
     [request setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:ascending];
     NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
     [request setSortDescriptors:sortDescriptors];
 	

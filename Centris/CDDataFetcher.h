@@ -9,5 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface CDDataFetcher : NSObject
-+ (NSMutableArray*)fetchObjectsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSMutableArray*)fetchObjectsFromDBWithEntity:(NSString*)entityName
+                                         forKey:(NSString*)keyName
+                                  sortAscending:(BOOL)ascending
+                                  withPredicate:(NSPredicate*)predicate
+                         inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
