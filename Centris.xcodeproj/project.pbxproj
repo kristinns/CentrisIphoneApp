@@ -37,7 +37,6 @@
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
 		578A4E52D2AD46909AA8B31E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E547C56EC8D419DAE2F8654 /* libPods.a */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
-		961BB6E617F0676300912C0D /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 961BB6E517F0676300912C0D /* CourseInstance.m */; };
 		961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
 		9647A94217E9E3A600BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94117E9E3A600BB2A96 /* User.m */; };
