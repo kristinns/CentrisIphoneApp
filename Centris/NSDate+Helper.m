@@ -20,4 +20,13 @@
     return [self dateByAddingTimeInterval:60*60*24*7*weeksToAdd];
 }
 
+// Returns a date in a custom format
++ (NSDate *)formatDateString:(NSString *)dateString
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+	return [formatter dateFromString:dateString];
+}
+
+
 @end

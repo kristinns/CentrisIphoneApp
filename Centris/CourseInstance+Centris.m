@@ -7,25 +7,24 @@
 //
 
 #import "CourseInstance+Centris.h"
+#import "CDDataFetcher.h"
 
 @implementation CourseInstance (Centris)
 
 +(CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	CourseInstance *instance = nil;
-	
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"CourseInstance"];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"id = %d", courseID];
-    
-    NSError *error;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    if (!matches) { // error
-        NSLog(@"Error: %@", [error userInfo]);
-    } else {
-        instance = [matches lastObject];
-    }
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %d", courseID];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
+                                                            forKey:@"id"
+                                                     sortAscending:NO
+                                                     withPredicate:pred
+                                            inManagedObjectContext:context];
+
+    NSString *assertFailMessage = [NSString stringWithFormat:@"there should only be one courseinstance with cousreid: %d", courseID];
+    NSAssert([matches count ] == 1, assertFailMessage);
+    instance = [matches lastObject];
 	
 	return instance;
 }
@@ -34,18 +33,14 @@
 {
     CourseInstance *courseInstance = nil;
     
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"CourseInstance"];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", centrisInfo[@"ID"]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
+                                                            forKey:@"id"
+                                                     sortAscending:NO
+                                                     withPredicate:pred
+                                            inManagedObjectContext:context];
     
-    request.predicate = [NSPredicate predicateWithFormat:@"id = %@", centrisInfo[@"ID"]];
-    
-    // Execute the fetch
-    
-    NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-    
-    if (!matches) { // error
-		NSLog(@"Error: %@", [error userInfo]);
-	} else if (![matches count]) { // no result, proceed with storing
+    if (![matches count]) { // no result, proceed with storing
         courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance.id = centrisInfo[@"ID"];
         courseInstance.courseID = centrisInfo[@"CourseID"];
@@ -59,31 +54,11 @@
 
 + (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
 {
-    return [self fetchEventsFromDBWithEntity:@"CourseInstance"
-                                      forKey:@"name"
-                               withPredicate:nil
-                      inManagedObjectContext:context];
-}
-
-#pragma mark - Helpers
-+ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    [request setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:NO];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setSortDescriptors:sortDescriptors];
-	
-    if (predicate != nil)
-        [request setPredicate:predicate];
-	
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"%@", error);
-    }
-    return mutableFetchResults;
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
+                                                forKey:@"name"
+                                         sortAscending:NO
+                                         withPredicate:nil
+                                inManagedObjectContext:context];
 }
 
 @end

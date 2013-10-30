@@ -9,6 +9,8 @@
 #import "ScheduleEvent+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "CentrisManagedObjectContext.h"
+#import "CDDataFetcher.h"
+#import "NSDate+Helper.h"
 
 @implementation ScheduleEvent (Centris)
 
@@ -26,12 +28,12 @@
     NSDate *toDate = [gregorian dateFromComponents:comps];
     
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", fromDate, toDate ];
-	
-	NSArray *scheduleEvents = [self fetchEventsFromDBWithEntity:@"ScheduleEvent"
-														  forKey:@"starts"
-                                                  sortAscending:YES
-												   withPredicate:pred
-										  inManagedObjectContext:context];
+    
+    NSArray *scheduleEvents = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                                   forKey:@"starts"
+                                                            sortAscending:YES
+                                                            withPredicate:pred
+                                                   inManagedObjectContext:context];
     
 	return scheduleEvents;
 }
@@ -39,25 +41,19 @@
 + (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
 	ScheduleEvent *event = nil;
-	
-	NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"ScheduleEvent"];
-	
-	request.predicate = [NSPredicate predicateWithFormat:@"eventID = %d", [eventInfo[@"ID"] integerValue]];
-	
-	// Execute the fetch
     
-    NSError *error = nil;
-    NSArray *matches = [context executeFetchRequest:request error:&error];
-	
-	if (!matches) { // error
-		NSLog(@"Error: %@", [error userInfo]);
-	}
-	else if (![matches count]) { // no result, put the event in core data
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", [eventInfo[@"ID"] integerValue]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                            forKey:@"eventID"
+                                                     sortAscending:NO
+                                                     withPredicate:pred
+                                            inManagedObjectContext:context];
+    
+    if (![matches count]) { // no result, put the event in core data
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
-		
-		event.starts = [self icelandicFormatWithDateString:eventInfo[@"StartTime"]];
-		event.ends = [self icelandicFormatWithDateString:eventInfo[@"EndTime"]];
-		event.eventID = [self convertToNumberFromString:eventInfo[@"ID"]];
+		event.starts = [NSDate formatDateString:eventInfo[@"StartTime"]];
+		event.ends = [NSDate formatDateString:eventInfo[@"EndTime"]];
+		event.eventID = [NSNumber numberWithInt:[eventInfo[@"ID"] intValue]];
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		event.courseName = eventInfo[@"CourseName"];
@@ -67,42 +63,6 @@
 		event = [matches lastObject];
 	}
 	return event;
-}
-
-#pragma mark - Helpers
-+ (NSMutableArray*)fetchEventsFromDBWithEntity:(NSString*)entityName forKey:(NSString*)keyName sortAscending:(BOOL)ascending withPredicate:(NSPredicate*)predicate inManagedObjectContext:(NSManagedObjectContext *)context;
-{
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *entity = [NSEntityDescription entityForName:entityName inManagedObjectContext:context];
-    [request setEntity:entity];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:keyName ascending:ascending];
-    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
-    [request setSortDescriptors:sortDescriptors];
-	
-    if (predicate != nil)
-        [request setPredicate:predicate];
-	
-    NSError *error = nil;
-    NSMutableArray *mutableFetchResults = [[context executeFetchRequest:request error:&error] mutableCopy];
-    if (mutableFetchResults == nil) {
-        NSLog(@"%@", error);
-    }
-    return mutableFetchResults;
-}
-
-+ (NSNumber *)convertToNumberFromString:(NSString *)numberString
-{
-	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-	[f setNumberStyle:NSNumberFormatterDecimalStyle];
-	
-	return [f numberFromString:numberString];
-}
-
-+ (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
-{
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-	return [formatter dateFromString:dateString];
 }
 
 @end
