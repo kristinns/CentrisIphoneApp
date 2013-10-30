@@ -10,6 +10,7 @@
 #import "CourseInstance+Centris.h"
 #import "CentrisManagedObjectContext.h"
 #import "CDDataFetcher.h"
+#import "NSDate+Helper.h"
 
 @implementation ScheduleEvent (Centris)
 
@@ -50,9 +51,9 @@
     
     if (![matches count]) { // no result, put the event in core data
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
-		event.starts = [self icelandicFormatWithDateString:eventInfo[@"StartTime"]];
-		event.ends = [self icelandicFormatWithDateString:eventInfo[@"EndTime"]];
-		event.eventID = [self convertToNumberFromString:eventInfo[@"ID"]];
+		event.starts = [NSDate formatDateString:eventInfo[@"StartTime"]];
+		event.ends = [NSDate formatDateString:eventInfo[@"EndTime"]];
+		event.eventID = eventInfo[@"ID"];
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		event.courseName = eventInfo[@"CourseName"];
@@ -62,23 +63,6 @@
 		event = [matches lastObject];
 	}
 	return event;
-}
-
-#pragma mark - Helpers
-
-+ (NSNumber *)convertToNumberFromString:(NSString *)numberString
-{
-	NSNumberFormatter * f = [[NSNumberFormatter alloc] init];
-	[f setNumberStyle:NSNumberFormatterDecimalStyle];
-	
-	return [f numberFromString:numberString];
-}
-
-+ (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
-{
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-	return [formatter dateFromString:dateString];
 }
 
 @end

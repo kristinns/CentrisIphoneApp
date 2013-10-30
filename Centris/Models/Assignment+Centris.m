@@ -9,6 +9,7 @@
 #import "Assignment+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "CDDataFetcher.h"
+#import "NSDate+Helper.h"
 
 @implementation Assignment (Centris)
 
@@ -30,8 +31,8 @@
 		}
 		assignment.weight = assignmentInfo[@"Weight"];
 		assignment.maxGroupSize = assignmentInfo[@"MaxStudentsInGroup"];
-		assignment.datePublished = [self icelandicFormatWithDateString:assignmentInfo[@"DatePublished"]];
-		assignment.dateClosed = [self icelandicFormatWithDateString:assignmentInfo[@"DateClosed"]];
+		assignment.datePublished = [NSDate formatDateString:assignmentInfo[@"DatePublished"]];
+		assignment.dateClosed = [NSDate formatDateString:assignmentInfo[@"DateClosed"]];
 		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
         assignment.isInCourseInstance = courseInst;
 	} else { // assignment found, return it.
@@ -58,15 +59,6 @@
                                          sortAscending:NO
                                          withPredicate:nil
                                 inManagedObjectContext:context];
-}
-
-#pragma mark - Helpers
-
-+ (NSDate *)icelandicFormatWithDateString:(NSString *)dateString
-{
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-	return [formatter dateFromString:dateString];
 }
 
 @end

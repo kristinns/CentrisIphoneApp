@@ -11,4 +11,5 @@
 @interface NSDate (Helper)
 - (NSDate *)dateByAddingDays:(NSInteger)daysToAdd;
 - (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd;
++ (NSDate *)formatDateString:(NSString *)dateString;
 @end
