@@ -53,7 +53,7 @@
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
 		event.starts = [NSDate formatDateString:eventInfo[@"StartTime"]];
 		event.ends = [NSDate formatDateString:eventInfo[@"EndTime"]];
-		event.eventID = eventInfo[@"ID"];
+		event.eventID = [NSNumber numberWithInt:[eventInfo[@"ID"] intValue]];
 		event.roomName = eventInfo[@"RoomName"];
 		event.typeOfClass = eventInfo[@"TypeOfClass"];
 		event.courseName = eventInfo[@"CourseName"];
