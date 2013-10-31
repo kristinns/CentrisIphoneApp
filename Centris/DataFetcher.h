@@ -11,7 +11,6 @@
 @protocol DataFetcher <NSObject>
 + (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester;
 + (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN;
-+ (NSDictionary *)getUser:(NSString *)bySSN;
 + (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 + (NSArray *)getScheduleBySSN:(NSString *)SSN;
 @end
