@@ -9,10 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @protocol DataFetcher <NSObject>
+// Get
 + (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester;
-+ (NSArray *)getAssignmentCourses;
 + (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN;
-+ (NSDictionary *)getUser:(NSString *)bySSN;
-+ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 + (NSArray *)getScheduleBySSN:(NSString *)SSN;
+
+// Post
++ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 @end

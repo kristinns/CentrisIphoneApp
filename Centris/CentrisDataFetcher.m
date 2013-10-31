@@ -10,6 +10,7 @@
 
 @implementation CentrisDataFetcher
 
+#pragma mark - Helper
 + (NSDictionary *)executeFetch:(NSString *)query
 {
 	NSString *url = [NSString stringWithFormat:@"%@%@", CENTRIS_API_URL, query];
@@ -27,40 +28,34 @@
     return results;
 }
 
-+ (NSArray *)getAssignments
+#pragma mark - Get methods
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester
 {
   	// TODO
     NSMutableArray *assignments = nil;
     return assignments;
 }
 
-+ (NSArray *)getAssignmentCourses
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
 {
     // TODO
     NSMutableArray *courses = nil;
 	return courses;
 }
 
-+ (NSDictionary *)getUser:(NSString *)bySSN
++ (NSArray *)getScheduleBySSN:(NSString *)SSN
 {
-    return [self executeFetch:[NSString stringWithFormat:@"%@%@", @"students/", bySSN]];
+    // TODO
+    NSMutableArray *schedule = nil;
+    return schedule;
 }
 
-+ (NSArray *)getSchedule:(NSString *)bySSN from:(NSDate *)fromDate to:(NSDate *)toDate
+#pragma mark - Post methods
++ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password
 {
-	
-//	NSCalendar *calendar = [NSCalendar currentCalendar];
-//	NSDateComponents *components = [calendar components:(NSSecondCalendarUnit | NSMinuteCalendarUnit | NSHourCalendarUnit fromDate:<#(NSDate *)#>];
-	NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-	
-	NSString *fromDateString = [formatter stringFromDate:fromDate];
-	NSString *toDateString = [formatter stringFromDate:toDate];
-	
-	
-	// TODO: This should return list of dictionaries... or a single dictionary.
-	// Might be buggy!
-	return @[[self executeFetch:[NSString stringWithFormat:@"students/%@/schedule?range=%@,%@",bySSN, fromDateString, toDateString]]];
+    // TODO
+    NSDictionary *user = nil;
+    return user;
 }
 
 @end

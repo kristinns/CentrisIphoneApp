@@ -57,18 +57,6 @@
     }
 }
 
-+ (NSArray *) getAssignmentCourses
-{
-    NSMutableArray *courses = [[NSMutableArray alloc] init];
-    
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Markaðsfræði", @"title", @"3", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Hagfræði", @"title", @"2", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Þjóðhagfræði", @"title", @"2", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Reikningshald", @"title", @"3", @"count", nil]];
-    
-    return courses;
-}
-
 + (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
 {
     NSMutableArray  *courseInstArray = [[NSMutableArray alloc] init];
@@ -115,21 +103,6 @@
     
     // Finally, return courseInstArray
     return courseInstArray;
-}
-
-+ (NSDictionary *)getUser:(NSString *)bySSN
-{
-	NSMutableDictionary *user = [[NSMutableDictionary alloc] init];
-	
-	[user setObject:[NSArray arrayWithObjects:@"Ljósheimum 2", nil] forKey:@"Address"];
-	[user setObject:[NSArray arrayWithObjects:@"bjarkim11@ru.is", nil] forKey:@"Email"];
-	[user setObject:[NSArray arrayWithObjects:@"18703", nil] forKey:@"ID"];
-	[user setObject:[NSArray arrayWithObjects:@"8698649", nil] forKey:@"MobilePhone"];
-	[user setObject:[NSArray arrayWithObjects:@"Bjarki Sörens Madsen", nil] forKey:@"Name"];
-	[user setObject:[NSArray arrayWithObjects:@"104", nil] forKey:@"Postal"];
-	[user setObject:[NSArray arrayWithObjects:@"0805903269", nil] forKey:@"SSN"];
-	
-	return user;
 }
 
 // This function is immitating the post request. Given an email (and password when ready), the fetcher
