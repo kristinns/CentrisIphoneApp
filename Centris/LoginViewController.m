@@ -84,6 +84,7 @@
 
 #pragma mark - UI Handlers
 - (IBAction)loginButtonPushed:(id)sender {
+    [self.view endEditing:YES];
 	NSString *email = self.emailInput.text;
 	NSString *pass = self.passwordInput.text;
     
