@@ -62,12 +62,12 @@
 {
     // register for keyboard notifications
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillShow)
+                                             selector:@selector(keyboardWillShow:)
                                                  name:UIKeyboardWillShowNotification
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(keyboardWillHide)
+                                             selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
 }
@@ -124,42 +124,36 @@
 
 #pragma mark - Selectors & Delegates
 
--(void)keyboardWillShow {
+-(void)keyboardWillShow:(NSNotification *)notification {
+    // Get the size of the keyboard
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     // Animate the current view out of the way
     if (self.view.frame.origin.y >= 0)
     {
-        [self setViewMovedUp:YES];
+        [self setViewMovedUp:YES byAmount:keyboardSize];
     }
     else if (self.view.frame.origin.y < 0)
     {
-        [self setViewMovedUp:NO];
+        [self setViewMovedUp:NO byAmount:keyboardSize];
     }
 }
 
--(void)keyboardWillHide {
+-(void)keyboardWillHide:(NSNotification *)notification {
+    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
     if (self.view.frame.origin.y >= 0)
     {
-        [self setViewMovedUp:YES];
+        [self setViewMovedUp:YES byAmount:keyboardSize];
     }
     else if (self.view.frame.origin.y < 0)
     {
-        [self setViewMovedUp:NO];
-    }
-}
-
--(void)textFieldDidBeginEditing:(UITextField *)sender
-{
-    //move the main view, so that the keyboard does not hide it.
-    if  (self.view.frame.origin.y >= 0)
-    {
-        [self setViewMovedUp:YES];
+        [self setViewMovedUp:NO byAmount:keyboardSize];
     }
 }
 
 #pragma mark - Keyboard tweaks
 
 //method to move the view up/down whenever the keyboard is shown/dismissed
--(void)setViewMovedUp:(BOOL)movedUp
+-(void)setViewMovedUp:(BOOL)movedUp byAmount:(CGSize)sizeOfKeyboard
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
@@ -169,14 +163,14 @@
     {
         // 1. move the view's origin up so that the text field that will be hidden come above the keyboard
         // 2. increase the size of the view so that the area behind the keyboard is covered up.
-        rect.origin.y -= kOFFSET_FOR_KEYBOARD;
-        rect.size.height += kOFFSET_FOR_KEYBOARD;
+        rect.origin.y -= (sizeOfKeyboard.height / 2);
+        rect.size.height += (sizeOfKeyboard.height / 2);
     }
     else
     {
         // revert back to the normal state.
-        rect.origin.y += kOFFSET_FOR_KEYBOARD;
-        rect.size.height -= kOFFSET_FOR_KEYBOARD;
+        rect.origin.y += (sizeOfKeyboard.height / 2);
+        rect.size.height -= (sizeOfKeyboard.height / 2);
     }
     self.view.frame = rect;
     
