@@ -57,18 +57,6 @@
     }
 }
 
-+ (NSArray *) getAssignmentCourses
-{
-    NSMutableArray *courses = [[NSMutableArray alloc] init];
-    
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Markaðsfræði", @"title", @"3", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Hagfræði", @"title", @"2", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Þjóðhagfræði", @"title", @"2", @"count", nil]];
-    [courses addObject:[[NSDictionary alloc] initWithObjectsAndKeys:@"Reikningshald", @"title", @"3", @"count", nil]];
-    
-    return courses;
-}
-
 + (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
 {
     NSMutableArray  *courseInstArray = [[NSMutableArray alloc] init];
