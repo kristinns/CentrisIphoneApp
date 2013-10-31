@@ -11,6 +11,7 @@
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
 		18856AD318206DE7009862CA /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD218206DE7009862CA /* CourseInstance.m */; };
 		18856AD618206F33009862CA /* CDDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD518206F33009862CA /* CDDataFetcher.m */; };
+		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
@@ -38,7 +39,6 @@
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
 		578A4E52D2AD46909AA8B31E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E547C56EC8D419DAE2F8654 /* libPods.a */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
-		961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
 		9647A94217E9E3A600BB2A96 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94117E9E3A600BB2A96 /* User.m */; };
 		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
@@ -71,6 +71,8 @@
 		18856AD218206DE7009862CA /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		18856AD418206F33009862CA /* CDDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataFetcher.h; sourceTree = "<group>"; };
 		18856AD518206F33009862CA /* CDDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataFetcher.m; sourceTree = "<group>"; };
+		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
+		18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CourseInstance+Centris.m"; path = "Models/CourseInstance+Centris.m"; sourceTree = "<group>"; };
 		190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentTableViewCell.h; sourceTree = "<group>"; };
 		190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentTableViewCell.m; sourceTree = "<group>"; };
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
@@ -114,8 +116,6 @@
 		6E547C56EC8D419DAE2F8654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		960827F817CB8E5D004741FD /* HomeFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		960827F917CB8E5D004741FD /* HomeFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
-		961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CourseInstance+Centris.h"; sourceTree = "<group>"; };
-		961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CourseInstance+Centris.m"; sourceTree = "<group>"; };
 		9621008817D7795400D60C06 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9647A94017E9E3A600BB2A96 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		9647A94117E9E3A600BB2A96 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
@@ -377,14 +377,14 @@
 		966A499917E9B68F009C342B /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */,
+				18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */,
 				18372E71181C2DA8005CEC18 /* Assignment+Centris.h */,
 				18372E72181C2DA8005CEC18 /* Assignment+Centris.m */,
 				192F979117D76B04007E2694 /* User+Centris.h */,
 				192F979217D76B04007E2694 /* User+Centris.m */,
 				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
-				961BB6EA17F069F800912C0D /* CourseInstance+Centris.h */,
-				961BB6EB17F069F800912C0D /* CourseInstance+Centris.m */,
 				194F9AB5180806790099A3E6 /* NSDate+Helper.h */,
 				194F9AB6180806790099A3E6 /* NSDate+Helper.m */,
 			);
@@ -560,7 +560,6 @@
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
-				961BB6EC17F069F800912C0D /* CourseInstance+Centris.m in Sources */,
 				18856AD318206DE7009862CA /* CourseInstance.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
@@ -583,6 +582,7 @@
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
+				18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
 				1813DD75181BDA6D00BEC90E /* Assignment.m in Sources */,
 				199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */,
