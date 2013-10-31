@@ -19,8 +19,6 @@
 #import "HTProgressHUDFadeZoomAnimation.h"
 #import "HTProgressHUDIndicatorView.h"
 
-#define kOFFSET_FOR_KEYBOARD 80.0
-
 @interface LoginViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *emailInput;
 @property (nonatomic, weak) IBOutlet UITextField *passwordInput;
