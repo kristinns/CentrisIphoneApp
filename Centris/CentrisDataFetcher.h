@@ -7,10 +7,9 @@
 #import "DataFetcher.h"
 
 @interface CentrisDataFetcher : NSObject <DataFetcher>
-+ (NSArray *)getAssignments;
-+ (NSArray *)getAssignmentCourses;
-+ (NSDictionary *)getUser:(NSString *)bySSN;
-+ (NSArray *)getSchedule:(NSString *)bySSN
-						 from:(NSDate *)fromDate
-						   to:(NSDate *)toDate;
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester;
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN;
++ (NSArray *)getScheduleBySSN:(NSString *)SSN;
+
++ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
 @end
