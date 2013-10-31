@@ -50,8 +50,11 @@
 // Lazy instantiate
 - (HTProgressHUD *)HUD
 {
-    if (!_HUD)
+    if (!_HUD) {
         _HUD = [[HTProgressHUD alloc] init];
+        _HUD.indicatorView = [HTProgressHUDIndicatorView indicatorViewWithType:HTProgressHUDIndicatorTypeRing];
+        _HUD.animation = [HTProgressHUDFadeZoomAnimation animation];
+    }
     return _HUD;
 }
 
@@ -91,19 +94,19 @@
     [self displayHUDWithText:@"Skrái þig inn"];
     dispatch_queue_t workQ = dispatch_queue_create("Centris fetch", NULL);
     dispatch_async(workQ, ^{
-        [self updateHUDWithText:@"Sæki notandaupplýsingar"];
+        [self updateHUDWithText:@"Sæki notandaupplýsingar" andProgress:0.2];
         sleep(3);
         User *user = [self doUserLoginWithEmail:email andPassword:pass];
         if (user) {
-            [self updateHUDWithText:@"Sæki áfanga"];
+            [self updateHUDWithText:@"Sæki áfanga" andProgress:0.2];
             sleep(3);
             [self fetchCourseInstancesForUserWithSSN:user.ssn];
             
-            [self updateHUDWithText:@"Sæki stundatöflu"];
+            [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
             sleep(3);
             [self fetchScheduleForUserWithSSN:user.ssn];
             
-            [self updateHUDWithText:@"Sæki verkefni"];
+            [self updateHUDWithText:@"Sæki verkefni" andProgress:0.2];
             sleep(3);
             [self fetchAssignmentsForUserWithSSN:user.ssn];
             
@@ -221,7 +224,7 @@
     }
 }
 
-#pragma mark - Helper methods
+#pragma mark - Delegators
 
 - (void)delegateFinishedLoggingInWithValidUser
 {
@@ -230,15 +233,18 @@
     });
 }
 
+#pragma mark - Helper methods
+
 - (void)displayHUDWithText:(NSString *)text
 {
     self.HUD.text = text;
     [self.HUD showInView:self.view animated:YES];
 }
 
-- (void)updateHUDWithText:(NSString *)text
+- (void)updateHUDWithText:(NSString *)text andProgress:(CGFloat)progress
 {
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.HUD.progress += progress;
         self.HUD.text = text;
     });
 }
