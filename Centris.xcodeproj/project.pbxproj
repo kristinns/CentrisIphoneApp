@@ -37,6 +37,7 @@
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
+		19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */; };
 		578A4E52D2AD46909AA8B31E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E547C56EC8D419DAE2F8654 /* libPods.a */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
@@ -113,6 +114,8 @@
 		19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisDataFetcher.m; sourceTree = "<group>"; };
 		19F62CDF17AC440800EEF08C /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
 		19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
+		19F78A5618269F880085C322 /* CentrisParserDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisParserDataFetcher.h; sourceTree = "<group>"; };
+		19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisParserDataFetcher.m; sourceTree = "<group>"; };
 		6E547C56EC8D419DAE2F8654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		960827F817CB8E5D004741FD /* HomeFeedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeFeedViewController.h; sourceTree = "<group>"; };
 		960827F917CB8E5D004741FD /* HomeFeedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeFeedViewController.m; sourceTree = "<group>"; };
@@ -325,6 +328,8 @@
 				966B2D0B17FC261A00F3D170 /* DataFetcher.h */,
 				966B2D0C17FC28D000F3D170 /* CDFServiceStub.h */,
 				966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */,
+				19F78A5618269F880085C322 /* CentrisParserDataFetcher.h */,
+				19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */,
 			);
 			name = API;
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
+				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
