@@ -36,26 +36,28 @@
     return assignments;
 }
 
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    // TODO
     NSMutableArray *courses = nil;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
+
 	return courses;
 }
 
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN
++ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-    // TODO
     NSMutableArray *schedule = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //NSLog(@"JSON: %@", responseObject);
-        for (NSDictionary *scheduleEvent in responseObject) {
-            NSLog(@"%@", scheduleEvent[@"CourseName"]);
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
-    }];    return schedule;
+    }];
+    
+    return schedule;
 }
 
 #pragma mark - Post methods
