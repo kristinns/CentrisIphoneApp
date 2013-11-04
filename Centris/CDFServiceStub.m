@@ -34,7 +34,14 @@
         [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
         [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
         [assignment1 setObject:@"2013-11-02T23:59:00" forKey:@"DateClosed"];
+        [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+        [assignment1 setObject:[NSNumber numberWithInteger:615334] forKey:@"GroupID"];
+        [assignment1 setObject:[NSNumber numberWithInteger:9.5] forKey:@"Grade"];
+        [assignment1 setObject:@"Sweet project" forKey:@"StudentMemo"];
+        [assignment1 setObject:@"Nice solution guys!" forKey:@"TeacherMemo"];
+        [assignment1 setObject:@"2013-10-28T23:44:20.433" forKey:@"Closes"];
         
+        // assignment 2
         NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
         [assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
         [assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];

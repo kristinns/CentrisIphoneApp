@@ -62,7 +62,7 @@
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"email = %@", email];
     
     NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:YES withPredicate:pred inManagedObjectContext:context];
-    NSAssert([matches count] == 1, @"Should only return one user");
+    //NSAssert([matches count] == 1, @"Should only return one user");
     return [matches lastObject];
 }
 
