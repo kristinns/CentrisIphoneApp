@@ -29,10 +29,14 @@
 }
 
 #pragma mark - Get methods
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
-  	// TODO
     NSMutableArray *assignments = nil;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://centris.nfsu.is/assignments" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+    }];
     return assignments;
 }
 
@@ -41,7 +45,7 @@
 {
     NSMutableArray *courses = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [manager GET:@"http://centris.nfsu.is/courses" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
 

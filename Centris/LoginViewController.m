@@ -222,15 +222,15 @@
 
 - (void)fetchAssignmentsForUserWithSSN:(NSString *)SSN
 {
-    // Get all courseInstances from Core Data
-    NSArray *courseInstances = [CourseInstance courseInstancesInManagedObjectContext:self.managedObjectContext];
-    for (CourseInstance *inst in courseInstances) {
-        NSArray *assignments = [self.dataFetcher getAssignmentsForCourseWithCourseID:inst.courseID inSemester:inst.semester];
-        for (NSDictionary *assignment in assignments) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[inst.id intValue] inManagedObjectContext:self.managedObjectContext];
+    [self.dataFetcher getAssignmentsForCourseWithCourseID:@"" inSemester:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d assignments", [responseObject count]);
+        for (NSDictionary *assignment in responseObject) {
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:self.managedObjectContext];
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+    }];
 
-    }
 }
 
 #pragma mark - Delegators
