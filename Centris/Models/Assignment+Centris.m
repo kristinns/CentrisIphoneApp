@@ -35,6 +35,11 @@
 		assignment.dateClosed = [NSDate formatDateString:assignmentInfo[@"DateClosed"]];
 		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
         assignment.isInCourseInstance = courseInst;
+        assignment.groupID = assignmentInfo[@"GroupID"];
+        assignment.grade = assignmentInfo[@"Grade"];
+        assignment.studentMemo = assignmentInfo[@"StudentMemo"];
+        assignment.teacherMemo = assignmentInfo[@"TeacherMemo"];
+        assignment.handInDate = [NSDate formatDateString:assignmentInfo[@"Closes"]];
 	} else { // assignment found, return it.
 		assignment = [matches lastObject];
 	}

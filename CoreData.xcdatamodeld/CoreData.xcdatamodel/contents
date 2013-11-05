@@ -2,11 +2,17 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3400" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assignment" representedClassName="Assignment" syncable="YES">
         <attribute name="assignmentDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="courseInstanceID" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="dateClosed" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fileExtensions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="grade" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="groupID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="handInDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="id" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="maxGroupSize" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="studentMemo" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teacherMemo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasAssignments" inverseEntity="CourseInstance" syncable="YES"/>
@@ -45,9 +51,9 @@
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="135" positionY="-45" width="128" height="178"/>
+        <element name="Assignment" positionX="117" positionY="-34" width="128" height="28"/>
         <element name="CourseInstance" positionX="133" positionY="-261" width="128" height="148"/>
         <element name="ScheduleEvent" positionX="-54" positionY="-261" width="128" height="148"/>
-        <element name="User" positionX="324" positionY="-261" width="128" height="58"/>
+        <element name="User" positionX="351" positionY="-261" width="128" height="223"/>
     </elements>
 </model>
