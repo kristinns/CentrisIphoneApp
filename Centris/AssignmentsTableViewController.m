@@ -162,7 +162,7 @@
         NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
         NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
         assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
-        if (assignment.grade != (id)[NSNull null])
+        if (assignment.grade != nil)
             cell.detailUpperLabel.text = [NSString stringWithFormat:@"%@", assignment.grade];
         else
             cell.detailUpperLabel.text = @"";
