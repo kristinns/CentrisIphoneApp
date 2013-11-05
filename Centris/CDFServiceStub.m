@@ -33,8 +33,15 @@
         [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
         [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
         [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-        [assignment1 setObject:@"2013-11-02T23:59:00" forKey:@"DateClosed"];
+        [assignment1 setObject:@"2013-11-14T23:59:00" forKey:@"DateClosed"];
+        [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+        [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
+        [assignment1 setObject:[NSNull null] forKey:@"Grade"];
+        [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];
+        [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
+        [assignment1 setObject:[NSNull null] forKey:@"Closes"];
         
+        // assignment 2
         NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
         [assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
         [assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];
@@ -46,8 +53,14 @@
         [assignment2 setObject:l2 forKey:@"AllowedFileExtensions"];
         [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
         [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
-        [assignment2 setObject:@"2013-09-20T15:00:00" forKey:@"DatePublished"];
-        [assignment2 setObject:@"2013-09-27T23:59:00" forKey:@"DateClosed"];
+        [assignment2 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
+        [assignment2 setObject:@"2013-10-27T23:59:00" forKey:@"DateClosed"];
+        [assignment2 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+        [assignment2 setObject:[NSNumber numberWithInteger:585999] forKey:@"GroupID"];
+        [assignment2 setObject:[NSNumber numberWithDouble:7.3] forKey:@"Grade"];
+        [assignment2 setObject:@"Computations are fundamental shit yo" forKey:@"StudentMemo"];
+        [assignment2 setObject:@"Yes it is! But your solution sucked" forKey:@"TeacherMemo"];
+        [assignment2 setObject:@"2013-10-23T23:44:20" forKey:@"Closes"];
         
         [assignments addObject:assignment1];
         [assignments addObject:assignment2];

@@ -162,7 +162,10 @@
         NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
         NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
         assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
-        cell.detailUpperLabel.text = @"7.5";
+        if (assignment.grade != nil)
+            cell.detailUpperLabel.text = [NSString stringWithFormat:@"%@", assignment.grade];
+        else
+            cell.detailUpperLabel.text = @"";
     }
     
     cell.titleLabel.text = assignment.title;

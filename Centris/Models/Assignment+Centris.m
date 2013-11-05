@@ -35,6 +35,11 @@
 		assignment.dateClosed = [NSDate formatDateString:assignmentInfo[@"DateClosed"]];
 		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
         assignment.isInCourseInstance = courseInst;
+        assignment.groupID = assignmentInfo[@"GroupID"] == (id)[NSNull null] ? nil : assignmentInfo[@"GroupID"] ;
+        assignment.grade = assignmentInfo[@"Grade"] == (id)[NSNull null] ? nil : assignmentInfo[@"Grade"];
+        assignment.studentMemo = assignmentInfo[@"StudentMemo"] == (id)[NSNull null] ? nil : assignmentInfo[@"StudentMemo"];
+        assignment.teacherMemo = assignmentInfo[@"TeacherMemo"] == (id)[NSNull null] ? nil : assignmentInfo[@"TeacherMemo"];
+        assignment.handInDate = assignmentInfo[@"Closes"] == (id)[NSNull null] ? nil : [NSDate formatDateString:assignmentInfo[@"Closes"]];
 	} else { // assignment found, return it.
 		assignment = [matches lastObject];
 	}
