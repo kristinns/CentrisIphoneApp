@@ -360,7 +360,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Tölvuhögun" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="InH-b5-t05">
-                                                            <rect key="frame" x="68" y="15" width="232" height="21"/>
+                                                            <rect key="frame" x="68" y="15" width="194" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17.5"/>
                                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -577,6 +577,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5o8-79-b56"/>
+        <segue reference="YSS-QB-Ftm"/>
     </inferredMetricsTieBreakers>
 </document>

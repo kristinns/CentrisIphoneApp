@@ -131,6 +131,12 @@
     formatter.dateFormat = @"HH:mm";
     cell.fromTimeLabel.text = [formatter stringFromDate:scheduleEvent.starts];
     cell.toTimeLabel.text = [formatter stringFromDate:scheduleEvent.ends];
+    if ([scheduleEvent.ends timeIntervalSinceNow] < 0)
+        cell.scheduleEventState = ScheduleEventHasFinished;
+    else if ([scheduleEvent.starts timeIntervalSinceNow] > 0 && [scheduleEvent.ends timeIntervalSinceNow] < 0)
+        cell.scheduleEventState = ScheduleEventHasBegan;
+    else
+        cell.scheduleEventState = ScheduleEventHasNotBegan;
     // Hide row at top
     if (indexPath.row == 0)
         cell.topBorderIsHidden = YES;
@@ -140,7 +146,6 @@
             cell.bounds = CGRectMake(cell.bounds.origin.x, cell.bounds.origin.y, cell.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
             cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
         }
-        
     }
     
     return cell;

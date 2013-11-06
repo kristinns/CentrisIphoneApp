@@ -104,7 +104,7 @@
             
             [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
             [self fetchScheduleForUserWithSSN:user.ssn];
-            sleep(12);
+            sleep(1);
             
             [self updateHUDWithText:@"Sæki verkefni" andProgress:0.2];
             [self fetchAssignmentsForUserWithSSN:user.ssn];
