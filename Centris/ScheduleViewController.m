@@ -21,7 +21,6 @@
 
 @interface ScheduleViewController ()
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSArray *scheduleEvents;

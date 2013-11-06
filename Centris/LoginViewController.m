@@ -95,19 +95,19 @@
     dispatch_queue_t workQ = dispatch_queue_create("Centris fetch", NULL);
     dispatch_async(workQ, ^{
         [self updateHUDWithText:@"Sæki notandaupplýsingar" andProgress:0.2];
-        sleep(3);
+        sleep(1);
         User *user = [self doUserLoginWithEmail:email andPassword:pass];
         if (user) {
             [self updateHUDWithText:@"Sæki áfanga" andProgress:0.2];
-            sleep(3);
+            sleep(1);
             [self fetchCourseInstancesForUserWithSSN:user.ssn];
             
             [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
-            sleep(3);
+            sleep(1);
             [self fetchScheduleForUserWithSSN:user.ssn];
             
             [self updateHUDWithText:@"Sæki verkefni" andProgress:0.2];
-            sleep(3);
+            sleep(1);
             [self fetchAssignmentsForUserWithSSN:user.ssn];
             
             dispatch_async(dispatch_get_main_queue(), ^{ // And finally
