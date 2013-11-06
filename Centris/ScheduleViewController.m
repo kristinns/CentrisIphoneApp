@@ -133,7 +133,7 @@
     cell.toTimeLabel.text = [formatter stringFromDate:scheduleEvent.ends];
     if ([scheduleEvent.ends timeIntervalSinceNow] < 0)
         cell.scheduleEventState = ScheduleEventHasFinished;
-    else if ([scheduleEvent.starts timeIntervalSinceNow] > 0 && [scheduleEvent.ends timeIntervalSinceNow] < 0)
+    else if ([scheduleEvent.starts timeIntervalSinceNow] < 0 && [scheduleEvent.ends timeIntervalSinceNow] > 0)
         cell.scheduleEventState = ScheduleEventHasBegan;
     else
         cell.scheduleEventState = ScheduleEventHasNotBegan;
