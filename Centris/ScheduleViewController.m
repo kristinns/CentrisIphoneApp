@@ -89,14 +89,6 @@
 	if (user) {
 		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
 		dispatch_async(fetchQ, ^{
-			NSDateComponents *comps = [[NSDateComponents alloc] init];
-			[comps setYear:2012];
-			[comps setDay:15];
-			[comps setMonth:2];
-			[comps setHour:8];
-			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
-			[comps setHour:18];
-			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
             NSArray *schedule = [self.dataFetcher getScheduleBySSN:user.ssn];
             [self.managedObjectContext performBlock:^{
 				for (NSDictionary *event in schedule) {
