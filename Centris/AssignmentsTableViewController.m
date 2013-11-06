@@ -175,7 +175,10 @@
     cell.dateLabel.text = [formatter stringFromDate:assignment.dateClosed];
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     cell.displayGrade = self.allAssignments;
-    
+    if (assignment.handInDate != nil)
+        cell.assignmentEventState = AssignmentIsFinished;
+    else
+        cell.assignmentEventState = AssignmentIsNotFinished;
     return cell;
 }
 
