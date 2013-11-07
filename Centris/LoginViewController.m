@@ -99,11 +99,8 @@
                 for (NSDictionary *event in responseObject) {
                     [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
                 }
-                // Call delegateFinishedLoggingInWithValidUser if assignments is finished fetching
-                if (self.threadCounter < 1)
-                    self.threadCounter++;
-                else
-                    [self delegateFinishedLoggingInWithValidUser];
+                
+                [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting Schedule Events");
             }];
@@ -114,11 +111,8 @@
                 for (NSDictionary *assignment in responseObject) {
                     [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
                 }
-                // Call delegateFinishedLoggingInWithValidUser if scheduleEvents is finished fetching
-                if (self.threadCounter < 1)
-                    self.threadCounter++;
-                else
-                    [self delegateFinishedLoggingInWithValidUser];
+                
+                [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
             }];
@@ -209,10 +203,14 @@
 
 - (void)delegateFinishedLoggingInWithValidUser
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self hideHUD];
-        [self.delegate didFinishLoginWithValidUser];
-    });
+    if (self.threadCounter < 1)
+        self.threadCounter++;
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self hideHUD];
+            [self.delegate didFinishLoginWithValidUser];
+        });
+    }
 }
 
 #pragma mark - Helper methods
