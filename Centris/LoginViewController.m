@@ -77,6 +77,7 @@
 
 #pragma mark - UI Handlers
 - (IBAction)loginButtonPushed:(id)sender {
+    id context = [AppFactory managedObjectContext];
     [self.view endEditing:YES];
 	NSString *username = self.emailInput.text;
 	NSString *password = self.passwordInput.text;
@@ -84,13 +85,14 @@
     [self displayHUDWithText:@"Skrái þig inn"];
     [self updateHUDWithText:@"Sæki notandaupplýsingar" addProgress:0.2];
     [self.dataFetcher loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [User userWithCentrisInfo:responseObject inManagedObjectContext:context];
         [self storeInKeychainUsername:username andPassword:password];
         
         [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
         [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d courses", [responseObject count]);
             for (NSDictionary *courseInst in responseObject) {
-                [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:[AppFactory managedObjectContext]];
+                [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
             }
             
             // Get scheduleEvents
@@ -98,7 +100,7 @@
             [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d scheduleEvents", [responseObject count]);
                 for (NSDictionary *event in responseObject) {
-                    [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
+                    [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:context];
                 }
                 
                 [self delegateFinishedLoggingInWithValidUser];
@@ -110,9 +112,8 @@
             [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d assignments", [responseObject count]);
                 for (NSDictionary *assignment in responseObject) {
-                    [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
+                    [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:context];
                 }
-                
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");

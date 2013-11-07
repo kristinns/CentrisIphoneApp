@@ -16,7 +16,7 @@
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
 	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
         NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-        User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
+        User *user = [User userWithUsername:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
         if (user)
             [self didFinishLoginWithValidUser];
         else {

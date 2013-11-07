@@ -2,7 +2,7 @@
 //  User.m
 //  Centris
 //
-//  Created by Bjarki Sörens on 10/15/13.
+//  Created by Bjarki Sörens on 07/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -12,18 +12,18 @@
 
 @implementation User
 
+@dynamic activeECTS;
 @dynamic address;
-@dynamic email;
+@dynamic averageGrade;
+@dynamic department;
+@dynamic username;
+@dynamic finishedECTS;
+@dynamic majorCredits;
+@dynamic majorEN;
+@dynamic majorIS;
 @dynamic name;
 @dynamic ssn;
-@dynamic department;
-@dynamic majorIS;
-@dynamic majorEN;
-@dynamic activeECTS;
-@dynamic finishedECTS;
-@dynamic averageGrade;
 @dynamic type;
-@dynamic majorCredits;
 @dynamic isInCourseInstance;
 
 @end
