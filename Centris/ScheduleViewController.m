@@ -195,8 +195,8 @@
     NSInteger addWeeks = right ? 1 : -1;
     self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];
     self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:addWeeks];
-    
     [self updateDatePicker];
+    [self fetchScheduleEventsFromCoreData];
 }
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
