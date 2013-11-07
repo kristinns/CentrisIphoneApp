@@ -41,15 +41,13 @@
 	[self setTimeLabels];
     [self getUserFromDatabase];
     self.title = @"Veitan";
-    
-	//[self greet:@"0805903269"];
 }
 
 #pragma mark - Methods
 - (void)getUserFromDatabase
 {
-	NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-	User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
+	NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+	User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];

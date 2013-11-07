@@ -74,7 +74,7 @@
 - (void)fetchScheduledEventsFromAPI
 {
     NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
+    User *user = [User userWithUsername:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
     if (user) {
         [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d scheduleEvents", [responseObject count]);
