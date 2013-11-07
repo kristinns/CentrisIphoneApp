@@ -124,6 +124,7 @@
 		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
 		[person setObject:@"kristinns11@ru.is" forKey:@"Email"];
+        [person setObject:@"kristinns11" forKey:@"Username"];
 		[person setObject:@"18748" forKey:@"ID"];
 		[person setObject:@"8657231" forKey:@"MobilePhone"];
 		[person setObject:@"Kristinn Svansson" forKey:@"Name"];
@@ -156,6 +157,7 @@
 		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Ljósheimum 2" forKey:@"Address"];
 		[person setObject:@"bjarkim11@ru.is" forKey:@"Email"];
+        [person setObject:@"bjarkim11" forKey:@"Username"];
 		[person setObject:@"18703" forKey:@"ID"];
 		[person setObject:@"8698649" forKey:@"MobilePhone"];
 		[person setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
