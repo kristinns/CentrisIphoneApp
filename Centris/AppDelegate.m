@@ -5,6 +5,10 @@
 
 #import "AppDelegate.h"
 #import "CentrisManagedObjectContext.h"
+#import "AppFactory.h"
+#import "KeychainItemWrapper.h"
+#import "User+Centris.h"
+#import "CentrisManagedObjectContext.h"
 
 @implementation AppDelegate
 
@@ -14,8 +18,15 @@
 //	[tabController setSelectedIndex:2]; // Veitan
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
 	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
-		LoginViewController *loginController = (LoginViewController *)rootViewController;
-		loginController.delegate = self;
+        KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+        NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+        User *user = [User userWithEmail:userEmail inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+        if (user)
+            [self didFinishLoginWithValidUser];
+        else {
+            LoginViewController *loginController = (LoginViewController *)rootViewController;
+            loginController.delegate = self;
+        }
 	}
     
     // Debug

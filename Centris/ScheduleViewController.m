@@ -83,29 +83,22 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+	/*KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
     NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
     User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
-	if (user) {
-		dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-		dispatch_async(fetchQ, ^{
-			NSDateComponents *comps = [[NSDateComponents alloc] init];
-			[comps setYear:2012];
-			[comps setDay:15];
-			[comps setMonth:2];
-			[comps setHour:8];
-			NSDate *from = [[NSCalendar currentCalendar] dateFromComponents:comps];
-			[comps setHour:18];
-			NSDate *to = [[NSCalendar currentCalendar] dateFromComponents:comps];
-            NSArray *schedule = [self.dataFetcher getScheduleBySSN:user.ssn];
-            [self.managedObjectContext performBlock:^{
-				for (NSDictionary *event in schedule) {
-					[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
-				}
-                [self fetchScheduleEventsFromCoreData];
-            }];
-        });
-	}
+    if (user) {
+        [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Got %d scheduleEvents", [responseObject count]);
+            for (NSDictionary *event in responseObject) {
+				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+			}
+             [self fetchScheduleEventsFromCoreData];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error");
+        }];
+        
+        
+    }*/
 }
 
 #pragma mark - Table methods
@@ -137,6 +130,12 @@
     formatter.dateFormat = @"HH:mm";
     cell.fromTimeLabel.text = [formatter stringFromDate:scheduleEvent.starts];
     cell.toTimeLabel.text = [formatter stringFromDate:scheduleEvent.ends];
+    if ([scheduleEvent.ends timeIntervalSinceNow] < 0)
+        cell.scheduleEventState = ScheduleEventHasFinished;
+    else if ([scheduleEvent.starts timeIntervalSinceNow] < 0 && [scheduleEvent.ends timeIntervalSinceNow] > 0)
+        cell.scheduleEventState = ScheduleEventHasBegan;
+    else
+        cell.scheduleEventState = ScheduleEventHasNotBegan;
     // Hide row at top
     if (indexPath.row == 0)
         cell.topBorderIsHidden = YES;
@@ -146,7 +145,6 @@
             cell.bounds = CGRectMake(cell.bounds.origin.x, cell.bounds.origin.y, cell.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
             cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
         }
-        
     }
     
     return cell;

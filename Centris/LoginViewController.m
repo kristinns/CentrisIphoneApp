@@ -99,16 +99,16 @@
         User *user = [self doUserLoginWithEmail:email andPassword:pass];
         if (user) {
             [self updateHUDWithText:@"Sæki áfanga" andProgress:0.2];
-            sleep(1);
             [self fetchCourseInstancesForUserWithSSN:user.ssn];
+            sleep(1);
             
             [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
-            sleep(1);
             [self fetchScheduleForUserWithSSN:user.ssn];
+            sleep(1);
             
             [self updateHUDWithText:@"Sæki verkefni" andProgress:0.2];
-            sleep(1);
             [self fetchAssignmentsForUserWithSSN:user.ssn];
+            sleep(1);
             
             dispatch_async(dispatch_get_main_queue(), ^{ // And finally
                 [self hideHUD];
@@ -197,31 +197,40 @@
 // in Core Data
 - (void)fetchCourseInstancesForUserWithSSN:(NSString *)SSN
 {
-    NSArray *courseInstances = [self.dataFetcher getCoursesForStudentWithSSN:SSN];
-    for (NSDictionary *courseInst in courseInstances) {
-        [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:self.managedObjectContext];
-    }
+    [self.dataFetcher getCoursesForStudentWithSSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d courses", [responseObject count]);
+        for (NSDictionary *courseInst in responseObject) {
+            [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:self.managedObjectContext];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+    }];
 }
 
 - (void)fetchScheduleForUserWithSSN:(NSString *)SSN
 {
-    NSArray *schedule = [self.dataFetcher getScheduleBySSN:SSN];
-    for (NSDictionary *event in schedule) {
-        [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
-    }
+    [self.dataFetcher getScheduleBySSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d scheduleEvents", [responseObject count]);
+        for (NSDictionary *event in responseObject) {
+            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+    }];
+
 }
 
 - (void)fetchAssignmentsForUserWithSSN:(NSString *)SSN
 {
-    // Get all courseInstances from Core Data
-    NSArray *courseInstances = [CourseInstance courseInstancesInManagedObjectContext:self.managedObjectContext];
-    for (CourseInstance *inst in courseInstances) {
-        NSArray *assignments = [self.dataFetcher getAssignmentsForCourseWithCourseID:inst.courseID inSemester:inst.semester];
-        for (NSDictionary *assignment in assignments) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[inst.id intValue] inManagedObjectContext:self.managedObjectContext];
+    [self.dataFetcher getAssignmentsForCourseWithCourseID:@"" inSemester:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d assignments", [responseObject count]);
+        for (NSDictionary *assignment in responseObject) {
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:self.managedObjectContext];
         }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+    }];
 
-    }
 }
 
 #pragma mark - Delegators
