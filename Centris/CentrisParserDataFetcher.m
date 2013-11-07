@@ -5,7 +5,6 @@
 
 #import "CentrisParserDataFetcher.h"
 #import <AFNetworking/AFNetworking.h>
-#import "KeychainItemWrapper.h"
 #import "AppFactory.h"
 
 #define CENTRIS_API_URL @"http://centris.nfsu.is"
@@ -16,12 +15,11 @@
 @implementation CentrisParserDataFetcher : NSObject
 
 #pragma mark - Helper
-- (NSDictionary *)userCredentialsObject
++ (NSDictionary *)userCredentialsObject
 {
-    
-    NSString *userEmail = [self.keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-    NSString *password = [self.keyChain objectForKey:(__bridge id)(kSecValueData)];
-    NSDictionary *userCred = @{@"email":userEmail, @"password" : password};
+    NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+    NSString *password = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecValueData)];
+    NSDictionary *userCred = @{@"email":userEmail, @"password":password};
     return userCred;
 }
 
@@ -31,7 +29,7 @@
     NSMutableArray *assignments = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/assignments"
-      parameters:nil
+      parameters:[self userCredentialsObject]
          success:success
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error);
@@ -44,7 +42,8 @@
     NSMutableArray *courses = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/courses"
-      parameters:nil success:success
+      parameters:[self userCredentialsObject]
+         success:success
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
@@ -56,7 +55,10 @@
 {
     NSMutableArray *schedule = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [manager GET:@"http://centris.nfsu.is/schedules"
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
     
@@ -68,7 +70,7 @@
 {
 	NSMutableDictionary *info = nil;
 	
-	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+	if ([@"kristinns11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
@@ -100,7 +102,7 @@
 		[info setObject:registration forKey:@"Registration"];
 		
         
-	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
+	} else if ([@"bjarkim11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Ljósheimum 2" forKey:@"Address"];
