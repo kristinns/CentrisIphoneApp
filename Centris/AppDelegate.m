@@ -45,7 +45,7 @@
 
 -(void)didFinishLoginWithValidUser
 {
-    
+    [self saveContext];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
 	[tabBarController setSelectedIndex:2]; // Veitan
