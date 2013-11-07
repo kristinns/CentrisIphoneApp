@@ -5,59 +5,60 @@
 
 #import "CentrisParserDataFetcher.h"
 #import <AFNetworking/AFNetworking.h>
+#import "AppFactory.h"
 
 #define CENTRIS_API_URL @"http://centris.nfsu.is"
+
+@interface CentrisParserDataFetcher()
+@end
 
 @implementation CentrisParserDataFetcher : NSObject
 
 #pragma mark - Helper
-+ (NSDictionary *)executeFetch:(NSString *)query
++ (NSDictionary *)userCredentialsObject
 {
-	NSString *url = [NSString stringWithFormat:@"%@%@", CENTRIS_API_URL, query];
-	
-    url = [url stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
-    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    
-    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers|NSJSONReadingMutableLeaves error:&error] : nil;
-    
-    if (error) NSLog(@"[%@ %@] JSON error: %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), error.localizedDescription);
-    //NSLog(@"[%@ %@] received %@", NSStringFromClass([self class]), NSStringFromSelector(_cmd), results);
-    
-    return results;
+    NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+    NSString *password = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecValueData)];
+    NSDictionary *userCred = @{@"email":userEmail, @"password":password};
+    return userCred;
 }
 
 #pragma mark - Get methods
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSMutableArray *assignments = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/assignments" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    [manager GET:@"http://centris.nfsu.is/assignments"
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+         }];
     return assignments;
 }
 
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSMutableArray *courses = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/courses" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [manager GET:@"http://centris.nfsu.is/courses"
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
 
 	return courses;
 }
 
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     NSMutableArray *schedule = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/schedules" parameters:nil success:success failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    [manager GET:@"http://centris.nfsu.is/schedules"
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
     
@@ -69,7 +70,7 @@
 {
 	NSMutableDictionary *info = nil;
 	
-	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+	if ([@"kristinns11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
@@ -101,7 +102,7 @@
 		[info setObject:registration forKey:@"Registration"];
 		
         
-	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
+	} else if ([@"bjarkim11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Ljósheimum 2" forKey:@"Address"];

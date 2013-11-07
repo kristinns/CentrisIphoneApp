@@ -10,11 +10,17 @@
 #import "DataFetcher.h"
 
 @interface CentrisParserDataFetcher : NSObject <DataFetcher>
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
++ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID
+                                      inSemester:(NSString *)semester
+                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+
++ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
+                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+
++ (NSArray *)getScheduleBySSN:(NSString *)SSN
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 + (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
