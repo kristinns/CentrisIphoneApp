@@ -83,7 +83,7 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-	/*KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
+	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
     NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
     User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
     if (user) {
@@ -98,7 +98,7 @@
         }];
         
         
-    }*/
+    }
 }
 
 #pragma mark - Table methods
