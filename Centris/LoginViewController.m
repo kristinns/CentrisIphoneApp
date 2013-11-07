@@ -98,9 +98,8 @@
         sleep(1);
         User *user = [self doUserLoginWithEmail:email andPassword:pass];
         if (user) {
-            [self updateHUDWithText:@"Sæki áfanga" andProgress:0.2];
             [self fetchCourseInstancesForUserWithSSN:user.ssn];
-            sleep(1);
+            
             
             [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
             [self fetchScheduleForUserWithSSN:user.ssn];
