@@ -7,7 +7,6 @@
 //
 
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "CDDataFetcher.h"
 
 @implementation User (Centris)

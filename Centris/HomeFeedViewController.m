@@ -12,7 +12,6 @@
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "AppFactory.h"
 
 #pragma mark - Properties
@@ -21,7 +20,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *dayOfWeekLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dayOfMonthLabel;
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation HomeFeedViewController
@@ -47,19 +45,11 @@
 	//[self greet:@"0805903269"];
 }
 
-#pragma mark - Getters
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-	if (!_managedObjectContext) _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-	return _managedObjectContext;
-}
-
 #pragma mark - Methods
 - (void)getUserFromDatabase
 {
 	NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-	User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+	User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];

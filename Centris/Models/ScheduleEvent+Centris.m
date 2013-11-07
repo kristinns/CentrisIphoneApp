@@ -8,7 +8,6 @@
 
 #import "ScheduleEvent+Centris.h"
 #import "CourseInstance+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "CDDataFetcher.h"
 #import "NSDate+Helper.h"
 

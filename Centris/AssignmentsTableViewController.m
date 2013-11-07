@@ -7,7 +7,6 @@
 
 #import "AssignmentsTableViewController.h"
 #import "Assignment+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "CourseInstance.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
@@ -41,7 +40,7 @@
 - (NSArray *)courses
 {
     // Get data from CentrisDataFetcher
-    if (!_courses) _courses = [CourseInstance courseInstancesInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+    if (!_courses) _courses = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
     
     return _courses;
 }
@@ -100,11 +99,11 @@
 {
     // TODO, check toggler
     if (self.allAssignments == YES) {
-        self.assignments = [Assignment assignmentsInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+        self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
     } else {
         NSDate *today = [NSDate date];
         self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
-                                                  inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+                                                  inManagedObjectContext:[AppFactory managedObjectContext]];
 
     }
 }

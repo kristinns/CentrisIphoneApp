@@ -8,6 +8,7 @@
 
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 #import "DataFetcher.h"
 #import "KeychainItemWrapper.h"
 
@@ -15,4 +16,5 @@
 
 + (id<DataFetcher>)fetcherFromConfiguration;
 + (KeychainItemWrapper *)keychainItemWrapper;
++ (NSManagedObjectContext *)managedObjectContext;
 @end

@@ -4,10 +4,8 @@
 //
 
 #import "AppDelegate.h"
-#import "CentrisManagedObjectContext.h"
 #import "AppFactory.h"
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
 
 @implementation AppDelegate
 
@@ -18,7 +16,7 @@
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
 	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
         NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-        User *user = [User userWithEmail:userEmail inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+        User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
         if (user)
             [self didFinishLoginWithValidUser];
         else {
@@ -86,7 +84,7 @@
 - (void)saveContext
 {
     NSError *error;
-    id context = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
+    id context = [AppFactory managedObjectContext];
     
     if (context != nil) {
         if ([context hasChanges] && ![context save:&error]) {

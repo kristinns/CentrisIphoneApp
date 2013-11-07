@@ -13,7 +13,6 @@
 #import "CourseInstance+Centris.h"
 #import "ScheduleEvent+Centris.h"
 #import "Assignment+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "HTProgressHUDFadeZoomAnimation.h"
 #import "HTProgressHUDIndicatorView.h"
@@ -23,7 +22,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *passwordInput;
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) HTProgressHUD *HUD;
 @end
 
@@ -36,14 +34,6 @@
     if(!_dataFetcher)
         _dataFetcher = [AppFactory fetcherFromConfiguration];
     return _dataFetcher;
-}
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if(!_managedObjectContext)
-        _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-    
-    return _managedObjectContext;
 }
 
 // Lazy instantiate
@@ -186,7 +176,7 @@
     NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:password];
     if (userInfo) {
         [self storeInKeychainEmail:email andPassword:password];
-        user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
+        user = [User userWithCentrisInfo:userInfo inManagedObjectContext:[AppFactory managedObjectContext]];
     }
     return user;
 }
@@ -198,7 +188,7 @@
     [self.dataFetcher getCoursesForStudentWithSSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d courses", [responseObject count]);
         for (NSDictionary *courseInst in responseObject) {
-            [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:self.managedObjectContext];
+            [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:[AppFactory managedObjectContext]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error");
@@ -210,7 +200,7 @@
     [self.dataFetcher getScheduleBySSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d scheduleEvents", [responseObject count]);
         for (NSDictionary *event in responseObject) {
-            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error");
@@ -223,7 +213,7 @@
     [self.dataFetcher getAssignmentsForCourseWithCourseID:@"" inSemester:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
         for (NSDictionary *assignment in responseObject) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:self.managedObjectContext];
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
         }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error");

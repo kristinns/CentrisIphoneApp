@@ -19,7 +19,6 @@
 #define SEPERATOR_HEIGHT 26.0
 
 @interface ScheduleViewController ()
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSArray *scheduleEvents;
@@ -45,14 +44,6 @@
 
 
 #pragma mark - Getters
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if(!_managedObjectContext)
-        _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-    
-    return _managedObjectContext;
-}
-
 - (NSArray *)scheduleEvents
 {
     if (!_scheduleEvents)
@@ -74,7 +65,7 @@
         [self fetchScheduledEventsFromAPI];
         self.updated = YES;
     } else {
-        self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:self.managedObjectContext];
+        self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:[AppFactory managedObjectContext]];
         [self.tableView reloadData];
     }
 }
@@ -83,12 +74,12 @@
 - (void)fetchScheduledEventsFromAPI
 {
     NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+    User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
     if (user) {
         [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d scheduleEvents", [responseObject count]);
             for (NSDictionary *event in responseObject) {
-				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
 			}
              [self fetchScheduleEventsFromCoreData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "CentrisManagedObjectContext.h"
 
 @interface HomeFeedViewController : UIViewController
 
