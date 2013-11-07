@@ -14,6 +14,7 @@
 @interface ScheduleTableViewCell()
 @property (nonatomic, strong) UIView *topBorder;
 @property (nonatomic, strong) UIView *seperatorView;
+@property (nonatomic, strong) UIImageView *selectedImageView;
 @property (nonatomic, strong) UILabel *seperatorLabel;
 @end
 
@@ -39,8 +40,6 @@
     [self.seperatorView removeFromSuperview];
     self.seperatorView = nil;
     self.seperatorLabel = nil;
-    NSLog(@"Reuse");
-    //self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, ROW_HEIGHT);
 }
 
 - (void)setup
@@ -82,17 +81,16 @@
 - (void)setScheduleEventState:(ScheduleEventState)scheduleEventState
 {
     _scheduleEventState = scheduleEventState;
-    UIImageView *selectedImage;
+    [self.selectedImageView removeFromSuperview];
     if (scheduleEventState == ScheduleEventHasNotBegan)
-        selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-empty.png"]];
+        self.selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-empty.png"]];
     else if (scheduleEventState == ScheduleEventHasBegan)
-        selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-half.png"]];
+        self.selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-half.png"]];
     else if (scheduleEventState == ScheduleEventHasFinished)
-        selectedImage = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-full.png"]];
+        self.selectedImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"selected-circle-full.png"]];
     
-    selectedImage.frame = CGRectMake(CIRCLE_POSITION_X, CIRCLE_POSITION_Y, selectedImage.bounds.size.width, selectedImage.bounds.size.height);
-    
-    [self addSubview:selectedImage];
+    self.selectedImageView.frame = CGRectMake(CIRCLE_POSITION_X, CIRCLE_POSITION_Y, self.selectedImageView.bounds.size.width, self.selectedImageView.bounds.size.height);
+    [self addSubview:self.selectedImageView];
 }
 
 - (void)setSeperatorBreakText:(NSString *)seperatorBreakText

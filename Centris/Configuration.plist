@@ -5,6 +5,6 @@
 	<key>KeychainFile</key>
 	<string>CentrisLogin</string>
 	<key>DataFetcher</key>
-	<string>CDFServiceStub</string>
+	<string>CentrisParserDataFetcher</string>
 </dict>
 </plist>
