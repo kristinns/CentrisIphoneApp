@@ -9,9 +9,10 @@
 
 #import <Foundation/Foundation.h>
 #import "DataFetcher.h"
+#import "KeychainItemWrapper.h"
 
 @interface AppFactory : NSObject
 
 + (id<DataFetcher>)fetcherFromConfiguration;
-+ (NSString *)keychainFromConfiguration;
++ (KeychainItemWrapper *)keychainItemWrapper;
 @end
