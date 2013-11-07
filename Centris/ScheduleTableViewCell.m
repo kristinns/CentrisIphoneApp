@@ -40,6 +40,9 @@
     [self.seperatorView removeFromSuperview];
     self.seperatorView = nil;
     self.seperatorLabel = nil;
+    // Set default again
+    self.scheduleEventState = ScheduleEventHasNotBegan;
+    self.topBorderIsHidden = NO;
 }
 
 - (void)setup
@@ -60,13 +63,14 @@
     self.courseNameLabel.textColor = [CentrisTheme blackLightTextColor];
     self.courseNameLabel.font = [CentrisTheme headingMediumFont];
     
-    // Default not began
+    // Default
     self.scheduleEventState = ScheduleEventHasNotBegan;
     self.topBorderIsHidden = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
+    // Disable selected
     [super setSelected:NO animated:animated];
 }
 
