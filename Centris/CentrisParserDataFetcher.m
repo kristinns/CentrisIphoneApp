@@ -30,9 +30,7 @@
     [manager GET:@"http://centris.nfsu.is/assignments"
       parameters:[self userCredentialsObject]
          success:success
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"Error: %@", error);
-         }];
+         failure:failure];
 }
 
 + (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
@@ -41,9 +39,7 @@
     [manager GET:@"http://centris.nfsu.is/courses"
       parameters:[self userCredentialsObject]
          success:success
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+         failure:failure];
 }
 
 + (void)getScheduleInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
@@ -52,9 +48,7 @@
     [manager GET:@"http://centris.nfsu.is/schedules"
       parameters:[self userCredentialsObject]
          success:success
-         failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+         failure:failure];
 }
 
 #pragma mark - Post methods

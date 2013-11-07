@@ -54,7 +54,7 @@
 @protocol DataFetcher <NSObject>
 // Get
 + (void)getAssignmentsInSemester:(NSString *)semester
-                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                         success:(void (^)(id responseObject))success
                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 + (void)getCoursesInSemester:(NSString *)semester
                                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
