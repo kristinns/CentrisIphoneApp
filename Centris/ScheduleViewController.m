@@ -10,7 +10,6 @@
 #import "User+Centris.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
-#import "KeychainItemWrapper.h"
 #import "ScheduleEvent+Centris.h"
 #import "DatePickerView.h"
 #import "ScheduleTableViewCell.h"
@@ -83,8 +82,7 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+    NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
     User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
     if (user) {
         [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {

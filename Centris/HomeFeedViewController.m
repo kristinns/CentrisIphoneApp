@@ -13,7 +13,6 @@
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 #import "CentrisManagedObjectContext.h"
-#import "KeychainItemWrapper.h"
 #import "AppFactory.h"
 
 #pragma mark - Properties
@@ -59,8 +58,7 @@
 #pragma mark - Methods
 - (void)getUserFromDatabase
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-	NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
+	NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
 	User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
 	if(user) {
 		NSLog(@"User found, no need to fetch");

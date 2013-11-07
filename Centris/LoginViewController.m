@@ -9,7 +9,6 @@
 #import "LoginViewController.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
-#import "KeychainItemWrapper.h"
 #import "User+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "ScheduleEvent+Centris.h"
@@ -266,9 +265,8 @@
 
 - (void)storeInKeychainEmail:(NSString *)email andPassword:(NSString *)password
 {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-    [keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
-    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
+    [[AppFactory keychainItemWrapper] setObject:email forKey:(__bridge id)(kSecAttrAccount)];
+    [[AppFactory keychainItemWrapper] setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 
 - (void)promptUserWithMessage:(NSString *)message title:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle
