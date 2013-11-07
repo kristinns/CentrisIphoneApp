@@ -13,64 +13,59 @@
 
 @implementation CDFServiceStub
 
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester
++ (void)getAssignmentsInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    if ([courseID isEqualToString:@"T-109-INTO"] && [semester isEqualToString:@"20113"])
-    {
-        NSMutableArray *assignments = [[NSMutableArray alloc] init];
-        
-        NSMutableDictionary *assignment1 = [[NSMutableDictionary alloc] init];
-        [assignment1 setObject:[NSNumber numberWithInteger:28947] forKey:@"ID"];
-        [assignment1 setObject:@"7. Essay" forKey:@"Title"];
-        [assignment1 setObject:@"<p>Write a short paper (approximately 2-3 pages) about a person who has contributed to computer science. You may choose to write about any one of the persons mentioned in the slides, or you could pick someone which isn't mentioned there, but in that case you need to get a permission (basically so we can ensure that the person in question is somewhat connected to computer science!).</p>\r\n<p>The paper should be roughly 2-3 pages long (excluding the front page), students should use their own judgement with regards to spacing, font sizes etc. You should pick your own style, i.e. APA, MLA etc, and stick to it.</p>\r\n<p>You may write in either Icelandic or English, just stick to either language.</p>\r\n<p>You should use at least 2&nbsp;sources (other than Wikipedia), and at least one of them should be a regular book (not just a web page). However, the book may be in electronic form (for instance, found at books.google.com).</p>\r\n<p>Hand in a single document, either in Microsoft Word format (.doc,.docx), Open Document Format (.odt), .pdf or .html.</p>" forKey:@"Description"];
-        NSMutableArray *l1 = [[NSMutableArray alloc] init];
-        [l1 addObject:@"doc"];
-        [l1 addObject:@"docx"];
-        [l1 addObject:@"pdf"];
-        [l1 addObject:@"html"];
-        [l1 addObject:@"odt"];
-        [assignment1 setObject:l1 forKey:@"AllowedFileExtensions"];
-        [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
-        [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
-        [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-        [assignment1 setObject:@"2013-11-14T23:59:00" forKey:@"DateClosed"];
-        [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
-        [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
-        [assignment1 setObject:[NSNull null] forKey:@"Grade"];
-        [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];
-        [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
-        [assignment1 setObject:[NSNull null] forKey:@"Closes"];
-        
-        // assignment 2
-        NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
-        [assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
-        [assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];
-        [assignment2 setObject:@"<h3>First practical assignment</h3>\r\n<p>1. Keep a diary for one day, and record everything you do. For each activity, try to determine if some computation was involved, either in the activity itself, or in the required infrastructure.</p>\r\n<p>2. Which of your activities did you follow mechanically? For instance, is there a lot of thinking involved in brushing your teeth? Do you always brush your teeth the same way? If not, why?</p>\r\n<p>&nbsp;</p>\r\n<p>Hand in a single text document (with the .txt extension), containing your answers to these questions.</p>" forKey:@"Description"];
-        NSMutableArray *l2 = [[NSMutableArray alloc] init];
-        [l2 addObject:@"txt"];
-        [l2 addObject:@"zip"];
-        [l2 addObject:@"rar"];
-        [assignment2 setObject:l2 forKey:@"AllowedFileExtensions"];
-        [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
-        [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
-        [assignment2 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
-        [assignment2 setObject:@"2013-10-27T23:59:00" forKey:@"DateClosed"];
-        [assignment2 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
-        [assignment2 setObject:[NSNumber numberWithInteger:585999] forKey:@"GroupID"];
-        [assignment2 setObject:[NSNumber numberWithDouble:7.3] forKey:@"Grade"];
-        [assignment2 setObject:@"Computations are fundamental shit yo" forKey:@"StudentMemo"];
-        [assignment2 setObject:@"Yes it is! But your solution sucked" forKey:@"TeacherMemo"];
-        [assignment2 setObject:@"2013-10-23T23:44:20" forKey:@"Closes"];
-        
-        [assignments addObject:assignment1];
-        [assignments addObject:assignment2];
-        return assignments;
-    } else {
-        return nil;
-    }
+    NSMutableArray *assignments = [[NSMutableArray alloc] init];
+    
+    NSMutableDictionary *assignment1 = [[NSMutableDictionary alloc] init];
+    [assignment1 setObject:[NSNumber numberWithInteger:28947] forKey:@"ID"];
+    [assignment1 setObject:@"7. Essay" forKey:@"Title"];
+    [assignment1 setObject:@"<p>Write a short paper (approximately 2-3 pages) about a person who has contributed to computer science. You may choose to write about any one of the persons mentioned in the slides, or you could pick someone which isn't mentioned there, but in that case you need to get a permission (basically so we can ensure that the person in question is somewhat connected to computer science!).</p>\r\n<p>The paper should be roughly 2-3 pages long (excluding the front page), students should use their own judgement with regards to spacing, font sizes etc. You should pick your own style, i.e. APA, MLA etc, and stick to it.</p>\r\n<p>You may write in either Icelandic or English, just stick to either language.</p>\r\n<p>You should use at least 2&nbsp;sources (other than Wikipedia), and at least one of them should be a regular book (not just a web page). However, the book may be in electronic form (for instance, found at books.google.com).</p>\r\n<p>Hand in a single document, either in Microsoft Word format (.doc,.docx), Open Document Format (.odt), .pdf or .html.</p>" forKey:@"Description"];
+    NSMutableArray *l1 = [[NSMutableArray alloc] init];
+    [l1 addObject:@"doc"];
+    [l1 addObject:@"docx"];
+    [l1 addObject:@"pdf"];
+    [l1 addObject:@"html"];
+    [l1 addObject:@"odt"];
+    [assignment1 setObject:l1 forKey:@"AllowedFileExtensions"];
+    [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
+    [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
+    [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
+    [assignment1 setObject:@"2013-11-14T23:59:00" forKey:@"DateClosed"];
+    [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+    [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
+    [assignment1 setObject:[NSNull null] forKey:@"Grade"];
+    [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];
+    [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
+    [assignment1 setObject:[NSNull null] forKey:@"Closes"];
+    
+    // assignment 2
+    NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
+    [assignment2 setObject:[NSNumber numberWithInteger:29000] forKey:@"ID"];
+    [assignment2 setObject:@"1. Computations in real life" forKey:@"Title"];
+    [assignment2 setObject:@"<h3>First practical assignment</h3>\r\n<p>1. Keep a diary for one day, and record everything you do. For each activity, try to determine if some computation was involved, either in the activity itself, or in the required infrastructure.</p>\r\n<p>2. Which of your activities did you follow mechanically? For instance, is there a lot of thinking involved in brushing your teeth? Do you always brush your teeth the same way? If not, why?</p>\r\n<p>&nbsp;</p>\r\n<p>Hand in a single text document (with the .txt extension), containing your answers to these questions.</p>" forKey:@"Description"];
+    NSMutableArray *l2 = [[NSMutableArray alloc] init];
+    [l2 addObject:@"txt"];
+    [l2 addObject:@"zip"];
+    [l2 addObject:@"rar"];
+    [assignment2 setObject:l2 forKey:@"AllowedFileExtensions"];
+    [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
+    [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
+    [assignment2 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
+    [assignment2 setObject:@"2013-10-27T23:59:00" forKey:@"DateClosed"];
+    [assignment2 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+    [assignment2 setObject:[NSNumber numberWithInteger:585999] forKey:@"GroupID"];
+    [assignment2 setObject:[NSNumber numberWithDouble:7.3] forKey:@"Grade"];
+    [assignment2 setObject:@"Computations are fundamental shit yo" forKey:@"StudentMemo"];
+    [assignment2 setObject:@"Yes it is! But your solution sucked" forKey:@"TeacherMemo"];
+    [assignment2 setObject:@"2013-10-23T23:44:20" forKey:@"Closes"];
+    
+    [assignments addObject:assignment1];
+    [assignments addObject:assignment2];
+    success(nil, assignments);
 }
 
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN
++ (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     NSMutableArray  *courseInstArray = [[NSMutableArray alloc] init];
     
@@ -115,16 +110,16 @@
     [courseInstArray addObject:courseInst5];
     
     // Finally, return courseInstArray
-    return courseInstArray;
+    success(nil, courseInstArray);
 }
 
 // This function is immitating the post request. Given an email (and password when ready), the fetcher
 // should try to login the user and get user details back.
-+ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
++ (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
 	NSMutableDictionary *info = nil;
 	
-	if ([@"kristinns11@ru.is" isEqualToString:email]) {
+	if ([@"kristinns11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
@@ -156,7 +151,7 @@
 		[info setObject:registration forKey:@"Registration"];
 		
 
-	} else if ([@"bjarkim11@ru.is" isEqualToString:email]) {
+	} else if ([@"bjarkim11" isEqualToString:email]) {
 		info = [[NSMutableDictionary alloc] init];
 		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
 		[person setObject:@"Ljósheimum 2" forKey:@"Address"];
@@ -188,13 +183,13 @@
 		[info setObject:registration forKey:@"Registration"];
 	}
 	else {
-		return nil;
+		return failure(nil, nil);
 	}
 	
-	return info;
+	success(nil, info);
 }
 
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN
++ (void)getScheduleInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
 	NSMutableArray *schedule = [[NSMutableArray alloc] init];
 	
@@ -327,11 +322,6 @@
 						 @"2013-10-28T14:55:00", @"StartTime",
 						 @"2013-10-28T15:40:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
-
-	
-	return schedule;
+    success(nil, schedule);
 }
-
-
-
 @end

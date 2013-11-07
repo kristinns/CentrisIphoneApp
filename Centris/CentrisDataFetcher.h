@@ -7,9 +7,18 @@
 #import "DataFetcher.h"
 
 @interface CentrisDataFetcher : NSObject <DataFetcher>
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester;
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN;
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN;
-
-+ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
+// Get
++ (void)getAssignmentsInSemester:(NSString *)semester
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)getCoursesInSemester:(NSString *)semester
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)getScheduleInSemester:(NSString *)semester
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+// Post
++ (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

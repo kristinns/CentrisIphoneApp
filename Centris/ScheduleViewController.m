@@ -76,7 +76,7 @@
     NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
     User *user = [User userWithEmail:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
     if (user) {
-        [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d scheduleEvents", [responseObject count]);
             for (NSDictionary *event in responseObject) {
 				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];

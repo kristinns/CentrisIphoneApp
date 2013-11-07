@@ -24,9 +24,8 @@
 }
 
 #pragma mark - Get methods
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (void)getAssignmentsInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableArray *assignments = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/assignments"
       parameters:[self userCredentialsObject]
@@ -34,12 +33,10 @@
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
              NSLog(@"Error: %@", error);
          }];
-    return assignments;
 }
 
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableArray *courses = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/courses"
       parameters:[self userCredentialsObject]
@@ -47,13 +44,10 @@
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-
-	return courses;
 }
 
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
++ (void)getScheduleInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    NSMutableArray *schedule = nil;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/schedules"
       parameters:[self userCredentialsObject]
@@ -61,12 +55,10 @@
          failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
-    
-    return schedule;
 }
 
 #pragma mark - Post methods
-+ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
++ (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
 	NSMutableDictionary *info = nil;
 	
@@ -134,11 +126,10 @@
 		[info setObject:registration forKey:@"Registration"];
 	}
 	else {
-		return nil;
+		return failure(nil, nil);
 	}
 	
-	return info;
+	success(nil, info);
 }
-
 
 @end

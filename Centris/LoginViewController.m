@@ -78,15 +78,16 @@
 #pragma mark - UI Handlers
 - (IBAction)loginButtonPushed:(id)sender {
     [self.view endEditing:YES];
-	NSString *email = self.emailInput.text;
-	NSString *pass = self.passwordInput.text;
+	NSString *username = self.emailInput.text;
+	NSString *password = self.passwordInput.text;
     
     [self displayHUDWithText:@"Skrái þig inn"];
     [self updateHUDWithText:@"Sæki notandaupplýsingar" addProgress:0.2];
-    User *user = [self doUserLoginWithEmail:email andPassword:pass];
-    if (user) {
+    [self.dataFetcher loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self storeInKeychainUsername:username andPassword:password];
+        
         [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
-        [self.dataFetcher getCoursesForStudentWithSSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d courses", [responseObject count]);
             for (NSDictionary *courseInst in responseObject) {
                 [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:[AppFactory managedObjectContext]];
@@ -94,7 +95,7 @@
             
             // Get scheduleEvents
             [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
-            [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d scheduleEvents", [responseObject count]);
                 for (NSDictionary *event in responseObject) {
                     [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
@@ -106,7 +107,7 @@
             }];
             
             // Get assignments
-            [self.dataFetcher getAssignmentsForCourseWithCourseID:@"" inSemester:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d assignments", [responseObject count]);
                 for (NSDictionary *assignment in responseObject) {
                     [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
@@ -116,18 +117,19 @@
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
             }];
-
+            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error getting Courses");
         }];
-    } else {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
-                          title:@"Notandi fannst ekki"
-              cancelButtonTitle:@"OK"];
+                              title:@"Notandi fannst ekki"
+                  cancelButtonTitle:@"OK"];
         [self hideHUD];
-    }
-
+        NSLog(@"Error in login");
+    }];
 }
 
 #pragma mark - Selectors & Delegates
@@ -185,20 +187,6 @@
     [UIView commitAnimations];
 }
 
-#pragma mark - Data methods
-
-// Authenticates user to API and stores him in Core Data. Returns user
-- (User *)doUserLoginWithEmail:(NSString *)email andPassword:(NSString *)password
-{
-    User *user = nil;
-    NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:password];
-    if (userInfo) {
-        [self storeInKeychainEmail:email andPassword:password];
-        user = [User userWithCentrisInfo:userInfo inManagedObjectContext:[AppFactory managedObjectContext]];
-    }
-    return user;
-}
-
 #pragma mark - Delegators
 
 - (void)delegateFinishedLoggingInWithValidUser
@@ -237,9 +225,9 @@
     });
 }
 
-- (void)storeInKeychainEmail:(NSString *)email andPassword:(NSString *)password
+- (void)storeInKeychainUsername:(NSString *)username andPassword:(NSString *)password
 {
-    [[AppFactory keychainItemWrapper] setObject:email forKey:(__bridge id)(kSecAttrAccount)];
+    [[AppFactory keychainItemWrapper] setObject:username forKey:(__bridge id)(kSecAttrAccount)];
     [[AppFactory keychainItemWrapper] setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 

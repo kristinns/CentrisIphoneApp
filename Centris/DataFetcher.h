@@ -11,11 +11,17 @@
 
 @protocol DataFetcher <NSObject>
 // Get
-+ (NSArray *)getAssignmentsForCourseWithCourseID:(NSString *)courseID inSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
++ (void)getAssignmentsInSemester:(NSString *)semester
+                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (NSArray *)getCoursesForStudentWithSSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
++ (void)getCoursesInSemester:(NSString *)semester
+                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (NSArray *)getScheduleBySSN:(NSString *)SSN success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)getScheduleInSemester:(NSString *)semester
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // Post
-+ (NSDictionary *)loginUserWithEmail:(NSString *)email andPassword:(NSString *)password;
++ (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
+                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end
