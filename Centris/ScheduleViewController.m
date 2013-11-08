@@ -86,8 +86,6 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error");
         }];
-        
-        
     }
 }
 
