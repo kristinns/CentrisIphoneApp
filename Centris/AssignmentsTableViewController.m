@@ -104,7 +104,6 @@
         NSDate *today = [NSDate date];
         self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
                                                   inManagedObjectContext:[AppFactory managedObjectContext]];
-
     }
 }
 

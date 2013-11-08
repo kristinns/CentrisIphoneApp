@@ -38,8 +38,8 @@
     
     self.datePickerSelectedDate = self.datePickerToday;
     self.datePickerDate = [[self.datePickerToday dateByAddingDays:-weekDay] dateByAddingWeeks:-1];
-
     [self updateDatePicker];
+    [self fetchScheduleEventsFromCoreData];
 }
 
 
