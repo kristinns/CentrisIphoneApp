@@ -31,6 +31,8 @@
 
 @implementation ScheduleViewController
 
+#pragma mark - Outlets
+
 - (IBAction)GoBackToToday:(id)sender {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self.datePickerToday];
@@ -73,8 +75,8 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-    NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithUsername:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
+    NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+    User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
     if (user) {
         [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d scheduleEvents", [responseObject count]);
@@ -85,8 +87,6 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error");
         }];
-        
-        
     }
 }
 
@@ -185,7 +185,7 @@
     self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];
     self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:addWeeks];
     [self updateDatePicker];
-    [self fetchScheduleEventsFromCoreData];
+    [self fetchScheduleEventsFromCoreData]; // Is this necessary?
 }
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex
