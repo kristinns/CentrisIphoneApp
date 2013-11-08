@@ -157,11 +157,11 @@
         cell.detailUpperLabel.text = assignment.isInCourseInstance.courseID;
     } else {
         CourseInstance *courseInstance = [self.courses objectAtIndex:indexPath.section];
-        NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
-        NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
+        NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
         assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
         if (assignment.grade != nil)
-            cell.detailUpperLabel.text = [NSString stringWithFormat:@"%@", assignment.grade];
+            cell.detailUpperLabel.text = [NSString stringWithFormat:@"%.1f", [assignment.grade floatValue]];
         else
             cell.detailUpperLabel.text = @"";
     }

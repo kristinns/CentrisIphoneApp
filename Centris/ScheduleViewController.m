@@ -62,8 +62,9 @@
 - (void )fetchScheduleEventsFromCoreData
 {
     if (!self.updated) {
-        [self fetchScheduledEventsFromAPI];
         self.updated = YES;
+        [self fetchScheduledEventsFromAPI];
+        
     } else {
         self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:[AppFactory managedObjectContext]];
         [self.tableView reloadData];
