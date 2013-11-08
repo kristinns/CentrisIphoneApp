@@ -57,7 +57,7 @@
 - (void)setAssignmentEventState:(AssignmentEventState)assignmentEventState
 {
     [self.circleImageView removeFromSuperview];
-    NSString *assignmentCircleFileToUse = assignmentEventState == AssignmentWasHandedIn ? @"selected-circle-full-red.png" : @"selected-circle-empty.png";
+    NSString *assignmentCircleFileToUse = assignmentEventState == AssignmentWasHandedIn ? @"selected-circle-full.png" : @"selected-circle-empty.png";
     self.circleImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:assignmentCircleFileToUse]];
     self.circleImageView.frame = CGRectMake(CIRCLE_POSITION_X, CIRCLE_POSITION_Y, self.circleImageView.bounds.size.width, self.circleImageView.bounds.size.height);
     [self addSubview:self.circleImageView];
