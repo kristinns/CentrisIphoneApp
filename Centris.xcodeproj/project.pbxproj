@@ -473,6 +473,11 @@
 				TargetAttributes = {
 					194842BD1799B0AB0016A5C0 = {
 						DevelopmentTeam = 9G9K2ZSW98;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+						};
 					};
 					194842DE1799B0AB0016A5C0 = {
 						TestTargetID = 194842BD1799B0AB0016A5C0;
