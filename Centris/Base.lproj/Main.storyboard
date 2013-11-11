@@ -160,7 +160,7 @@
                                     <outlet property="detailLowerLabel" destination="dQH-X4-rCe" id="ZMz-Ax-VtB"/>
                                     <outlet property="detailUpperLabel" destination="Xmp-8R-bfM" id="vCd-Hb-t2g"/>
                                     <outlet property="titleLabel" destination="BwB-v2-fwb" id="9AB-vv-OCX"/>
-                                    <segue destination="y97-Oi-8d6" kind="push" id="6Dq-Jz-5WD"/>
+                                    <segue destination="y97-Oi-8d6" kind="push" id="aYK-wl-2tJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -184,10 +184,10 @@
             </objects>
             <point key="canvasLocation" x="913" y="176"/>
         </scene>
-        <!--View Controller-->
+        <!--Assignment Detail View Controller-->
         <scene sceneID="r85-CT-MAS">
             <objects>
-                <viewController id="y97-Oi-8d6" sceneMemberID="viewController">
+                <viewController id="y97-Oi-8d6" customClass="AssignmentDetailViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Kvu-gN-8q4"/>
                         <viewControllerLayoutGuide type="bottom" id="SSi-Li-fEA"/>
@@ -196,19 +196,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Verkefni 1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3g-LR-xae">
-                                <rect key="frame" x="20" y="73" width="280" height="30"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vac-7J-a4U">
+                                <rect key="frame" x="0.0" y="0.0" width="360" height="518"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Skilafr: 25.3.2012 23:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLV-Eo-hir">
-                                <rect key="frame" x="20" y="95" width="280" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="assignment-detail" translatesAutoresizingMaskIntoConstraints="NO" id="or7-Ob-67R">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="553"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
@@ -378,7 +375,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="11:05" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NhB-D8-el9">
-                                                    <rect key="frame" x="24" y="31" width="43" height="21"/>
+                                                    <rect key="frame" x="25" y="32" width="43" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.60392156862745094" alpha="1" colorSpace="calibratedRGB"/>
@@ -392,11 +389,11 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="map-icon" translatesAutoresizingMaskIntoConstraints="NO" id="Ukh-6g-os6">
-                                                    <rect key="frame" x="136" y="30" width="16" height="25"/>
+                                                    <rect key="frame" x="127" y="30" width="16" height="25"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </imageView>
                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="M101" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nIL-qr-4PX">
-                                                    <rect key="frame" x="156" y="32" width="42" height="21"/>
+                                                    <rect key="frame" x="144" y="32" width="42" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.59999999999999998" green="0.59999999999999998" blue="0.60392156860000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -554,11 +551,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="assignment-detail" width="320" height="553"/>
         <image name="assignment-icon" width="30" height="30"/>
         <image name="calendar-icon" width="30" height="30"/>
         <image name="home-icon" width="30" height="30"/>
         <image name="malid-icon" width="30" height="30"/>
-        <image name="map-icon" width="16" height="25"/>
+        <image name="map-icon" width="9" height="13"/>
         <image name="more-icon" width="30" height="30"/>
         <image name="profile-icon" width="33" height="33"/>
         <image name="time-icon" width="13" height="13"/>
