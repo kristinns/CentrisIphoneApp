@@ -4,11 +4,8 @@
 //
 
 #import "AppDelegate.h"
-#import "CentrisManagedObjectContext.h"
 #import "AppFactory.h"
-#import "KeychainItemWrapper.h"
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
 
 @implementation AppDelegate
 
@@ -18,9 +15,8 @@
 //	[tabController setSelectedIndex:2]; // Veitan
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
 	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
-        KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-        NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-        User *user = [User userWithEmail:userEmail inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+        NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+        User *user = [User userWithUsername:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
         if (user)
             [self didFinishLoginWithValidUser];
         else {
@@ -49,7 +45,7 @@
 
 -(void)didFinishLoginWithValidUser
 {
-    
+    [self saveContext];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
 	[tabBarController setSelectedIndex:2]; // Veitan
@@ -88,7 +84,7 @@
 - (void)saveContext
 {
     NSError *error;
-    id context = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
+    id context = [AppFactory managedObjectContext];
     
     if (context != nil) {
         if ([context hasChanges] && ![context save:&error]) {

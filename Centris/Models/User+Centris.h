@@ -10,6 +10,5 @@
 
 @interface User (Centris)
 + (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
-+ (User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context;
-+ (User *)userWithEmail:(NSString *)email inManagedObjectContext:(NSManagedObjectContext *)context;
++ (User *)userWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

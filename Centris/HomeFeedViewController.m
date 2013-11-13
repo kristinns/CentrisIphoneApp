@@ -12,8 +12,6 @@
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
-#import "KeychainItemWrapper.h"
 #import "AppFactory.h"
 
 #pragma mark - Properties
@@ -22,7 +20,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *dayOfWeekLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dayOfMonthLabel;
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation HomeFeedViewController
@@ -44,24 +41,13 @@
 	[self setTimeLabels];
     [self getUserFromDatabase];
     self.title = @"Veitan";
-    
-	//[self greet:@"0805903269"];
-}
-
-#pragma mark - Getters
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-	if (!_managedObjectContext) _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-	return _managedObjectContext;
 }
 
 #pragma mark - Methods
 - (void)getUserFromDatabase
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-	NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-	User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+	NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+	User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
 	if(user) {
 		NSLog(@"User found, no need to fetch");
         self.greetingLabel.text = [user.name description];

@@ -42,18 +42,17 @@
 - (void)setup
 {
     self.dayViewsArray = [[NSMutableArray alloc] init];
-    
     // Setup scroll view
     self.scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, INFORMATION_VIEW_HEIGHT, self.bounds.size.width, DAY_VIEW_HEIGHT)];
     self.scrollView.pagingEnabled = YES;
     self.scrollView.showsVerticalScrollIndicator = NO;
     self.scrollView.bounces = NO;
     self.scrollView.delegate = self;
-    self.scrollView.contentSize = CGSizeMake(self.bounds.size.width * DATE_PICKER_WEEKS_TO_LOAD, DAY_VIEW_HEIGHT);
+    self.scrollView.contentSize = CGSizeMake(self.bounds.size.width * DATE_PICKER_WEEKS_TO_LOAD, self.scrollView.frame.size.height);
     self.scrollView.contentOffset = CGPointMake(self.bounds.size.width, 0);
     [self addSubview:self.scrollView];
     // Setup dayViews view in scroll view
-    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width * DATE_PICKER_WEEKS_TO_LOAD, self.bounds.size.height)];
+    self.dayViews = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width * DATE_PICKER_WEEKS_TO_LOAD, DAY_VIEW_HEIGHT)];
     [self.scrollView addSubview:self.dayViews];
     
     // Add dayViews to self.dayViews
@@ -76,13 +75,11 @@
     self.weekNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(INFORMATION_VIEW_PADDING, 0, self.bounds.size.width-INFORMATION_VIEW_PADDING, INFORMATION_VIEW_HEIGHT)];
     self.weekNumberLabel.font = [CentrisTheme headingSmallFont];
     self.weekNumberLabel.textColor = [CentrisTheme grayLightTextColor];
-    self.weekNumberLabel.text = [@"Vika 25" uppercaseString];
     // Add dateRange label to information view
     [self.informationView addSubview:self.weekNumberLabel];
     self.dateRangeLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width-INFORMATION_VIEW_PADDING, INFORMATION_VIEW_HEIGHT)];
     self.dateRangeLabel.font = [CentrisTheme headingSmallFont];
     self.dateRangeLabel.textColor = [CentrisTheme grayLightTextColor];
-    self.dateRangeLabel.text = [@"30 September - 6 Október" uppercaseString];
     self.dateRangeLabel.textAlignment = NSTextAlignmentRight;
     [self.informationView addSubview:self.dateRangeLabel];
     // Add bottom border
@@ -92,6 +89,11 @@
     
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [scrollView setContentOffset:CGPointMake(scrollView.contentOffset.x, 0)];
+}
+
 #pragma Get methods
 - (NSArray *)dayViewsList
 {   // Return copy of array to prevent others from resizing this array
@@ -99,6 +101,7 @@
 }
 
 #pragma Delegate methods
+
 - (void)tappedOnDatePickerDayView:(DatePickerDayView *)datePickerDayView;
 {
     NSInteger index = [self.dayViewsArray indexOfObject:datePickerDayView];

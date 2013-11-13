@@ -7,8 +7,8 @@
 //
 
 #import "User+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "CDDataFetcher.h"
+#import "DataFetcher.h"
 
 @implementation User (Centris)
 
@@ -17,26 +17,26 @@
 {
     User *user = nil;
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[@"Person.SSN"] stringValue]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", [centrisInfo[CENTRIS_USER_SSN] description]];
     NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
     
     if (![matches count]) { // Noone found, let's create a User from CentrisInfo
         user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-        user.name = [[centrisInfo valueForKeyPath:@"Person.Name"] description];
-        user.ssn = [[centrisInfo valueForKeyPath:@"Person.SSN"] description];
-        user.address = [[centrisInfo valueForKeyPath:@"Person.Address"] description];
-        user.email = [[centrisInfo valueForKeyPath:@"Person.Email"] description];
+        user.name = [[centrisInfo valueForKeyPath:CENTRIS_USER_FULL_NAME] description];
+        user.ssn = [[centrisInfo valueForKeyPath:CENTRIS_USER_SSN] description];
+        user.address = [[centrisInfo valueForKeyPath:CENTRIS_USER_ADDRESS] description];
+        user.username = [[centrisInfo valueForKeyPath:CENTRIS_USER_USERNAME] description];
 		
-		user.finishedECTS = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.ECTSFinished"];
-		user.activeECTS = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.ECTSActive"];
-		user.averageGrade = [centrisInfo valueForKeyPath:@"Registration.StudentRegistration.AverageGrade"];
+		user.finishedECTS = [centrisInfo valueForKeyPath:CENTRIS_USER_ECTS_FINISHED];
+		user.activeECTS = [centrisInfo valueForKeyPath:CENTRIS_USER_ECTS_ACTIVE];
+		user.averageGrade = [centrisInfo valueForKeyPath:CENTRIS_USER_AVERAGE_GRADE];
 		
-		user.department = [centrisInfo valueForKeyPath:@"Registration.DepartmentName"];
-		user.majorIS = [centrisInfo valueForKeyPath:@"Registration.Major.Name"];
-		user.majorEN = [centrisInfo valueForKeyPath:@"Registrationn.Major.NameEnglish"];
-		user.majorCredits = [centrisInfo valueForKeyPath:@"Registration.Major.Credits"];
+		user.department = [centrisInfo valueForKeyPath:CENTRIS_USER_DEPARTMENT_NAME];
+		user.majorIS = [centrisInfo valueForKeyPath:CENTRIS_USER_MAJOR_IS];
+		user.majorEN = [centrisInfo valueForKeyPath:CENTRIS_USER_MAJOR_EN];
+		user.majorCredits = [centrisInfo valueForKeyPath:CENTRIS_USER_MAJOR_CREDITS];
 		
-		user.type = [centrisInfo valueForKeyPath:@"Registraton.StudentTypeName"];
+		user.type = [centrisInfo valueForKeyPath:CENTRIS_USER_TYPE];
 		
     } else { // Found
         // Just return that User
@@ -45,21 +45,9 @@
     return user;
 }
 
-// Get User with ssn from context
-+(User *)userWith:(NSString *)SSN inManagedObjectContext:(NSManagedObjectContext *)context
++ (User *)userWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context
 {
-	User *user = nil;
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"ssn = %@", SSN];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
-    user = [matches lastObject];
-    
-	return user;
-}
-
-+ (User *)userWithEmail:(NSString *)email inManagedObjectContext:(NSManagedObjectContext *)context
-{
-	NSPredicate *pred = [NSPredicate predicateWithFormat:@"email = %@", email];
+	NSPredicate *pred = [NSPredicate predicateWithFormat:@"username = %@", username];
     
     NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"User" forKey:@"name" sortAscending:YES withPredicate:pred inManagedObjectContext:context];
     //NSAssert([matches count] == 1, @"Should only return one user");

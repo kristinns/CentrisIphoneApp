@@ -40,7 +40,6 @@
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="averageGrade" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="department" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="finishedECTS" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="majorCredits" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="majorEN" optional="YES" attributeType="String" syncable="YES"/>
@@ -48,12 +47,13 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ssn" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="117" positionY="-34" width="128" height="28"/>
-        <element name="CourseInstance" positionX="133" positionY="-261" width="128" height="148"/>
-        <element name="ScheduleEvent" positionX="-54" positionY="-261" width="128" height="148"/>
-        <element name="User" positionX="351" positionY="-261" width="128" height="223"/>
+        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEvent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

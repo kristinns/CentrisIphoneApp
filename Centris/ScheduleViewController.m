@@ -10,7 +10,6 @@
 #import "User+Centris.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
-#import "KeychainItemWrapper.h"
 #import "ScheduleEvent+Centris.h"
 #import "DatePickerView.h"
 #import "ScheduleTableViewCell.h"
@@ -20,7 +19,6 @@
 #define SEPERATOR_HEIGHT 26.0
 
 @interface ScheduleViewController ()
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSArray *scheduleEvents;
@@ -33,6 +31,8 @@
 
 @implementation ScheduleViewController
 
+#pragma mark - Outlets
+
 - (IBAction)GoBackToToday:(id)sender {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self.datePickerToday];
@@ -40,20 +40,12 @@
     
     self.datePickerSelectedDate = self.datePickerToday;
     self.datePickerDate = [[self.datePickerToday dateByAddingDays:-weekDay] dateByAddingWeeks:-1];
-
     [self updateDatePicker];
+    [self fetchScheduleEventsFromCoreData];
 }
 
 
 #pragma mark - Getters
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if(!_managedObjectContext)
-        _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-    
-    return _managedObjectContext;
-}
-
 - (NSArray *)scheduleEvents
 {
     if (!_scheduleEvents)
@@ -72,32 +64,31 @@
 - (void )fetchScheduleEventsFromCoreData
 {
     if (!self.updated) {
-        [self fetchScheduledEventsFromAPI];
         self.updated = YES;
-    } else {
-        self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:self.managedObjectContext];
-        [self.tableView reloadData];
+        [self fetchScheduledEventsFromAPI];
     }
+        
+    self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate
+                                        inManagedObjectContext:[AppFactory managedObjectContext]];
+    [self.tableView reloadData];
+    
 }
 
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-	KeychainItemWrapper *keyChain = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-    NSString *userEmail = [keyChain objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithEmail:userEmail inManagedObjectContext:self.managedObjectContext];
+    NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+    User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
     if (user) {
-        [self.dataFetcher getScheduleBySSN:user.ssn success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             NSLog(@"Got %d scheduleEvents", [responseObject count]);
             for (NSDictionary *event in responseObject) {
-				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
+				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
 			}
              [self fetchScheduleEventsFromCoreData];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error");
         }];
-        
-        
     }
 }
 
@@ -195,8 +186,8 @@
     NSInteger addWeeks = right ? 1 : -1;
     self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];
     self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:addWeeks];
-    
     [self updateDatePicker];
+    [self fetchScheduleEventsFromCoreData]; // Is this necessary?
 }
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex

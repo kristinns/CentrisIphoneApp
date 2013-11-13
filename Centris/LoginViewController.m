@@ -9,12 +9,10 @@
 #import "LoginViewController.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
-#import "KeychainItemWrapper.h"
 #import "User+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "ScheduleEvent+Centris.h"
 #import "Assignment+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "HTProgressHUDFadeZoomAnimation.h"
 #import "HTProgressHUDIndicatorView.h"
@@ -24,8 +22,8 @@
 @property (nonatomic, weak) IBOutlet UITextField *passwordInput;
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @property (nonatomic, strong) HTProgressHUD *HUD;
+@property (nonatomic) NSInteger threadCounter;
 @end
 
 
@@ -37,14 +35,6 @@
     if(!_dataFetcher)
         _dataFetcher = [AppFactory fetcherFromConfiguration];
     return _dataFetcher;
-}
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    if(!_managedObjectContext)
-        _managedObjectContext = [[CentrisManagedObjectContext sharedInstance] managedObjectContext];
-    
-    return _managedObjectContext;
 }
 
 // Lazy instantiate
@@ -87,40 +77,60 @@
 
 #pragma mark - UI Handlers
 - (IBAction)loginButtonPushed:(id)sender {
+    id context = [AppFactory managedObjectContext];
     [self.view endEditing:YES];
-	NSString *email = self.emailInput.text;
-	NSString *pass = self.passwordInput.text;
+	NSString *username = self.emailInput.text;
+	NSString *password = self.passwordInput.text;
     
     [self displayHUDWithText:@"Skrái þig inn"];
-    dispatch_queue_t workQ = dispatch_queue_create("Centris fetch", NULL);
-    dispatch_async(workQ, ^{
-        [self updateHUDWithText:@"Sæki notandaupplýsingar" andProgress:0.2];
-        sleep(1);
-        User *user = [self doUserLoginWithEmail:email andPassword:pass];
-        if (user) {
-            [self fetchCourseInstancesForUserWithSSN:user.ssn];
+    [self updateHUDWithText:@"Sæki notandaupplýsingar" addProgress:0.2];
+    [self.dataFetcher loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [User userWithCentrisInfo:responseObject inManagedObjectContext:context];
+        [self storeInKeychainUsername:username andPassword:password];
+        
+        [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
+        [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Got %d courses", [responseObject count]);
+            for (NSDictionary *courseInst in responseObject) {
+                [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
+            }
             
-            
-            [self updateHUDWithText:@"Sæki stundatöflu" andProgress:0.2];
-            [self fetchScheduleForUserWithSSN:user.ssn];
-            sleep(1);
-            
-            [self updateHUDWithText:@"Sæki verkefni" andProgress:0.2];
-            [self fetchAssignmentsForUserWithSSN:user.ssn];
-            sleep(1);
-            
-            dispatch_async(dispatch_get_main_queue(), ^{ // And finally
-                [self hideHUD];
-                // and finish by delegate that we want to go inside (TWSS)
+            // Get scheduleEvents
+            [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
+            [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d scheduleEvents", [responseObject count]);
+                for (NSDictionary *event in responseObject) {
+                    [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:context];
+                }
+                
                 [self delegateFinishedLoggingInWithValidUser];
-            });
-        } else {
-            [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
-                                  title:@"Notandi fannst ekki"
-                      cancelButtonTitle:@"OK"];
-            [self hideHUD];
-        }
-    });
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting Schedule Events");
+            }];
+            
+            // Get assignments
+            [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d assignments", [responseObject count]);
+                for (NSDictionary *assignment in responseObject) {
+                    [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:context];
+                }
+                [self delegateFinishedLoggingInWithValidUser];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting assignments");
+            }];
+            
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error getting Courses");
+        }];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [self promptUserWithMessage:@"Netfang eða lykilorð er vitlaust. Vinsamlegast reyndu aftur."
+                              title:@"Notandi fannst ekki"
+                  cancelButtonTitle:@"OK"];
+        [self hideHUD];
+        NSLog(@"Error in login");
+    }];
 }
 
 #pragma mark - Selectors & Delegates
@@ -178,67 +188,18 @@
     [UIView commitAnimations];
 }
 
-#pragma mark - Data methods
-
-// Authenticates user to API and stores him in Core Data. Returns a
-- (User *)doUserLoginWithEmail:(NSString *)email andPassword:(NSString *)password
-{
-    User *user = nil;
-    NSDictionary *userInfo = [self.dataFetcher loginUserWithEmail:email andPassword:password];
-    if (userInfo) {
-        [self storeInKeychainEmail:email andPassword:password];
-        user = [User userWithCentrisInfo:userInfo inManagedObjectContext:self.managedObjectContext];
-    }
-    return user;
-}
-
-// Will make a fetch request to the API for a given SSN and store the results (if any)
-// in Core Data
-- (void)fetchCourseInstancesForUserWithSSN:(NSString *)SSN
-{
-    [self.dataFetcher getCoursesForStudentWithSSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got %d courses", [responseObject count]);
-        for (NSDictionary *courseInst in responseObject) {
-            [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:self.managedObjectContext];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error");
-    }];
-}
-
-- (void)fetchScheduleForUserWithSSN:(NSString *)SSN
-{
-    [self.dataFetcher getScheduleBySSN:SSN success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got %d scheduleEvents", [responseObject count]);
-        for (NSDictionary *event in responseObject) {
-            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:self.managedObjectContext];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error");
-    }];
-
-}
-
-- (void)fetchAssignmentsForUserWithSSN:(NSString *)SSN
-{
-    [self.dataFetcher getAssignmentsForCourseWithCourseID:@"" inSemester:@"" success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got %d assignments", [responseObject count]);
-        for (NSDictionary *assignment in responseObject) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:self.managedObjectContext];
-        }
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error");
-    }];
-
-}
-
 #pragma mark - Delegators
 
 - (void)delegateFinishedLoggingInWithValidUser
 {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.delegate didFinishLoginWithValidUser];
-    });
+    if (self.threadCounter < 1)
+        self.threadCounter++;
+    else {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self hideHUD];
+            [self.delegate didFinishLoginWithValidUser];
+        });
+    }
 }
 
 #pragma mark - Helper methods
@@ -249,7 +210,7 @@
     [self.HUD showInView:self.view animated:YES];
 }
 
-- (void)updateHUDWithText:(NSString *)text andProgress:(CGFloat)progress
+- (void)updateHUDWithText:(NSString *)text addProgress:(CGFloat)progress
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         self.HUD.progress += progress;
@@ -261,14 +222,14 @@
 {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.HUD hideWithAnimation:YES];
+        self.HUD = nil;
     });
 }
 
-- (void)storeInKeychainEmail:(NSString *)email andPassword:(NSString *)password
+- (void)storeInKeychainUsername:(NSString *)username andPassword:(NSString *)password
 {
-    KeychainItemWrapper *keychainItem = [[KeychainItemWrapper alloc] initWithIdentifier:[AppFactory keychainFromConfiguration] accessGroup:nil];
-    [keychainItem setObject:email forKey:(__bridge id)(kSecAttrAccount)];
-    [keychainItem setObject:password forKey:(__bridge id)(kSecValueData)];
+    [[AppFactory keychainItemWrapper] setObject:username forKey:(__bridge id)(kSecAttrAccount)];
+    [[AppFactory keychainItemWrapper] setObject:password forKey:(__bridge id)(kSecValueData)];
 }
 
 - (void)promptUserWithMessage:(NSString *)message title:(NSString *)title cancelButtonTitle:(NSString *)cancelButtonTitle
