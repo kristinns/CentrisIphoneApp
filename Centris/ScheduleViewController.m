@@ -66,11 +66,12 @@
     if (!self.updated) {
         self.updated = YES;
         [self fetchScheduledEventsFromAPI];
-        
-    } else {
-        self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate inManagedObjectContext:[AppFactory managedObjectContext]];
-        [self.tableView reloadData];
     }
+        
+    self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate
+                                        inManagedObjectContext:[AppFactory managedObjectContext]];
+    [self.tableView reloadData];
+    
 }
 
 // Function that calls the API and stores events in Core data
