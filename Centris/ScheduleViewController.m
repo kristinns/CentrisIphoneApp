@@ -152,11 +152,19 @@
     else
     return minutes;
 }
+#pragma mark - Table delegate methods
+-(void)userDidRefresh:(UIRefreshControl *)refreshControl
+{
+    
+}
 
 #pragma mark - Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(userDidRefresh:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
     self.updated = NO;
     self.scheduleEvents = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
@@ -179,7 +187,7 @@
     [self updateDatePicker];
 }
 
-#pragma DatePicker delegate methods
+#pragma mark - DatePicker delegate methods
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
     // If right, add 1 week, if left, subtract 1 week
