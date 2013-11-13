@@ -67,6 +67,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
     // Change title for navigation controller
     self.title = @"Verkefni";
     self.allAssignments = NO;
@@ -89,7 +90,7 @@
     [self fetchAssignmentsFromCoreData];
     if ([self.assignments count] == 0) { // means there is nothing in core data
         // DO API CALL
-        [self fetchAssignmentsFromAPIForUserWithSSN:nil];
+        [self fetchAssignmentsFromAPI];
     }
 }
 
@@ -109,7 +110,7 @@
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPIForUserWithSSN:(NSString *)SSN
+-(void)fetchAssignmentsFromAPI
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
@@ -122,6 +123,13 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignments");
     }];
+}
+
+#pragma mark - Table delegate methods
+
+-(void)userDidRefresh
+{
+    
 }
 
 #pragma mark - Table methods

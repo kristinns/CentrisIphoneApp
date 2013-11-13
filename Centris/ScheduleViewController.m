@@ -85,20 +85,16 @@
 // Function that calls the API and stores events in Core data
 - (void)fetchScheduledEventsFromAPI
 {
-    NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-    User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
-    if (user) {
-        [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Got %d scheduleEvents", [responseObject count]);
-            for (NSDictionary *event in responseObject) {
-				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
-			}
-            [self fetchScheduleEventsFromCoreData];
-            [self.refreshControl endRefreshing];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error");
-        }];
-    }
+    [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d scheduleEvents", [responseObject count]);
+        for (NSDictionary *event in responseObject) {
+            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
+        }
+        [self fetchScheduleEventsFromCoreData];
+        [self.refreshControl endRefreshing];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+    }];
 }
 
 #pragma mark - Table methods
