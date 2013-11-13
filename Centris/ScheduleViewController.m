@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSDate *datePickerDate;
 @property (nonatomic, strong) NSDate *datePickerSelectedDate;
 @property (nonatomic, strong) NSDate *datePickerToday;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic) BOOL updated;
 @end
 
@@ -44,8 +45,8 @@
     [self fetchScheduleEventsFromCoreData];
 }
 
+#pragma mark - Getters and setters
 
-#pragma mark - Getters
 - (NSArray *)scheduleEvents
 {
     if (!_scheduleEvents)
@@ -58,6 +59,13 @@
     if(!_dataFetcher)
         _dataFetcher = [AppFactory fetcherFromConfiguration];
     return _dataFetcher;
+}
+
+-(UIRefreshControl *)refreshControl
+{
+    if (!_refreshControl)
+        _refreshControl = [[UIRefreshControl alloc] init];
+    return _refreshControl;
 }
 
 #pragma mark - Methods
@@ -85,7 +93,8 @@
             for (NSDictionary *event in responseObject) {
 				[ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
 			}
-             [self fetchScheduleEventsFromCoreData];
+            [self fetchScheduleEventsFromCoreData];
+            [self.refreshControl endRefreshing];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             NSLog(@"Error");
         }];
@@ -152,19 +161,20 @@
     else
     return minutes;
 }
+
 #pragma mark - Table delegate methods
--(void)userDidRefresh:(UIRefreshControl *)refreshControl
+
+-(void)userDidRefresh
 {
-    
+    [self fetchScheduledEventsFromAPI];
 }
 
 #pragma mark - Setup
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-    [refreshControl addTarget:self action:@selector(userDidRefresh:) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:refreshControl];
+    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
     self.updated = NO;
     self.scheduleEvents = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
