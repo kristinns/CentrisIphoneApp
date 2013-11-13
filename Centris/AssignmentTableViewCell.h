@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 
 typedef enum AssignmentEventState {
-    AssignmentIsFinished = 0,
-    AssignmentIsNotFinished = 1
+    AssignmentWasHandedIn = 0,
+    AssignmentWasNotHandedIn = 1
 } AssignmentEventState;
 
 @interface AssignmentTableViewCell : UITableViewCell

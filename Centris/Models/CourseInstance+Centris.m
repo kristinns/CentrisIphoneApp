@@ -8,6 +8,7 @@
 
 #import "CourseInstance+Centris.h"
 #import "CDDataFetcher.h"
+#import "DataFetcher.h"
 
 @implementation CourseInstance (Centris)
 
@@ -42,10 +43,10 @@
     
     if (![matches count]) { // no result, proceed with storing
         courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
-        courseInstance.id = centrisInfo[@"ID"];
-        courseInstance.courseID = centrisInfo[@"CourseID"];
-        courseInstance.name = centrisInfo[@"Name"];
-        courseInstance.semester = centrisInfo[@"Semester"];
+        courseInstance.id = centrisInfo[COURSE_INSTANCE_ID];
+        courseInstance.courseID = centrisInfo[COURSE_ID];
+        courseInstance.name = centrisInfo[COURSE_NAME];
+        courseInstance.semester = centrisInfo[COURSE_SEMESTER];
     } else {
         return [matches lastObject];
     }

@@ -7,7 +7,6 @@
 
 #import "AssignmentsTableViewController.h"
 #import "Assignment+Centris.h"
-#import "CentrisManagedObjectContext.h"
 #import "CourseInstance.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
@@ -17,6 +16,7 @@
 
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
+#define PADDING_VERTICAL 15.0
 
 #pragma mark - Interface
 
@@ -31,7 +31,7 @@
 @implementation AssignmentsTableViewController
 
 - (IBAction)togglerWasPushed:(UISegmentedControl *)sender {
-    self.allAssignments = sender.selectedSegmentIndex == 1;
+    self.allAssignments = sender.selectedSegmentIndex == 1; // True if All assignment is selected which has index 1
     [self fetchAssignmentsFromCoreData];
     [self.tableView reloadData];
 }
@@ -41,8 +41,8 @@
 - (NSArray *)courses
 {
     // Get data from CentrisDataFetcher
-    if (!_courses) _courses = [CourseInstance courseInstancesInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
-    
+    if (!_courses)
+        _courses = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
     return _courses;
 }
 
@@ -50,15 +50,15 @@
 - (NSArray *)assignments
 {
     // Get data from CentrisDataFetcher
-    if (!_assignments) _assignments = [[NSMutableArray alloc] init];
+    if (!_assignments)
+        _assignments = [[NSMutableArray alloc] init];
     return _assignments;
 }
 
 - (id<DataFetcher>)dataFetcher
 {
-	if (!_dataFetcher) {
+	if (!_dataFetcher)
 		_dataFetcher = [AppFactory fetcherFromConfiguration];
-	}
 	return _dataFetcher;
 }
 
@@ -71,7 +71,6 @@
     self.title = @"Verkefni";
     self.allAssignments = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
-	self.navigationController.navigationBar.translucent = NO;
     [self setupAssignments];
 }
 
@@ -100,12 +99,11 @@
 {
     // TODO, check toggler
     if (self.allAssignments == YES) {
-        self.assignments = [Assignment assignmentsInManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
+        self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
     } else {
         NSDate *today = [NSDate date];
         self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
-                                                  inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
-
+                                                  inManagedObjectContext:[AppFactory managedObjectContext]];
     }
 }
 
@@ -113,18 +111,17 @@
 // and add the assignments (if any) to self.assignments
 -(void)fetchAssignmentsFromAPIForUserWithSSN:(NSString *)SSN
 {
-//    dispatch_queue_t fetchQ = dispatch_queue_create("Centris Fetch", NULL);
-//    dispatch_async(fetchQ, ^{
-//        NSArray *apiAssignments = [self.dataFetcher getAssignmentsForUserWithSSN:SSN];
-//        [[[CentrisManagedObjectContext sharedInstance] managedObjectContext] performBlock:^{
-//            for (NSDictionary *assignment in apiAssignments) {
-//                [Assignment addAssignmentWithCentrisInfo:assignment
-//                                  inManagedObjectContext:[[CentrisManagedObjectContext sharedInstance] managedObjectContext]];
-//            }
-//            [self fetchAssignmentsFromCoreData];
-//            [self.tableView reloadData];
-//        }];
-//    });
+    [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d assignments", [responseObject count]);
+        for (NSDictionary *assignment in responseObject) {
+            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
+        }
+        
+        [self fetchAssignmentsFromCoreData];
+        [self.tableView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error getting assignments");
+    }];
 }
 
 #pragma mark - Table methods
@@ -144,7 +141,7 @@
 {
     if (self.allAssignments == YES)
         return [self.courses count];
-    else
+    else // If showing next assignments there is only one section
         return 1;
 }
 
@@ -159,11 +156,11 @@
         cell.detailUpperLabel.text = assignment.isInCourseInstance.courseID;
     } else {
         CourseInstance *courseInstance = [self.courses objectAtIndex:indexPath.section];
-        NSSortDescriptor *nameDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"datePublished" ascending:YES];
-        NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:nameDescriptor]];
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
+        NSArray *sortedAssignmentList = [courseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
         assignment = [sortedAssignmentList objectAtIndex:indexPath.row];
         if (assignment.grade != nil)
-            cell.detailUpperLabel.text = [NSString stringWithFormat:@"%@", assignment.grade];
+            cell.detailUpperLabel.text = [NSString stringWithFormat:@"%.1f", [assignment.grade floatValue]];
         else
             cell.detailUpperLabel.text = @"";
     }
@@ -176,9 +173,9 @@
     cell.detailLowerLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
     cell.displayGrade = self.allAssignments;
     if (assignment.handInDate != nil)
-        cell.assignmentEventState = AssignmentIsFinished;
+        cell.assignmentEventState = AssignmentWasHandedIn;
     else
-        cell.assignmentEventState = AssignmentIsNotFinished;
+        cell.assignmentEventState = AssignmentWasNotHandedIn;
     return cell;
 }
 
@@ -186,7 +183,8 @@
 {
     if (self.allAssignments == YES)
         return SECTION_HEIGHT;
-    return 0;
+    else
+        return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -197,7 +195,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     if (self.allAssignments == YES) {
-        CGRect frame = CGRectMake(15, 0, tableView.bounds.size.width-15, 26);
+        CGRect frame = CGRectMake(PADDING_VERTICAL, 0, tableView.bounds.size.width-PADDING_VERTICAL, SECTION_HEIGHT);
         UIView *view = [[UIView alloc] initWithFrame:frame];
         view.backgroundColor = [CentrisTheme grayLightColor];
         UILabel *sectionHeader = [[UILabel alloc] initWithFrame:frame];
@@ -207,7 +205,8 @@
         [view addSubview:sectionHeader];
         return view;
     }
-    return nil;
+    else
+        return nil;
 }
 
 #pragma mark - Segue methods

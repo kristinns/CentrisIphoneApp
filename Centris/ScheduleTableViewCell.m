@@ -40,6 +40,9 @@
     [self.seperatorView removeFromSuperview];
     self.seperatorView = nil;
     self.seperatorLabel = nil;
+    // Set default again
+    self.scheduleEventState = ScheduleEventHasNotBegan;
+    self.topBorderIsHidden = NO;
 }
 
 - (void)setup
@@ -60,16 +63,15 @@
     self.courseNameLabel.textColor = [CentrisTheme blackLightTextColor];
     self.courseNameLabel.font = [CentrisTheme headingMediumFont];
     
-    // Default not began
+    // Default
     self.scheduleEventState = ScheduleEventHasNotBegan;
     self.topBorderIsHidden = NO;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
-    //[super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+    // Disable selected
+    [super setSelected:NO animated:animated];
 }
 
 - (void)setTopBorderIsHidden:(BOOL)topBorderIsHidden
@@ -97,9 +99,7 @@
 {
     if (self.bounds.size.height > 87)
         self.bounds = CGRectMake(self.bounds.origin.x, self.bounds.origin.y, self.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
-    NSLog(@"%@ - %f", seperatorBreakText, self.bounds.size.height);
     if (!_seperatorBreakText) {
-        //if (self.bounds.size.height == 87) {
             self.seperatorView = [[UIView alloc] initWithFrame:CGRectMake(0, self.bounds.size.height-SEPERATOR_HEIGHT, self.bounds.size.width, SEPERATOR_HEIGHT)];
             self.seperatorView.backgroundColor = [CentrisTheme grayLightColor];
             self.seperatorLabel = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, self.bounds.size.width, SEPERATOR_HEIGHT)];
@@ -108,7 +108,6 @@
             self.seperatorLabel.font = [CentrisTheme headingSmallFont];
             [self.seperatorView addSubview:self.seperatorLabel];
             [self addSubview:self.seperatorView];
-       // }
     } else {
         self.seperatorLabel.text = seperatorBreakText;
     }

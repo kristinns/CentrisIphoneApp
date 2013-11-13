@@ -8,7 +8,7 @@
 
 #import "ScheduleEvent+Centris.h"
 #import "CourseInstance+Centris.h"
-#import "CentrisManagedObjectContext.h"
+#import "DataFetcher.h"
 #import "CDDataFetcher.h"
 #import "NSDate+Helper.h"
 
@@ -51,13 +51,13 @@
     
     if (![matches count]) { // no result, put the event in core data
 		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
-		event.starts = [NSDate formatDateString:eventInfo[@"StartTime"]];
-		event.ends = [NSDate formatDateString:eventInfo[@"EndTime"]];
-		event.eventID = [NSNumber numberWithInt:[eventInfo[@"ID"] intValue]];
-		event.roomName = eventInfo[@"RoomName"];
-		event.typeOfClass = eventInfo[@"TypeOfClass"];
-		event.courseName = eventInfo[@"CourseName"];
-		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[eventInfo[@"CourseID"] intValue] inManagedObjectContext:context];
+		event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
+		event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+		event.eventID = [NSNumber numberWithInt:[eventInfo[EVENT_ID] intValue]];
+		event.roomName = eventInfo[EVENT_ROOM_NAME];
+		event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
+		event.courseName = eventInfo[EVENT_COURSE_NAME];
+		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[eventInfo[EVENT_COURSE_INSTANCE_ID] intValue] inManagedObjectContext:context];
         event.hasCourseInstance = courseInst;
 	} else { // event found, return it
 		event = [matches lastObject];
