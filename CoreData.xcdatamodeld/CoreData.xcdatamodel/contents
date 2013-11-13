@@ -14,7 +14,7 @@
         <attribute name="studentMemo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teacherMemo" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="weight" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="weight" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasAssignments" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <entity name="CourseInstance" representedClassName="CourseInstance" syncable="YES">
