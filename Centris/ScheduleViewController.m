@@ -73,8 +73,7 @@
 {
     if ([self viewNeedsToBeUpdated]) {
         // update last updated
-        NSDate *now = [NSDate date];
-        [[AppFactory sharedDefaults] setObject:now forKey:SCHEDULEVC_LAST_UPDATED];
+        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULEVC_LAST_UPDATED];
         [self fetchScheduledEventsFromAPI];
     }
         
@@ -177,6 +176,7 @@
 
 -(void)userDidRefresh
 {
+    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULEVC_LAST_UPDATED];
     [self fetchScheduledEventsFromAPI];
 }
 

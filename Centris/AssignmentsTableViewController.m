@@ -88,8 +88,7 @@
 {
     if ([self viewNeedsToBeUpdated]) {
         // update last updated
-        NSDate *now = [NSDate date];
-        [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENTTVC_LAST_UPDATED];
         [self fetchAssignmentsFromAPI];
     }
     if (self.allAssignments == YES) {
@@ -136,8 +135,7 @@
 
 -(void)userDidRefresh
 {
-    NSDate *now = [NSDate date];
-    [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENTTVC_LAST_UPDATED];
     [self fetchAssignmentsFromAPI];
 }
 
