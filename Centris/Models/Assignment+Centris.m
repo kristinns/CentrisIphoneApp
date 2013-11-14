@@ -32,13 +32,18 @@
         }
     }
     // find assignments that needs to be deleted, if any
-    NSMutableSet *setToBeDeleted = [NSMutableSet setWithArray:[self assignmentsInManagedObjectContext:context]];
-    NSMutableSet *set = [NSMutableSet setWithArray:assignments];
-    [setToBeDeleted intersectSet:set];
+    NSArray *assignmentsInCoreData = [self assignmentsInManagedObjectContext:context];
+    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init ];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (Assignment *a in assignmentsInCoreData)
+        [setToBeDeleted addObject:a.id];
+    for (NSDictionary *dic in assignments)
+        [set addObject:dic[ASSIGNMENT_ID]];
+    [setToBeDeleted minusSet:set];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
-    if ([setToBeDeleted count]) { // there are some assignments that needs to be removed
-        for (Assignment *deleteAssignment in arrayToBeDeleted) {
-            Assignment *assignment = [[self assignmentWithID:assignment.id inManagedObjectContext:context] lastObject];
+    if ([arrayToBeDeleted count]) { // there are some assignments that needs to be removed
+        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
+            Assignment *assignment = [[self assignmentWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
             [context deleteObject:assignment];
         }
     }

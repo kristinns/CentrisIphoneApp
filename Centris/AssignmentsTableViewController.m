@@ -136,6 +136,8 @@
 
 -(void)userDidRefresh
 {
+    NSDate *now = [NSDate date];
+    [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
     [self fetchAssignmentsFromAPI];
 }
 
