@@ -16,14 +16,10 @@
 //	[tabController setSelectedIndex:2]; // Veitan
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
 	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
-        NSString *userEmail = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-        User *user = [User userWithUsername:userEmail inManagedObjectContext:[AppFactory managedObjectContext]];
+        NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+        User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
         if (user)
             [self didFinishLoginWithValidUser];
-        else {
-            LoginViewController *loginController = (LoginViewController *)rootViewController;
-            loginController.delegate = self;
-        }
 	}
     // Debug
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
@@ -46,6 +42,7 @@
     return YES;
 }
 
+#pragma mark - Login Delegates
 -(void)didFinishLoginWithValidUser
 {
     [self saveContext];
@@ -53,6 +50,17 @@
 	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
 	[tabBarController setSelectedIndex:2]; // Veitan
 	[self.window setRootViewController:tabBarController];
+}
+
+#pragma mark - Logout delegates
+-(void)didLogOutUser
+{
+    [self saveContext];
+    // Destroy username from keychain
+    [[AppFactory keychainItemWrapper] setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    [self.window setRootViewController:loginViewController];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

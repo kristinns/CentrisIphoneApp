@@ -11,6 +11,7 @@
 		18856AD318206DE7009862CA /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD218206DE7009862CA /* CourseInstance.m */; };
 		18856AD618206F33009862CA /* CDDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD518206F33009862CA /* CDDataFetcher.m */; };
 		188C7DA918341FBC0030CB09 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C7DA818341FBC0030CB09 /* Assignment.m */; };
+		188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C7DAC183528F00030CB09 /* ProfileViewController.m */; };
 		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
 		18E6F627182C03CE0073AB9A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6F626182C03CE0073AB9A /* User.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
@@ -71,6 +72,8 @@
 		18856AD518206F33009862CA /* CDDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDDataFetcher.m; sourceTree = "<group>"; };
 		188C7DA718341FBC0030CB09 /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		188C7DA818341FBC0030CB09 /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		188C7DAB183528F00030CB09 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		188C7DAC183528F00030CB09 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
 		18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CourseInstance+Centris.m"; path = "Models/CourseInstance+Centris.m"; sourceTree = "<group>"; };
 		18E6F625182C03CE0073AB9A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
@@ -166,6 +169,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		188C7DAA183528BA0030CB09 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				188C7DAB183528F00030CB09 /* ProfileViewController.h */,
+				188C7DAC183528F00030CB09 /* ProfileViewController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -309,6 +321,7 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				188C7DAA183528BA0030CB09 /* Profile */,
 				969C94DA180807C600356C7C /* Login */,
 				966A499817E9B632009C342B /* Schedule */,
 				19879C7717AF1AB500FBC672 /* Assignment */,
@@ -583,6 +596,7 @@
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
 				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
+				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
