@@ -72,7 +72,11 @@
 + (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", ID];
-    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent" forKey:@"eventID" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"eventID"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
 }
 
 + (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context
