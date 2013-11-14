@@ -104,7 +104,7 @@
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPI
+- (void)fetchAssignmentsFromAPI
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
@@ -119,7 +119,7 @@
 
 // Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
 // If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
--(BOOL)viewNeedsToBeUpdated
+- (BOOL)viewNeedsToBeUpdated
 {
     NSDate *now = [NSDate date];
     NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:ASSIGNMENTTVC_LAST_UPDATED];

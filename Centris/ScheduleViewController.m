@@ -17,6 +17,7 @@
 
 #define ROW_HEIGHT 61.0
 #define SEPERATOR_HEIGHT 26.0
+#define SCHEDULEVC_LAST_UPDATED @"ScheduleVCLastUpdate"
 
 @interface ScheduleViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
@@ -27,7 +28,6 @@
 @property (nonatomic, strong) NSDate *datePickerSelectedDate;
 @property (nonatomic, strong) NSDate *datePickerToday;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
-@property (nonatomic) BOOL updated;
 @end
 
 @implementation ScheduleViewController
@@ -71,8 +71,10 @@
 #pragma mark - Methods
 - (void )fetchScheduleEventsFromCoreData
 {
-    if (!self.updated) {
-        self.updated = YES;
+    if ([self viewNeedsToBeUpdated]) {
+        // update last updated
+        NSDate *now = [NSDate date];
+        [[AppFactory sharedDefaults] setObject:now forKey:SCHEDULEVC_LAST_UPDATED];
         [self fetchScheduledEventsFromAPI];
     }
         
@@ -87,14 +89,27 @@
 {
     [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d scheduleEvents", [responseObject count]);
-        for (NSDictionary *event in responseObject) {
-            [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:[AppFactory managedObjectContext]];
-        }
+        [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
         [self fetchScheduleEventsFromCoreData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error");
     }];
+}
+
+// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
+// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:SCHEDULEVC_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - Table methods
@@ -171,7 +186,6 @@
     [super viewDidLoad];
     [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:self.refreshControl];
-    self.updated = NO;
     self.scheduleEvents = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
     self.title = @"Stundaskrá";
@@ -194,6 +208,7 @@
 }
 
 #pragma mark - DatePicker delegate methods
+
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
     // If right, add 1 week, if left, subtract 1 week
@@ -201,7 +216,7 @@
     self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];
     self.datePickerSelectedDate = [self.datePickerSelectedDate dateByAddingWeeks:addWeeks];
     [self updateDatePicker];
-    [self fetchScheduleEventsFromCoreData]; // Is this necessary?
+    [self fetchScheduleEventsFromCoreData];
 }
 
 - (void)datePickerDidSelectDayAtIndex:(NSInteger)dayIndex

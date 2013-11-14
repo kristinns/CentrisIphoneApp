@@ -18,6 +18,7 @@
 {
     for ( NSDictionary *assignmentInfo in assignments) {
         Assignment *assignment;
+        
         NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[@"ID"]];
         NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
         if (![matches count]) { // no results
@@ -29,9 +30,8 @@
             assignment = [matches lastObject];
             [self populateAssignmentFieldsForAssignment:assignment withAssignmentInfo:assignmentInfo inManagedObjectContext:context];
         }
-
     }
-    // now figure out what assignments needs to be deleted, if any
+    // find assignments that needs to be deleted, if any
     NSMutableSet *setToBeDeleted = [NSMutableSet setWithArray:[self assignmentsInManagedObjectContext:context]];
     NSMutableSet *set = [NSMutableSet setWithArray:assignments];
     [setToBeDeleted intersectSet:set];

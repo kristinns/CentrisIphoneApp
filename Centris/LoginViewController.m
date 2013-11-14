@@ -99,10 +99,7 @@
             [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
             [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d scheduleEvents", [responseObject count]);
-                for (NSDictionary *event in responseObject) {
-                    [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:context];
-                }
-                
+                [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting Schedule Events");
