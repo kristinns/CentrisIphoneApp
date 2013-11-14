@@ -6,6 +6,7 @@
 #import "AppDelegate.h"
 #import "AppFactory.h"
 #import "User+Centris.h"
+#import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 
 @implementation AppDelegate
 
@@ -24,7 +25,6 @@
             loginController.delegate = self;
         }
 	}
-    
     // Debug
 //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 //	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
@@ -39,6 +39,9 @@
                                                            }];
     [[UINavigationBar appearance] setBarTintColor:[CentrisTheme redColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    
+    // AFNetworking NetworkAcitvityIndicator
+    [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
 
     return YES;
 }

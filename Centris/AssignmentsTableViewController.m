@@ -17,7 +17,7 @@
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
 #define PADDING_VERTICAL 15.0
-
+#define ASSIGNMENTTVC_LAST_UPDATED @"AssignmentTVCLastUpdate"
 #pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
@@ -67,37 +67,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
     // Change title for navigation controller
     self.title = @"Verkefni";
     self.allAssignments = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
-    [self setupAssignments];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fetchAssignmentsFromCoreData];
 }
 
 #pragma mark - Methods
-
-// Function that gets called when there is nothing in the database or
-// when the user decides to update the information by manually refreshing.
--(void)reloadData
-{
-    // TODO
-    return;
-}
-
-- (void)setupAssignments
-{
-    [self fetchAssignmentsFromCoreData];
-    if ([self.assignments count] == 0) { // means there is nothing in core data
-        // DO API CALL
-        [self fetchAssignmentsFromAPIForUserWithSSN:nil];
-    }
-}
 
 // Will do a fetch request to Core data and add the assignments
 // (if any) to self.assignments
 - (void )fetchAssignmentsFromCoreData
 {
-    // TODO, check toggler
+    if ([self viewNeedsToBeUpdated]) {
+        // update last updated
+        NSDate *now = [NSDate date];
+        [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+        [self fetchAssignmentsFromAPI];
+    }
     if (self.allAssignments == YES) {
         self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
     } else {
@@ -105,23 +99,44 @@
         self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
                                                   inManagedObjectContext:[AppFactory managedObjectContext]];
     }
+    [self.tableView reloadData];
 }
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPIForUserWithSSN:(NSString *)SSN
+- (void)fetchAssignmentsFromAPI
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
-        for (NSDictionary *assignment in responseObject) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
-        }
-        
+        [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+        // call success block if any
         [self fetchAssignmentsFromCoreData];
-        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignments");
     }];
+}
+
+// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
+// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:ASSIGNMENTTVC_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+#pragma mark - Table delegate methods
+
+-(void)userDidRefresh
+{
+    [self fetchAssignmentsFromAPI];
 }
 
 #pragma mark - Table methods
