@@ -57,13 +57,17 @@
         }
     }
     // find events that need to be removed, if any
-    NSMutableSet *setToBeDeleted = [NSMutableSet setWithArray:[self eventsInManagedObjectContext:context]];
-    NSMutableSet *set = [NSMutableSet setWithArray:events];
-    [setToBeDeleted intersectSet:set];
+    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
+    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (ScheduleEvent *e in eventsInCoreData)
+        [setToBeDeleted addObject:e.eventID];
+    for (NSDictionary *dic in events)
+        [set addObject:dic[EVENT_ID]];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
-    if ([setToBeDeleted count]) { // there are some assignments that needs to be removed
-        for (ScheduleEvent *deleteScheduleEvent in arrayToBeDeleted) {
-            ScheduleEvent *scheduleEvent = [[self eventWithID:deleteScheduleEvent.eventID inManagedObjectContext:context] lastObject];
+    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
+        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
+            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
             [context deleteObject:scheduleEvent];
         }
     }
