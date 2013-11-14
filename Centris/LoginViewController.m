@@ -192,7 +192,9 @@
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideHUD];
-            [self.delegate didFinishLoginWithValidUser];
+//            [self.delegate didFinishLoginWithValidUser];
+            id<LoginViewControllerDelegate> appDelegate = (id<LoginViewControllerDelegate>)[[UIApplication sharedApplication] delegate];
+            [appDelegate didFinishLoginWithValidUser];
         });
     }
 }

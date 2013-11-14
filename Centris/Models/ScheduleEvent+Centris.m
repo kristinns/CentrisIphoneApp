@@ -64,6 +64,7 @@
         [setToBeDeleted addObject:e.eventID];
     for (NSDictionary *dic in events)
         [set addObject:dic[EVENT_ID]];
+    [setToBeDeleted minusSet:set];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
     if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
         for (int i = 0; i < [arrayToBeDeleted count]; i++) {
