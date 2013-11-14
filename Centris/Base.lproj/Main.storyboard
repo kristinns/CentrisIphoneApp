@@ -459,10 +459,10 @@
             </objects>
             <point key="canvasLocation" x="913" y="874"/>
         </scene>
-        <!--Table View Controller - Tilkynnningar-->
+        <!--Notification Table View Controller - Tilkynnningar-->
         <scene sceneID="he6-Ox-xdc">
             <objects>
-                <tableViewController id="dSH-56-3ik" sceneMemberID="viewController">
+                <tableViewController id="dSH-56-3ik" customClass="NotificationTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gpx-Yi-eyr">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
