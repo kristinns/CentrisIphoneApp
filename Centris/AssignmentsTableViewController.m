@@ -104,11 +104,15 @@
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
+        [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+        // store results in Core data
+//        for (NSDictionary *assignment in responseObject) {
+//            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
+//        }
+        // update last updated
         NSDate *now = [NSDate date];
         [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
-        for (NSDictionary *assignment in responseObject) {
-            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
-        }
+        // call success block if any
         if (success) {
             success();
         }
@@ -117,15 +121,15 @@
     }];
 }
 
+// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
+// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
 -(BOOL)viewNeedsToBeUpdated
 {
-    NSUserDefaults *defaults = [AppFactory sharedDefaults];
     NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [defaults objectForKey:ASSIGNMENTTVC_LAST_UPDATED];
-    if (!lastUpdated) {
-        [defaults setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:ASSIGNMENTTVC_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
         return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= 7200.0f) {
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
         return YES;
     } else {
         return NO;
