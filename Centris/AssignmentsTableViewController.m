@@ -86,8 +86,12 @@
 // (if any) to self.assignments
 - (void )fetchAssignmentsFromCoreData
 {
-    if ([self viewNeedsToBeUpdated])
-        [self fetchAssignmentsFromAPIWithSuccess:nil];
+    if ([self viewNeedsToBeUpdated]) {
+        // update last updated
+        NSDate *now = [NSDate date];
+        [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+        [self fetchAssignmentsFromAPI];
+    }
     if (self.allAssignments == YES) {
         self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
     } else {
@@ -100,22 +104,14 @@
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPIWithSuccess:(void(^)())success
+-(void)fetchAssignmentsFromAPI
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
         [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
-        // store results in Core data
-//        for (NSDictionary *assignment in responseObject) {
-//            [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
-//        }
-        // update last updated
-        NSDate *now = [NSDate date];
-        [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
         // call success block if any
-        if (success) {
-            success();
-        }
+        [self fetchAssignmentsFromCoreData];
+        [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignments");
     }];
@@ -140,10 +136,7 @@
 
 -(void)userDidRefresh
 {
-    [self fetchAssignmentsFromAPIWithSuccess:^ {
-        [self fetchAssignmentsFromCoreData];
-        [self.refreshControl endRefreshing];
-    }];
+    [self fetchAssignmentsFromAPI];
 }
 
 #pragma mark - Table methods
