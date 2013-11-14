@@ -23,7 +23,7 @@
     // BUG IN IOS 7, TEMP FIX
     UIView *fixItView = [[UIView alloc] init];
     fixItView.frame = CGRectMake(0, 0, 320, 20);
-    fixItView.backgroundColor = [CentrisTheme redColor]; //change this to match your navigation bar
+    fixItView.backgroundColor = [CentrisTheme redColor];
     [self.view addSubview:fixItView];
     self.navBar.translucent = NO;
 }

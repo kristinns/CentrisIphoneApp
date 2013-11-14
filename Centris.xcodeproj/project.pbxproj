@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
+		18805FCF18358E6C00CBE2CD /* NotificationTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18805FCE18358E6C00CBE2CD /* NotificationTableViewController.m */; };
 		18856AD318206DE7009862CA /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD218206DE7009862CA /* CourseInstance.m */; };
 		18856AD618206F33009862CA /* CDDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD518206F33009862CA /* CDDataFetcher.m */; };
 		188C7DA918341FBC0030CB09 /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C7DA818341FBC0030CB09 /* Assignment.m */; };
@@ -66,6 +67,8 @@
 /* Begin PBXFileReference section */
 		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
 		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
+		18805FCD18358E6C00CBE2CD /* NotificationTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationTableViewController.h; sourceTree = "<group>"; };
+		18805FCE18358E6C00CBE2CD /* NotificationTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationTableViewController.m; sourceTree = "<group>"; };
 		18856AD118206DE7009862CA /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
 		18856AD218206DE7009862CA /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		18856AD418206F33009862CA /* CDDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataFetcher.h; sourceTree = "<group>"; };
@@ -169,6 +172,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18805FC918358DE600CBE2CD /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				18805FCD18358E6C00CBE2CD /* NotificationTableViewController.h */,
+				18805FCE18358E6C00CBE2CD /* NotificationTableViewController.m */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		188C7DAA183528BA0030CB09 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -321,6 +333,7 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				18805FC918358DE600CBE2CD /* Notifications */,
 				188C7DAA183528BA0030CB09 /* Profile */,
 				969C94DA180807C600356C7C /* Login */,
 				966A499817E9B632009C342B /* Schedule */,
@@ -582,6 +595,7 @@
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				188C7DA918341FBC0030CB09 /* Assignment.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
+				18805FCF18358E6C00CBE2CD /* NotificationTableViewController.m in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,

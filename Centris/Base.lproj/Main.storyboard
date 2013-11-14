@@ -459,7 +459,7 @@
             </objects>
             <point key="canvasLocation" x="913" y="874"/>
         </scene>
-        <!--Table View Controller - Root View Controller-->
+        <!--Table View Controller - Tilkynnningar-->
         <scene sceneID="he6-Ox-xdc">
             <objects>
                 <tableViewController id="dSH-56-3ik" sceneMemberID="viewController">
@@ -478,7 +478,7 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="8G7-qG-RE4"/>
+                    <navigationItem key="navigationItem" title="Tilkynnningar" id="8G7-qG-RE4"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="r8z-m6-pVq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -525,11 +525,11 @@
             </objects>
             <point key="canvasLocation" x="506" y="2237"/>
         </scene>
-        <!--Navigation Controller - Málið-->
+        <!--Navigation Controller - Tilkynningar-->
         <scene sceneID="a7j-em-YcA">
             <objects>
                 <navigationController definesPresentationContext="YES" id="QX3-a9-coO" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Málið" image="malid-icon" id="50w-k8-j5A">
+                    <tabBarItem key="tabBarItem" title="Tilkynningar" image="malid-icon" id="50w-k8-j5A">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vki-SW-SBw">
