@@ -17,7 +17,7 @@
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
 #define PADDING_VERTICAL 15.0
-
+#define ASSIGNMENTTVC_LAST_UPDATED @"AssignmentTVCLastUpdate"
 #pragma mark - Interface
 
 @interface AssignmentsTableViewController () <UITableViewDataSource>
@@ -72,33 +72,22 @@
     self.title = @"Verkefni";
     self.allAssignments = NO;
     self.tableView.backgroundColor = [UIColor whiteColor];
-    [self setupAssignments];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self fetchAssignmentsFromCoreData];
 }
 
 #pragma mark - Methods
-
-// Function that gets called when there is nothing in the database or
-// when the user decides to update the information by manually refreshing.
--(void)reloadData
-{
-    // TODO
-    return;
-}
-
-- (void)setupAssignments
-{
-    [self fetchAssignmentsFromCoreData];
-    if ([self.assignments count] == 0) { // means there is nothing in core data
-        // DO API CALL
-        [self fetchAssignmentsFromAPI];
-    }
-}
 
 // Will do a fetch request to Core data and add the assignments
 // (if any) to self.assignments
 - (void )fetchAssignmentsFromCoreData
 {
-    // TODO, check toggler
+    if ([self viewNeedsToBeUpdated])
+        [self fetchAssignmentsFromAPIWithSuccess:nil];
     if (self.allAssignments == YES) {
         self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
     } else {
@@ -106,30 +95,51 @@
         self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
                                                   inManagedObjectContext:[AppFactory managedObjectContext]];
     }
+    [self.tableView reloadData];
 }
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
--(void)fetchAssignmentsFromAPI
+-(void)fetchAssignmentsFromAPIWithSuccess:(void(^)())success
 {
     [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d assignments", [responseObject count]);
+        NSDate *now = [NSDate date];
+        [[AppFactory sharedDefaults] setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
         for (NSDictionary *assignment in responseObject) {
             [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:[AppFactory managedObjectContext]];
         }
-        
-        [self fetchAssignmentsFromCoreData];
-        [self.tableView reloadData];
+        if (success) {
+            success();
+        }
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignments");
     }];
+}
+
+-(BOOL)viewNeedsToBeUpdated
+{
+    NSUserDefaults *defaults = [AppFactory sharedDefaults];
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [defaults objectForKey:ASSIGNMENTTVC_LAST_UPDATED];
+    if (!lastUpdated) {
+        [defaults setObject:now forKey:ASSIGNMENTTVC_LAST_UPDATED];
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= 7200.0f) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma mark - Table delegate methods
 
 -(void)userDidRefresh
 {
-    
+    [self fetchAssignmentsFromAPIWithSuccess:^ {
+        [self fetchAssignmentsFromCoreData];
+        [self.refreshControl endRefreshing];
+    }];
 }
 
 #pragma mark - Table methods

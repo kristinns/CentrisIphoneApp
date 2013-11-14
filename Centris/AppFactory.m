@@ -68,4 +68,9 @@ static NSManagedObjectContext *sharedManagedObjectContext = nil;
 	return [[self configuration] objectForKey:@"KeychainFile"];
 }
 
++ (NSUserDefaults *)sharedDefaults
+{
+    return [NSUserDefaults standardUserDefaults];
+}
+
 @end
