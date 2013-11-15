@@ -29,6 +29,7 @@
 		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
 		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
 		194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 194F9AB6180806790099A3E6 /* NSDate+Helper.m */; };
+		1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1959490218350129009686F5 /* AssignmentDetailViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194842D31799B0AB0016A5C0 /* Main.storyboard */; };
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
@@ -36,7 +37,6 @@
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
-		19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */; };
 		19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */; };
 		578A4E52D2AD46909AA8B31E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E547C56EC8D419DAE2F8654 /* libPods.a */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
@@ -99,6 +99,8 @@
 		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
 		194F9AB5180806790099A3E6 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		194F9AB6180806790099A3E6 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
+		1959490118350129009686F5 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
+		1959490218350129009686F5 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
 		19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
 		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
@@ -111,8 +113,6 @@
 		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
 		19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisDataFetcher.h; sourceTree = "<group>"; };
 		19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisDataFetcher.m; sourceTree = "<group>"; };
-		19F62CDF17AC440800EEF08C /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
-		19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		19F78A5618269F880085C322 /* CentrisParserDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisParserDataFetcher.h; sourceTree = "<group>"; };
 		19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CentrisParserDataFetcher.m; sourceTree = "<group>"; };
 		6E547C56EC8D419DAE2F8654 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -264,10 +264,10 @@
 		19879C7717AF1AB500FBC672 /* Assignment */ = {
 			isa = PBXGroup;
 			children = (
-				19F62CDF17AC440800EEF08C /* AssignmentDetailViewController.h */,
-				19F62CE017AC440800EEF08C /* AssignmentDetailViewController.m */,
 				19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */,
 				19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */,
+				1959490118350129009686F5 /* AssignmentDetailViewController.h */,
+				1959490218350129009686F5 /* AssignmentDetailViewController.m */,
 			);
 			name = Assignment;
 			sourceTree = "<group>";
@@ -571,11 +571,11 @@
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
+				1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
-				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
