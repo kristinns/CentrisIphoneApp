@@ -14,7 +14,7 @@
 
 @implementation ScheduleEvent (Centris)
 
-+(NSArray *)scheduleEventsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
++ (NSArray *)scheduleEventsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
@@ -38,31 +38,71 @@
 	return scheduleEvents;
 }
 
-+ (ScheduleEvent *)addScheduleEventWithCentrisInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (void)addScheduleEventsWithCentrisInfo:(NSArray *)events inManagedObjectContext:(NSManagedObjectContext *)context
 {
-	ScheduleEvent *event = nil;
-    
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", [eventInfo[@"ID"] integerValue]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
-                                                            forKey:@"eventID"
-                                                     sortAscending:NO
-                                                     withPredicate:pred
-                                            inManagedObjectContext:context];
-    
-    if (![matches count]) { // no result, put the event in core data
-		event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
-		event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
-		event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
-		event.eventID = [NSNumber numberWithInt:[eventInfo[EVENT_ID] intValue]];
-		event.roomName = eventInfo[EVENT_ROOM_NAME];
-		event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
-		event.courseName = eventInfo[EVENT_COURSE_NAME];
-		CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[eventInfo[EVENT_COURSE_INSTANCE_ID] intValue] inManagedObjectContext:context];
-        event.hasCourseInstance = courseInst;
-	} else { // event found, return it
-		event = [matches lastObject];
-	}
-	return event;
+    for (NSDictionary *eventInfo in events) {
+        ScheduleEvent *event = nil;
+        
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", [eventInfo[@"ID"] integerValue]];
+        NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent" forKey:@"eventID" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
+        
+        if (![matches count]) { // no result, put the event in core data
+            event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+            event.eventID = [NSNumber numberWithInt:[eventInfo[EVENT_ID] intValue]];
+            // rest can be populated by helper
+            [self populeScheduleEventFieldsForScheduleEvent:event withEventInfo:eventInfo inManagedObjectContext:context];
+        } else { // event found, update its field
+            event = [matches lastObject];
+            [self populeScheduleEventFieldsForScheduleEvent:event withEventInfo:eventInfo inManagedObjectContext:context];
+        }
+    }
+    // find events that need to be removed, if any
+    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
+    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (ScheduleEvent *e in eventsInCoreData)
+        [setToBeDeleted addObject:e.eventID];
+    for (NSDictionary *dic in events)
+        [set addObject:dic[EVENT_ID]];
+    [setToBeDeleted minusSet:set];
+    NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
+    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
+        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
+            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            [context deleteObject:scheduleEvent];
+        }
+    }
 }
 
++ (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", ID];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"eventID"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
+
++ (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"eventID"
+                                         sortAscending:NO
+                                         withPredicate:nil
+                                inManagedObjectContext:context];
+}
+
+#pragma mark - Helper methods
+
++ (void)populeScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
+    event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+    event.roomName = eventInfo[EVENT_ROOM_NAME];
+    event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
+    event.courseName = eventInfo[EVENT_COURSE_NAME];
+    CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[eventInfo[EVENT_COURSE_INSTANCE_ID] intValue] inManagedObjectContext:context];
+    event.hasCourseInstance = courseInst;
+}
 @end

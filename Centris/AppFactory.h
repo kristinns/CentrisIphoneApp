@@ -17,4 +17,5 @@
 + (id<DataFetcher>)fetcherFromConfiguration;
 + (KeychainItemWrapper *)keychainItemWrapper;
 + (NSManagedObjectContext *)managedObjectContext;
++ (NSUserDefaults *)sharedDefaults;
 @end

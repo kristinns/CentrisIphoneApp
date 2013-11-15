@@ -99,10 +99,7 @@
             [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
             [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d scheduleEvents", [responseObject count]);
-                for (NSDictionary *event in responseObject) {
-                    [ScheduleEvent addScheduleEventWithCentrisInfo:event inManagedObjectContext:context];
-                }
-                
+                [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting Schedule Events");
@@ -111,9 +108,7 @@
             // Get assignments
             [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d assignments", [responseObject count]);
-                for (NSDictionary *assignment in responseObject) {
-                    [Assignment addAssignmentWithCentrisInfo:assignment withCourseInstanceID:[assignment[@"CourseInstanceID"] integerValue] inManagedObjectContext:context];
-                }
+                [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
@@ -197,7 +192,9 @@
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideHUD];
-            [self.delegate didFinishLoginWithValidUser];
+//            [self.delegate didFinishLoginWithValidUser];
+            id<LoginViewControllerDelegate> appDelegate = (id<LoginViewControllerDelegate>)[[UIApplication sharedApplication] delegate];
+            [appDelegate didFinishLoginWithValidUser];
         });
     }
 }
