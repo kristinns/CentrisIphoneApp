@@ -19,12 +19,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionFileHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionFileTableView;
 // Comments from teacher outlets
+@property (weak, nonatomic) IBOutlet UIView *teacherView;
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *teacherCommentTextView;
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentFileHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITableView *teacherCommentFileTableView;
 // Handin outlets
+@property (weak, nonatomic) IBOutlet UIView *handinView;
 @property (weak, nonatomic) IBOutlet UILabel *handinTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *handinDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *handinTextView;
@@ -74,8 +76,8 @@
     // Add tableView for files
     //self.descriptionFileTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 581, 89) style:UITableViewStylePlain];
     //[self.view addSubview:self.descriptionFileTable];
-    //[self hideHandinSection];
-    //[self hideTeacherCommentSection];
+//    [self hideView:self.teacherView];
+//    [self hideView:self.handinView];
 }
 
 - (void)hideView:(UIView *)view
