@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Assignment.h"
 
 @interface AssignmentDetailViewController : UIViewController
-
+@property (nonatomic, strong) Assignment *assignment;
 @end
