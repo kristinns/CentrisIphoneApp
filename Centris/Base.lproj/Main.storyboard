@@ -281,14 +281,14 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OfJ-U0-kLr" userLabel="Description File Title Label">
-                                                <rect key="frame" x="29" y="20" width="115" height="17"/>
+                                                <rect key="frame" x="15" y="20" width="115" height="17"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                 <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="a8Q-xO-1ny" userLabel="Description File Table View">
-                                                <rect key="frame" x="20" y="45" width="250" height="44"/>
+                                                <rect key="frame" x="0.0" y="45" width="290" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -298,11 +298,11 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="a8Q-xO-1ny" secondAttribute="trailing" constant="20" id="Bf9-dp-EAc"/>
+                                            <constraint firstAttribute="trailing" secondItem="a8Q-xO-1ny" secondAttribute="trailing" id="Bf9-dp-EAc"/>
                                             <constraint firstAttribute="bottom" secondItem="a8Q-xO-1ny" secondAttribute="bottom" constant="4" id="Nl4-f7-Zwf"/>
-                                            <constraint firstItem="OfJ-U0-kLr" firstAttribute="leading" secondItem="Zjj-I5-7h7" secondAttribute="leading" constant="29" id="OOb-d0-O4d"/>
+                                            <constraint firstItem="OfJ-U0-kLr" firstAttribute="leading" secondItem="Zjj-I5-7h7" secondAttribute="leading" constant="15" id="OOb-d0-O4d"/>
                                             <constraint firstItem="a8Q-xO-1ny" firstAttribute="top" secondItem="OfJ-U0-kLr" secondAttribute="bottom" constant="8" id="Yh3-t3-HSD"/>
-                                            <constraint firstItem="a8Q-xO-1ny" firstAttribute="leading" secondItem="Zjj-I5-7h7" secondAttribute="leading" constant="20" id="lmj-uQ-yYU"/>
+                                            <constraint firstItem="a8Q-xO-1ny" firstAttribute="leading" secondItem="Zjj-I5-7h7" secondAttribute="leading" id="lmj-uQ-yYU"/>
                                             <constraint firstItem="OfJ-U0-kLr" firstAttribute="top" secondItem="Zjj-I5-7h7" secondAttribute="top" constant="20" id="xpK-FR-LlS"/>
                                         </constraints>
                                     </view>
@@ -317,88 +317,82 @@
                                         <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Description Text View">
-                                        <rect key="frame" x="15" y="399" width="290" height="135"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="23U-RO-tMr" userLabel="Teacher View">
+                                        <rect key="frame" x="15" y="368" width="290" height="244"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
-                                        <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Athugasemd kennara" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-hM-Wcg" userLabel="Description Title Label">
-                                        <rect key="frame" x="15" y="365" width="157" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="18. nóv 23:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WY-El-VKg" userLabel="Teacher Comment Date Label">
-                                        <rect key="frame" x="220" y="367" width="85" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HvI-z4-Fvv" userLabel="Teacher Comment File Table View">
-                                        <rect key="frame" x="15" y="571" width="290" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzs-lJ-7RU" userLabel="Teacher Comment File Title Label">
-                                        <rect key="frame" x="22" y="546" width="115" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hsy-Tm-AHs" userLabel="Handin Text View">
-                                        <rect key="frame" x="15" y="666" width="290" height="135"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                        <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
-                                        <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                    </textView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Þín skil" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNH-BU-AA4" userLabel="Handin Title Label">
-                                        <rect key="frame" x="15" y="632" width="51" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="18. nóv 23:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d8n-hu-3TF" userLabel="Handin Date Label">
-                                        <rect key="frame" x="220" y="634" width="85" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="VXk-hU-JUy" userLabel="Handin File Table View">
-                                        <rect key="frame" x="15" y="838" width="290" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableView>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zSq-26-E1q" userLabel="Handin File Title Label">
-                                        <rect key="frame" x="22" y="813" width="115" height="17"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Aðrar upplýsingar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MDt-0L-e9B" userLabel="Other Info Title Label">
-                                        <rect key="frame" x="15" y="890" width="129" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
-                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="qKU-sn-RNd" userLabel="Other Info Table View">
-                                        <rect key="frame" x="15" y="919" width="290" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </tableView>
+                                        <subviews>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Athugasemd kennara" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cPe-hM-Wcg" userLabel="Teacher Title Label">
+                                                <rect key="frame" x="0.0" y="0.0" width="157" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                                                <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18. nóv 23:59" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3WY-El-VKg" userLabel="Teacher Date Label">
+                                                <rect key="frame" x="205" y="2" width="85" height="17"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Teacher Text View">
+                                                <rect key="frame" x="0.0" y="31" width="290" height="135"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" priority="618" constant="135" id="OZS-iA-Hzl"/>
+                                                </constraints>
+                                                <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
+                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-sv-Plo" userLabel="Teacher  File View">
+                                                <rect key="frame" x="0.0" y="174" width="290" height="70"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nzs-lJ-7RU" userLabel="Teacher File Title Label">
+                                                        <rect key="frame" x="15" y="4" width="115" height="17"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                                        <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="HvI-z4-Fvv" userLabel="Teacher File Table View">
+                                                        <rect key="frame" x="0.0" y="29" width="290" height="41"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="583" constant="41" id="Had-v5-6zV"/>
+                                                        </constraints>
+                                                    </tableView>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="HvI-z4-Fvv" firstAttribute="leading" secondItem="PFW-sv-Plo" secondAttribute="leading" id="5FF-SN-Pe8"/>
+                                                    <constraint firstAttribute="trailing" secondItem="HvI-z4-Fvv" secondAttribute="trailing" id="E5m-Rs-CUb"/>
+                                                    <constraint firstItem="nzs-lJ-7RU" firstAttribute="leading" secondItem="PFW-sv-Plo" secondAttribute="leading" constant="15" id="S1j-Bm-DNw"/>
+                                                    <constraint firstItem="HvI-z4-Fvv" firstAttribute="top" secondItem="nzs-lJ-7RU" secondAttribute="bottom" constant="8" id="Y8L-dK-smH"/>
+                                                    <constraint firstItem="nzs-lJ-7RU" firstAttribute="top" secondItem="PFW-sv-Plo" secondAttribute="top" constant="4" id="eoh-8I-gqZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="HvI-z4-Fvv" secondAttribute="bottom" id="o9m-VJ-HBS"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="PFW-sv-Plo" firstAttribute="trailing" secondItem="ruM-VK-O9W" secondAttribute="trailing" id="F75-bh-nce"/>
+                                            <constraint firstItem="PFW-sv-Plo" firstAttribute="top" secondItem="ruM-VK-O9W" secondAttribute="bottom" constant="8" id="O6a-FU-xjk"/>
+                                            <constraint firstItem="cPe-hM-Wcg" firstAttribute="leading" secondItem="23U-RO-tMr" secondAttribute="leading" id="Tzm-wG-Des"/>
+                                            <constraint firstAttribute="trailing" secondItem="3WY-El-VKg" secondAttribute="trailing" id="bFN-jj-VAM"/>
+                                            <constraint firstAttribute="bottom" secondItem="PFW-sv-Plo" secondAttribute="bottom" id="fmP-JG-wVe"/>
+                                            <constraint firstItem="ruM-VK-O9W" firstAttribute="top" secondItem="cPe-hM-Wcg" secondAttribute="bottom" constant="10" id="gZ6-p9-AuW"/>
+                                            <constraint firstItem="cPe-hM-Wcg" firstAttribute="baseline" secondItem="3WY-El-VKg" secondAttribute="baseline" id="kC2-OV-VN2"/>
+                                            <constraint firstItem="cPe-hM-Wcg" firstAttribute="top" secondItem="23U-RO-tMr" secondAttribute="top" id="lN7-nE-2jS"/>
+                                            <constraint firstItem="cPe-hM-Wcg" firstAttribute="leading" secondItem="ruM-VK-O9W" secondAttribute="leading" id="nfe-hO-vY2"/>
+                                            <constraint firstItem="PFW-sv-Plo" firstAttribute="leading" secondItem="ruM-VK-O9W" secondAttribute="leading" id="oVs-Ed-lZn"/>
+                                            <constraint firstItem="3WY-El-VKg" firstAttribute="trailing" secondItem="ruM-VK-O9W" secondAttribute="trailing" id="vyy-ar-rU0"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -416,11 +410,15 @@
                                     <constraint firstAttribute="trailing" secondItem="Ay2-Z2-e3f" secondAttribute="trailing" constant="164" id="I2m-2t-MaQ"/>
                                     <constraint firstItem="50K-2e-4Se" firstAttribute="leading" secondItem="EdL-Y2-Uov" secondAttribute="leading" constant="253" id="IH2-Wa-Lw0"/>
                                     <constraint firstItem="50K-2e-4Se" firstAttribute="top" secondItem="rNu-da-1jx" secondAttribute="top" constant="4" id="IiX-fg-JGF"/>
+                                    <constraint firstItem="23U-RO-tMr" firstAttribute="trailing" secondItem="XJ2-h3-tLg" secondAttribute="trailing" id="JxV-R4-Ohl"/>
+                                    <constraint firstItem="23U-RO-tMr" firstAttribute="top" secondItem="Zjj-I5-7h7" secondAttribute="bottom" constant="3" id="KtS-WF-6DI"/>
                                     <constraint firstAttribute="width" constant="320" id="Lbg-Nq-l3a"/>
                                     <constraint firstItem="XJ2-h3-tLg" firstAttribute="leading" secondItem="2sL-Aq-BSj" secondAttribute="leading" id="NtI-Jw-m56"/>
                                     <constraint firstItem="Zjj-I5-7h7" firstAttribute="leading" secondItem="XJ2-h3-tLg" secondAttribute="leading" id="Pye-G4-g5d"/>
                                     <constraint firstItem="XJ2-h3-tLg" firstAttribute="trailing" secondItem="32U-D6-Op6" secondAttribute="trailing" id="RHK-ce-NLT"/>
+                                    <constraint firstItem="23U-RO-tMr" firstAttribute="leading" secondItem="XJ2-h3-tLg" secondAttribute="leading" id="RxL-zg-oou"/>
                                     <constraint firstItem="Zjj-I5-7h7" firstAttribute="top" secondItem="XJ2-h3-tLg" secondAttribute="bottom" id="S2c-oU-4x2"/>
+                                    <constraint firstAttribute="bottom" secondItem="23U-RO-tMr" secondAttribute="bottom" constant="525" id="VaB-ke-KLY"/>
                                     <constraint firstItem="x82-Fo-yvi" firstAttribute="leading" secondItem="rNu-da-1jx" secondAttribute="leading" id="VbX-jf-K1k"/>
                                     <constraint firstItem="tbc-n8-yEd" firstAttribute="top" secondItem="Ay2-Z2-e3f" secondAttribute="bottom" constant="17" id="a6k-XG-ftH"/>
                                     <constraint firstItem="32U-D6-Op6" firstAttribute="top" secondItem="tbc-n8-yEd" secondAttribute="bottom" constant="16" id="amq-2a-rGs"/>
@@ -430,7 +428,6 @@
                                     <constraint firstAttribute="trailing" secondItem="50K-2e-4Se" secondAttribute="trailing" constant="15" id="hhK-Mf-bUH"/>
                                     <constraint firstItem="dHh-Cn-Kek" firstAttribute="trailing" secondItem="50K-2e-4Se" secondAttribute="trailing" id="k6r-Sv-c2S"/>
                                     <constraint firstItem="tbc-n8-yEd" firstAttribute="trailing" secondItem="32U-D6-Op6" secondAttribute="trailing" id="keK-TR-doh"/>
-                                    <constraint firstAttribute="bottom" secondItem="Ay2-Z2-e3f" secondAttribute="bottom" constant="1066" id="m4r-Ys-eGg"/>
                                     <constraint firstItem="Ay2-Z2-e3f" firstAttribute="baseline" secondItem="vX3-Qn-Y19" secondAttribute="baseline" id="mhi-fc-WGr"/>
                                     <constraint firstItem="6xs-6x-VXo" firstAttribute="bottom" secondItem="vX3-Qn-Y19" secondAttribute="bottom" constant="1" id="p9t-h3-Ski"/>
                                     <constraint firstItem="Ay2-Z2-e3f" firstAttribute="leading" secondItem="x82-Fo-yvi" secondAttribute="trailing" constant="5" id="xdb-Xc-EbE"/>
@@ -454,14 +451,7 @@
                         <outlet property="descriptionLabel" destination="2sL-Aq-BSj" id="9cm-qH-bYz"/>
                         <outlet property="descriptionTextView" destination="XJ2-h3-tLg" id="6Nq-91-Xqr"/>
                         <outlet property="gradeLabel" destination="dHh-Cn-Kek" id="Myc-NX-Jnk"/>
-                        <outlet property="handinDateLabel" destination="d8n-hu-3TF" id="HcA-r4-Zgs"/>
-                        <outlet property="handinFileHeaderLabel" destination="zSq-26-E1q" id="kGd-SZ-4ic"/>
-                        <outlet property="handinFileTableView" destination="VXk-hU-JUy" id="WeY-LN-M36"/>
-                        <outlet property="handinTextView" destination="hsy-Tm-AHs" id="Fa0-8M-nMa"/>
-                        <outlet property="handinTitleLabel" destination="NNH-BU-AA4" id="5p6-gX-6eR"/>
                         <outlet property="horizontalBorderWidthConstraint" destination="urh-HB-qed" id="9vt-4B-kir"/>
-                        <outlet property="otherInfoTableView" destination="qKU-sn-RNd" id="yXw-Fn-t7p"/>
-                        <outlet property="otherInfoTitleLabel" destination="MDt-0L-e9B" id="bXP-lh-Q7Z"/>
                         <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="Qw1-gr-RwE"/>
                         <outlet property="teacherCommentFileHeaderLabel" destination="nzs-lJ-7RU" id="O5L-Up-ZuL"/>
                         <outlet property="teacherCommentFileTableView" destination="HvI-z4-Fvv" id="hwn-L7-gs7"/>
