@@ -20,6 +20,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *dayOfWeekLabel;
 @property (nonatomic, weak) IBOutlet UILabel *dayOfMonthLabel;
 @property (nonatomic, weak) IBOutlet UILabel *greetingLabel;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @end
 
 @implementation HomeFeedViewController

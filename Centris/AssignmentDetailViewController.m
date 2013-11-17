@@ -33,11 +33,13 @@
 // Other info
 @property (weak, nonatomic) IBOutlet UILabel *otherInfoTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *otherInfoTableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *handinTopSpaceConstraint;
 
 
 // Constraints
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
+
 @end
 
 @implementation AssignmentDetailViewController 
@@ -72,7 +74,7 @@
     // Add tableView for files
     //self.descriptionFileTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 581, 89) style:UITableViewStylePlain];
     //[self.view addSubview:self.descriptionFileTable];
-    [self hideHandinSection];
+    //[self hideHandinSection];
     [self hideTeacherCommentSection];
 }
 
@@ -99,6 +101,9 @@
     [self hideView:self.teacherCommentFileHeaderLabel];
     [self hideView:self.teacherCommentFileTableView];
     [self hideView:self.teacherCommentTextView];
+    [self.handinTitleLabel removeConstraint:self.handinTopSpaceConstraint];
+//    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.teacherCommentTitleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.descriptionFileTableView attribute:NSLayoutAttributeBottom multiplier:1 constant:17];
+//    [self.handinTitleLabel addConstraint:constraint];
 }
 
 #pragma UITableView Delegate Methods
