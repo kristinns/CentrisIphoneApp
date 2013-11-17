@@ -75,7 +75,7 @@
     //self.descriptionFileTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 581, 89) style:UITableViewStylePlain];
     //[self.view addSubview:self.descriptionFileTable];
     //[self hideHandinSection];
-    [self hideTeacherCommentSection];
+    //[self hideTeacherCommentSection];
 }
 
 - (void)hideView:(UIView *)view
