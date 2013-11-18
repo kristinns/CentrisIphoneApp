@@ -106,9 +106,12 @@
         [set addObject:dic[ASSIGNMENT_ID]];
     [setToBeDeleted minusSet:set];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
-    if ([arrayToBeDeleted count]) { // there are some assignments that needs to be removed
+    if ([arrayToBeDeleted count]) { // are there some assignments that needs to be removed?
         for (int i = 0; i < [arrayToBeDeleted count]; i++) {
             Assignment *assignment = [[self assignmentWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            // remove its files first
+            [AssignmentFile removeAssignmentFilesForAssignment:assignment inManagedObjectContext:context];
+            // then remove the assignment itself
             [context deleteObject:assignment];
         }
     }
