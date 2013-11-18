@@ -14,6 +14,8 @@
 		18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630E8183A8DBC00CA29FE /* AssignmentFile.m */; };
 		18A630EC183A8E1600CA29FE /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EB183A8E1600CA29FE /* Assignment.m */; };
 		18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */; };
+		18A630D1183973D200CA29FE /* ScheduleEventUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630D0183973D200CA29FE /* ScheduleEventUnit.m */; };
+		18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630D31839769B00CA29FE /* ScheduleEvent.m */; };
 		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
 		18E6F627182C03CE0073AB9A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6F626182C03CE0073AB9A /* User.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
@@ -81,6 +83,10 @@
 		18A630EB183A8E1600CA29FE /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		18A630ED183A9E7100CA29FE /* AssignmentFile+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssignmentFile+Centris.h"; path = "Models/AssignmentFile+Centris.h"; sourceTree = "<group>"; };
 		18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssignmentFile+Centris.m"; path = "Models/AssignmentFile+Centris.m"; sourceTree = "<group>"; };
+		18A630CF183973D200CA29FE /* ScheduleEventUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEventUnit.h; path = Models/ScheduleEventUnit.h; sourceTree = "<group>"; };
+		18A630D0183973D200CA29FE /* ScheduleEventUnit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEventUnit.m; path = Models/ScheduleEventUnit.m; sourceTree = "<group>"; };
+		18A630D21839769B00CA29FE /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
+		18A630D31839769B00CA29FE /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
 		18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CourseInstance+Centris.m"; path = "Models/CourseInstance+Centris.m"; sourceTree = "<group>"; };
 		18E6F625182C03CE0073AB9A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
@@ -194,6 +200,10 @@
 				18A630EB183A8E1600CA29FE /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
 				18A630E8183A8DBC00CA29FE /* AssignmentFile.m */,
+				18A630D21839769B00CA29FE /* ScheduleEvent.h */,
+				18A630D31839769B00CA29FE /* ScheduleEvent.m */,
+				18A630CF183973D200CA29FE /* ScheduleEventUnit.h */,
+				18A630D0183973D200CA29FE /* ScheduleEventUnit.m */,
 				18E6F625182C03CE0073AB9A /* User.h */,
 				18E6F626182C03CE0073AB9A /* User.m */,
 				18856AD118206DE7009862CA /* CourseInstance.h */,
@@ -605,6 +615,8 @@
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
+				19F62CE117AC440800EEF08C /* AssignmentDetailViewController.m in Sources */,
+				18A630D1183973D200CA29FE /* ScheduleEventUnit.m in Sources */,
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,

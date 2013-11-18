@@ -139,7 +139,7 @@
     }
 }
 
-+ (void)populeScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (void)populateScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
     event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
