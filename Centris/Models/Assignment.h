@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class AssignmentFiles, CourseInstance;
+@class AssignmentFile, CourseInstance;
 
 @interface Assignment : NSManagedObject
 
@@ -33,8 +33,8 @@
 
 @interface Assignment (CoreDataGeneratedAccessors)
 
-- (void)addHasFilesObject:(AssignmentFiles *)value;
-- (void)removeHasFilesObject:(AssignmentFiles *)value;
+- (void)addHasFilesObject:(AssignmentFile *)value;
+- (void)removeHasFilesObject:(AssignmentFile *)value;
 - (void)addHasFiles:(NSSet *)values;
 - (void)removeHasFiles:(NSSet *)values;
 

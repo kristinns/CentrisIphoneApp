@@ -1,5 +1,5 @@
 //
-//  AssignmentFiles.h
+//  AssignmentFile.h
 //  Centris
 //
 //  Created by Bjarki Sörens on 18/11/13.
@@ -11,7 +11,7 @@
 
 @class Assignment;
 
-@interface AssignmentFiles : NSManagedObject
+@interface AssignmentFile : NSManagedObject
 
 @property (nonatomic, retain) NSString * url;
 @property (nonatomic, retain) NSString * fileName;

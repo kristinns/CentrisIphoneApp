@@ -1,16 +1,16 @@
 //
-//  AssignmentFiles.m
+//  AssignmentFile.m
 //  Centris
 //
 //  Created by Bjarki Sörens on 18/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "AssignmentFiles.h"
+#import "AssignmentFile.h"
 #import "Assignment.h"
 
 
-@implementation AssignmentFiles
+@implementation AssignmentFile
 
 @dynamic url;
 @dynamic fileName;

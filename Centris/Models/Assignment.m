@@ -7,7 +7,7 @@
 //
 
 #import "Assignment.h"
-#import "AssignmentFiles.h"
+#import "AssignmentFile.h"
 #import "CourseInstance.h"
 
 
