@@ -103,6 +103,8 @@
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting Schedule Events");
+                [self hideHUD];
+                [self promptUserWithMessage:@"Villa kom upp við að sækja stundaskrá :(. Endilega reyndu aftur" title:@"Villa" cancelButtonTitle:@"Ókei"];
             }];
             
             // Get assignments
@@ -112,6 +114,8 @@
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
+                [self hideHUD];
+                [self promptUserWithMessage:@"Villa kom upp við að sækja áfanga :(. Endilega reyndu aftur" title:@"Villa" cancelButtonTitle:@"Ókei"];
             }];
             
             
@@ -192,7 +196,6 @@
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideHUD];
-//            [self.delegate didFinishLoginWithValidUser];
             id<LoginViewControllerDelegate> appDelegate = (id<LoginViewControllerDelegate>)[[UIApplication sharedApplication] delegate];
             [appDelegate didFinishLoginWithValidUser];
         });

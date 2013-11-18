@@ -10,6 +10,16 @@
 
 @implementation NSDate (Helper)
 
+- (NSDate *)dateByAddingMintues:(NSInteger)minutesToAdd
+{
+    return [self dateByAddingTimeInterval:60*minutesToAdd];
+}
+
+- (NSDate *)dateByAddingHours:(NSInteger)hoursToAdd
+{
+    return [self dateByAddingTimeInterval:60*60*hoursToAdd];
+}
+
 - (NSDate *)dateByAddingDays:(NSInteger)daysToAdd
 {
     return [self dateByAddingTimeInterval:60*60*24*daysToAdd];

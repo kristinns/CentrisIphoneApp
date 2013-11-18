@@ -18,7 +18,7 @@
         <relationship name="hasFiles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="AssignmentFile" inverseName="isInAssignment" inverseEntity="AssignmentFile" syncable="YES"/>
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasAssignments" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
-    <entity name="AssignmentFile" representedClassName="AssignmentFile" syncable="YES">
+    <entity name="AssignmentFile" syncable="YES">
         <attribute name="fileName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="lastUpdate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
@@ -42,6 +42,13 @@
         <attribute name="starts" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="typeOfClass" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasScheduleEvents" inverseEntity="CourseInstance" syncable="YES"/>
+        <relationship name="hasUnits" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEventUnit" inverseName="isAUnitOf" inverseEntity="ScheduleEventUnit" syncable="YES"/>
+    </entity>
+    <entity name="ScheduleEventUnit" representedClassName="ScheduleEventUnit" syncable="YES">
+        <attribute name="ends" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="starts" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="isAUnitOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasUnits" inverseEntity="ScheduleEvent" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="activeECTS" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -59,10 +66,11 @@
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="-3800" positionY="-1413" width="128" height="283"/>
-        <element name="CourseInstance" positionX="-3611" positionY="-1224" width="128" height="150"/>
-        <element name="ScheduleEvent" positionX="-3800" positionY="-1122" width="128" height="150"/>
-        <element name="User" positionX="-3422" positionY="-1377" width="128" height="240"/>
-        <element name="AssignmentFile" positionX="-3980" positionY="-1387" width="128" height="118"/>
+        <element name="Assignment" positionX="-207" positionY="-342" width="128" height="283"/>
+        <element name="CourseInstance" positionX="-2" positionY="-213" width="128" height="148"/>
+        <element name="ScheduleEvent" positionX="162" positionY="-252" width="128" height="163"/>
+        <element name="ScheduleEventUnit" positionX="331" positionY="-79" width="128" height="103"/>
+        <element name="User" positionX="-207" positionY="-54" width="128" height="240"/>
+        <element name="AssignmentFile" positionX="-387" positionY="-342" width="128" height="118"/>
     </elements>
 </model>

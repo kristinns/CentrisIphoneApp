@@ -7,9 +7,10 @@
 //
 
 #import "ScheduleEvent.h"
+#import "ScheduleEventUnit.h"
 
 @interface ScheduleEvent (Centris)
-+ (NSArray *)scheduleEventsFromDay:(NSDate *)fromDate inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)addScheduleEventsWithCentrisInfo:(NSArray *)events inManagedObjectContext:(NSManagedObjectContext *)context;
