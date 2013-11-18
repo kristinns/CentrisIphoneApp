@@ -298,7 +298,7 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" priority="315" constant="44" id="ef9-gL-jih"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="465" constant="44" id="ef9-gL-jih"/>
                                                 </constraints>
                                             </tableView>
                                         </subviews>
@@ -369,7 +369,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" priority="583" constant="41" id="Had-v5-6zV"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="583" constant="41" id="Had-v5-6zV"/>
                                                         </constraints>
                                                     </tableView>
                                                 </subviews>
@@ -446,7 +446,7 @@
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" priority="583" constant="41" id="8X2-rX-adr"/>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="583" constant="41" id="8X2-rX-adr"/>
                                                         </constraints>
                                                     </tableView>
                                                 </subviews>
@@ -489,8 +489,9 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" priority="90" constant="41" id="mnd-is-WBI"/>
                                             <constraint firstAttribute="width" constant="290" id="omH-vc-liz"/>
-                                            <constraint firstAttribute="height" priority="583" constant="41" id="rUO-G0-LxF"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="583" constant="41" id="rUO-G0-LxF"/>
                                         </constraints>
                                     </tableView>
                                 </subviews>
@@ -561,13 +562,21 @@
                         <outlet property="dateLabel" destination="Ay2-Z2-e3f" id="WrT-N5-Tc7"/>
                         <outlet property="descriptionFileHeaderLabel" destination="OfJ-U0-kLr" id="H7W-tF-g97"/>
                         <outlet property="descriptionFileTableView" destination="a8Q-xO-1ny" id="esJ-mW-dgF"/>
+                        <outlet property="descriptionFileTableViewHeightConstraint" destination="ef9-gL-jih" id="jX0-St-DwB"/>
                         <outlet property="descriptionFileView" destination="Zjj-I5-7h7" id="gEM-sH-qm5"/>
                         <outlet property="descriptionLabel" destination="2sL-Aq-BSj" id="9cm-qH-bYz"/>
                         <outlet property="descriptionTextView" destination="XJ2-h3-tLg" id="6Nq-91-Xqr"/>
                         <outlet property="gradeLabel" destination="dHh-Cn-Kek" id="Myc-NX-Jnk"/>
+                        <outlet property="handinDateLabel" destination="MpK-w6-BVN" id="dqU-4u-3Fy"/>
+                        <outlet property="handinFileHeaderLabel" destination="lUm-0Q-xl1" id="HSp-dR-5FG"/>
+                        <outlet property="handinFileTableView" destination="G6Y-eD-URR" id="oxT-i7-pC4"/>
                         <outlet property="handinFileView" destination="CnA-2L-o1U" id="8Je-ZU-EqE"/>
+                        <outlet property="handinTextView" destination="gZ8-7h-ge8" id="UNK-xu-1kq"/>
+                        <outlet property="handinTitleLabel" destination="JNQ-ih-iTd" id="wqC-bF-AbY"/>
                         <outlet property="handinView" destination="ZWK-za-Lf6" id="ecN-br-cDt"/>
                         <outlet property="horizontalBorderWidthConstraint" destination="urh-HB-qed" id="9vt-4B-kir"/>
+                        <outlet property="otherInfoTableView" destination="j5P-7D-BMn" id="CbM-yw-DGn"/>
+                        <outlet property="otherInfoTitleLabel" destination="lkX-Go-Fdj" id="Wjs-Ie-8gn"/>
                         <outlet property="scrollView" destination="EdL-Y2-Uov" id="Gpi-mJ-21G"/>
                         <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="Qw1-gr-RwE"/>
                         <outlet property="teacherCommentFileHeaderLabel" destination="nzs-lJ-7RU" id="O5L-Up-ZuL"/>
@@ -584,6 +593,34 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bce-HZ-tnH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1320" y="176"/>
+        </scene>
+        <!--Assignment File View Controller-->
+        <scene sceneID="yyz-Mm-WeN">
+            <objects>
+                <viewController storyboardIdentifier="AssignmentFileView" id="44j-KA-Jh6" customClass="AssignmentFileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fk2-y2-ZuF"/>
+                        <viewControllerLayoutGuide type="bottom" id="9u2-yn-RKW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4AL-y3-sSL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHd-0v-Zby">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="LHd-0v-Zby" id="sOj-XY-ahU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9z0-8e-ccs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1720" y="176"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="ogX-Oh-hNo">

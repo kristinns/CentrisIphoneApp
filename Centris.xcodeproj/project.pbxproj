@@ -34,6 +34,8 @@
 		194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 194F9AB6180806790099A3E6 /* NSDate+Helper.m */; };
 		1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1959490218350129009686F5 /* AssignmentDetailViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
+		1989B655183A84B80005E44F /* AssignmentDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B654183A84B80005E44F /* AssignmentDetailViewCell.m */; };
+		1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B657183AC0A50005E44F /* AssignmentFileViewController.m */; };
 		198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194842D31799B0AB0016A5C0 /* Main.storyboard */; };
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
@@ -112,6 +114,10 @@
 		1959490218350129009686F5 /* AssignmentDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
 		19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleTableViewCell.m; sourceTree = "<group>"; };
+		1989B653183A84B80005E44F /* AssignmentDetailViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewCell.h; sourceTree = "<group>"; };
+		1989B654183A84B80005E44F /* AssignmentDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewCell.m; sourceTree = "<group>"; };
+		1989B656183AC0A40005E44F /* AssignmentFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentFileViewController.h; sourceTree = "<group>"; };
+		1989B657183AC0A50005E44F /* AssignmentFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentFileViewController.m; sourceTree = "<group>"; };
 		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		199F72C61802E16F009A724A /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		199F72C91802F9AB009A724A /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
@@ -288,6 +294,8 @@
 				19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */,
 				1959490118350129009686F5 /* AssignmentDetailViewController.h */,
 				1959490218350129009686F5 /* AssignmentDetailViewController.m */,
+				1989B656183AC0A40005E44F /* AssignmentFileViewController.h */,
+				1989B657183AC0A50005E44F /* AssignmentFileViewController.m */,
 			);
 			name = Assignment;
 			sourceTree = "<group>";
@@ -384,6 +392,8 @@
 				19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */,
 				190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */,
 				190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */,
+				1989B653183A84B80005E44F /* AssignmentDetailViewCell.h */,
+				1989B654183A84B80005E44F /* AssignmentDetailViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -588,6 +598,7 @@
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
+				1989B655183A84B80005E44F /* AssignmentDetailViewCell.m in Sources */,
 				18856AD318206DE7009862CA /* CourseInstance.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
@@ -607,6 +618,7 @@
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
 				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
+				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
 				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,

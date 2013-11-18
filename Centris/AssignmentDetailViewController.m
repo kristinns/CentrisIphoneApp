@@ -7,8 +7,10 @@
 //
 
 #import "AssignmentDetailViewController.h"
+#import "AssignmentDetailViewCell.h"
+#import "AssignmentFileViewController.h"
 
-@interface AssignmentDetailViewController () <UITableViewDataSource>
+@interface AssignmentDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 // Assignment description outlets
@@ -41,12 +43,11 @@
 // Other info
 @property (weak, nonatomic) IBOutlet UILabel *otherInfoTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *otherInfoTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *handinTopSpaceConstraint;
-
 
 // Constraints
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionFileTableViewHeightConstraint;
 
 @end
 
@@ -69,6 +70,7 @@
 
 - (void)setup
 {
+    // Fix width and height on borders, not possible in storyboard
     self.verticalBorderHeightConstraint.constant = 0.5;
     self.horizontalBorderWidthConstraint.constant = 0.5;
     
@@ -80,34 +82,63 @@
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
     
+    self.descriptionFileTableView.dataSource = self;
+    self.descriptionFileTableView.delegate = self;
+    self.handinFileTableView.dataSource = self;
+    self.handinFileTableView.delegate = self;
+    self.teacherCommentFileTableView.dataSource = self;
+    self.teacherCommentFileTableView.delegate = self;
 //    [self hideView:self.handinView];
-//    [self.teacherView removeFromSuperview];
-    [self.descriptionFileView removeFromSuperview];
-    [self.teacherCommentFileView removeFromSuperview];
     [self.teacherView removeFromSuperview];
+//    [self.descriptionFileView removeFromSuperview];
+//    [self.teacherCommentFileView removeFromSuperview];
+//    [self.teacherView removeFromSuperview];
 //    [self.handinView removeFromSuperview];
-    [self.handinFileView removeFromSuperview];
-//    self.descriptionTextView.text = @"Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd. Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd.";
-//    NSLog(@"%f", self.descriptionTextView.contentSize.height);
-//    [self.descriptionTextView sizeToFit];
-//    NSLog(@"%f", self.descriptionTextView.contentSize.height);
+//    [self.handinFileView removeFromSuperview];
 }
 
-- (void)hideView:(UIView *)view
+- (void)viewWillAppear:(BOOL)animated
 {
-    [view removeConstraints:view.constraints];
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:400];
-    [view addConstraint:constraint];
-//    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 0)];
+    // just add this line to the end of this method or create it if it does not exist
+    [self.descriptionFileTableView reloadData];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    // Create list of all table views
+    NSArray *tableViews = @[self.descriptionFileTableView];//, self.handinFileTableView, self.teacherCommentFileTableView, self.otherInfoTableView];
+    // Fix height on table view list
+    for (UITableView *tableView in tableViews) {
+        NSInteger height = tableView.contentSize.height;
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+        [tableView addConstraint:constraint];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    [self.view layoutIfNeeded];
 }
 
 #pragma UITableView Delegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.descriptionFileTableView) {
+        return 2;
+    } else if (tableView == self.handinFileTableView) {
         return 1;
     }
     else return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+	AssignmentFileViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"AssignmentFileView"];
+    [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -117,18 +148,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.descriptionFileTableView) {
-        static NSString *CellIdentifier = @"fileCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        cell.textLabel.text = @"Lýsing.pdf";
-        return cell;
+    static NSString *CellIdentifier = @"fileCell";
+    AssignmentDetailViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[AssignmentDetailViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    // Else
-    return nil;
+    if (indexPath.row == 0)
+        [cell addTopBorder];
+    if (tableView == self.descriptionFileTableView) {
+        cell.textLabel.text = @"Lýsing.pdf";
+    } else if (tableView == self.handinFileTableView) {
+        cell.textLabel.text = @"Skil1.pdf";
+    }
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
