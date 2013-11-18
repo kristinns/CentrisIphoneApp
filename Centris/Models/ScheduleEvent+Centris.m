@@ -56,22 +56,8 @@
             [self populeScheduleEventFieldsForScheduleEvent:event withEventInfo:eventInfo inManagedObjectContext:context];
         }
     }
-    // find events that need to be removed, if any
-    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
-    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
-    NSMutableSet *set = [[NSMutableSet alloc] init];
-    for (ScheduleEvent *e in eventsInCoreData)
-        [setToBeDeleted addObject:e.eventID];
-    for (NSDictionary *dic in events)
-        [set addObject:dic[EVENT_ID]];
-    [setToBeDeleted minusSet:set];
-    NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
-    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
-        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
-            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
-            [context deleteObject:scheduleEvent];
-        }
-    }
+    // finally, find events that need to be removed, if any
+    [self checkToRemoveScheduleEventsForCentrisScheduleEvents:events inMangedObjectContext:context];
 }
 
 + (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
@@ -94,6 +80,25 @@
 }
 
 #pragma mark - Helper methods
+
++ (void)checkToRemoveScheduleEventsForCentrisScheduleEvents:(NSArray *)centrisScheduleEvents inMangedObjectContext:(NSManagedObjectContext *)context
+{
+    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
+    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (ScheduleEvent *e in eventsInCoreData)
+        [setToBeDeleted addObject:e.eventID];
+    for (NSDictionary *dic in centrisScheduleEvents)
+        [set addObject:dic[EVENT_ID]];
+    [setToBeDeleted minusSet:set];
+    NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
+    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
+        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
+            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            [context deleteObject:scheduleEvent];
+        }
+    }
+}
 
 + (void)populeScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
