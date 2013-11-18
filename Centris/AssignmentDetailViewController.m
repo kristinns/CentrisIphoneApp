@@ -7,6 +7,7 @@
 //
 
 #import "AssignmentDetailViewController.h"
+#import "AssignmentDetailViewCell.h"
 
 @interface AssignmentDetailViewController () <UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -45,6 +46,7 @@
 // Constraints
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionFileTableViewHeightConstraint;
 
 @end
 
@@ -79,22 +81,53 @@
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
     
+    self.descriptionFileTableView.dataSource = self;
+    self.handinFileTableView.dataSource = self;
+    self.teacherCommentFileTableView.dataSource = self;
+    
 //    [self hideView:self.handinView];
 //    [self.teacherView removeFromSuperview];
-    [self.descriptionFileView removeFromSuperview];
-    [self.teacherCommentFileView removeFromSuperview];
-    [self.teacherView removeFromSuperview];
+//    [self.descriptionFileView removeFromSuperview];
+//    [self.teacherCommentFileView removeFromSuperview];
+//    [self.teacherView removeFromSuperview];
 //    [self.handinView removeFromSuperview];
-    [self.handinFileView removeFromSuperview];
+//    [self.handinFileView removeFromSuperview];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    // just add this line to the end of this method or create it if it does not exist
+    [self.descriptionFileTableView reloadData];
+}
+
+-(void)viewDidLayoutSubviews
+{
+    // Create list of all table views
+    NSArray *tableViews = @[self.descriptionFileTableView, self.teacherCommentFileTableView];//, self.handinFileTableView, self.otherInfoTableView];
+    // Fix height on table view list
+    for (UITableView *tableView in tableViews) {
+        NSInteger height = tableView.contentSize.height;
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+        [tableView addConstraint:constraint];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    [self.view layoutIfNeeded];
 }
 
 #pragma UITableView Delegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.descriptionFileTableView) {
+        return 3;
+    } else if (tableView == self.handinFileTableView) {
         return 1;
     }
     else return 0;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 44;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -104,18 +137,19 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == self.descriptionFileTableView) {
-        static NSString *CellIdentifier = @"fileCell";
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-        
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-        }
-        cell.textLabel.text = @"Lýsing.pdf";
-        return cell;
+    static NSString *CellIdentifier = @"fileCell";
+    AssignmentDetailViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[AssignmentDetailViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
-    // Else
-    return nil;
+    if (indexPath.row == 0)
+        [cell addTopBorder];
+    if (tableView == self.descriptionFileTableView) {
+        cell.textLabel.text = @"Lýsing.pdf";
+    } else if (tableView == self.handinFileTableView) {
+        cell.textLabel.text = @"Lýsing2.pdf";
+    }
+    return cell;
 }
 
 - (void)didReceiveMemoryWarning
