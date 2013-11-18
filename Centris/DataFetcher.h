@@ -24,6 +24,12 @@
 #define ASSIGNMENT_STUDENT_MEMO             @"StudentMemo"
 #define ASSIGNMENT_TEACHER_MEMO             @"TeacherMemo"
 #define ASSIGNMENT_HANDIN_DATE              @"Closes"
+#define ASSIGNMENT_FILES                    @"Files"
+// Assignment File Constants
+#define ASSIGNMENT_FILE_NAME                @"Filename"
+#define ASSIGNMENT_FILE_DATE_UPDATED        @"LastUpdated"
+#define ASSIGNMENT_FILE_TYPE                @"Type"
+#define ASSIGNMENT_FILE_URL                 @"URL"
 // Course Key Constants
 #define COURSE_ID                           @"CourseID"
 #define COURSE_INSTANCE_ID                  @"ID"

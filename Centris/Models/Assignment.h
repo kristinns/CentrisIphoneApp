@@ -2,14 +2,14 @@
 //  Assignment.h
 //  Centris
 //
-//  Created by Bjarki Sörens on 13/11/13.
+//  Created by Bjarki Sörens on 18/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class CourseInstance;
+@class AssignmentFile, CourseInstance;
 
 @interface Assignment : NSManagedObject
 
@@ -28,5 +28,14 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSNumber * weight;
 @property (nonatomic, retain) CourseInstance *isInCourseInstance;
+@property (nonatomic, retain) NSSet *hasFiles;
+@end
+
+@interface Assignment (CoreDataGeneratedAccessors)
+
+- (void)addHasFilesObject:(AssignmentFile *)value;
+- (void)removeHasFilesObject:(AssignmentFile *)value;
+- (void)addHasFiles:(NSSet *)values;
+- (void)removeHasFiles:(NSSet *)values;
 
 @end
