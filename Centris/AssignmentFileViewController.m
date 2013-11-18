@@ -33,6 +33,7 @@
 - (void)setup
 {
     self.navigationController.navigationBar.backItem.title = @"Verkefni";
+    self.webView.scrollView.scrollEnabled = YES;
     // This should of course use AFNetworking and be in DataFetcher
     NSURL *targetURL = [NSURL URLWithString:@"http://developer.apple.com/iphone/library/documentation/UIKit/Reference/UIWebView_Class/UIWebView_Class.pdf"];
     NSURLRequest *request = [NSURLRequest requestWithURL:targetURL];
