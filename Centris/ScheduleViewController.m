@@ -77,7 +77,7 @@
         [self fetchScheduledEventsFromAPI];
     }
         
-    self.scheduleEvents = [ScheduleEvent scheduleEventsFromDay:self.datePickerSelectedDate
+    self.scheduleEvents = [ScheduleEvent scheduleEventUnitsFromDay:self.datePickerSelectedDate
                                         inManagedObjectContext:[AppFactory managedObjectContext]];
     [self.tableView reloadData];
     
@@ -132,17 +132,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScheduleTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleEventCell"];
-    ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
-    cell.courseNameLabel.text = scheduleEvent.courseName;
-    cell.locationLabel.text = scheduleEvent.roomName;
-    cell.typeOfClassLabel.text = scheduleEvent.typeOfClass;
+    ScheduleEventUnit *scheduleEventUnit = [self.scheduleEvents objectAtIndex:indexPath.row];
+    cell.courseNameLabel.text = scheduleEventUnit.isAUnitOf.courseName;
+    cell.locationLabel.text = scheduleEventUnit.isAUnitOf.roomName;
+    cell.typeOfClassLabel.text = scheduleEventUnit.isAUnitOf.typeOfClass;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"HH:mm";
-    cell.fromTimeLabel.text = [formatter stringFromDate:scheduleEvent.starts];
-    cell.toTimeLabel.text = [formatter stringFromDate:scheduleEvent.ends];
-    if ([scheduleEvent.ends timeIntervalSinceNow] < 0)
+    cell.fromTimeLabel.text = [formatter stringFromDate:scheduleEventUnit.starts];
+    cell.toTimeLabel.text = [formatter stringFromDate:scheduleEventUnit.ends];
+    if ([scheduleEventUnit.ends timeIntervalSinceNow] < 0)
         cell.scheduleEventState = ScheduleEventHasFinished;
-    else if ([scheduleEvent.starts timeIntervalSinceNow] < 0 && [scheduleEvent.ends timeIntervalSinceNow] > 0)
+    else if ([scheduleEventUnit.starts timeIntervalSinceNow] < 0 && [scheduleEventUnit.ends timeIntervalSinceNow] > 0)
         cell.scheduleEventState = ScheduleEventHasBegan;
     else
         cell.scheduleEventState = ScheduleEventHasNotBegan;

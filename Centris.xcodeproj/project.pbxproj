@@ -51,7 +51,6 @@
 		966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D0D17FC28D000F3D170 /* CDFServiceStub.m */; };
 		966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = 966B2D0F17FC39F000F3D170 /* Configuration.plist */; };
 		966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 966B2D1217FC498C00F3D170 /* AppFactory.m */; };
-		967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 967A3AB61802D71500A083BC /* ScheduleEvent.m */; };
 		969C94DD180807E100356C7C /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94DC180807E100356C7C /* LoginViewController.m */; };
 		969C94DF18082A3700356C7C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 969C94DE18082A3700356C7C /* Security.framework */; };
 		969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 969C94E518082DDD00356C7C /* KeychainItemWrapper.m */; };
@@ -144,8 +143,6 @@
 		966B2D0F17FC39F000F3D170 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		966B2D1117FC498C00F3D170 /* AppFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppFactory.h; sourceTree = "<group>"; };
 		966B2D1217FC498C00F3D170 /* AppFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppFactory.m; sourceTree = "<group>"; };
-		967A3AB51802D71500A083BC /* ScheduleEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScheduleEvent.h; path = Models/ScheduleEvent.h; sourceTree = "<group>"; };
-		967A3AB61802D71500A083BC /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		969C94DB180807E100356C7C /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		969C94DC180807E100356C7C /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		969C94DE18082A3700356C7C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -201,8 +198,6 @@
 				18E6F626182C03CE0073AB9A /* User.m */,
 				18856AD118206DE7009862CA /* CourseInstance.h */,
 				18856AD218206DE7009862CA /* CourseInstance.m */,
-				967A3AB51802D71500A083BC /* ScheduleEvent.h */,
-				967A3AB61802D71500A083BC /* ScheduleEvent.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -620,8 +615,8 @@
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
-				967A3AB71802D71500A083BC /* ScheduleEvent.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
+				18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
 				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
