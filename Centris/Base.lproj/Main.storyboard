@@ -594,6 +594,34 @@
             </objects>
             <point key="canvasLocation" x="1320" y="176"/>
         </scene>
+        <!--Assignment File View Controller-->
+        <scene sceneID="yyz-Mm-WeN">
+            <objects>
+                <viewController storyboardIdentifier="AssignmentFileView" id="44j-KA-Jh6" customClass="AssignmentFileViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Fk2-y2-ZuF"/>
+                        <viewControllerLayoutGuide type="bottom" id="9u2-yn-RKW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4AL-y3-sSL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LHd-0v-Zby">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="webView" destination="LHd-0v-Zby" id="sOj-XY-ahU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9z0-8e-ccs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1720" y="176"/>
+        </scene>
         <!--Profile View Controller-->
         <scene sceneID="ogX-Oh-hNo">
             <objects>

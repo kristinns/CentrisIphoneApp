@@ -8,8 +8,9 @@
 
 #import "AssignmentDetailViewController.h"
 #import "AssignmentDetailViewCell.h"
+#import "AssignmentFileViewController.h"
 
-@interface AssignmentDetailViewController () <UITableViewDataSource>
+@interface AssignmentDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 // Assignment description outlets
@@ -82,11 +83,13 @@
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
     
     self.descriptionFileTableView.dataSource = self;
+    self.descriptionFileTableView.delegate = self;
     self.handinFileTableView.dataSource = self;
+    self.handinFileTableView.delegate = self;
     self.teacherCommentFileTableView.dataSource = self;
-    
+    self.teacherCommentFileTableView.delegate = self;
 //    [self hideView:self.handinView];
-//    [self.teacherView removeFromSuperview];
+    [self.teacherView removeFromSuperview];
 //    [self.descriptionFileView removeFromSuperview];
 //    [self.teacherCommentFileView removeFromSuperview];
 //    [self.teacherView removeFromSuperview];
@@ -103,7 +106,7 @@
 -(void)viewDidLayoutSubviews
 {
     // Create list of all table views
-    NSArray *tableViews = @[self.descriptionFileTableView, self.teacherCommentFileTableView];//, self.handinFileTableView, self.otherInfoTableView];
+    NSArray *tableViews = @[self.descriptionFileTableView];//, self.handinFileTableView, self.teacherCommentFileTableView, self.otherInfoTableView];
     // Fix height on table view list
     for (UITableView *tableView in tableViews) {
         NSInteger height = tableView.contentSize.height;
@@ -118,11 +121,19 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.descriptionFileTableView) {
-        return 3;
+        return 2;
     } else if (tableView == self.handinFileTableView) {
         return 1;
     }
     else return 0;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+	AssignmentFileViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"AssignmentFileView"];
+    [self.navigationController pushViewController:controller animated:YES];
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -147,7 +158,7 @@
     if (tableView == self.descriptionFileTableView) {
         cell.textLabel.text = @"Lýsing.pdf";
     } else if (tableView == self.handinFileTableView) {
-        cell.textLabel.text = @"Lýsing2.pdf";
+        cell.textLabel.text = @"Skil1.pdf";
     }
     return cell;
 }
