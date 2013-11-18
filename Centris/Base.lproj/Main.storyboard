@@ -565,9 +565,16 @@
                         <outlet property="descriptionLabel" destination="2sL-Aq-BSj" id="9cm-qH-bYz"/>
                         <outlet property="descriptionTextView" destination="XJ2-h3-tLg" id="6Nq-91-Xqr"/>
                         <outlet property="gradeLabel" destination="dHh-Cn-Kek" id="Myc-NX-Jnk"/>
+                        <outlet property="handinDateLabel" destination="MpK-w6-BVN" id="dqU-4u-3Fy"/>
+                        <outlet property="handinFileHeaderLabel" destination="lUm-0Q-xl1" id="HSp-dR-5FG"/>
+                        <outlet property="handinFileTableView" destination="G6Y-eD-URR" id="oxT-i7-pC4"/>
                         <outlet property="handinFileView" destination="CnA-2L-o1U" id="8Je-ZU-EqE"/>
+                        <outlet property="handinTextView" destination="gZ8-7h-ge8" id="UNK-xu-1kq"/>
+                        <outlet property="handinTitleLabel" destination="JNQ-ih-iTd" id="wqC-bF-AbY"/>
                         <outlet property="handinView" destination="ZWK-za-Lf6" id="ecN-br-cDt"/>
                         <outlet property="horizontalBorderWidthConstraint" destination="urh-HB-qed" id="9vt-4B-kir"/>
+                        <outlet property="otherInfoTableView" destination="j5P-7D-BMn" id="CbM-yw-DGn"/>
+                        <outlet property="otherInfoTitleLabel" destination="lkX-Go-Fdj" id="Wjs-Ie-8gn"/>
                         <outlet property="scrollView" destination="EdL-Y2-Uov" id="Gpi-mJ-21G"/>
                         <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="Qw1-gr-RwE"/>
                         <outlet property="teacherCommentFileHeaderLabel" destination="nzs-lJ-7RU" id="O5L-Up-ZuL"/>

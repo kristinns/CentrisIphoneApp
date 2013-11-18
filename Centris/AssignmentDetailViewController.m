@@ -41,8 +41,6 @@
 // Other info
 @property (weak, nonatomic) IBOutlet UILabel *otherInfoTitleLabel;
 @property (weak, nonatomic) IBOutlet UITableView *otherInfoTableView;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *handinTopSpaceConstraint;
-
 
 // Constraints
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
@@ -69,6 +67,7 @@
 
 - (void)setup
 {
+    // Fix width and height on borders, not possible in storyboard
     self.verticalBorderHeightConstraint.constant = 0.5;
     self.horizontalBorderWidthConstraint.constant = 0.5;
     
@@ -87,18 +86,6 @@
     [self.teacherView removeFromSuperview];
 //    [self.handinView removeFromSuperview];
     [self.handinFileView removeFromSuperview];
-//    self.descriptionTextView.text = @"Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd. Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd.";
-//    NSLog(@"%f", self.descriptionTextView.contentSize.height);
-//    [self.descriptionTextView sizeToFit];
-//    NSLog(@"%f", self.descriptionTextView.contentSize.height);
-}
-
-- (void)hideView:(UIView *)view
-{
-    [view removeConstraints:view.constraints];
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:400];
-    [view addConstraint:constraint];
-//    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 0)];
 }
 
 #pragma UITableView Delegate Methods
