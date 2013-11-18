@@ -9,6 +9,8 @@
 #import "AssignmentDetailViewController.h"
 
 @interface AssignmentDetailViewController () <UITableViewDataSource>
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
 // Assignment description outlets
 @property (nonatomic, weak) IBOutlet UILabel *titleLabel;
 @property (nonatomic, weak) IBOutlet UILabel *descriptionLabel;
@@ -16,6 +18,8 @@
 @property (nonatomic, weak) IBOutlet UILabel *weightLabel;
 @property (nonatomic, weak) IBOutlet UILabel *gradeLabel;
 @property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIView *descriptionFileView;
+
 @property (weak, nonatomic) IBOutlet UILabel *descriptionFileHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionFileTableView;
 // Comments from teacher outlets
@@ -23,6 +27,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *teacherCommentTextView;
+@property (weak, nonatomic) IBOutlet UIView *teacherCommentFileView;
 @property (weak, nonatomic) IBOutlet UILabel *teacherCommentFileHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITableView *teacherCommentFileTableView;
 // Handin outlets
@@ -30,6 +35,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *handinTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *handinDateLabel;
 @property (weak, nonatomic) IBOutlet UITextView *handinTextView;
+@property (weak, nonatomic) IBOutlet UIView *handinFileView;
 @property (weak, nonatomic) IBOutlet UILabel *handinFileHeaderLabel;
 @property (weak, nonatomic) IBOutlet UITableView *handinFileTableView;
 // Other info
@@ -73,39 +79,24 @@
     self.dateLabel.text = [formatter stringFromDate:self.assignment.dateClosed];
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
-    // Add tableView for files
-    //self.descriptionFileTableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, 581, 89) style:UITableViewStylePlain];
-    //[self.view addSubview:self.descriptionFileTable];
-//    [self hideView:self.teacherView];
+    
 //    [self hideView:self.handinView];
+//    [self.teacherView removeFromSuperview];
+//    [self.descriptionFileView removeFromSuperview];
+//    [self.teacherCommentFileView removeFromSuperview];
+    [self.handinView removeFromSuperview];
+    self.descriptionTextView.text = @"Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd. Fyrir jólin í fyrra framleiddi sælgætisverksmiðjan Nói-Síríus 10 milljónir konfektmola. Að sögn Kristjáns Geirs Gunnarssonar, framkvæmdastjóra markaðs- og sölusviðs hjá fyrirtækinu, fóru langflestir molarnir út. Ef molarnir sem landsmenn njóta fyrir jólin væru lagðir á hringveginn, sem er 1.332 kílómetrar, þyrfti að fara tæplega 19 hringi í kringum landið svo hægt væri að leggja þá alla niður í röð. Hér er áætlað að hver moli sé að meðaltali 2,5 sentímetrar að lengd.";
+    NSLog(@"%f", self.descriptionTextView.contentSize.height);
+    [self.descriptionTextView sizeToFit];
+    NSLog(@"%f", self.descriptionTextView.contentSize.height);
 }
 
 - (void)hideView:(UIView *)view
 {
     [view removeConstraints:view.constraints];
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:0];
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:400];
     [view addConstraint:constraint];
-}
-
-- (void)hideHandinSection
-{
-    [self hideView:self.handinDateLabel];
-    [self hideView:self.handinFileHeaderLabel];
-    [self hideView:self.handinFileTableView];
-    [self hideView:self.handinTextView];
-    [self hideView:self.handinTitleLabel];
-}
-
-- (void)hideTeacherCommentSection
-{
-    [self hideView:self.teacherCommentTitleLabel];
-    [self hideView:self.teacherCommentDateLabel];
-    [self hideView:self.teacherCommentFileHeaderLabel];
-    [self hideView:self.teacherCommentFileTableView];
-    [self hideView:self.teacherCommentTextView];
-    [self.handinTitleLabel removeConstraint:self.handinTopSpaceConstraint];
-//    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.teacherCommentTitleLabel attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.descriptionFileTableView attribute:NSLayoutAttributeBottom multiplier:1 constant:17];
-//    [self.handinTitleLabel addConstraint:constraint];
+//    [view setFrame:CGRectMake(view.frame.origin.x, view.frame.origin.y, view.frame.size.width, 0)];
 }
 
 #pragma UITableView Delegate Methods
