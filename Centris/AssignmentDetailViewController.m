@@ -153,6 +153,11 @@
     if ([self.assignment.assignmentDescription length] == 0) {
         NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
         [self.descriptionTextView addConstraint:constraint];
+    } else {
+        NSInteger height = 130;
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+        [self.descriptionTextView addConstraint:constraint];
+
     }
     
     if ([self.assignment.studentMemo length] == 0) {

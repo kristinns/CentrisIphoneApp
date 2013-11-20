@@ -43,6 +43,10 @@
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
+		19BD8F42183D71E300F34A40 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
+		19BD8F43183D71E300F34A40 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 19BD8F3D183D71E300F34A40 /* README.md */; };
+		19BD8F44183D71E300F34A40 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 19BD8F3E183D71E300F34A40 /* release_notes.md */; };
+		19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F45183D726100F34A40 /* libz.dylib */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */; };
@@ -132,6 +136,13 @@
 		199F72CA1802F9AB009A724A /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		199F72CC1802FC40009A724A /* DatePickerDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerDayView.h; sourceTree = "<group>"; };
 		199F72CD1802FC40009A724A /* DatePickerDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerDayView.m; sourceTree = "<group>"; };
+		19BD8F3C183D71E300F34A40 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		19BD8F3D183D71E300F34A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		19BD8F3E183D71E300F34A40 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
+		19BD8F3F183D71E300F34A40 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		19BD8F40183D71E300F34A40 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		19BD8F41183D71E300F34A40 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		19BD8F45183D726100F34A40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
 		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
 		19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisDataFetcher.h; sourceTree = "<group>"; };
@@ -165,7 +176,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */,
 				969C94DF18082A3700356C7C /* Security.framework in Frameworks */,
+				19BD8F42183D71E300F34A40 /* libTestFlight.a in Frameworks */,
 				9621008917D7795400D60C06 /* CoreData.framework in Frameworks */,
 				194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */,
 				194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */,
@@ -239,6 +252,7 @@
 		194842C01799B0AB0016A5C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				19BD8F45183D726100F34A40 /* libz.dylib */,
 				969C94DE18082A3700356C7C /* Security.framework */,
 				9621008817D7795400D60C06 /* CoreData.framework */,
 				194842C11799B0AB0016A5C0 /* Foundation.framework */,
@@ -319,6 +333,20 @@
 			name = DatePicker;
 			sourceTree = "<group>";
 		};
+		19BD8F3B183D71E300F34A40 /* TestFlightSDK2 */ = {
+			isa = PBXGroup;
+			children = (
+				19BD8F3C183D71E300F34A40 /* libTestFlight.a */,
+				19BD8F3D183D71E300F34A40 /* README.md */,
+				19BD8F3E183D71E300F34A40 /* release_notes.md */,
+				19BD8F3F183D71E300F34A40 /* TestFlight+AsyncLogging.h */,
+				19BD8F40183D71E300F34A40 /* TestFlight+ManualSessions.h */,
+				19BD8F41183D71E300F34A40 /* TestFlight.h */,
+			);
+			name = TestFlightSDK2;
+			path = Centris/TestFlightSDK2;
+			sourceTree = "<group>";
+		};
 		960827FB17CB8E72004741FD /* HomeFeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +417,7 @@
 		966A499517E9B4CB009C342B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				19BD8F3B183D71E300F34A40 /* TestFlightSDK2 */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -551,8 +580,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				19BD8F44183D71E300F34A40 /* release_notes.md in Resources */,
 				194842DA1799B0AB0016A5C0 /* Images.xcassets in Resources */,
 				966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */,
+				19BD8F43183D71E300F34A40 /* README.md in Resources */,
 				194842CC1799B0AB0016A5C0 /* InfoPlist.strings in Resources */,
 				198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */,
 			);
@@ -770,6 +801,10 @@
 				GCC_PREFIX_HEADER = "Centris/Centris-Prefix.pch";
 				INFOPLIST_FILE = "Centris/Centris-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kristinns/Developer/iOS/Centris/Centris/TestFlightSDK2,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;
@@ -788,6 +823,10 @@
 				GCC_PREFIX_HEADER = "Centris/Centris-Prefix.pch";
 				INFOPLIST_FILE = "Centris/Centris-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/kristinns/Developer/iOS/Centris/Centris/TestFlightSDK2,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				WRAPPER_EXTENSION = app;

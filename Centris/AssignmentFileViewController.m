@@ -8,9 +8,11 @@
 
 #import "AssignmentFileViewController.h"
 #import "AppFactory.h"
+#import <HTProgressHUD/HTProgressHUD.h>
 
 @interface AssignmentFileViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (strong, nonatomic) HTProgressHUD *HUD;
 
 @end
 
@@ -33,6 +35,9 @@
 
 - (void)setup
 {
+    self.HUD = [[HTProgressHUD alloc] init];
+    self.HUD.text = @"Sæki skrá..";
+    [self.HUD showInView:self.view];
     self.navigationController.navigationBar.backItem.title = @"Verkefni";
     self.webView.scrollView.scrollEnabled = YES;
     // This should of course use AFNetworking and be in DataFetcher
@@ -44,6 +49,7 @@
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     [self.webView loadRequest:request];
+    [self.HUD hide];
 }
 
 - (void)didReceiveMemoryWarning
