@@ -44,7 +44,6 @@
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", AFBase64EncodedStringFromString(basicAuthCredentials)];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     [self.webView loadRequest:request];
-
 }
 
 - (void)didReceiveMemoryWarning
