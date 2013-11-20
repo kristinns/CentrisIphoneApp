@@ -9,6 +9,11 @@
 #import "AssignmentDetailViewController.h"
 #import "AssignmentDetailViewCell.h"
 #import "AssignmentFileViewController.h"
+#import "DataFetcher.h"
+#import "AppFactory.h"
+#import "Assignment+Centris.h"
+#import "AssignmentFile+Centris.h"
+#import "CourseInstance+Centris.h"
 
 @interface AssignmentDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -74,6 +79,19 @@
     self.verticalBorderHeightConstraint.constant = 0.5;
     self.horizontalBorderWidthConstraint.constant = 0.5;
     
+    // Set delegates and datasources
+    self.descriptionFileTableView.dataSource = self;
+    self.descriptionFileTableView.delegate = self;
+    self.handinFileTableView.dataSource = self;
+    self.handinFileTableView.delegate = self;
+    self.teacherCommentFileTableView.dataSource = self;
+    self.teacherCommentFileTableView.delegate = self;
+    
+    [self fetchAssignmentFromAPI];
+}
+
+- (void)updateOutlets
+{
     self.titleLabel.text = self.assignment.title;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale currentLocale];
@@ -81,21 +99,44 @@
     self.dateLabel.text = [formatter stringFromDate:self.assignment.dateClosed];
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
+    self.descriptionTextView.text = [self.assignment.assignmentDescription length] != 0 ? self.assignment.assignmentDescription : @"Engin lýsing..";
+    self.teacherCommentTextView.text = self.assignment.teacherMemo;
+    self.handinTextView.text = self.assignment.studentMemo;
     
-    self.descriptionFileTableView.dataSource = self;
-    self.descriptionFileTableView.delegate = self;
-    self.handinFileTableView.dataSource = self;
-    self.handinFileTableView.delegate = self;
-    self.teacherCommentFileTableView.dataSource = self;
-    self.teacherCommentFileTableView.delegate = self;
-//    [self hideView:self.handinView];
-    [self.teacherView removeFromSuperview];
-//    [self.descriptionFileView removeFromSuperview];
-//    [self.teacherCommentFileView removeFromSuperview];
-//    [self.teacherView removeFromSuperview];
-//    [self.handinView removeFromSuperview];
-//    [self.handinFileView removeFromSuperview];
+    NSInteger height = self.descriptionTextView.contentSize.height;
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+    //[self.descriptionTextView addConstraint:constraint];
+    
+    // Create list of all table views
+    //NSArray *tableViews = @[self.descriptionFileTableView, self.handinFileTableView, self.teacherCommentFileTableView];//, self.otherInfoTableView];
+    // Fix height on table view list
+//    for (UITableView *tableView in tableViews) {
+//        [tableView removeConstraints:tableView.constraints];
+//        NSInteger height = tableView.contentSize.height;
+//        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+//        [tableView addConstraint:constraint];
+//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    }
+//    [self.view layoutIfNeeded];
 }
+
+- (void)fetchAssignmentFromAPI
+{
+    CourseInstance *courseInstance = self.assignment.isInCourseInstance;
+    [[AppFactory fetcherFromConfiguration] getAssignmentById:[self.assignment.id integerValue] courseId:[courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got assignment %@", [responseObject objectForKey:@"Title"]);
+        // Add assignment to core data
+        [Assignment updateAssignmentWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];      // Update our assignment
+        self.assignment = [Assignment assignmentWithID:self.assignment.id inManagedObjectContext:[AppFactory managedObjectContext]];
+        [self updateOutlets];
+        [self.descriptionFileTableView reloadData];
+        [self.handinFileTableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error getting assignments");
+    }];
+}
+
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -105,27 +146,25 @@
 
 -(void)viewDidLayoutSubviews
 {
-    // Create list of all table views
-    NSArray *tableViews = @[self.descriptionFileTableView];//, self.handinFileTableView, self.teacherCommentFileTableView, self.otherInfoTableView];
-    // Fix height on table view list
-    for (UITableView *tableView in tableViews) {
-        NSInteger height = tableView.contentSize.height;
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
-        [tableView addConstraint:constraint];
-        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    }
-    [self.view layoutIfNeeded];
+    
 }
 
 #pragma UITableView Delegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.descriptionFileTableView) {
-        return 2;
-    } else if (tableView == self.handinFileTableView) {
-        return 1;
+    NSString *fileDescription;
+    NSInteger count = 0;
+    if (tableView == self.descriptionFileTableView)
+        fileDescription = @"DescriptionFile";
+    else if (tableView == self.handinFileTableView)
+        fileDescription = @"SolutionFile";
+    
+    
+    for (AssignmentFile *file in self.assignment.hasFiles) {
+        if ([file.type isEqualToString:fileDescription])
+            count++;
     }
-    else return 0;
+    return count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -146,6 +185,23 @@
     return 1;
 }
 
+- (NSArray *)assignmentsWithType:(NSString *)type
+{
+    CourseInstance *courseInstance = self.assignment.isInCourseInstance;
+    if (courseInstance) {
+        NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"fileName" ascending:YES];
+        NSArray *sortedAssignmentFileList = [self.assignment.hasFiles sortedArrayUsingDescriptors:@[descriptor]];
+        NSMutableArray *sortedAssignmentFileListWithRightType = [[NSMutableArray alloc] init];
+        for (AssignmentFile *file in sortedAssignmentFileList) {
+            if ([file.type isEqualToString:type])
+                [sortedAssignmentFileListWithRightType addObject:file];
+        }
+        return sortedAssignmentFileListWithRightType;
+    }
+    // Else
+    return nil;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"fileCell";
@@ -155,10 +211,11 @@
     }
     if (indexPath.row == 0)
         [cell addTopBorder];
+    
     if (tableView == self.descriptionFileTableView) {
-        cell.textLabel.text = @"Lýsing.pdf";
+        cell.textLabel.text = [[[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row] fileName];
     } else if (tableView == self.handinFileTableView) {
-        cell.textLabel.text = @"Skil1.pdf";
+        cell.textLabel.text = [[[self assignmentsWithType:@"SolutionFile"] objectAtIndex:indexPath.row] fileName];
     }
     return cell;
 }

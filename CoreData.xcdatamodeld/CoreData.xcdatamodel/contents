@@ -2,7 +2,7 @@
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="Assignment" representedClassName="Assignment" syncable="YES">
         <attribute name="assignmentDescription" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="courseInstanceID" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="courseInstanceID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="dateClosed" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="datePublished" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="fileExtensions" optional="YES" attributeType="String" syncable="YES"/>
@@ -66,11 +66,11 @@
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="-207" positionY="-342" width="128" height="283"/>
-        <element name="CourseInstance" positionX="-2" positionY="-213" width="128" height="148"/>
-        <element name="ScheduleEvent" positionX="162" positionY="-252" width="128" height="163"/>
-        <element name="ScheduleEventUnit" positionX="331" positionY="-79" width="128" height="103"/>
-        <element name="User" positionX="-207" positionY="-54" width="128" height="240"/>
-        <element name="AssignmentFile" positionX="-387" positionY="-342" width="128" height="118"/>
+        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AssignmentFile" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEvent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEventUnit" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

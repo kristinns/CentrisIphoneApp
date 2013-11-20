@@ -2,12 +2,11 @@
 //  Assignment.m
 //  Centris
 //
-//  Created by Bjarki Sörens on 18/11/13.
+//  Created by Kristinn Svansson on 20/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #import "Assignment.h"
-#import "AssignmentFile.h"
 #import "CourseInstance.h"
 
 
@@ -27,7 +26,7 @@
 @dynamic teacherMemo;
 @dynamic title;
 @dynamic weight;
-@dynamic isInCourseInstance;
 @dynamic hasFiles;
+@dynamic isInCourseInstance;
 
 @end

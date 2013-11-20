@@ -14,7 +14,6 @@
 		18A630D1183973D200CA29FE /* ScheduleEventUnit.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630D0183973D200CA29FE /* ScheduleEventUnit.m */; };
 		18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630D31839769B00CA29FE /* ScheduleEvent.m */; };
 		18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630E8183A8DBC00CA29FE /* AssignmentFile.m */; };
-		18A630EC183A8E1600CA29FE /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EB183A8E1600CA29FE /* Assignment.m */; };
 		18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */; };
 		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
 		18E6F627182C03CE0073AB9A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6F626182C03CE0073AB9A /* User.m */; };
@@ -39,6 +38,7 @@
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		1989B655183A84B80005E44F /* AssignmentDetailViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B654183A84B80005E44F /* AssignmentDetailViewCell.m */; };
 		1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B657183AC0A50005E44F /* AssignmentFileViewController.m */; };
+		1989B65B183CC4510005E44F /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B65A183CC4510005E44F /* Assignment.m */; };
 		198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194842D31799B0AB0016A5C0 /* Main.storyboard */; };
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
@@ -84,8 +84,6 @@
 		18A630D31839769B00CA29FE /* ScheduleEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScheduleEvent.m; path = Models/ScheduleEvent.m; sourceTree = "<group>"; };
 		18A630E7183A8DBC00CA29FE /* AssignmentFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AssignmentFile.h; path = Models/AssignmentFile.h; sourceTree = "<group>"; };
 		18A630E8183A8DBC00CA29FE /* AssignmentFile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AssignmentFile.m; path = Models/AssignmentFile.m; sourceTree = "<group>"; };
-		18A630EA183A8E1600CA29FE /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
-		18A630EB183A8E1600CA29FE /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		18A630ED183A9E7100CA29FE /* AssignmentFile+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "AssignmentFile+Centris.h"; path = "Models/AssignmentFile+Centris.h"; sourceTree = "<group>"; };
 		18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssignmentFile+Centris.m"; path = "Models/AssignmentFile+Centris.m"; sourceTree = "<group>"; };
 		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
@@ -126,6 +124,8 @@
 		1989B654183A84B80005E44F /* AssignmentDetailViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentDetailViewCell.m; sourceTree = "<group>"; };
 		1989B656183AC0A40005E44F /* AssignmentFileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentFileViewController.h; sourceTree = "<group>"; };
 		1989B657183AC0A50005E44F /* AssignmentFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentFileViewController.m; sourceTree = "<group>"; };
+		1989B659183CC4510005E44F /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
+		1989B65A183CC4510005E44F /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
 		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		199F72C61802E16F009A724A /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		199F72C91802F9AB009A724A /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
@@ -199,8 +199,8 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				18A630EA183A8E1600CA29FE /* Assignment.h */,
-				18A630EB183A8E1600CA29FE /* Assignment.m */,
+				1989B659183CC4510005E44F /* Assignment.h */,
+				1989B65A183CC4510005E44F /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
 				18A630E8183A8DBC00CA29FE /* AssignmentFile.m */,
 				18A630D21839769B00CA29FE /* ScheduleEvent.h */,
@@ -610,6 +610,7 @@
 				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
 				1989B655183A84B80005E44F /* AssignmentDetailViewCell.m in Sources */,
 				18856AD318206DE7009862CA /* CourseInstance.m in Sources */,
+				1989B65B183CC4510005E44F /* Assignment.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
@@ -639,7 +640,6 @@
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */,
 				194842CE1799B0AB0016A5C0 /* main.m in Sources */,
-				18A630EC183A8E1600CA29FE /* Assignment.m in Sources */,
 				199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

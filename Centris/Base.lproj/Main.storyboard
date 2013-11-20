@@ -268,7 +268,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" priority="411" constant="135" id="vQ6-cq-RYL"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="411" constant="30" id="vQ6-cq-RYL"/>
                                         </constraints>
                                         <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
                                         <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -992,6 +992,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="pYU-I0-9HO"/>
+        <segue reference="5o8-79-b56"/>
     </inferredMetricsTieBreakers>
 </document>

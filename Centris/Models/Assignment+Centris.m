@@ -36,15 +36,27 @@
     [self checkToRemoveAssignmentsForCentrisAssignments:assignments inMangedObjectContext:context];
 }
 
++ (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    Assignment *assignment;
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[ASSIGNMENT_ID]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
+
+    if (matches) {
+        assignment = [matches lastObject];
+        [self populateAssignmentFieldsForAssignment:assignment withAssignmentInfo:assignmentInfo inManagedObjectContext:context];
+    }
+}
+
 // get single assignment
-+ (NSArray *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
++ (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", ID];
-    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
+    return [[CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                                 forKey:@"id"
                                          sortAscending:NO
                                          withPredicate:pred
-                                inManagedObjectContext:context];
+                                inManagedObjectContext:context] lastObject];
 }
 
 // assignments that have due date after some date
@@ -108,7 +120,7 @@
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
     if ([arrayToBeDeleted count]) { // are there some assignments that needs to be removed?
         for (int i = 0; i < [arrayToBeDeleted count]; i++) {
-            Assignment *assignment = [[self assignmentWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            Assignment *assignment = [self assignmentWithID:arrayToBeDeleted[i] inManagedObjectContext:context];
             // remove its files first
             [AssignmentFile removeAssignmentFilesForAssignment:assignment inManagedObjectContext:context];
             // then remove the assignment itself
