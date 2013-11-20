@@ -14,6 +14,7 @@
 #import "Assignment+Centris.h"
 #import "AssignmentFile+Centris.h"
 #import "CourseInstance+Centris.h"
+#import <HTProgressHUD/HTProgressHUD.h>
 
 @interface AssignmentDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -54,6 +55,8 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionFileTableViewHeightConstraint;
+
+@property (strong, nonatomic) HTProgressHUD *HUD;
 
 @end
 
@@ -100,11 +103,15 @@
     self.handinDateLabel.text = @"";
     self.descriptionDateLabel.text = @"";
     self.teacherCommentDateLabel.text = @"";
+    self.HUD = [[HTProgressHUD alloc] init];
+    self.HUD.text = @"Sæki verkefni..";
+    [self.HUD showInView:self.view];
     [self fetchAssignmentFromAPI];
 }
 
 - (void)updateOutlets
 {
+    [self.HUD hide];
     // Debug
 //    self.teacherCommentFileHeaderLabel.textColor = [UIColor redColor];
 //    self.handinFileHeaderLabel.textColor = [UIColor yellowColor];
