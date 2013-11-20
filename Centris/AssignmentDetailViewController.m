@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UIView *descriptionFileView;
 
 @property (weak, nonatomic) IBOutlet UILabel *descriptionFileHeaderLabel;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionDateLabel;
 @property (weak, nonatomic) IBOutlet UITableView *descriptionFileTableView;
 // Comments from teacher outlets
 @property (weak, nonatomic) IBOutlet UIView *teacherView;
@@ -87,11 +88,43 @@
     self.teacherCommentFileTableView.dataSource = self;
     self.teacherCommentFileTableView.delegate = self;
     
+    self.titleLabel.text = self.assignment.title;
+    self.titleLabel.text = self.assignment.title;
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.locale = [NSLocale currentLocale];
+    formatter.dateFormat = @"d. MMMM HH:mm";
+    self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
+    self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
+    self.descriptionTextView.text = @"";
+    self.teacherCommentTextView.text = @"";
+    self.handinDateLabel.text = @"";
+    self.descriptionDateLabel.text = @"";
+    self.teacherCommentDateLabel.text = @"";
     [self fetchAssignmentFromAPI];
 }
 
 - (void)updateOutlets
 {
+    // Debug
+//    self.teacherCommentFileHeaderLabel.textColor = [UIColor redColor];
+//    self.handinFileHeaderLabel.textColor = [UIColor yellowColor];
+//    self.descriptionFileHeaderLabel.textColor = [UIColor greenColor];
+    
+    if (self.assignment.grade == nil)
+        [self.teacherView removeFromSuperview];
+    if (self.assignment.handInDate == nil)
+        [self.handinView removeFromSuperview];
+    if ([[self assignmentsWithType:@"DescriptionFile"] count] == 0)
+        [self.descriptionFileView removeFromSuperview];
+    if ([[self assignmentsWithType:@"SolutionFile"] count] == 0)
+        [self.handinFileView removeFromSuperview];
+    if ([[self assignmentsWithType:@"TeacherFile"] count] == 0)
+        [self.teacherCommentFileView removeFromSuperview];
+    
+    [self.descriptionFileTableView reloadData];
+    [self.handinFileTableView reloadData];
+    [self.teacherCommentFileTableView reloadData];
+    
     self.titleLabel.text = self.assignment.title;
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.locale = [NSLocale currentLocale];
@@ -102,22 +135,30 @@
     self.descriptionTextView.text = [self.assignment.assignmentDescription length] != 0 ? self.assignment.assignmentDescription : @"Engin lýsing..";
     self.teacherCommentTextView.text = self.assignment.teacherMemo;
     self.handinTextView.text = self.assignment.studentMemo;
+    // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
+    self.descriptionTextView.font = [CentrisTheme headingSmallFont];
+    self.descriptionTextView.textColor = [CentrisTheme grayLightTextColor];
+    self.teacherCommentTextView.font = [CentrisTheme headingSmallFont];
+    self.teacherCommentTextView.textColor = [CentrisTheme grayLightTextColor];
+    self.handinTextView.font = [CentrisTheme headingSmallFont];
+    self.handinTextView.textColor = [CentrisTheme grayLightTextColor];
     
-    NSInteger height = self.descriptionTextView.contentSize.height;
+    NSInteger height = 100;//self.descriptionTextView.contentSize.height;
+    NSLog(@"Height: %d", height);
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
-    //[self.descriptionTextView addConstraint:constraint];
+    [self.descriptionTextView addConstraint:constraint];
     
     // Create list of all table views
-    //NSArray *tableViews = @[self.descriptionFileTableView, self.handinFileTableView, self.teacherCommentFileTableView];//, self.otherInfoTableView];
+    NSArray *tableViews = @[self.descriptionFileTableView, self.handinFileTableView, self.teacherCommentFileTableView];//, self.otherInfoTableView];
     // Fix height on table view list
-//    for (UITableView *tableView in tableViews) {
-//        [tableView removeConstraints:tableView.constraints];
-//        NSInteger height = tableView.contentSize.height;
-//        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
-//        [tableView addConstraint:constraint];
-//        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-//    }
-//    [self.view layoutIfNeeded];
+    for (UITableView *tableView in tableViews) {
+        [tableView removeConstraints:tableView.constraints];
+        NSInteger height = tableView.contentSize.height;
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
+        [tableView addConstraint:constraint];
+        tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    }
+    [self.view layoutIfNeeded];
 }
 
 - (void)fetchAssignmentFromAPI
@@ -133,7 +174,7 @@
         [self.handinFileTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error getting assignments");
+        NSLog(@"Error getting assignment %@/%@", self.assignment.isInCourseInstance.id, self.assignment.id);
     }];
 }
 
@@ -141,7 +182,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // just add this line to the end of this method or create it if it does not exist
-    [self.descriptionFileTableView reloadData];
+    //[self.descriptionFileTableView reloadData];
 }
 
 -(void)viewDidLayoutSubviews

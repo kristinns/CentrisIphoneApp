@@ -434,14 +434,14 @@
                                                 <rect key="frame" x="0.0" y="174" width="290" height="70"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <subviews>
-                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-0Q-xl1" userLabel="Teacher File Title Label">
+                                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Meðfylgjandi skrár" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lUm-0Q-xl1" userLabel="Handin File Title Label">
                                                         <rect key="frame" x="15" y="4" width="115" height="17"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                                         <color key="textColor" red="0.25098039220000001" green="0.25098039220000001" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-eD-URR" userLabel="Teacher File Table View">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="G6Y-eD-URR" userLabel="Handin File Table View">
                                                         <rect key="frame" x="0.0" y="29" width="290" height="41"/>
                                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -560,6 +560,7 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="dateLabel" destination="Ay2-Z2-e3f" id="WrT-N5-Tc7"/>
+                        <outlet property="descriptionDateLabel" destination="32U-D6-Op6" id="ZTR-XS-mZo"/>
                         <outlet property="descriptionFileHeaderLabel" destination="OfJ-U0-kLr" id="H7W-tF-g97"/>
                         <outlet property="descriptionFileTableView" destination="a8Q-xO-1ny" id="esJ-mW-dgF"/>
                         <outlet property="descriptionFileTableViewHeightConstraint" destination="ef9-gL-jih" id="jX0-St-DwB"/>
@@ -578,7 +579,7 @@
                         <outlet property="otherInfoTableView" destination="j5P-7D-BMn" id="CbM-yw-DGn"/>
                         <outlet property="otherInfoTitleLabel" destination="lkX-Go-Fdj" id="Wjs-Ie-8gn"/>
                         <outlet property="scrollView" destination="EdL-Y2-Uov" id="Gpi-mJ-21G"/>
-                        <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="Qw1-gr-RwE"/>
+                        <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="bAY-xH-3TX"/>
                         <outlet property="teacherCommentFileHeaderLabel" destination="nzs-lJ-7RU" id="O5L-Up-ZuL"/>
                         <outlet property="teacherCommentFileTableView" destination="HvI-z4-Fvv" id="hwn-L7-gs7"/>
                         <outlet property="teacherCommentFileView" destination="PFW-sv-Plo" id="GQK-Bc-QQ7"/>
