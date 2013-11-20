@@ -10,6 +10,7 @@
 #import "Assignment.h"
 #import "CDDataFetcher.h"
 #import "DataFetcher.h"
+#import "NSDate+Helper.h"
 
 @implementation AssignmentFile (Centris)
 
@@ -22,7 +23,7 @@
         file.fileName = fileInfo[ASSIGNMENT_FILE_NAME];
         file.type = fileInfo[ASSIGNMENT_FILE_TYPE];
         file.url = fileInfo[ASSIGNMENT_FILE_URL];
-        file.lastUpdate = fileInfo[ASSIGNMENT_FILE_DATE_UPDATED];
+        file.lastUpdate = [NSDate formatDateString:fileInfo[ASSIGNMENT_FILE_DATE_UPDATED]];
         file.isInAssignment = assignment;
     }
 }

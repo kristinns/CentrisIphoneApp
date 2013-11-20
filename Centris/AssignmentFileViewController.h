@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface AssignmentFileViewController : UIViewController
-
+@property (strong, nonatomic) NSString *url;
 @end

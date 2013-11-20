@@ -229,6 +229,16 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 	AssignmentFileViewController *controller = [storyboard instantiateViewControllerWithIdentifier:@"AssignmentFileView"];
+    if (tableView == self.descriptionFileTableView) {
+        AssignmentFile *file = [[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row];
+        controller.url = file.url;
+    } else if (tableView == self.handinFileTableView) {
+        AssignmentFile *file = [[self assignmentsWithType:@"SolutionFile"] objectAtIndex:indexPath.row];
+        controller.url = file.url;
+    } else if (tableView == self.teacherCommentFileTableView) {
+        AssignmentFile *file = [[self assignmentsWithType:@"TeacherFile"] objectAtIndex:indexPath.row];
+        controller.url = file.url;
+    }
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
@@ -274,6 +284,8 @@
         cell.textLabel.text = [[[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row] fileName];
     } else if (tableView == self.handinFileTableView) {
         cell.textLabel.text = [[[self assignmentsWithType:@"SolutionFile"] objectAtIndex:indexPath.row] fileName];
+    } else if (tableView == self.teacherCommentFileTableView) {
+        cell.textLabel.text = [[[self assignmentsWithType:@"TeacherFile"] objectAtIndex:indexPath.row] fileName];
     }
     return cell;
 }
