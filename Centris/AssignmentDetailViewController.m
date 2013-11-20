@@ -133,8 +133,8 @@
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
     self.descriptionTextView.text = [self.assignment.assignmentDescription length] != 0 ? self.assignment.assignmentDescription : @"Engin lýsing..";
-    self.teacherCommentTextView.text = self.assignment.teacherMemo;
-    self.handinTextView.text = self.assignment.studentMemo;
+    self.teacherCommentTextView.text = [self.assignment.teacherMemo length] != 0 ? self.assignment.teacherMemo : @"Engin athugasemd..";
+    self.handinTextView.text = [self.assignment.studentMemo length] != 0 ? self.assignment.studentMemo : @"Engin textaskil..";;
     // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
     self.descriptionTextView.font = [CentrisTheme headingSmallFont];
     self.descriptionTextView.textColor = [CentrisTheme grayLightTextColor];
@@ -143,11 +143,21 @@
     self.handinTextView.font = [CentrisTheme headingSmallFont];
     self.handinTextView.textColor = [CentrisTheme grayLightTextColor];
     
-    NSInteger height = 100;//self.descriptionTextView.contentSize.height;
-    NSLog(@"Height: %d", height);
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
-    [self.descriptionTextView addConstraint:constraint];
+    if ([self.assignment.assignmentDescription length] == 0) {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
+        [self.descriptionTextView addConstraint:constraint];
+    }
     
+    if ([self.assignment.studentMemo length] == 0) {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.handinTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
+        [self.handinTextView addConstraint:constraint];
+    }
+    
+    if ([self.assignment.teacherMemo length] == 0) {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.teacherCommentTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
+        [self.teacherCommentTextView addConstraint:constraint];
+    }
+
     // Create list of all table views
     NSArray *tableViews = @[self.descriptionFileTableView, self.handinFileTableView, self.teacherCommentFileTableView];//, self.otherInfoTableView];
     // Fix height on table view list
