@@ -76,78 +76,12 @@
 #pragma mark - Post methods
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-	NSMutableDictionary *info = nil;
-	
-	if ([@"kristinns11" isEqualToString:email]) {
-		info = [[NSMutableDictionary alloc] init];
-		NSMutableDictionary * person = [[NSMutableDictionary alloc] init];
-		[person setObject:@"Tröllhólum 12" forKey:@"Address"];
-		[person setObject:@"kristinns11@ru.is" forKey:@"Email"];
-        [person setObject:@"kristinns11" forKey:@"Username"];
-		[person setObject:@"18748" forKey:@"ID"];
-		[person setObject:@"8657231" forKey:@"MobilePhone"];
-		[person setObject:@"Kristinn Svansson" forKey:@"Name"];
-		[person setObject:@"800" forKey:@"Postal"];
-		[person setObject:@"2402912319" forKey:@"SSN"];
-		[info setObject:person forKey:@"Person"];
-		
-		NSMutableDictionary *registration = [[NSMutableDictionary  alloc] init];
-		NSMutableDictionary *studentRegistration = [[NSMutableDictionary alloc] init];
-		NSMutableDictionary *major = [[NSMutableDictionary alloc] init];
-		
-		[registration setObject:@"Tölvunarfræðideild" forKey:@"DepartmentName"];
-		[registration setObject:@"Staðarnám" forKey:@"StudentTypeName"];
-		
-		[studentRegistration setObject:[NSNumber numberWithInteger:18] forKey:@"ECTSActive"];
-		[studentRegistration setObject:[NSNumber numberWithInteger:72] forKey:@"ECTSFinished"];
-		[studentRegistration setObject:[NSNumber numberWithDouble:9] forKey:@"AverageGrade"];
-		[registration setObject:studentRegistration forKey:@"StudentRegistration"];
-		
-		[major setObject:@"BSc í tölvunarfræði" forKey:@"Name"];
-		[major setObject:@"BSc in Computer Science" forKey:@"NameEnglish"];
-		[major setObject:[NSNumber numberWithInteger:180] forKey:@"Credits"];
-		[registration setObject:major forKey:@"Major"];
-		
-		[info setObject:registration forKey:@"Registration"];
-		
-        
-	} else if ([@"bjarkim11" isEqualToString:email]) {
-		info = [[NSMutableDictionary alloc] init];
-		NSMutableDictionary *person = [[NSMutableDictionary alloc] init];
-		[person setObject:@"Ljósheimum 2" forKey:@"Address"];
-		[person setObject:@"bjarkim11@ru.is" forKey:@"Email"];
-        [person setObject:@"bjarkim11" forKey:@"Username"];
-		[person setObject:@"18703" forKey:@"ID"];
-		[person setObject:@"8698649" forKey:@"MobilePhone"];
-		[person setObject:@"Bjarki Sörens Madsen" forKey:@"Name"];
-		[person setObject:@"104" forKey:@"Postal"];
-		[person setObject:@"0805903269" forKey:@"SSN"];
-		[info setObject:person forKey:@"Person"];
-		
-		NSMutableDictionary *registration = [[NSMutableDictionary  alloc] init];
-		NSMutableDictionary *studentRegistration = [[NSMutableDictionary alloc] init];
-		NSMutableDictionary *major = [[NSMutableDictionary alloc] init];
-		
-		[registration setObject:@"Tölvunarfræðideild" forKey:@"DepartmentName"];
-		[registration setObject:@"Staðarnám" forKey:@"StudentTypeName"];
-		
-		[studentRegistration setObject:[NSNumber numberWithInteger:24] forKey:@"ECTSActive"];
-		[studentRegistration setObject:[NSNumber numberWithInteger:66] forKey:@"ECTSFinished"];
-		[studentRegistration setObject:[NSNumber numberWithDouble:7.5] forKey:@"AverageGrade"];
-		[registration setObject:studentRegistration forKey:@"StudentRegistration"];
-		
-		[major setObject:@"BSc í tölvunarfræði" forKey:@"Name"];
-		[major setObject:@"BSc in Computer Science" forKey:@"NameEnglish"];
-		[major setObject:[NSNumber numberWithInteger:180] forKey:@"Credits"];
-		[registration setObject:major forKey:@"Major"];
-		
-		[info setObject:registration forKey:@"Registration"];
-	}
-	else {
-		return failure(nil, nil);
-	}
-	
-	success(nil, info);
+    NSDictionary *userCred = @{@"email":email, @"password":password};
+	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://centris.nfsu.is/user"
+      parameters:userCred
+         success:success
+         failure:failure];
 }
 
 @end
