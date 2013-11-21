@@ -27,7 +27,7 @@
 + (void)getAssignmentsInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/assignments"
+    [manager POST:@"http://centris.nfsu.is/assignments/"
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -38,7 +38,7 @@
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:[NSString stringWithFormat:@"http://centris.nfsu.is/assignments/%d/%d", courseId, assignmentId]
+    [manager POST:[NSString stringWithFormat:@"http://centris.nfsu.is/assignments/%d/%d/", courseId, assignmentId]
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -49,7 +49,7 @@
                          failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:url
+    [manager POST:url
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -58,7 +58,7 @@
 + (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/courses"
+    [manager POST:@"http://centris.nfsu.is/courses/"
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -67,7 +67,7 @@
 + (void)getScheduleInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/schedules"
+    [manager POST:@"http://centris.nfsu.is/schedules/"
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -78,7 +78,7 @@
 {
     NSDictionary *userCred = @{@"email":email, @"password":password};
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/user"
+    [manager POST:@"http://centris.nfsu.is/user/"
       parameters:userCred
          success:success
          failure:failure];
