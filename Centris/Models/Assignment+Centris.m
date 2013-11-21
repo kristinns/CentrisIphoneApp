@@ -65,7 +65,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed > %@", date];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                                 forKey:@"dateClosed"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:pred
                                 inManagedObjectContext:context];
 }

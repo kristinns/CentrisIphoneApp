@@ -74,7 +74,7 @@
         
         for (NSManagedObject *managedObject in items) {
             [[AppFactory managedObjectContext] deleteObject:managedObject];
-            NSLog(@"%@ object deleted",entityDescription);
+            //NSLog(@"%@ object deleted",entityDescription);
         }
         if (![[AppFactory managedObjectContext] save:&error]) {
             NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
