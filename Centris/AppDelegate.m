@@ -7,11 +7,15 @@
 #import "AppFactory.h"
 #import "User+Centris.h"
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
+#import "TestFlight.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSString *user = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
+    [TestFlight addCustomEnvironmentInformation:user forKey:@"user"];
+    [TestFlight takeOff:@"ece3da99-8ec0-42d2-8945-32837e342ff1"];
 //	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
 //	[tabController setSelectedIndex:2]; // Veitan
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
@@ -45,6 +49,7 @@
 #pragma mark - Login Delegates
 -(void)didFinishLoginWithValidUser
 {
+    [TestFlight passCheckpoint:@"Got to the HomeFeed"];
     [self saveContext];
 	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];

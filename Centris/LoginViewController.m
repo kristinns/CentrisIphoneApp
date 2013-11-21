@@ -16,6 +16,7 @@
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "HTProgressHUDFadeZoomAnimation.h"
 #import "HTProgressHUDIndicatorView.h"
+#import "TestFlight.h"
 
 @interface LoginViewController ()
 @property (nonatomic, weak) IBOutlet UITextField *emailInput;
@@ -90,7 +91,7 @@
         
         [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
         [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            NSLog(@"Got %d courses", [responseObject count]);
+            TFLog(@"Got %d courses", [responseObject count]);
             for (NSDictionary *courseInst in responseObject) {
                 [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
             }
@@ -98,29 +99,29 @@
             // Get scheduleEvents
             [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
             [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Got %d scheduleEvents", [responseObject count]);
+                TFLog(@"Got %d scheduleEvents", [responseObject count]);
                 [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error getting Schedule Events");
+                TFLog(@"Error getting Schedule Events");
                 [self hideHUD];
                 [self promptUserWithMessage:@"Villa kom upp við að sækja stundaskrá :(. Endilega reyndu aftur" title:@"Villa" cancelButtonTitle:@"Ókei"];
             }];
             
             // Get assignments
             [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Got %d assignments", [responseObject count]);
+                TFLog(@"Got %d assignments", [responseObject count]);
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error getting assignments");
+                TFLog(@"Error getting assignments");
                 [self hideHUD];
                 [self promptUserWithMessage:@"Villa kom upp við að sækja áfanga :(. Endilega reyndu aftur" title:@"Villa" cancelButtonTitle:@"Ókei"];
             }];
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            NSLog(@"Error getting Courses");
+            TFLog(@"Error getting Courses");
         }];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -128,7 +129,7 @@
                               title:@"Notandi fannst ekki"
                   cancelButtonTitle:@"OK"];
         [self hideHUD];
-        NSLog(@"Error in login");
+        TFLog(@"Error in login");
     }];
 }
 
