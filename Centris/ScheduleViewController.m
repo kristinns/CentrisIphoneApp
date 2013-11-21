@@ -153,7 +153,13 @@
         NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
         if (minutes != 0) {
             cell.bounds = CGRectMake(cell.bounds.origin.x, cell.bounds.origin.y, cell.bounds.size.width, ROW_HEIGHT+SEPERATOR_HEIGHT);
-            cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
+            if (minutes < 25)
+                cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín kaffihlé", minutes];
+            if (minutes == 25)
+                cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hádegishlé", minutes];
+            else {
+                cell.seperatorBreakText = [NSString stringWithFormat:@"%d mín hlé", minutes];
+            }
         }
     }
     
