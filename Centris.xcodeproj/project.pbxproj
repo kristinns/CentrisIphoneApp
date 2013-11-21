@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
+		184DA2DF183EA762006BF324 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
 		18856AD318206DE7009862CA /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD218206DE7009862CA /* CourseInstance.m */; };
 		18856AD618206F33009862CA /* CDDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD518206F33009862CA /* CDDataFetcher.m */; };
 		188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C7DAC183528F00030CB09 /* ProfileViewController.m */; };
@@ -43,7 +44,6 @@
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
-		19BD8F42183D71E300F34A40 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
 		19BD8F43183D71E300F34A40 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 19BD8F3D183D71E300F34A40 /* README.md */; };
 		19BD8F44183D71E300F34A40 /* release_notes.md in Resources */ = {isa = PBXBuildFile; fileRef = 19BD8F3E183D71E300F34A40 /* release_notes.md */; };
 		19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F45183D726100F34A40 /* libz.dylib */; };
@@ -176,9 +176,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				184DA2DF183EA762006BF324 /* libTestFlight.a in Frameworks */,
 				19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */,
 				969C94DF18082A3700356C7C /* Security.framework in Frameworks */,
-				19BD8F42183D71E300F34A40 /* libTestFlight.a in Frameworks */,
 				9621008917D7795400D60C06 /* CoreData.framework in Frameworks */,
 				194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */,
 				194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */,
@@ -804,6 +804,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kristinns/Developer/iOS/Centris/Centris/TestFlightSDK2,
+					/Users/bjarki/Documents/Git/CentrisIphoneApp/Centris/TestFlightSDK2,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -826,6 +827,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/kristinns/Developer/iOS/Centris/Centris/TestFlightSDK2,
+					/Users/bjarki/Documents/Git/CentrisIphoneApp/Centris/TestFlightSDK2,
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";

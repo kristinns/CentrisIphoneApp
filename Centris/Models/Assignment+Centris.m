@@ -38,12 +38,9 @@
 
 + (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    Assignment *assignment;
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[ASSIGNMENT_ID]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
-
-    if (matches) {
-        assignment = [matches lastObject];
+    Assignment *assignment = [self assignmentWithID:assignmentInfo[@"ID"] inManagedObjectContext:context];
+    if (assignment != nil)
+    {
         [self populateAssignmentFieldsForAssignment:assignment withAssignmentInfo:assignmentInfo inManagedObjectContext:context];
     }
 }
