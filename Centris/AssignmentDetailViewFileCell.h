@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AssignmentDetailViewCell : UITableViewCell
+@interface AssignmentDetailViewFileCell : UITableViewCell
 - (void)addTopBorder;
+@property (nonatomic, strong) UILabel *fileNameLabel;
 @end

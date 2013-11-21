@@ -7,7 +7,7 @@
 //
 
 #import "AssignmentDetailViewController.h"
-#import "AssignmentDetailViewCell.h"
+#import "AssignmentDetailViewFileCell.h"
 #import "AssignmentFileViewController.h"
 #import "DataFetcher.h"
 #import "AppFactory.h"
@@ -247,19 +247,19 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"fileCell";
-    AssignmentDetailViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    AssignmentDetailViewFileCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
-        cell = [[AssignmentDetailViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[AssignmentDetailViewFileCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     }
     if (indexPath.row == 0)
         [cell addTopBorder];
     
     if (tableView == self.descriptionFileTableView) {
-        cell.textLabel.text = [[[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row] fileName];
+        cell.fileNameLabel.text = [[[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row] fileName];
     } else if (tableView == self.handinFileTableView) {
-        cell.textLabel.text = [[[self assignmentsWithType:@"SolutionFile"] objectAtIndex:indexPath.row] fileName];
+        cell.fileNameLabel.text = [[[self assignmentsWithType:@"SolutionFile"] objectAtIndex:indexPath.row] fileName];
     } else if (tableView == self.teacherCommentFileTableView) {
-        cell.textLabel.text = [[[self assignmentsWithType:@"TeacherFile"] objectAtIndex:indexPath.row] fileName];
+        cell.fileNameLabel.text = [[[self assignmentsWithType:@"TeacherFile"] objectAtIndex:indexPath.row] fileName];
     }
     return cell;
 }
