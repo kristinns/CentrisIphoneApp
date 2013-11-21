@@ -61,6 +61,27 @@
 -(void)didLogOutUser
 {
     [self saveContext];
+    // Remove database file, not sure if this is the right way
+    NSArray *entities = @[@"Assignment", @"ScheduleEvent", @"AssignmentFile", @"CourseInstance", @"ScheduleEventUnit", @"User"];
+    for (NSString *entityDescription in entities) {
+        NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+        NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:[AppFactory managedObjectContext]];
+        [fetchRequest setEntity:entity];
+        
+        NSError *error;
+        NSArray *items = [[AppFactory managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        
+        
+        for (NSManagedObject *managedObject in items) {
+            [[AppFactory managedObjectContext] deleteObject:managedObject];
+            NSLog(@"%@ object deleted",entityDescription);
+        }
+        if (![[AppFactory managedObjectContext] save:&error]) {
+            NSLog(@"Error deleting %@ - error:%@",entityDescription,error);
+        }
+
+    }
+
     // Destroy username from keychain
     [[AppFactory keychainItemWrapper] setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
