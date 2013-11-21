@@ -97,7 +97,7 @@
     formatter.locale = [NSLocale currentLocale];
     formatter.dateFormat = @"d. MMMM HH:mm";
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
-    self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
+    self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%.1f", [self.assignment.grade floatValue]] : @"";
     self.descriptionTextView.text = @"";
     self.teacherCommentTextView.text = @"";
     self.handinDateLabel.text = @"";
@@ -112,11 +112,7 @@
 - (void)updateOutlets
 {
     [self.HUD hide];
-    // Debug
-//    self.teacherCommentFileHeaderLabel.textColor = [UIColor redColor];
-//    self.handinFileHeaderLabel.textColor = [UIColor yellowColor];
-//    self.descriptionFileHeaderLabel.textColor = [UIColor greenColor];
-    
+    // Remove unneeded views
     if (self.assignment.grade == nil)
         [self.teacherView removeFromSuperview];
     if (self.assignment.handInDate == nil)
@@ -127,7 +123,7 @@
         [self.handinFileView removeFromSuperview];
     if ([[self assignmentsWithType:@"TeacherFile"] count] == 0)
         [self.teacherCommentFileView removeFromSuperview];
-    
+    // Reload table views to get newest data
     [self.descriptionFileTableView reloadData];
     [self.handinFileTableView reloadData];
     [self.teacherCommentFileTableView reloadData];
@@ -138,7 +134,7 @@
     formatter.dateFormat = @"d. MMMM HH:mm";
     self.dateLabel.text = [formatter stringFromDate:self.assignment.dateClosed];
     self.weightLabel.text = [NSString stringWithFormat:@"| %@%%", self.assignment.weight];
-    self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%@", self.assignment.grade] : @"";
+    self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%.1f", [self.assignment.grade floatValue]] : @"";
     self.descriptionTextView.text = [self.assignment.assignmentDescription length] != 0 ? self.assignment.assignmentDescription : @"Engin lýsing..";
     self.teacherCommentTextView.text = [self.assignment.teacherMemo length] != 0 ? self.assignment.teacherMemo : @"Engin athugasemd..";
     self.handinTextView.text = [self.assignment.studentMemo length] != 0 ? self.assignment.studentMemo : @"Engin textaskil..";;
@@ -149,27 +145,18 @@
     self.teacherCommentTextView.textColor = [CentrisTheme grayLightTextColor];
     self.handinTextView.font = [CentrisTheme headingSmallFont];
     self.handinTextView.textColor = [CentrisTheme grayLightTextColor];
-    
-    if ([self.assignment.assignmentDescription length] == 0) {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
-        [self.descriptionTextView addConstraint:constraint];
-    } else {
-        NSInteger height = 130;
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.descriptionTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
-        [self.descriptionTextView addConstraint:constraint];
-
+    // Go through text views and calculate the content height and add constraint with that height
+    NSArray *textViewArray = @[self.descriptionTextView, self.handinTextView, self.teacherCommentTextView];
+    for (UITextView *textView in textViewArray) {
+        CGRect frame = [textView.text boundingRectWithSize:CGSizeMake(290, 250)
+                                                            options:(NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading)
+                                                         attributes:@{NSFontAttributeName:[CentrisTheme headingSmallFont]}
+                                                            context:nil];
+        // Add height constraint
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:frame.size.height*1.6];
+        [textView addConstraint:constraint];
     }
-    
-    if ([self.assignment.studentMemo length] == 0) {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.handinTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
-        [self.handinTextView addConstraint:constraint];
-    }
-    
-    if ([self.assignment.teacherMemo length] == 0) {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.teacherCommentTextView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:30];
-        [self.teacherCommentTextView addConstraint:constraint];
-    }
-
+ 
     // Create list of all table views
     NSArray *tableViews = @[self.descriptionFileTableView, self.handinFileTableView, self.teacherCommentFileTableView];//, self.otherInfoTableView];
     // Fix height on table view list
@@ -192,24 +179,10 @@
         [Assignment updateAssignmentWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];      // Update our assignment
         self.assignment = [Assignment assignmentWithID:self.assignment.id inManagedObjectContext:[AppFactory managedObjectContext]];
         [self updateOutlets];
-        [self.descriptionFileTableView reloadData];
-        [self.handinFileTableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignment %@/%@", self.assignment.isInCourseInstance.id, self.assignment.id);
     }];
-}
-
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    // just add this line to the end of this method or create it if it does not exist
-    //[self.descriptionFileTableView reloadData];
-}
-
--(void)viewDidLayoutSubviews
-{
-    
 }
 
 #pragma UITableView Delegate Methods
@@ -221,7 +194,6 @@
         fileDescription = @"DescriptionFile";
     else if (tableView == self.handinFileTableView)
         fileDescription = @"SolutionFile";
-    
     
     for (AssignmentFile *file in self.assignment.hasFiles) {
         if ([file.type isEqualToString:fileDescription])
