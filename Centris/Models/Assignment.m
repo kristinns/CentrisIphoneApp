@@ -2,7 +2,7 @@
 //  Assignment.m
 //  Centris
 //
-//  Created by Bjarki Sörens on 13/11/13.
+//  Created by Kristinn Svansson on 20/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -26,6 +26,7 @@
 @dynamic teacherMemo;
 @dynamic title;
 @dynamic weight;
+@dynamic hasFiles;
 @dynamic isInCourseInstance;
 
 @end

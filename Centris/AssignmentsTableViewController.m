@@ -13,6 +13,7 @@
 #import "AssignmentDetailViewController.h"
 #import "AssignmentTableViewCell.h"
 #import "CourseInstance+Centris.h"
+#import "AssignmentDetailViewController.h"
 
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
@@ -228,9 +229,18 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if([segue.identifier isEqualToString:@"assignmentDetailSegue"]) {
-        //NSString *title = [[self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row] valueForKey:@"title"];
-        //[segue.destinationViewController setAssignmentTitle:title];
+    if([segue.identifier isEqualToString:@"assignmentDetailViewSegue"]) {
+        AssignmentDetailViewController *assignmentDetailViewController = [segue destinationViewController];
+        Assignment *selectedAssignment;
+        if (self.allAssignments) {
+            CourseInstance *selectedCourseInstance = [self.courses objectAtIndex:self.tableView.indexPathForSelectedRow.section];
+            NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
+            NSArray *sortedAssignmentList = [selectedCourseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+            selectedAssignment = [sortedAssignmentList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        } else {
+            selectedAssignment = [self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        }
+        assignmentDetailViewController.assignment = selectedAssignment;
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleEvent+Centris.h"
+#import "ScheduleEventUnit+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "DataFetcher.h"
 #import "CDDataFetcher.h"
@@ -59,61 +60,24 @@
                                                          withPredicate:pred
                                                 inManagedObjectContext:context];
         // get the event units
-        NSArray *splittedEvents = [self splitEventsDownToUnits:eventInfo];
+        NSArray *eventUnits = [self splitEventsDownToUnits:eventInfo];
         
         if (![matches count]) { // no result, put the event in core data
             event = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
             event.eventID = [NSNumber numberWithInt:[eventInfo[EVENT_ID] intValue]];
             // rest can be populated by helper
             [self populateScheduleEventFieldsForScheduleEvent:event withEventInfo:eventInfo inManagedObjectContext:context];
-            
-            ScheduleEventUnit *eventUnit = nil;
-            NSInteger index = 0;
-            for (NSDictionary *subEvent in splittedEvents) {
-                eventUnit = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEventUnit" inManagedObjectContext:context];
-                eventUnit.isAUnitOf = event;
-                eventUnit.id = [NSString stringWithFormat:@"%d_%d", [event.eventID integerValue], ++index];
-                eventUnit.starts = subEvent[EVENT_START_TIME];
-                eventUnit.ends = subEvent[EVENT_END_TIME];
-            }
+            // add event units
+            [ScheduleEventUnit addScheduleEventUnitForScheduleEvent:event withScheduleEventUnits:eventUnits inManagedObjectContext:context];
         } else { // event found, update its field
             event = [matches lastObject];
             [self populateScheduleEventFieldsForScheduleEvent:event withEventInfo:eventInfo inManagedObjectContext:context];
-            // re-insert the event units by first removing them
-            for (ScheduleEventUnit *unit in event.hasUnits) {
-                [context deleteObject:unit];
-            }
-            // and then insert the new sub events
-            ScheduleEventUnit *eventUnit = nil;
-            NSInteger index = 0;
-            for (NSDictionary *subEvent in splittedEvents) {
-                eventUnit = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEventUnit" inManagedObjectContext:context];
-                eventUnit.isAUnitOf = event;
-                eventUnit.id = [NSString stringWithFormat:@"%d_%d", [event.eventID integerValue], ++index];
-                eventUnit.starts = subEvent[EVENT_START_TIME];
-                eventUnit.ends = subEvent[EVENT_END_TIME];
-            }
+            // add event units again
+            [ScheduleEventUnit addScheduleEventUnitForScheduleEvent:event withScheduleEventUnits:eventUnits inManagedObjectContext:context];
         }
     }
-    // find events that need to be removed, if any
-    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
-    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
-    NSMutableSet *set = [[NSMutableSet alloc] init];
-    for (ScheduleEvent *e in eventsInCoreData)
-        [setToBeDeleted addObject:e.eventID];
-    for (NSDictionary *dic in events)
-        [set addObject:dic[EVENT_ID]];
-    [setToBeDeleted minusSet:set];
-    NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
-    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
-        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
-            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
-            for (ScheduleEventUnit *unit in scheduleEvent.hasUnits) {
-                [context deleteObject:unit];
-            }
-            [context deleteObject:scheduleEvent];
-        }
-    }
+    // finally, find events that need to be removed, if any
+    [self checkToRemoveScheduleEventsForCentrisScheduleEvents:events inMangedObjectContext:context];
 }
 
 + (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
@@ -136,6 +100,25 @@
 }
 
 #pragma mark - Helper methods
+
++ (void)checkToRemoveScheduleEventsForCentrisScheduleEvents:(NSArray *)centrisScheduleEvents inMangedObjectContext:(NSManagedObjectContext *)context
+{
+    NSArray *eventsInCoreData = [self eventsInManagedObjectContext:context];
+    NSMutableSet *setToBeDeleted = [[NSMutableSet alloc] init];
+    NSMutableSet *set = [[NSMutableSet alloc] init];
+    for (ScheduleEvent *e in eventsInCoreData)
+        [setToBeDeleted addObject:e.eventID];
+    for (NSDictionary *dic in centrisScheduleEvents)
+        [set addObject:dic[EVENT_ID]];
+    [setToBeDeleted minusSet:set];
+    NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
+    if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
+        for (int i = 0; i < [arrayToBeDeleted count]; i++) {
+            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            [context deleteObject:scheduleEvent];
+        }
+    }
+}
 
 + (void)populateScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
@@ -160,7 +143,6 @@
     } else {
         NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents *compsStarts = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSMinuteCalendarUnit fromDate:starts];
-        NSDateComponents *compsTo = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSMinuteCalendarUnit fromDate:to];
     
         // either component is fine because they both have the same day
         NSArray *breaks = [self getRUbreaksForDateComponent:compsStarts inCalendar:gregorian];

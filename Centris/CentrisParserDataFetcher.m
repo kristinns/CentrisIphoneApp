@@ -33,6 +33,28 @@
          failure:failure];
 }
 
++ (void)getAssignmentById:(NSInteger)assignmentId courseId:(NSInteger)courseId
+                  success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:[NSString stringWithFormat:@"http://centris.nfsu.is/assignments/%d/%d", courseId, assignmentId]
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:failure];
+}
+
++ (void)getAssignmentFileWithUrl:(NSString *)url
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:url
+      parameters:[self userCredentialsObject]
+         success:success
+         failure:failure];
+}
+
 + (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
