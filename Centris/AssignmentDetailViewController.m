@@ -54,7 +54,6 @@
 // Constraints
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *descriptionFileTableViewHeightConstraint;
 
 @property (strong, nonatomic) HTProgressHUD *HUD;
 
@@ -153,7 +152,7 @@
                                                          attributes:@{NSFontAttributeName:[CentrisTheme headingSmallFont]}
                                                             context:nil];
         // Add height constraint
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:frame.size.height*1.6];
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(frame.size.height*1.6)+20]; // The calculation is not correct, trying to fix it
         [textView addConstraint:constraint];
     }
  
@@ -188,18 +187,15 @@
 #pragma UITableView Delegate Methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSString *fileDescription;
-    NSInteger count = 0;
-    if (tableView == self.descriptionFileTableView)
-        fileDescription = @"DescriptionFile";
-    else if (tableView == self.handinFileTableView)
-        fileDescription = @"SolutionFile";
-    
-    for (AssignmentFile *file in self.assignment.hasFiles) {
-        if ([file.type isEqualToString:fileDescription])
-            count++;
+    if (tableView == self.descriptionFileTableView) {
+        return [[self assignmentsWithType:@"DescriptionFile"] count];
+    } else if (tableView == self.handinFileTableView) {
+        return [[self assignmentsWithType:@"SolutionFile"] count];
+    } else if (tableView == self.teacherCommentFileTableView) {
+        return [[self assignmentsWithType:@"TeacherFile"] count];
     }
-    return count;
+    // Else
+    return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

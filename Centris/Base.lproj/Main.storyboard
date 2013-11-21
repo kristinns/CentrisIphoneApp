@@ -263,7 +263,7 @@
                                             <constraint firstAttribute="height" constant="1" id="1Ni-9l-elJ"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ2-h3-tLg" userLabel="Description Text View">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ2-h3-tLg" userLabel="Description Text View">
                                         <rect key="frame" x="15" y="137" width="290" height="135"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +341,7 @@
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Teacher Text View">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Teacher Text View">
                                                 <rect key="frame" x="0.0" y="31" width="290" height="135"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -418,7 +418,7 @@
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-7h-ge8" userLabel="Handin Text View">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-7h-ge8" userLabel="Handin Text View">
                                                 <rect key="frame" x="0.0" y="31" width="290" height="135"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -562,26 +562,21 @@
                         <outlet property="dateLabel" destination="Ay2-Z2-e3f" id="WrT-N5-Tc7"/>
                         <outlet property="descriptionDateLabel" destination="32U-D6-Op6" id="ZTR-XS-mZo"/>
                         <outlet property="descriptionFileHeaderLabel" destination="OfJ-U0-kLr" id="H7W-tF-g97"/>
-                        <outlet property="descriptionFileTableView" destination="a8Q-xO-1ny" id="esJ-mW-dgF"/>
-                        <outlet property="descriptionFileTableViewHeightConstraint" destination="ef9-gL-jih" id="jX0-St-DwB"/>
                         <outlet property="descriptionFileView" destination="Zjj-I5-7h7" id="gEM-sH-qm5"/>
                         <outlet property="descriptionLabel" destination="2sL-Aq-BSj" id="9cm-qH-bYz"/>
                         <outlet property="descriptionTextView" destination="XJ2-h3-tLg" id="6Nq-91-Xqr"/>
                         <outlet property="gradeLabel" destination="dHh-Cn-Kek" id="Myc-NX-Jnk"/>
                         <outlet property="handinDateLabel" destination="MpK-w6-BVN" id="dqU-4u-3Fy"/>
                         <outlet property="handinFileHeaderLabel" destination="lUm-0Q-xl1" id="HSp-dR-5FG"/>
-                        <outlet property="handinFileTableView" destination="G6Y-eD-URR" id="oxT-i7-pC4"/>
                         <outlet property="handinFileView" destination="CnA-2L-o1U" id="8Je-ZU-EqE"/>
                         <outlet property="handinTextView" destination="gZ8-7h-ge8" id="UNK-xu-1kq"/>
                         <outlet property="handinTitleLabel" destination="JNQ-ih-iTd" id="wqC-bF-AbY"/>
                         <outlet property="handinView" destination="ZWK-za-Lf6" id="ecN-br-cDt"/>
                         <outlet property="horizontalBorderWidthConstraint" destination="urh-HB-qed" id="9vt-4B-kir"/>
-                        <outlet property="otherInfoTableView" destination="j5P-7D-BMn" id="CbM-yw-DGn"/>
                         <outlet property="otherInfoTitleLabel" destination="lkX-Go-Fdj" id="Wjs-Ie-8gn"/>
                         <outlet property="scrollView" destination="EdL-Y2-Uov" id="Gpi-mJ-21G"/>
                         <outlet property="teacherCommentDateLabel" destination="3WY-El-VKg" id="bAY-xH-3TX"/>
                         <outlet property="teacherCommentFileHeaderLabel" destination="nzs-lJ-7RU" id="O5L-Up-ZuL"/>
-                        <outlet property="teacherCommentFileTableView" destination="HvI-z4-Fvv" id="hwn-L7-gs7"/>
                         <outlet property="teacherCommentFileView" destination="PFW-sv-Plo" id="GQK-Bc-QQ7"/>
                         <outlet property="teacherCommentTextView" destination="ruM-VK-O9W" id="Xer-oX-73w"/>
                         <outlet property="teacherCommentTitleLabel" destination="cPe-hM-Wcg" id="0fx-Mn-iEY"/>
