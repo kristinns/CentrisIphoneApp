@@ -15,7 +15,7 @@
 {
     NSString *user = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
     [TestFlight addCustomEnvironmentInformation:user forKey:@"user"];
-    [TestFlight takeOff:@"ece3da99-8ec0-42d2-8945-32837e342ff1"];
+    [TestFlight takeOff:@"42b8e02a-a292-4dd7-a5ab-012898ca6dbd"];
 //	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
 //	[tabController setSelectedIndex:2]; // Veitan
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;

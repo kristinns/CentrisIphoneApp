@@ -111,17 +111,6 @@
 - (void)updateOutlets
 {
     [self.HUD hide];
-    // Remove unneeded views
-    if (self.assignment.grade == nil)
-        [self.teacherView removeFromSuperview];
-    if (self.assignment.handInDate == nil)
-        [self.handinView removeFromSuperview];
-    if ([[self assignmentsWithType:@"DescriptionFile"] count] == 0)
-        [self.descriptionFileView removeFromSuperview];
-    if ([[self assignmentsWithType:@"SolutionFile"] count] == 0)
-        [self.handinFileView removeFromSuperview];
-    if ([[self assignmentsWithType:@"TeacherFile"] count] == 0)
-        [self.teacherCommentFileView removeFromSuperview];
     // Reload table views to get newest data
     [self.descriptionFileTableView reloadData];
     [self.handinFileTableView reloadData];
@@ -167,6 +156,18 @@
         tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     [self.view layoutIfNeeded];
+    
+    // Remove unneeded views
+    if (self.assignment.grade == nil)
+        [self.teacherView removeFromSuperview];
+    if (self.assignment.handInDate == nil)
+        [self.handinView removeFromSuperview];
+    if ([[self assignmentsWithType:@"DescriptionFile"] count] == 0)
+        [self.descriptionFileView removeFromSuperview];
+    if ([[self assignmentsWithType:@"SolutionFile"] count] == 0)
+        [self.handinFileView removeFromSuperview];
+    if ([[self assignmentsWithType:@"TeacherFile"] count] == 0)
+        [self.teacherCommentFileView removeFromSuperview];
 }
 
 - (void)fetchAssignmentFromAPI
