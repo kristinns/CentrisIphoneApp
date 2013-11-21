@@ -13,7 +13,6 @@
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 #import "AppFactory.h"
-#import "TestFlight.h"
 
 #pragma mark - Properties
 
@@ -43,7 +42,6 @@
 	[self setTimeLabels];
     [self getUserFromDatabase];
     self.title = @"Veitan";
-    [TestFlight passCheckpoint:@"Got to the HomeFeed"];
 }
 
 #pragma mark - Methods
