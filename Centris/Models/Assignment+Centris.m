@@ -38,7 +38,7 @@
 
 + (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    Assignment *assignment = [self assignmentWithID:assignmentInfo[@"ID"] inManagedObjectContext:context];
+    Assignment *assignment = [self assignmentWithID:[NSNumber numberWithInteger:[assignmentInfo[@"ID"] integerValue]] inManagedObjectContext:context];
     if (assignment != nil)
     {
         [self populateAssignmentFieldsForAssignment:assignment withAssignmentInfo:assignmentInfo inManagedObjectContext:context];
