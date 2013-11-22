@@ -9,6 +9,10 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "TestFlight.h"
 
+@interface AppDelegate()
+@property (nonatomic, strong) NSString *url;
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -42,8 +46,40 @@
     
     // AFNetworking NetworkAcitvityIndicator
     [[AFNetworkActivityIndicatorManager sharedManager] setEnabled:YES];
-
+    [self checkForUpdate];
     return YES;
+}
+
+#pragma mark - UIAlertView
+- (void)checkForUpdate
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://centris.nfsu.is/app_version/"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSLog(@"Version %@, %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [responseObject objectForKey:@"Version"]);
+             if ([[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue] < [[responseObject objectForKey:@"Version"] floatValue]) {
+                 self.url = [responseObject objectForKey:@"URL"];
+                 UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Uppfærsla"
+                                                                   message:@"Það er komin uppfærsla af appinu, endilega sæktu nýjasta með því að smella á uppfæra"
+                                                                  delegate:self
+                                                         cancelButtonTitle:@"Uppfæra"
+                                                         otherButtonTitles:@"Loka", nil];
+                 [message show];
+             }
+             
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error version number");
+         }];
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+    if([title isEqualToString:@"Uppfæra"])
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.url]];
+    }
 }
 
 #pragma mark - Login Delegates
@@ -105,6 +141,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
+    [self checkForUpdate];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
