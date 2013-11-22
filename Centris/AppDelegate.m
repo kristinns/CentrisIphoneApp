@@ -96,6 +96,7 @@
 #pragma mark - Logout delegates
 -(void)didLogOutUser
 {
+    [TestFlight passCheckpoint:@"Logged out"];
     [self saveContext];
     // Remove database file, not sure if this is the right way
     NSArray *entities = @[@"Assignment", @"ScheduleEvent", @"AssignmentFile", @"CourseInstance", @"ScheduleEventUnit", @"User"];

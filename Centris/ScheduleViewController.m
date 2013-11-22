@@ -14,6 +14,7 @@
 #import "DatePickerView.h"
 #import "ScheduleTableViewCell.h"
 #import "NSDate+Helper.h"
+#import "TestFlight.h"
 
 #define ROW_HEIGHT 61.0
 #define SEPERATOR_HEIGHT 26.0
@@ -183,6 +184,7 @@
 
 -(void)userDidRefresh
 {
+    [TestFlight passCheckpoint:@"User did refresh schedule view"];
     [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULEVC_LAST_UPDATED];
     [self fetchScheduledEventsFromAPI];
 }
@@ -218,6 +220,7 @@
 
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
+    [TestFlight passCheckpoint:@"Scrolled datepicker"];
     // If right, add 1 week, if left, subtract 1 week
     NSInteger addWeeks = right ? 1 : -1;
     self.datePickerDate = [self.datePickerDate dateByAddingWeeks:addWeeks];

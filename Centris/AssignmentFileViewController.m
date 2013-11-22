@@ -9,6 +9,7 @@
 #import "AssignmentFileViewController.h"
 #import "AppFactory.h"
 #import <HTProgressHUD/HTProgressHUD.h>
+#import "TestFlight.h"
 
 @interface AssignmentFileViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
@@ -35,6 +36,7 @@
 
 - (void)setup
 {
+    [TestFlight passCheckpoint:@"Assignment Detail View File Opened"];
     self.HUD = [[HTProgressHUD alloc] init];
     self.HUD.text = @"Sæki skrá..";
     [self.HUD showInView:self.view];

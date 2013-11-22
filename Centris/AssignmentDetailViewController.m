@@ -15,6 +15,7 @@
 #import "AssignmentFile+Centris.h"
 #import "CourseInstance+Centris.h"
 #import <HTProgressHUD/HTProgressHUD.h>
+#import "TestFlight.h"
 
 @interface AssignmentDetailViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -78,6 +79,7 @@
 
 - (void)setup
 {
+    [TestFlight passCheckpoint:@"Assignment Detail View opened"];
     // Fix width and height on borders, not possible in storyboard
     self.verticalBorderHeightConstraint.constant = 0.5;
     self.horizontalBorderWidthConstraint.constant = 0.5;

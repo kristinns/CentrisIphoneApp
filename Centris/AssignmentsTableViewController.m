@@ -14,6 +14,7 @@
 #import "AssignmentTableViewCell.h"
 #import "CourseInstance+Centris.h"
 #import "AssignmentDetailViewController.h"
+#import "TestFlight.h"
 
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
@@ -137,6 +138,7 @@
 
 -(void)userDidRefresh
 {
+    [TestFlight passCheckpoint:@"User did refresh Assignment list"];
     [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENTTVC_LAST_UPDATED];
     [self fetchAssignmentsFromAPI];
 }
