@@ -147,7 +147,7 @@
         textView.font = [CentrisTheme headingSmallFont];
         textView.scrollEnabled = NO;
         // Add gesture recognizer
-        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapRecognized:)];
+        UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapOnTextViewRecognized:)];
         singleTap.numberOfTapsRequired = 1;
         [textView addGestureRecognizer:singleTap];
         CGSize newSize = [textView sizeThatFits:CGSizeMake(290, 2000)];
@@ -181,27 +181,30 @@
         [self.teacherCommentFileView removeFromSuperview];
 }
 
-- (void)singleTapRecognized:(UIGestureRecognizer *)gestureRecognizer {
+- (void)singleTapOnTextViewRecognized:(UIGestureRecognizer *)gestureRecognizer {
     UITextView *textView = (UITextView *)gestureRecognizer.view;
     id constraint = [textView.constraints lastObject];
+    NSString *originalText;
     if (self.descriptionTextView == textView)
-        textView.text = self.assignment.assignmentDescription;
+        originalText = self.assignment.assignmentDescription;
     else if (self.handinTextView == textView)
-        textView.text = self.assignment.studentMemo;
+        originalText = self.assignment.studentMemo;
     if (self.teacherCommentTextView == textView)
-        textView.text = self.assignment.teacherMemo;
-    if ([constraint isKindOfClass:[NSLayoutConstraint class]]) {
-        [UITextView animateWithDuration:1
-                         animations:^{
-                             NSLayoutConstraint *layoutConstraint = constraint;
-                             layoutConstraint.constant = [textView sizeThatFits:CGSizeMake(290, 2000)].height;
-                             [self.view layoutIfNeeded];
-                         }];
+        originalText = self.assignment.teacherMemo;
+    if ([originalText length] != 0 && ![originalText isEqualToString:textView.text]) {
+        textView.text = originalText;
+        if ([constraint isKindOfClass:[NSLayoutConstraint class]]) {
+            [UITextView animateWithDuration:1
+                                 animations:^{
+                                     NSLayoutConstraint *layoutConstraint = constraint;
+                                     layoutConstraint.constant = [textView sizeThatFits:CGSizeMake(290, 2000)].height+10;
+                                     [self.view layoutIfNeeded];
+                                 }];
+        }
+        // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
+        textView.font = [CentrisTheme headingSmallFont];
+        textView.textColor = [CentrisTheme grayLightTextColor];
     }
-    // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
-    textView.font = [CentrisTheme headingSmallFont];
-    textView.textColor = [CentrisTheme grayLightTextColor];
-
 }
 
 - (void)fetchAssignmentFromAPI
