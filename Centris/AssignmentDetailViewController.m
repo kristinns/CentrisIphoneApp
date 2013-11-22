@@ -134,10 +134,15 @@
             NSRange range = [textView.text rangeOfComposedCharacterSequencesForRange:(NSRange){0, 500}];
             textView.text = [textView.text substringWithRange:range];
             textView.text = [textView.text stringByAppendingString:@"… meira"];
+            NSMutableAttributedString *attributeText = [[NSMutableAttributedString alloc] initWithString:textView.text];
+            [attributeText addAttribute: NSForegroundColorAttributeName value:[CentrisTheme redColor] range:(NSRange){0, [textView.text length]}];
+            [attributeText addAttribute: NSForegroundColorAttributeName value:[CentrisTheme grayLightTextColor] range:(NSRange){0, [textView.text length]-6}];
+            textView.attributedText = attributeText;
+        } else {
+            textView.textColor = [CentrisTheme grayLightTextColor];
         }
         // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
         textView.font = [CentrisTheme headingSmallFont];
-        textView.textColor = [CentrisTheme grayLightTextColor];
         textView.scrollEnabled = NO;
         // Add gesture recognizer
         UITapGestureRecognizer *singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapRecognized:)];

@@ -263,16 +263,23 @@
                                             <constraint firstAttribute="height" constant="1" id="1Ni-9l-elJ"/>
                                         </constraints>
                                     </view>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ2-h3-tLg" userLabel="Description Text View">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XJ2-h3-tLg" userLabel="Description Text View">
                                         <rect key="frame" x="15" y="137" width="290" height="135"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="411" constant="30" id="vQ6-cq-RYL"/>
                                         </constraints>
-                                        <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
-                                        <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <string key="content">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
+                                                <attributes>
+                                                    <color key="NSColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
                                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lýsing" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sL-Aq-BSj" userLabel="Description Title Label">
@@ -341,16 +348,23 @@
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Teacher Text View">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ruM-VK-O9W" userLabel="Teacher Text View">
                                                 <rect key="frame" x="0.0" y="31" width="290" height="135"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="618" constant="135" id="OZS-iA-Hzl"/>
                                                 </constraints>
-                                                <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
-                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PFW-sv-Plo" userLabel="Teacher  File View">
@@ -418,16 +432,23 @@
                                                 <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-7h-ge8" userLabel="Handin Text View">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" editable="NO" usesAttributedText="YES" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-7h-ge8" userLabel="Handin Text View">
                                                 <rect key="frame" x="0.0" y="31" width="290" height="135"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" priority="618" constant="135" id="3t9-Zw-VTv"/>
                                                 </constraints>
-                                                <string key="text">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
-                                                <color key="textColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment>
+                                                        <string key="content">Sjá verkefnalýsingu og tengt efni. Verkefninu þarf að skila í síðasta lagi hér á MySchool 20. september. Passið að skrá höfunda vel og með kennitölu. Ef að tveir vinna verkefnið að þá er nóg að annar skili því (með nöfnum beggja á forsíðu). Hér kemur smá auka... meira</string>
+                                                        <attributes>
+                                                            <color key="NSColor" red="0.57254901960000004" green="0.57254901960000004" blue="0.57647058819999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <font key="NSFont" size="14" name="HelveticaNeue-Light"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CnA-2L-o1U" userLabel="Handin File View">
