@@ -19,18 +19,9 @@
 
 + (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
-    [comps setMinute:0];
-    [comps setHour:0];
-    [comps setSecond:0];
-    NSDate *fromDate = [gregorian dateFromComponents:comps];
-    [comps setHour:23];
-    [comps setMinute:59];
-    [comps setSecond:59];
-    NSDate *toDate = [gregorian dateFromComponents:comps];
+    NSDictionary *range = [NSDate allDaydateRangeForDay:date];
     
-	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", fromDate, toDate ];
+	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     
     NSArray *scheduleEvents = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                                    forKey:@"starts"
@@ -99,6 +90,25 @@
                                 inManagedObjectContext:context];
 }
 
+// Returns the next schedule event for that given day. If, however, the time of the date is past 22:00
+// it will return the next event before 12:00 the next day
++ (ScheduleEvent *)nextEventForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    ScheduleEvent *nextEvent = nil;
+    NSDictionary *range = [NSDate dateRangeToMidnightFromDate:day];
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                            forKey:@"starts"
+                                                     sortAscending:NO
+                                                     withPredicate:pred
+                                            inManagedObjectContext:context];
+    if ([matches count]) {
+        nextEvent = [matches lastObject]; // return the first event that is found
+    }
+    return nextEvent;
+}
+
 
 #pragma mark - Helper methods
 
@@ -110,7 +120,7 @@
     for (ScheduleEvent *e in eventsInCoreData)
         [setToBeDeleted addObject:e.eventID];
     for (NSDictionary *dic in centrisScheduleEvents)
-        [set addObject:dic[EVENT_ID]];
+        [set addObject: [NSNumber numberWithInteger:[dic[EVENT_ID] integerValue]]];
     [setToBeDeleted minusSet:set];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
     if ([arrayToBeDeleted count]) { // there are some events that needs to be removed

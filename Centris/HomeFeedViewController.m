@@ -12,6 +12,7 @@
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
+#import "ScheduleEvent+Centris.h"
 #import "AppFactory.h"
 
 #pragma mark - Properties
@@ -41,10 +42,20 @@
 	
 	[self setTimeLabels];
     [self getUserFromDatabase];
+    [self setupHomeFeed];
     self.title = @"Veitan";
 }
 
 #pragma mark - Methods
+
+- (void)setupHomeFeed
+{
+    ScheduleEvent *nextEvent = [ScheduleEvent nextEventForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
+    if (nextEvent != nil) {
+        NSLog(@"there is a next event");
+    }
+}
+
 - (void)getUserFromDatabase
 {
 	NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];

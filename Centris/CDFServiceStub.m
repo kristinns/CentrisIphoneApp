@@ -200,8 +200,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T08:30:00", @"StartTime",
-						 @"2013-10-27T09:15:00", @"EndTime",
+						 @"2013-11-22T08:30:00", @"StartTime",
+						 @"2013-11-22T09:15:00", @"EndTime",
 						 @"Dæmatími",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -209,8 +209,8 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T09:20:00", @"StartTime",
-						 @"2013-10-27T10:05:00", @"EndTime",
+						 @"2013-11-22T09:20:00", @"StartTime",
+						 @"2013-11-22T10:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -218,8 +218,8 @@
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T10:20:00", @"StartTime",
-						 @"2013-10-27T11:05:00", @"EndTime",
+						 @"2013-11-22T10:20:00", @"StartTime",
+						 @"2013-11-22T11:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -227,40 +227,40 @@
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T11:10:00", @"StartTime",
-						 @"2013-10-27T11:55:00", @"EndTime",
+						 @"2013-11-22T11:10:00", @"StartTime",
+						 @"2013-11-22T11:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"5", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T12:20:00", @"StartTime",
-						 @"2013-10-27T13:05:00", @"EndTime",
+						 @"2013-11-22T12:20:00", @"StartTime",
+						 @"2013-11-22T13:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"6", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T13:10:00", @"StartTime",
-						 @"2013-10-27T13:55:00", @"EndTime",
+						 @"2013-11-22T13:10:00", @"StartTime",
+						 @"2013-11-22T13:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"7", @"ID",
 						 @"22220", @"CourseID",
 						 @"Verkefnalausnir", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T14:00:00", @"StartTime",
-						 @"2013-10-27T14:45:00", @"EndTime",
+						 @"2013-11-22T16:35:00", @"StartTime",
+						 @"2013-11-22T17:20:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"8", @"ID",
 						 @"22220", @"CourseID",
 						 @"Verkefnalausnir", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T14:55:00", @"StartTime",
-						 @"2013-10-27T15:40:00", @"EndTime",
+						 @"2013-11-22T17:25:00", @"StartTime",
+						 @"2013-11-22T18:10:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     
@@ -271,8 +271,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T09:20:00", @"StartTime",
-						 @"2013-10-28T10:05:00", @"EndTime",
+						 @"2013-11-28T09:20:00", @"StartTime",
+						 @"2013-11-28T10:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -280,8 +280,8 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T10:20:00", @"StartTime",
-						 @"2013-10-28T11:05:00", @"EndTime",
+						 @"2013-11-28T10:20:00", @"StartTime",
+						 @"2013-11-28T11:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -289,40 +289,40 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T11:10:00", @"StartTime",
-						 @"2013-10-28T11:55:00", @"EndTime",
+						 @"2013-11-28T11:10:00", @"StartTime",
+						 @"2013-11-28T11:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"15", @"ID",
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T12:20:00", @"StartTime",
-						 @"2013-10-28T13:05:00", @"EndTime",
+						 @"2013-11-28T12:20:00", @"StartTime",
+						 @"2013-11-28T13:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"16", @"ID",
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T13:10:00", @"StartTime",
-						 @"2013-10-28T13:55:00", @"EndTime",
+						 @"2013-11-28T13:10:00", @"StartTime",
+						 @"2013-11-28T13:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"17", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T14:00:00", @"StartTime",
-						 @"2013-10-28T14:45:00", @"EndTime",
+						 @"2013-11-28T14:00:00", @"StartTime",
+						 @"2013-11-28T14:45:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"18", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T14:55:00", @"StartTime",
-						 @"2013-10-28T15:40:00", @"EndTime",
+						 @"2013-11-28T14:55:00", @"StartTime",
+						 @"2013-11-28T15:40:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     success(nil, schedule);
 }
