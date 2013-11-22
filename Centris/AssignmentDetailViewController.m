@@ -143,6 +143,8 @@
         } else {
             textView.textColor = [CentrisTheme grayLightTextColor];
         }
+        // Fix padding in textView
+        textView.contentInset = UIEdgeInsetsMake(0,-5,0,0);
         // Fix iOS 7 bug, it's necessary to set the font and color after assigning the text
         textView.font = [CentrisTheme headingSmallFont];
         textView.scrollEnabled = NO;
@@ -250,6 +252,7 @@
         AssignmentFile *file = [[self assignmentsWithType:@"TeacherFile"] objectAtIndex:indexPath.row];
         controller.url = file.url;
     }
+    controller.title = [[[self assignmentsWithType:@"DescriptionFile"] objectAtIndex:indexPath.row] fileName];
     [self.navigationController pushViewController:controller animated:YES];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }

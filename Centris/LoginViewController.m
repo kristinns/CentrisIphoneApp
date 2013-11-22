@@ -62,6 +62,11 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification
                                                object:nil];
+    // Add left padding to email and password input
+    self.emailInput.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, self.emailInput.leftView.frame.size.height)];
+    self.emailInput.leftViewMode = UITextFieldViewModeAlways;
+    self.passwordInput.leftView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 5, self.passwordInput.leftView.frame.size.height)];
+    self.passwordInput.leftViewMode = UITextFieldViewModeAlways;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
