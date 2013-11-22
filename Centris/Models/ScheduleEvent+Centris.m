@@ -95,8 +95,13 @@
 + (ScheduleEvent *)nextEventForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context
 {
     ScheduleEvent *nextEvent = nil;
-    NSDictionary *range = [NSDate dateRangeToMidnightFromDate:day];
-    
+    NSDateComponents *comps = [NSDate dateComponentForDate:day];
+    NSDictionary *range = nil;
+    if ([comps hour] > 21) {
+        range = [NSDate dateRangeToNextMorning:day];
+    } else {
+        range = [NSDate dateRangeToMidnightFromDate:day];
+    }
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                             forKey:@"starts"

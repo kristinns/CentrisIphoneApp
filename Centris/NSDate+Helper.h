@@ -16,4 +16,6 @@
 + (NSDate *)formatDateString:(NSString *)dateString;
 + (NSDictionary *)allDaydateRangeForDay:(NSDate *)day;
 + (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date;
++ (NSDictionary *)dateRangeToNextMorning:(NSDate *)date;
++ (NSDateComponents *)dateComponentForDate:(NSDate *)date;
 @end
