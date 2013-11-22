@@ -93,6 +93,7 @@
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error");
+        [self.refreshControl endRefreshing];
     }];
 }
 

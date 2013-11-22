@@ -114,6 +114,7 @@
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting assignments");
+        [self.refreshControl endRefreshing];
     }];
 }
 
