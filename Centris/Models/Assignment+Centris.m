@@ -20,7 +20,7 @@
 {
     for ( NSDictionary *assignmentInfo in assignments) {
         Assignment *assignment;
-        NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[@"ID"]];
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", assignmentInfo[ASSIGNMENT_ID]];
         NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"id" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
         if (![matches count]) { // no results
             assignment = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
