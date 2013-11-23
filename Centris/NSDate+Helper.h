@@ -14,7 +14,7 @@
 - (NSDate *)dateByAddingDays:(NSInteger)daysToAdd;
 - (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd;
 + (NSDate *)formatDateString:(NSString *)dateString;
-+ (NSDictionary *)allDaydateRangeForDay:(NSDate *)day;
++ (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date;
 + (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date;
 + (NSDictionary *)dateRangeToNextMorning:(NSDate *)date;
 + (NSDateComponents *)dateComponentForDate:(NSDate *)date;

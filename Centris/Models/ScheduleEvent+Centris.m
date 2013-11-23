@@ -19,7 +19,7 @@
 
 + (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDictionary *range = [NSDate allDaydateRangeForDay:date];
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:date];
     
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     

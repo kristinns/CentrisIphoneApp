@@ -88,11 +88,26 @@
         range = [NSDate dateRangeToMidnightFromDate:day];
     }
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed >= %@ AND dateClosed <= %@", range[@"from"], range[@"to"]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"dateClosed" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
+                                                            forKey:@"dateClosed"
+                                                     sortAscending:NO
+                                                     withPredicate:pred
+                                            inManagedObjectContext:context];
     if ([matches count]) {
         nextAssignment = [matches lastObject];
     }
     return nextAssignment;
+}
+
++ (NSArray *)assignmentsForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed >= %@ AND dateClosed <= %@", range[@"from"], range[@"to"]];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
+                                                forKey:@"dateClosed"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
 }
 
 

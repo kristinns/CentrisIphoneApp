@@ -39,11 +39,11 @@
 }
 
 // Returns a dictionary with 'from' date that starts at 0:00 and 'to' date that ends at 23:59
-+ (NSDictionary *)allDaydateRangeForDay:(NSDate *)day
++ (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date
 {
     NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:day];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
     [comps setSecond:0];
     [comps setMinute:0];
     [comps setHour:0];
