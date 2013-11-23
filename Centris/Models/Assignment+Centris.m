@@ -77,6 +77,25 @@
                                 inManagedObjectContext:context];
 }
 
++ (Assignment *)nextAssignmentForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    Assignment *nextAssignment = nil;
+    NSDateComponents *comps = [NSDate dateComponentForDate:day];
+    NSDictionary *range = nil;
+    if ([comps hour] > 21) {
+        range = [NSDate dateRangeToNextMorning:day];
+    } else {
+        range = [NSDate dateRangeToMidnightFromDate:day];
+    }
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed >= %@ AND dateClosed <= %@", range[@"from"], range[@"to"]];
+    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment" forKey:@"dateClosed" sortAscending:NO withPredicate:pred inManagedObjectContext:context];
+    if ([matches count]) {
+        nextAssignment = [matches lastObject];
+    }
+    return nextAssignment;
+}
+
+
 #pragma mark - Helper methods
 
 + (void)populateAssignmentFieldsForAssignment:(Assignment *)assignment withAssignmentInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context

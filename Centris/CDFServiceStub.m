@@ -31,11 +31,11 @@
     [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
     [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
     [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-    [assignment1 setObject:@"2013-11-14T23:59:00" forKey:@"DateClosed"];
+    [assignment1 setObject:@"2013-11-23T23:59:00" forKey:@"DateClosed"];
     [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
     [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
     [assignment1 setObject:[NSNull null] forKey:@"Grade"];
-    [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];
+    [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];    
     [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
     [assignment1 setObject:[NSNull null] forKey:@"Closes"];
     
@@ -52,7 +52,7 @@
     [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
     [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
     [assignment2 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
-    [assignment2 setObject:@"2013-10-27T23:59:00" forKey:@"DateClosed"];
+    [assignment2 setObject:@"2013-11-23T22:00:00" forKey:@"DateClosed"];
     [assignment2 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
     [assignment2 setObject:[NSNumber numberWithInteger:585999] forKey:@"GroupID"];
     [assignment2 setObject:[NSNumber numberWithDouble:7.3] forKey:@"Grade"];

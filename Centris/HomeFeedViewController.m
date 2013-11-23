@@ -13,6 +13,7 @@
 #import "CentrisDataFetcher.h"
 #import "User+Centris.h"
 #import "ScheduleEvent+Centris.h"
+#import "Assignment+Centris.h"
 #import "AppFactory.h"
 
 #pragma mark - Properties
@@ -50,9 +51,14 @@
 
 - (void)setupHomeFeed
 {
-    ScheduleEvent *nextEvent = [ScheduleEvent nextEventForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
+    NSManagedObjectContext *context = [AppFactory managedObjectContext];
+    ScheduleEvent *nextEvent = [ScheduleEvent nextEventForDay:[NSDate date] inManagedObjectContext:context];
+    Assignment *nextAssignment = [Assignment nextAssignmentForDay:[NSDate date] inManagedObjectContext:context];
     if (nextEvent != nil) {
         NSLog(@"there is a next event");
+    }
+    if (nextAssignment != nil) {
+        NSLog(@"there is a next assignment");
     }
 }
 

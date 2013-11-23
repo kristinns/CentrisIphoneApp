@@ -12,6 +12,8 @@
 
 + (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
 
++ (Assignment *)nextAssignmentForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context;
+
 + (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
                         inManagedObjectContext:(NSManagedObjectContext *)context;
 
