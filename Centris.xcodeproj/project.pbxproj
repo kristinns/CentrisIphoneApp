@@ -45,6 +45,7 @@
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
 		19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F45183D726100F34A40 /* libz.dylib */; };
 		19CD49CF1842327A008094D8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
+		19CD49D3184240D2008094D8 /* ScheduleCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */; };
 		19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */; };
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */; };
@@ -141,6 +142,8 @@
 		19BD8F40183D71E300F34A40 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
 		19BD8F41183D71E300F34A40 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		19BD8F45183D726100F34A40 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		19CD49D1184240D2008094D8 /* ScheduleCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleCardTableViewCell.h; sourceTree = "<group>"; };
+		19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleCardTableViewCell.m; sourceTree = "<group>"; };
 		19F62CD917AC057100EEF08C /* AssignmentsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentsTableViewController.h; sourceTree = "<group>"; };
 		19F62CDA17AC057100EEF08C /* AssignmentsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentsTableViewController.m; sourceTree = "<group>"; };
 		19F62CDC17AC3EB700EEF08C /* CentrisDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CentrisDataFetcher.h; sourceTree = "<group>"; };
@@ -345,6 +348,15 @@
 			path = Centris/TestFlightSDK2;
 			sourceTree = "<group>";
 		};
+		19CD49D01842407C008094D8 /* HomeFeedCardViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				19CD49D1184240D2008094D8 /* ScheduleCardTableViewCell.h */,
+				19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */,
+			);
+			name = HomeFeedCardViewCells;
+			sourceTree = "<group>";
+		};
 		960827FB17CB8E72004741FD /* HomeFeed */ = {
 			isa = PBXGroup;
 			children = (
@@ -423,6 +435,7 @@
 		966A499717E9B619009C342B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				19CD49D01842407C008094D8 /* HomeFeedCardViewCells */,
 				19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */,
 				19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */,
 				190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */,
@@ -653,6 +666,7 @@
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				19CD49D3184240D2008094D8 /* ScheduleCardTableViewCell.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
