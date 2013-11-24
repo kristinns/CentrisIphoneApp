@@ -38,5 +38,87 @@
 	return [formatter dateFromString:dateString];
 }
 
++ (NSString *)formateDateToHourAndMinutesStringForDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH':'mm"];
+    return [formatter stringFromDate:date];
+}
+
+// Returns a dictionary with 'from' date that starts at 0:00 and 'to' date that ends at 23:59
++ (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date
+{
+    NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    [comps setSecond:0];
+    [comps setMinute:0];
+    [comps setHour:0];
+    NSDate *fromDate = [gregorian dateFromComponents:comps];
+    [comps setSecond:59];
+    [comps setMinute:59];
+    [comps setHour:23];
+    NSDate *toDate = [gregorian dateFromComponents:comps];
+    [range setObject:fromDate forKey:@"from"];
+    [range setObject:toDate forKey:@"to"];
+    return range;
+}
+
++ (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date;
+{
+    NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+    [comps setSecond:0];
+    [comps setMinute:0];
+    [comps setHour:[comps hour]];
+    NSDate *fromDate = [gregorian dateFromComponents:comps];
+    [comps setSecond:59];
+    [comps setMinute:59];
+    [comps setHour:23];
+    NSDate *toDate = [gregorian dateFromComponents:comps];
+    [range setObject:fromDate forKey:@"from"];
+    [range setObject:toDate forKey:@"to"];
+    return range;
+}
+
++ (NSDictionary *)dateRangeToNextMorning:(NSDate *)date
+{
+    NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+    [comps setSecond:0];
+    [comps setMinute:0];
+    [comps setHour:[comps hour]];
+    NSDate *fromDate = [gregorian dateFromComponents:comps];
+    [comps setSecond:59];
+    [comps setMinute:59];
+    [comps setHour:9];
+    [comps setDay:([comps day]) +1];
+    NSDate *toDate = [gregorian dateFromComponents:comps];
+    [range setObject:fromDate forKey:@"from"];
+    [range setObject:toDate forKey:@"to"];
+    return range;
+}
+
++ (NSDateComponents *)dateComponentForDate:(NSDate *)date
+{
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    return [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSWeekdayCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,11 @@
 
 #import "HomeFeedViewController.h"
 #import "CentrisDataFetcher.h"
+#import "NSDate+Helper.h"
 #import "User+Centris.h"
+#import "ScheduleEvent+Centris.h"
+#import "Assignment+Centris.h"
+#import "CourseInstance+Centris.h"
 #import "AppFactory.h"
 #import "ScheduleCardTableViewCell.h"
 
@@ -44,6 +48,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setupHomeFeed];
     [self setup];
 }
 
@@ -74,6 +79,65 @@
     [self.tableView addConstraint:constraint];
     [self.view layoutIfNeeded];
 }
+
+#pragma mark - Methods
+
+- (void)setupHomeFeed
+{
+    NSManagedObjectContext *context = [AppFactory managedObjectContext];
+    NSArray *nextEvents = [ScheduleEvent nextEventForCurrentDateInManagedObjectContext:context];
+    NSArray *nextAssignments = [Assignment assignmentsForCurrentDateInManagedObjectContext:context];
+    NSLog(@"%@", [self summaryTextForAssignments:nextAssignments]);
+    NSLog(@"%@", [self summaryTextForScheduleEvents:nextEvents]);
+}
+
+- (NSString *)summaryTextForAssignments:(NSArray *)assignments
+{
+    NSInteger numberOfAssignments = [assignments count];
+    NSString *assignmentsSummary = @"";
+    if (numberOfAssignments) {
+        if (numberOfAssignments > 1) {
+            assignmentsSummary = [NSString stringWithFormat:@"Þú átt að skila %d verkefnum í dag í ", numberOfAssignments];
+            NSMutableSet *setOfCourses = [[NSMutableSet alloc] init];
+            for (Assignment *assignment in assignments) {
+                [setOfCourses addObject:assignment.isInCourseInstance.name];
+            }
+            NSInteger index = 0;
+            for (NSString *courseInstanceName in setOfCourses) {
+                if (index == ([setOfCourses count] -2)) { // we're at the second last
+                    assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@ og ", courseInstanceName]];
+                } else if (index == [setOfCourses count] -1 ) { // we're at the last
+                    assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@.", courseInstanceName]];
+                } else { // we just keep adding commas
+                    assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@, ", courseInstanceName]];
+                }
+                index++;
+            }
+        } else {
+            assignmentsSummary = [NSString stringWithFormat:@"Þú átt að skila einu verkefni í dag í "];
+            Assignment *assignment = (Assignment *)[assignments firstObject];
+            assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@", assignment.isInCourseInstance.name]];
+        }
+    } else {
+        NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date]];
+        if ([comps weekday] == 5) { // FRIDAY
+            assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð?";
+        }
+    }
+    return assignmentsSummary;
+}
+
+- (NSString *)summaryTextForScheduleEvents:(NSArray *)scheduleEvents
+{
+    NSInteger numberOfEvents = [scheduleEvents count];
+    NSString *scheduleEventSummary = @"";
+    if (numberOfEvents) {
+        ScheduleEvent *nextEvent = (ScheduleEvent *)[scheduleEvents lastObject];
+        scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"Þú átt %d tíma eftir í dag. %@ er næsti tími hjá þér klukkan %@ í stofu %@.", numberOfEvents ,nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+    } // else it is a weekend or the schoolday is over. Might be a good idea to find a witty text about this situation.
+    return scheduleEventSummary;
+}
+
 
 #pragma mark - Table View Delegate Methods
 
