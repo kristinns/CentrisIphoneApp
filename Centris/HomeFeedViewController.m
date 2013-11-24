@@ -89,7 +89,7 @@
         }
     } else {
         NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date]];
-        if ([comps week] == 5) { // FRIDAY
+        if ([comps weekday] == 5) { // FRIDAY
             assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð?";
         }
     }
