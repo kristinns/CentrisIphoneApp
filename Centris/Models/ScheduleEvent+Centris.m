@@ -90,30 +90,40 @@
                                 inManagedObjectContext:context];
 }
 
-// Returns the next schedule event for that given day. If, however, the time of the date is past 22:00
-// it will return the next event before 12:00 the next day
-+ (ScheduleEvent *)nextEventForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context
+// Returns all the NEXT schedule events for that given day. If, however, the time of the date is past 22:00
+// it will return the next events before 11:00 the next day
++ (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
 {
-    ScheduleEvent *nextEvent = nil;
-    NSDateComponents *comps = [NSDate dateComponentForDate:day];
+    NSDate *toDay = [NSDate date];
+    NSDateComponents *comps = [NSDate dateComponentForDate:toDay];
     NSDictionary *range = nil;
+    
     if ([comps hour] > 21) {
-        range = [NSDate dateRangeToNextMorning:day];
+        range = [NSDate dateRangeToNextMorning:toDay];
     } else {
-        range = [NSDate dateRangeToMidnightFromDate:day];
+        range = [NSDate dateRangeToMidnightFromDate:toDay];
     }
+    
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
-    NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
-                                                            forKey:@"starts"
-                                                     sortAscending:NO
-                                                     withPredicate:pred
-                                            inManagedObjectContext:context];
-    if ([matches count]) {
-        nextEvent = [matches lastObject]; // return the first event that is found
-    }
-    return nextEvent;
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"starts"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
 }
 
+// Retrieves all the schedule event units for the current date
++ (NSArray *)scheduleEventUnitsForCurrentDateInMangedObjectContext:(NSManagedObjectContext *)context
+{
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
+    
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"starts"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
 
 #pragma mark - Helper methods
 

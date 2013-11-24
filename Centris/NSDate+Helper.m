@@ -38,6 +38,13 @@
 	return [formatter dateFromString:dateString];
 }
 
++ (NSString *)formateDateToHourAndMinutesStringForDate:(NSDate *)date
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"HH':'mm"];
+    return [formatter stringFromDate:date];
+}
+
 // Returns a dictionary with 'from' date that starts at 0:00 and 'to' date that ends at 23:59
 + (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date
 {
@@ -97,7 +104,7 @@
 + (NSDateComponents *)dateComponentForDate:(NSDate *)date
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    return [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+    return [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSWeekdayCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
 }
 
 @end

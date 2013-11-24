@@ -13,6 +13,7 @@
 + (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
-+ (ScheduleEvent *)nextEventForDay:(NSDate *)day inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)scheduleEventUnitsForCurrentDateInMangedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)addScheduleEventsWithCentrisInfo:(NSArray *)events inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
