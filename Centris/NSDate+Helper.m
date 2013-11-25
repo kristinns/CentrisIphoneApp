@@ -117,6 +117,7 @@
 {
     return [calendar components:NSYearCalendarUnit|
                                 NSMonthCalendarUnit|
+                                NSWeekCalendarUnit|
                                 NSWeekdayCalendarUnit|
                                 NSDayCalendarUnit|
                                 NSHourCalendarUnit|
