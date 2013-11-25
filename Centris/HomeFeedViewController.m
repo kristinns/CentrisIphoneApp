@@ -48,14 +48,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupHomeFeed];
     [self setup];
+    [self setupHomeFeed];
+    [self updateConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self setupHomeFeed];
+    [self updateConstraints];
 }
 
 - (void)setup
@@ -74,7 +76,10 @@
     self.textView.contentInset = UIEdgeInsetsMake(0,-5,0,0);
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme grayLightTextColor];
-    
+}
+
+- (void)updateConstraints
+{
     [self.tableView reloadData];
     CGSize newSize = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, 300)];
     // Add height constraint
@@ -86,6 +91,7 @@
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
     [self.tableView addConstraint:constraint];
     [self.view layoutIfNeeded];
+
 }
 
 #pragma mark - Methods
