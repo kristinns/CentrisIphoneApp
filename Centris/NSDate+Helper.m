@@ -31,18 +31,30 @@
 }
 
 // Returns a date in a custom format
-+ (NSDate *)formatDateString:(NSString *)dateString
++ (NSDate *)convertToDate:(NSString *)dateString withFormat:(NSString *)format
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-	[formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
-	return [formatter dateFromString:dateString];
+    if (!format) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+        return [formatter dateFromString:dateString];
+    } else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:format];
+        return [formatter dateFromString:dateString];
+    }
 }
 
-+ (NSString *)formateDateToHourAndMinutesStringForDate:(NSDate *)date
++ (NSString *)convertToString:(NSDate *)date withFormat:(NSString *)format
 {
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"HH':'mm"];
-    return [formatter stringFromDate:date];
+    if (!format) {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy'-'MM'-'dd'T'HH':'mm':'ss"];
+        return [formatter stringFromDate:date];
+    } else {
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:format];
+        return [formatter stringFromDate:date];
+    }
 }
 
 // Returns a dictionary with 'from' date that starts at 0:00 and 'to' date that ends at 23:59

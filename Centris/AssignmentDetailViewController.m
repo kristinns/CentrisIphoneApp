@@ -13,6 +13,7 @@
 #import "AppFactory.h"
 #import "Assignment+Centris.h"
 #import "AssignmentFile+Centris.h"
+#import "NSDate+Helper.h"
 #import "CourseInstance+Centris.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "TestFlight.h"
@@ -101,7 +102,7 @@
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%.1f", [self.assignment.grade floatValue]] : @"";
     self.descriptionTextView.text = @"";
     self.teacherCommentTextView.text = @"";
-    self.handinDateLabel.text = @"";
+    self.handinDateLabel.text = [NSDate convertToString:self.assignment.handInDate withFormat:@"dd'. 'MMM HH':'mm'"];
     self.descriptionDateLabel.text = @"";
     self.teacherCommentDateLabel.text = @"";
     self.HUD = [[HTProgressHUD alloc] init];

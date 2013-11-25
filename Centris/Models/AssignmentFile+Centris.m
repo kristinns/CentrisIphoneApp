@@ -23,7 +23,7 @@
         file.fileName = fileInfo[ASSIGNMENT_FILE_NAME];
         file.type = fileInfo[ASSIGNMENT_FILE_TYPE];
         file.url = fileInfo[ASSIGNMENT_FILE_URL];
-        file.lastUpdate = [NSDate formatDateString:fileInfo[ASSIGNMENT_FILE_DATE_UPDATED]];
+        file.lastUpdate = [NSDate convertToDate:fileInfo[ASSIGNMENT_FILE_DATE_UPDATED] withFormat:nil];
         file.isInAssignment = assignment;
     }
 }

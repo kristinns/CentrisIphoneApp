@@ -13,8 +13,10 @@
 - (NSDate *)dateByAddingHours:(NSInteger)hoursToAdd;
 - (NSDate *)dateByAddingDays:(NSInteger)daysToAdd;
 - (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd;
-+ (NSDate *)formatDateString:(NSString *)dateString;
-+ (NSString *)formateDateToHourAndMinutesStringForDate:(NSDate *)date;
+
++ (NSDate *)convertToDate:(NSString *)dateString withFormat:(NSString *)format;
++ (NSString *)convertToString:(NSDate *)date withFormat:(NSString *)format;
+
 + (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date;
 + (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date;
 + (NSDictionary *)dateRangeToNextMorning:(NSDate *)date;
