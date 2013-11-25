@@ -81,7 +81,7 @@
 + (NSArray *)assignmentsNotHandedInForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"dateClosed >= %@ AND dateClosed <= %@ AND handInDate  nil", range[@"from"], range[@"to"]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(dateClosed >= %@) AND (dateClosed <= %@) AND (handInDate = nil)", range[@"from"], range[@"to"]];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                                 forKey:@"dateClosed"
                                          sortAscending:NO
