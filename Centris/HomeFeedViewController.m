@@ -81,7 +81,6 @@
     [self.textView removeConstraints:self.textView.constraints];
     [self.tableView reloadData];
     CGSize newSize = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, 300)];
-    [self.textView removeConstraints:self.textView.constraints];
     // Add height constraint
     NSLayoutConstraint *textViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(newSize.height)]; // The calculation is not correct, trying to fix it
     [self.textView addConstraint:textViewConstraint];
@@ -108,11 +107,7 @@
     // Fix iOS 7 bug
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme blackLightTextColor];
-    
-    NSLog(@"%@", assignmentSummaryText);
-    NSLog(@"%@", scheduleEventSummaryText);
 }
-
 - (NSString *)summaryTextForAssignments:(NSArray *)assignments
 {
     NSInteger numberOfAssignments = [assignments count];
