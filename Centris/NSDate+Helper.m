@@ -50,7 +50,7 @@
 {
     NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
+    NSDateComponents *comps = [self dateComponentForDate:date withCalendar:gregorian];
     [comps setSecond:0];
     [comps setMinute:0];
     [comps setHour:0];
@@ -68,9 +68,9 @@
 {
     NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
-    [comps setSecond:0];
-    [comps setMinute:0];
+    NSDateComponents *comps = [self dateComponentForDate:date withCalendar:gregorian];
+    [comps setSecond:[comps second]];
+    [comps setMinute:[comps minute]];
     [comps setHour:[comps hour]];
     NSDate *fromDate = [gregorian dateFromComponents:comps];
     [comps setSecond:59];
@@ -86,7 +86,7 @@
 {
     NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+    NSDateComponents *comps = [self dateComponentForDate:date withCalendar:gregorian];
     [comps setSecond:0];
     [comps setMinute:0];
     [comps setHour:[comps hour]];
@@ -101,10 +101,15 @@
     return range;
 }
 
-+ (NSDateComponents *)dateComponentForDate:(NSDate *)date
++ (NSDateComponents *)dateComponentForDate:(NSDate *)date withCalendar:(NSCalendar *)calendar
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    return [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSWeekdayCalendarUnit|NSDayCalendarUnit|NSHourCalendarUnit fromDate:date];
+    return [calendar components:NSYearCalendarUnit|
+                                NSMonthCalendarUnit|
+                                NSWeekdayCalendarUnit|
+                                NSDayCalendarUnit|
+                                NSHourCalendarUnit|
+                                NSMinuteCalendarUnit|
+                                NSSecondCalendarUnit fromDate:date];
 }
 
 @end

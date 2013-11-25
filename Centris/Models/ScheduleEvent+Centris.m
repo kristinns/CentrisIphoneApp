@@ -95,7 +95,8 @@
 + (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSDate *toDay = [NSDate date];
-    NSDateComponents *comps = [NSDate dateComponentForDate:toDay];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [NSDate dateComponentForDate:toDay withCalendar:gregorian];
     NSDictionary *range = nil;
     
     if ([comps hour] > 21) {

@@ -18,5 +18,5 @@
 + (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date;
 + (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date;
 + (NSDictionary *)dateRangeToNextMorning:(NSDate *)date;
-+ (NSDateComponents *)dateComponentForDate:(NSDate *)date;
++ (NSDateComponents *)dateComponentForDate:(NSDate *)date withCalendar:(NSCalendar *)calendar;
 @end
