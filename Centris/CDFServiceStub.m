@@ -251,8 +251,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-11-24T18:15:00", @"StartTime",
-						 @"2013-11-24T19:00:00", @"EndTime",
+						 @"2013-11-25T12:20:00", @"StartTime",
+						 @"2013-11-25T13:55:00", @"EndTime",
 						 @"Dæmatími",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
