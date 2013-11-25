@@ -80,12 +80,14 @@
 
 - (void)updateConstraints
 {
+    [self.textView removeConstraints:self.textView.constraints];
     [self.tableView reloadData];
     CGSize newSize = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, 300)];
     // Add height constraint
     NSLayoutConstraint *textViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(newSize.height)]; // The calculation is not correct, trying to fix it
     [self.textView addConstraint:textViewConstraint];
     
+    [self.tableView removeConstraints:self.tableView.constraints];
     // Fix tableView height
     NSInteger height = self.tableView.contentSize.height;
     NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.tableView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:height];
@@ -106,7 +108,7 @@
     self.textView.text = [assignmentSummaryText stringByAppendingString:scheduleEventSummaryText];
     // Fix iOS 7 bug
     self.textView.font = [CentrisTheme headingSmallFont];
-    self.textView.textColor = [CentrisTheme grayLightTextColor];
+    self.textView.textColor = [CentrisTheme blackLightTextColor];
     
     NSLog(@"%@", assignmentSummaryText);
     NSLog(@"%@", scheduleEventSummaryText);
@@ -179,11 +181,15 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 90;
+    return 100;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 20.0f;
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UILabel *sectionHeader = [[UILabel alloc] initWithFrame:CGRectMake(20, self.tableView.frame.origin.y, self.tableView.frame.size.width-20, 14)];
+    UILabel *sectionHeader = [[UILabel alloc] init];// initWithFrame:CGRectMake(0, self.tableView.frame.origin.y, self.tableView.frame.size.width-20, 14)];
     sectionHeader.textColor = [CentrisTheme blackLightTextColor];
     sectionHeader.font = [CentrisTheme headingSmallFont];
     sectionHeader.text = @"     Í DAG";
@@ -192,7 +198,9 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ScheduleCardTableViewCell *tableViewCell = [[ScheduleCardTableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 81)];
+    NSString *CellIdentifier = @"ScheduleCardTableViewCell";
+    ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    //ScheduleCardTableViewCell *tableViewCell = [tableView deq]//[[ScheduleCardTableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 81)];
     return tableViewCell;
 }
 

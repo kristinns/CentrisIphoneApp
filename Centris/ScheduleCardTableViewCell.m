@@ -9,28 +9,18 @@
 #import "ScheduleCardTableViewCell.h"
 
 @interface ScheduleCardTableViewCell()
-@property (nonatomic, strong) UIView *view;
+@property (weak, nonatomic) IBOutlet UIView *contentView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @end
 
 @implementation ScheduleCardTableViewCell
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+
+- (void)layoutSubviews
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) {
-    }
-    return self;
-}
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        self.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.view = [[UIView alloc] initWithFrame:CGRectMake(0, 17, frame.size.width, frame.size.height-17)];
-        self.view.backgroundColor = [UIColor colorWithRed:239.0 green:241.0 blue:248.0 alpha:0.4];
-        [self addSubview:self.view];
-        self.backgroundColor = [UIColor clearColor];
-    }
-    return self;
+    self.horizontalBorderWidthConstraint.constant = 0.5;
+    self.verticalBorderHeightConstraint.constant = 0.5;
+    self.backgroundColor = [UIColor clearColor];
 }
 
 @end
