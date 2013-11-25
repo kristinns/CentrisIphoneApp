@@ -48,8 +48,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self setupHomeFeed];
     [self setup];
+    [self setupHomeFeed];
 }
 
 - (void)setup
@@ -86,7 +86,7 @@
 {
     NSManagedObjectContext *context = [AppFactory managedObjectContext];
     NSArray *nextEvents = [ScheduleEvent nextEventForCurrentDateInManagedObjectContext:context];
-    NSArray *nextAssignments = [Assignment assignmentsForCurrentDateInManagedObjectContext:context];
+    NSArray *nextAssignments = [Assignment assignmentsNotHandedInForCurrentDateInManagedObjectContext:context];
     NSLog(@"%@", [self summaryTextForAssignments:nextAssignments]);
     NSLog(@"%@", [self summaryTextForScheduleEvents:nextEvents]);
 }
@@ -97,7 +97,7 @@
     NSString *assignmentsSummary = @"";
     if (numberOfAssignments) {
         if (numberOfAssignments > 1) {
-            assignmentsSummary = [NSString stringWithFormat:@"Þú átt að skila %d verkefnum í dag í ", numberOfAssignments];
+            assignmentsSummary = [NSString stringWithFormat:@"Þú átt eftir að skila %d verkefnum í dag í ", numberOfAssignments];
             NSMutableSet *setOfCourses = [[NSMutableSet alloc] init];
             for (Assignment *assignment in assignments) {
                 [setOfCourses addObject:assignment.isInCourseInstance.name];
@@ -114,7 +114,7 @@
                 index++;
             }
         } else {
-            assignmentsSummary = [NSString stringWithFormat:@"Þú átt að skila einu verkefni í dag í "];
+            assignmentsSummary = [NSString stringWithFormat:@"Þú átt eftir að skila einu verkefni í dag í "];
             Assignment *assignment = (Assignment *)[assignments firstObject];
             assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@", assignment.isInCourseInstance.name]];
         }
@@ -130,10 +130,17 @@
 - (NSString *)summaryTextForScheduleEvents:(NSArray *)scheduleEvents
 {
     NSInteger numberOfEvents = [scheduleEvents count];
+    NSDateComponents *compsNow = [NSDate dateComponentForDate:[NSDate date]];
     NSString *scheduleEventSummary = @"";
     if (numberOfEvents) {
         ScheduleEvent *nextEvent = (ScheduleEvent *)[scheduleEvents lastObject];
-        scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"Þú átt %d tíma eftir í dag. %@ er næsti tími hjá þér klukkan %@ í stofu %@.", numberOfEvents ,nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+        NSDateComponents *eventComps = [NSDate dateComponentForDate:nextEvent.starts];
+        // check if it's in the morning
+        if ([eventComps day] != [compsNow day]) {
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér er í fyrramálið klukkan %@ í stofu %@.", nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+        } else {
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér er klukkan %@ í stofu %@.", nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+        }
     } // else it is a weekend or the schoolday is over. Might be a good idea to find a witty text about this situation.
     return scheduleEventSummary;
 }

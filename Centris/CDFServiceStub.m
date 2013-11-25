@@ -42,7 +42,7 @@
     [assignment1 setObject:[NSNull null] forKey:@"Grade"];
     [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];    
     [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
-    [assignment1 setObject:[NSNull null] forKey:@"Closes"];
+    [assignment1 setObject:@"2013-10-24T23:44:20" forKey:@"Closes"];
     
     // assignment 2
     NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
@@ -64,9 +64,6 @@
     [assignment2 setObject:@"Computations are fundamental shit yo" forKey:@"StudentMemo"];
     [assignment2 setObject:@"Yes it is! But your solution sucked" forKey:@"TeacherMemo"];
     [assignment2 setObject:@"2013-10-23T23:44:20" forKey:@"Closes"];
-    
-    [assignments addObject:assignment1];
-    [assignments addObject:assignment2];
     
     // assignment 3
     NSMutableDictionary *assignment3 = [[NSMutableDictionary alloc] init];
@@ -108,7 +105,7 @@
     [assignment4 setObject:[NSNull null] forKey:@"Grade"];
     [assignment4 setObject:[NSNull null] forKey:@"StudentMemo"];
     [assignment4 setObject:[NSNull null] forKey:@"TeacherMemo"];
-    [assignment4 setObject:[NSNull null] forKey:@"Closes"];
+    [assignment4 setObject:@"2013-10-24T23:44:20" forKey:@"Closes"];
     
     
     
@@ -281,8 +278,8 @@
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-11-24T12:20:00", @"StartTime",
-						 @"2013-11-24T13:55:00", @"EndTime",
+						 @"2013-11-25T08:30:00", @"StartTime",
+						 @"2013-11-25T09:15:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
 
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -290,10 +287,9 @@
 						 @"22220", @"CourseID",
 						 @"Verkefnalausnir", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-11-24T16:35:00", @"StartTime",
-						 @"2013-11-24T18:10:00", @"EndTime",
+						 @"2013-11-24T09:20:00", @"StartTime",
+						 @"2013-11-24T10:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
-    
     
     /* Monday */
 	

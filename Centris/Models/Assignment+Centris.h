@@ -11,18 +11,10 @@
 @interface Assignment (Centris)
 
 + (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
-
-+ (NSArray *)assignmentsForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context;
-
-+ (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
-                        inManagedObjectContext:(NSManagedObjectContext *)context;
-
-+ (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments
-                       inManagedObjectContext:(NSManagedObjectContext *)context;
-
-+ (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
-               inManagedObjectContext:(NSManagedObjectContext *)context;
-
-
++ (NSArray *)assignmentsNotHandedInForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments inManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context;
+
 @end
