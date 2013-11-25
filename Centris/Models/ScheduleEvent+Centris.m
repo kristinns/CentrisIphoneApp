@@ -95,7 +95,8 @@
 + (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSDate *toDay = [NSDate date];
-    NSDateComponents *comps = [NSDate dateComponentForDate:toDay];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [NSDate dateComponentForDate:toDay withCalendar:gregorian];
     NSDictionary *range = nil;
     
     if ([comps hour] > 21) {
@@ -148,8 +149,8 @@
 
 + (void)populateScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
-    event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+    event.starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
+    event.ends = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
     event.roomName = eventInfo[EVENT_ROOM_NAME];
     event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
     event.courseName = eventInfo[EVENT_COURSE_NAME];
@@ -160,8 +161,8 @@
 + (NSArray *)splitEventsDownToUnits:(NSDictionary *)eventInfo
 {
     NSMutableArray *splittedEvents = [[NSMutableArray alloc] init];
-    NSDate *starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
-    NSDate *to = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+    NSDate *starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
+    NSDate *to = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
     CGFloat length = [to timeIntervalSinceDate:starts];
     if (length <= SCHEDULE_EVENT_LENGTH) {
         [splittedEvents addObject:eventInfo];

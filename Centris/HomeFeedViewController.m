@@ -49,8 +49,6 @@
 {
     [super viewDidLoad];
     [self setup];
-    [self setupHomeFeed];
-    [self updateConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -83,6 +81,7 @@
     [self.textView removeConstraints:self.textView.constraints];
     [self.tableView reloadData];
     CGSize newSize = [self.textView sizeThatFits:CGSizeMake(self.textView.frame.size.width, 300)];
+    [self.textView removeConstraints:self.textView.constraints];
     // Add height constraint
     NSLayoutConstraint *textViewConstraint = [NSLayoutConstraint constraintWithItem:self.textView attribute:NSLayoutAttributeHeight relatedBy:0 toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:(newSize.height)]; // The calculation is not correct, trying to fix it
     [self.textView addConstraint:textViewConstraint];
@@ -117,6 +116,7 @@
 - (NSString *)summaryTextForAssignments:(NSArray *)assignments
 {
     NSInteger numberOfAssignments = [assignments count];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSString *assignmentsSummary = @"";
     if (numberOfAssignments) {
         if (numberOfAssignments > 1) {
@@ -142,7 +142,7 @@
             assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@. ", assignment.isInCourseInstance.name]];
         }
     } else {
-        NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date]];
+        NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
         if ([comps weekday] == 5) { // FRIDAY
             assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð? ";
         }
@@ -153,16 +153,17 @@
 - (NSString *)summaryTextForScheduleEvents:(NSArray *)scheduleEvents
 {
     NSInteger numberOfEvents = [scheduleEvents count];
-    NSDateComponents *compsNow = [NSDate dateComponentForDate:[NSDate date]];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *compsNow = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
     NSString *scheduleEventSummary = @"";
     if (numberOfEvents) {
         ScheduleEvent *nextEvent = (ScheduleEvent *)[scheduleEvents lastObject];
-        NSDateComponents *eventComps = [NSDate dateComponentForDate:nextEvent.starts];
+        NSDateComponents *eventComps = [NSDate dateComponentForDate:nextEvent.starts withCalendar:gregorian];
         // check if it's in the morning
         if ([eventComps day] != [compsNow day]) {
-            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm]"], nextEvent.roomName]];
         } else {
-            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate formateDateToHourAndMinutesStringForDate:nextEvent.starts], nextEvent.roomName]];
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm"], nextEvent.roomName]];
         }
     } // else it is a weekend or the schoolday is over. Might be a good idea to find a witty text about this situation.
     return scheduleEventSummary;

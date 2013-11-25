@@ -105,7 +105,7 @@
     [assignment4 setObject:[NSNull null] forKey:@"Grade"];
     [assignment4 setObject:[NSNull null] forKey:@"StudentMemo"];
     [assignment4 setObject:[NSNull null] forKey:@"TeacherMemo"];
-    [assignment4 setObject:@"2013-10-24T23:44:20" forKey:@"Closes"];
+    [assignment4 setObject:[NSNull null] forKey:@"Closes"];
     
     
     
@@ -260,8 +260,8 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-11-24T19:05:00", @"StartTime",
-						 @"2013-11-24T19:50:00", @"EndTime",
+						 @"2013-11-25T14:00:00", @"StartTime",
+						 @"2013-11-25T15:40:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
