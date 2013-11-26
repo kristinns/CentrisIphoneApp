@@ -31,13 +31,14 @@ describe(@"MyManagedObject", ^{
             NSLog(@"Could not set coordinator in Unit Tests");
         }
         
-        // Set up dummy course instance to be ready
+        // Set up dummy course instance to be ready for testing
         CourseInstance *courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance.id = [NSNumber numberWithInteger:22363];
         courseInstance.courseID = @"T-111-PROG";
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
         
+        // Set up dummy assignment instance to be ready for testing
         Assignment *assignment = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
         assignment.id = [NSNumber numberWithInteger:1];
         assignment.isInCourseInstance = courseInstance;
