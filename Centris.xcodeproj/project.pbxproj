@@ -23,6 +23,8 @@
 		18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */; };
 		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
 		18E0BFFC1844FF55009E1329 /* AssignmentFile+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BFFB1844FF55009E1329 /* AssignmentFile+Centris_Spec.m */; };
+		18E0BFFF1845618A009E1329 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BFFE1845618A009E1329 /* Menu.m */; };
+		18E0C002184561BA009E1329 /* Menu+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C001184561BA009E1329 /* Menu+Centris.m */; };
 		18E6F627182C03CE0073AB9A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6F626182C03CE0073AB9A /* User.m */; };
 		18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCA4EE183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
@@ -101,6 +103,10 @@
 		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
 		18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CourseInstance+Centris.m"; path = "Models/CourseInstance+Centris.m"; sourceTree = "<group>"; };
 		18E0BFFB1844FF55009E1329 /* AssignmentFile+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssignmentFile+Centris_Spec.m"; sourceTree = "<group>"; };
+		18E0BFFD1845618A009E1329 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Models/Menu.h; sourceTree = "<group>"; };
+		18E0BFFE1845618A009E1329 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = Models/Menu.m; sourceTree = "<group>"; };
+		18E0C000184561BA009E1329 /* Menu+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Menu+Centris.h"; path = "Models/Menu+Centris.h"; sourceTree = "<group>"; };
+		18E0C001184561BA009E1329 /* Menu+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Menu+Centris.m"; path = "Models/Menu+Centris.m"; sourceTree = "<group>"; };
 		18E6F625182C03CE0073AB9A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		18E6F626182C03CE0073AB9A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
 		18FCA4ED183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ScheduleEventUnit+Centris.h"; path = "Models/ScheduleEventUnit+Centris.h"; sourceTree = "<group>"; };
@@ -247,14 +253,16 @@
 				1989B65A183CC4510005E44F /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
 				18A630E8183A8DBC00CA29FE /* AssignmentFile.m */,
+				18856AD118206DE7009862CA /* CourseInstance.h */,
+				18856AD218206DE7009862CA /* CourseInstance.m */,
+				18E0BFFD1845618A009E1329 /* Menu.h */,
+				18E0BFFE1845618A009E1329 /* Menu.m */,
 				18A630D21839769B00CA29FE /* ScheduleEvent.h */,
 				18A630D31839769B00CA29FE /* ScheduleEvent.m */,
 				18A630CF183973D200CA29FE /* ScheduleEventUnit.h */,
 				18A630D0183973D200CA29FE /* ScheduleEventUnit.m */,
 				18E6F625182C03CE0073AB9A /* User.h */,
 				18E6F626182C03CE0073AB9A /* User.m */,
-				18856AD118206DE7009862CA /* CourseInstance.h */,
-				18856AD218206DE7009862CA /* CourseInstance.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -478,6 +486,8 @@
 				18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */,
 				18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */,
 				18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */,
+				18E0C000184561BA009E1329 /* Menu+Centris.h */,
+				18E0C001184561BA009E1329 /* Menu+Centris.m */,
 				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 				18FCA4ED183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.h */,
@@ -709,6 +719,7 @@
 				1989B65B183CC4510005E44F /* Assignment.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
+				18E0C002184561BA009E1329 /* Menu+Centris.m in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */,
@@ -729,6 +740,7 @@
 				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
+				18E0BFFF1845618A009E1329 /* Menu.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */,

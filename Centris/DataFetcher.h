@@ -69,19 +69,27 @@
 @protocol DataFetcher <NSObject>
 // Get
 + (void)getAssignmentsInSemester:(NSString *)semester
-                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (void)getAssignmentById:(NSInteger)assignmentId courseId:(NSInteger)courseId
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getAssignmentById:(NSInteger)assignmentId
+                 courseId:(NSInteger)courseId
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 + (void)getCoursesInSemester:(NSString *)semester
-                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 + (void)getScheduleInSemester:(NSString *)semester
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 // Post
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
-                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end
