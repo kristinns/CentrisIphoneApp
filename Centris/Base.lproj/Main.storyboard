@@ -63,7 +63,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <subviews>
                                                                 <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="time-icon" translatesAutoresizingMaskIntoConstraints="NO" id="zBr-I9-gql" userLabel="Time Icon">
-                                                                    <rect key="frame" x="86" y="46" width="13" height="13"/>
+                                                                    <rect key="frame" x="86" y="47" width="13" height="13"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                 </imageView>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzP-xA-eoL" userLabel="Horizontal border">
@@ -76,12 +76,11 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g85-RM-U6R" userLabel="Vertical border">
-                                                                    <rect key="frame" x="86" y="40" width="227" height="1"/>
+                                                                    <rect key="frame" x="86" y="40" width="219" height="1"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="1" id="L9a-J7-XkW"/>
-                                                                        <constraint firstAttribute="width" constant="227" id="XXF-mD-bgJ"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="14:55" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QPj-K9-p8H" userLabel="From Time Label">
@@ -99,23 +98,23 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tölvusamskipti" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0aZ-T0-O9h" userLabel="Course Name Label">
-                                                                    <rect key="frame" x="86" y="14" width="227" height="24"/>
+                                                                    <rect key="frame" x="86" y="14" width="219" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                                                     <color key="textColor" red="0.25098039215686274" green="0.25490196078431371" blue="0.25490196078431371" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Eftir u.þ.b. 30 mín" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qrd-4d-dDI" userLabel="Time Until Label">
-                                                                    <rect key="frame" x="103" y="45" width="93" height="15"/>
+                                                                    <rect key="frame" x="103" y="45" width="108" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                                     <color key="textColor" red="0.3294117647" green="0.3411764706" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fyrirlestur í M101" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxb-zy-Spv" userLabel="Location Label">
-                                                                    <rect key="frame" x="224" y="45" width="89" height="15"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fyrirl. í M101" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gxb-zy-Spv" userLabel="Location Label">
+                                                                    <rect key="frame" x="227" y="45" width="78" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                                     <color key="textColor" red="0.3294117647" green="0.3411764706" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
@@ -128,7 +127,8 @@
                                                                 <constraint firstItem="Qrd-4d-dDI" firstAttribute="leading" secondItem="zBr-I9-gql" secondAttribute="trailing" constant="4" id="9Si-xD-ePT"/>
                                                                 <constraint firstItem="g85-RM-U6R" firstAttribute="leading" secondItem="zBr-I9-gql" secondAttribute="leading" id="Elw-4V-gnH"/>
                                                                 <constraint firstItem="ejk-W9-M19" firstAttribute="top" secondItem="QPj-K9-p8H" secondAttribute="bottom" id="GGx-BH-QmZ"/>
-                                                                <constraint firstAttribute="trailing" secondItem="g85-RM-U6R" secondAttribute="trailing" constant="7" id="K7U-6w-2ep"/>
+                                                                <constraint firstItem="gzP-xA-eoL" firstAttribute="leading" secondItem="lut-Kn-EJU" secondAttribute="leading" constant="71" id="ICa-Wa-oQR"/>
+                                                                <constraint firstAttribute="trailing" secondItem="g85-RM-U6R" secondAttribute="trailing" constant="15" id="K7U-6w-2ep"/>
                                                                 <constraint firstItem="g85-RM-U6R" firstAttribute="centerY" secondItem="gzP-xA-eoL" secondAttribute="centerY" id="KPu-Z3-4D2"/>
                                                                 <constraint firstAttribute="centerY" secondItem="g85-RM-U6R" secondAttribute="centerY" id="RV5-x4-y8X"/>
                                                                 <constraint firstItem="gzP-xA-eoL" firstAttribute="leading" secondItem="QPj-K9-p8H" secondAttribute="trailing" constant="5" id="SdZ-qz-RlV"/>
@@ -181,11 +181,10 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BcH-2g-A78" userLabel="Vertical border">
-                                                                    <rect key="frame" x="86" y="40" width="227" height="1"/>
+                                                                    <rect key="frame" x="86" y="40" width="219" height="1"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <color key="backgroundColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="227" id="ab4-pc-my4"/>
                                                                         <constraint firstAttribute="height" constant="1" id="yIK-xx-kmd"/>
                                                                     </constraints>
                                                                 </view>
@@ -197,60 +196,70 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SKIL EFTIR" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRV-17-sZz" userLabel="Handin After Title Label">
-                                                                    <rect key="frame" x="23" y="18" width="35" height="9"/>
+                                                                    <rect key="frame" x="16" y="15" width="49" height="12"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="7"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="10"/>
                                                                     <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="klst           mín" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZs-5a-0o3" userLabel="klst mín Label">
-                                                                    <rect key="frame" x="19" y="53" width="43" height="9"/>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KLST" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZs-5a-0o3" userLabel="klst Label">
+                                                                    <rect key="frame" x="18" y="54" width="19" height="10"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="7"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="8"/>
                                                                     <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dæmatímaverkefni 14" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n8H-WJ-iED" userLabel="Title Label">
-                                                                    <rect key="frame" x="86" y="14" width="227" height="24"/>
+                                                                    <rect key="frame" x="86" y="14" width="219" height="24"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                                                     <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Inngangur að tölvunarfræði" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AAa-UM-Etz" userLabel="Course Label">
-                                                                    <rect key="frame" x="86" y="44" width="139" height="15"/>
+                                                                    <rect key="frame" x="86" y="44" width="162" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                                                                     <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="753" text="10%" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="58r-5f-BLh" userLabel="Weight Label">
-                                                                    <rect key="frame" x="288" y="44" width="25" height="15"/>
+                                                                    <rect key="frame" x="276" y="44" width="29" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                                                                    <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MÍN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7d-PV-ckD" userLabel="mín Label">
+                                                                    <rect key="frame" x="49" y="54" width="14" height="10"/>
+                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="8"/>
                                                                     <color key="textColor" red="0.25098039220000001" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                             <constraints>
+                                                                <constraint firstItem="Q7d-PV-ckD" firstAttribute="trailing" secondItem="gFU-Gh-GER" secondAttribute="trailing" constant="-3" id="057-cY-eQc"/>
                                                                 <constraint firstItem="BcH-2g-A78" firstAttribute="leading" secondItem="n8H-WJ-iED" secondAttribute="leading" id="7MU-jF-Jnk"/>
+                                                                <constraint firstItem="KZs-5a-0o3" firstAttribute="baseline" secondItem="Q7d-PV-ckD" secondAttribute="baseline" id="7ut-MK-FYA"/>
                                                                 <constraint firstItem="BcH-2g-A78" firstAttribute="top" secondItem="n8H-WJ-iED" secondAttribute="bottom" constant="2" id="821-oM-Ta2"/>
                                                                 <constraint firstItem="gFU-Gh-GER" firstAttribute="top" secondItem="FRV-17-sZz" secondAttribute="bottom" constant="1" id="C05-YG-Y7L"/>
                                                                 <constraint firstItem="FRV-17-sZz" firstAttribute="centerX" secondItem="gFU-Gh-GER" secondAttribute="centerX" id="EtS-Tq-JTf"/>
                                                                 <constraint firstItem="BcH-2g-A78" firstAttribute="trailing" secondItem="n8H-WJ-iED" secondAttribute="trailing" id="Hpz-Ml-mgd"/>
                                                                 <constraint firstItem="58r-5f-BLh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="AAa-UM-Etz" secondAttribute="trailing" constant="8" id="MAf-7g-pjc"/>
                                                                 <constraint firstItem="BcH-2g-A78" firstAttribute="leading" secondItem="TGG-5y-j15" secondAttribute="trailing" constant="14" id="MbQ-iR-FNv"/>
-                                                                <constraint firstItem="KZs-5a-0o3" firstAttribute="centerX" secondItem="gFU-Gh-GER" secondAttribute="centerX" id="Nqi-ZX-qdd"/>
                                                                 <constraint firstItem="TGG-5y-j15" firstAttribute="centerY" secondItem="BcH-2g-A78" secondAttribute="centerY" id="Oiv-Gd-PNR"/>
                                                                 <constraint firstItem="AAa-UM-Etz" firstAttribute="top" secondItem="BcH-2g-A78" secondAttribute="bottom" constant="3" id="Oy7-TI-MRC"/>
                                                                 <constraint firstItem="58r-5f-BLh" firstAttribute="trailing" secondItem="BcH-2g-A78" secondAttribute="trailing" id="RBz-mh-6TB"/>
                                                                 <constraint firstAttribute="height" constant="80" id="Xbe-zF-hII"/>
                                                                 <constraint firstItem="AAa-UM-Etz" firstAttribute="leading" secondItem="BcH-2g-A78" secondAttribute="leading" id="Xud-4f-2VT"/>
+                                                                <constraint firstItem="KZs-5a-0o3" firstAttribute="leading" secondItem="gFU-Gh-GER" secondAttribute="leading" constant="3" id="ZQQ-dZ-4Hm"/>
                                                                 <constraint firstAttribute="centerY" secondItem="BcH-2g-A78" secondAttribute="centerY" id="cau-7d-q4M"/>
-                                                                <constraint firstItem="KZs-5a-0o3" firstAttribute="top" secondItem="gFU-Gh-GER" secondAttribute="bottom" constant="1" id="cgq-Vx-nCE"/>
+                                                                <constraint firstItem="KZs-5a-0o3" firstAttribute="top" secondItem="gFU-Gh-GER" secondAttribute="bottom" constant="2" id="cgq-Vx-nCE"/>
                                                                 <constraint firstItem="TGG-5y-j15" firstAttribute="centerY" secondItem="gFU-Gh-GER" secondAttribute="centerY" id="phx-Gu-qOC"/>
-                                                                <constraint firstAttribute="trailing" secondItem="BcH-2g-A78" secondAttribute="trailing" constant="7" id="rCf-MH-FNr"/>
+                                                                <constraint firstAttribute="trailing" secondItem="BcH-2g-A78" secondAttribute="trailing" constant="15" id="rCf-MH-FNr"/>
+                                                                <constraint firstItem="TGG-5y-j15" firstAttribute="leading" secondItem="ZrL-OJ-LyL" secondAttribute="leading" constant="71" id="rE0-bD-fBH"/>
                                                                 <constraint firstItem="58r-5f-BLh" firstAttribute="baseline" secondItem="AAa-UM-Etz" secondAttribute="baseline" id="rii-1n-ZnF"/>
                                                                 <constraint firstItem="TGG-5y-j15" firstAttribute="leading" secondItem="gFU-Gh-GER" secondAttribute="trailing" constant="5" id="wer-y0-RpT"/>
                                                             </constraints>
