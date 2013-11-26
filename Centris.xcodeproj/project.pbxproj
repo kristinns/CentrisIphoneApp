@@ -43,6 +43,7 @@
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
+		19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */; };
 		19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F45183D726100F34A40 /* libz.dylib */; };
 		19CD49CF1842327A008094D8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
 		19CD49D3184240D2008094D8 /* ScheduleCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */; };
@@ -135,6 +136,8 @@
 		199F72CA1802F9AB009A724A /* DatePickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerView.m; sourceTree = "<group>"; };
 		199F72CC1802FC40009A724A /* DatePickerDayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerDayView.h; sourceTree = "<group>"; };
 		199F72CD1802FC40009A724A /* DatePickerDayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerDayView.m; sourceTree = "<group>"; };
+		19BAC8441844CA0100003D05 /* AssignmentCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentCardTableViewCell.h; sourceTree = "<group>"; };
+		19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentCardTableViewCell.m; sourceTree = "<group>"; };
 		19BD8F3C183D71E300F34A40 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		19BD8F3D183D71E300F34A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		19BD8F3E183D71E300F34A40 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -353,6 +356,8 @@
 			children = (
 				19CD49D1184240D2008094D8 /* ScheduleCardTableViewCell.h */,
 				19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */,
+				19BAC8441844CA0100003D05 /* AssignmentCardTableViewCell.h */,
+				19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */,
 			);
 			name = HomeFeedCardViewCells;
 			sourceTree = "<group>";
@@ -659,6 +664,7 @@
 				1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
+				19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */,
 				18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,

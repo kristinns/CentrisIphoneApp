@@ -18,6 +18,7 @@
 #import "CourseInstance+Centris.h"
 #import "AppFactory.h"
 #import "ScheduleCardTableViewCell.h"
+#import "AssignmentCardTableViewCell.h"
 
 #pragma mark - Properties
 
@@ -194,10 +195,13 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = @"ScheduleCardTableViewCell";
-    ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    //ScheduleCardTableViewCell *tableViewCell = [tableView deq]//[[ScheduleCardTableViewCell alloc] initWithFrame:CGRectMake(0, 0, 320, 81)];
-    return tableViewCell;
+    if (indexPath.row == 1) {
+        ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
+        return tableViewCell;
+    } else {
+        AssignmentCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"AssignmentCardTableViewCell"];
+        return tableViewCell;
+    }
 }
 
 @end
