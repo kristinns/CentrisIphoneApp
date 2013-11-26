@@ -229,11 +229,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView == self.descriptionFileTableView) {
-        return [[self assignmentsWithType:@"DescriptionFile"] count];
+        return [[self assignmentsWithType:ASSIGNMENT_FILE_TYPE_DESCRIPTION] count];
     } else if (tableView == self.handinFileTableView) {
-        return [[self assignmentsWithType:@"SolutionFile"] count];
+        return [[self assignmentsWithType:ASSIGNMENT_FILE_TYPE_STUDENT] count];
     } else if (tableView == self.teacherCommentFileTableView) {
-        return [[self assignmentsWithType:@"TeacherFile"] count];
+        return [[self assignmentsWithType:ASSIGNMENT_FILE_TYPE_TEACHER] count];
     }
     // Else
     return 0;

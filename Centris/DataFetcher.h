@@ -30,6 +30,10 @@
 #define ASSIGNMENT_FILE_DATE_UPDATED        @"LastUpdated"
 #define ASSIGNMENT_FILE_TYPE                @"Type"
 #define ASSIGNMENT_FILE_URL                 @"URL"
+// Assignment File Types
+#define ASSIGNMENT_FILE_TYPE_DESCRIPTION    @"DescriptionFile"
+#define ASSIGNMENT_FILE_TYPE_STUDENT        @"SolutionFile"
+#define ASSIGNMENT_FILE_TYPE_TEACHER        @"TeacherFile"
 // Course Key Constants
 #define COURSE_ID                           @"CourseID"
 #define COURSE_INSTANCE_ID                  @"ID"

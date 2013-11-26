@@ -13,7 +13,7 @@
 
 SPEC_BEGIN(AssignmentCentrisSpec)
 
-describe(@"MyManagedObject", ^{
+describe(@"Assignment Category", ^{
     
     __block NSManagedObjectContext *context = nil;
     
@@ -39,6 +39,7 @@ describe(@"MyManagedObject", ^{
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
         
+        // Create a date range that is always available
         NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
         
         // Set up dummy assignments to be ready for testing
@@ -85,7 +86,7 @@ describe(@"MyManagedObject", ^{
         [[theValue([checkAssignments count]) should] equal:theValue(2)];
     });
     
-    it(@"should add assignment properly to core data and remove assignments that do not appear in the list", ^{
+    it(@"should add assignments properly to core data and remove assignments that do not appear in the list", ^{
         NSMutableDictionary *newAssignment = [[NSMutableDictionary alloc] init];
         [newAssignment setObject:[NSNumber numberWithInteger:3] forKey:@"ID"];
         [newAssignment setObject:@"Assignment 3" forKey:@"Title"];
@@ -97,6 +98,28 @@ describe(@"MyManagedObject", ^{
         [l1 addObject:@"html"];
         [l1 addObject:@"odt"];
         [newAssignment setObject:l1 forKey:@"AllowedFileExtensions"];
+        [newAssignment setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
+        [newAssignment setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
+        [newAssignment setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
+        [newAssignment setObject:@"2013-11-25T23:59:00" forKey:@"DateClosed"];
+        [newAssignment setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
+        [newAssignment setObject:[NSNull null] forKey:@"GroupID"];
+        [newAssignment setObject:[NSNull null] forKey:@"Grade"];
+        [newAssignment setObject:[NSNull null] forKey:@"StudentMemo"];
+        [newAssignment setObject:[NSNull null] forKey:@"TeacherMemo"];
+        [newAssignment setObject:[NSNull null] forKey:@"Closes"];
+        NSArray *checkAssignments = [Assignment assignmentsInManagedObjectContext:context];
+        [Assignment addAssignmentsWithCentrisInfo:@[newAssignment] inManagedObjectContext:context];
+        checkAssignments = [Assignment assignmentsInManagedObjectContext:context];
+        [[theValue([checkAssignments count]) should] equal:theValue(1)]; // this should be the only assignment
+    });
+    
+    it(@"should be able to add assignment properly without files", ^{
+        NSMutableDictionary *newAssignment = [[NSMutableDictionary alloc] init];
+        [newAssignment setObject:[NSNumber numberWithInteger:3] forKey:@"ID"];
+        [newAssignment setObject:@"Assignment 3" forKey:@"Title"];
+        [newAssignment setObject:@"Some even more description" forKey:@"Description"];
+        [newAssignment setObject:[NSNull null] forKey:@"AllowedFileExtensions"];
         [newAssignment setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
         [newAssignment setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
         [newAssignment setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
