@@ -151,7 +151,12 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="contentView" destination="lut-Kn-EJU" id="eX5-6w-NuP"/>
+                                                    <outlet property="courseNameLabel" destination="0aZ-T0-O9h" id="fNa-lu-Wsa"/>
+                                                    <outlet property="fromTimeLabel" destination="QPj-K9-p8H" id="M7T-aj-Jqx"/>
                                                     <outlet property="horizontalBorderWidthConstraint" destination="yRk-sE-xL3" id="Y8o-iw-Fxo"/>
+                                                    <outlet property="locationLabel" destination="Gxb-zy-Spv" id="fW1-uO-awG"/>
+                                                    <outlet property="timeUntilLabel" destination="Qrd-4d-dDI" id="aM6-VI-Nkb"/>
+                                                    <outlet property="toTimeLabel" destination="ejk-W9-M19" id="nop-eD-hn1"/>
                                                     <outlet property="verticalBorderHeightConstraint" destination="L9a-J7-XkW" id="qsg-47-Gro"/>
                                                 </connections>
                                             </tableViewCell>
@@ -259,8 +264,12 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="contentView" destination="ZrL-OJ-LyL" id="YHz-Q8-53n"/>
+                                                    <outlet property="courseLabel" destination="AAa-UM-Etz" id="q8e-EZ-AJQ"/>
                                                     <outlet property="horizontalBorderWidthConstraint" destination="FyQ-9A-KP2" id="hKx-JQ-yRn"/>
+                                                    <outlet property="timeUntilClosedLabel" destination="gFU-Gh-GER" id="XwG-0E-3Cv"/>
+                                                    <outlet property="titleLabel" destination="n8H-WJ-iED" id="GYB-pF-qha"/>
                                                     <outlet property="verticalBorderHeightConstraint" destination="yIK-xx-kmd" id="TSk-u8-JU0"/>
+                                                    <outlet property="weightLabel" destination="58r-5f-BLh" id="LF8-vi-gHL"/>
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="R0r-Xk-1qs">

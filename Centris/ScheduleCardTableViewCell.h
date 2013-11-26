@@ -9,5 +9,9 @@
 #import <UIKit/UIKit.h>
 
 @interface ScheduleCardTableViewCell : UITableViewCell
-
+@property (weak, nonatomic) IBOutlet UILabel *fromTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *toTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *courseNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeUntilLabel;
+@property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @end
