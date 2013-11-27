@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
+		18777D6B1843B58B00DAB715 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842E01799B0AB0016A5C0 /* XCTest.framework */; };
+		18777D6C1843B58B00DAB715 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
+		18777D6D1843B58B00DAB715 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
+		18777D731843B58B00DAB715 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18777D711843B58B00DAB715 /* InfoPlist.strings */; };
 		18856AD318206DE7009862CA /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD218206DE7009862CA /* CourseInstance.m */; };
 		18856AD618206F33009862CA /* CDDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 18856AD518206F33009862CA /* CDDataFetcher.m */; };
 		188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188C7DAC183528F00030CB09 /* ProfileViewController.m */; };
@@ -16,7 +20,13 @@
 		18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630E8183A8DBC00CA29FE /* AssignmentFile.m */; };
 		18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */; };
 		18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */; };
+		18E0BFFF1845618A009E1329 /* Menu.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0BFFE1845618A009E1329 /* Menu.m */; };
+		18E0C002184561BA009E1329 /* Menu+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C001184561BA009E1329 /* Menu+Centris.m */; };
 		18E6F627182C03CE0073AB9A /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E6F626182C03CE0073AB9A /* User.m */; };
+		18FAA6EE184651F000CAE495 /* Assignment+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA6EA184651F000CAE495 /* Assignment+Centris_Spec.m */; };
+		18FAA6EF184651F000CAE495 /* AssignmentFile+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA6EB184651F000CAE495 /* AssignmentFile+Centris_Spec.m */; };
+		18FAA6F1184651F000CAE495 /* NSDate+Helper_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA6ED184651F000CAE495 /* NSDate+Helper_Spec.m */; };
+		18FAA6F31846524900CAE495 /* Menu+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FAA6F21846524900CAE495 /* Menu+Centris_Spec.m */; };
 		18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18FCA4EE183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m */; };
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
@@ -28,11 +38,6 @@
 		194842CE1799B0AB0016A5C0 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842CD1799B0AB0016A5C0 /* main.m */; };
 		194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842D11799B0AB0016A5C0 /* AppDelegate.m */; };
 		194842DA1799B0AB0016A5C0 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 194842D91799B0AB0016A5C0 /* Images.xcassets */; };
-		194842E11799B0AB0016A5C0 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842E01799B0AB0016A5C0 /* XCTest.framework */; };
-		194842E21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
-		194842E31799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
-		194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 194842E91799B0AB0016A5C0 /* InfoPlist.strings */; };
-		194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 194842EC1799B0AB0016A5C0 /* CentrisTests.m */; };
 		194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 194F9AB6180806790099A3E6 /* NSDate+Helper.m */; };
 		1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1959490218350129009686F5 /* AssignmentDetailViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
@@ -53,6 +58,7 @@
 		19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F62CDD17AC3EB700EEF08C /* CentrisDataFetcher.m */; };
 		19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 19F78A5718269F880085C322 /* CentrisParserDataFetcher.m */; };
 		578A4E52D2AD46909AA8B31E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E547C56EC8D419DAE2F8654 /* libPods.a */; };
+		7C2B85CE2EC94AC99731B899 /* libPods-CentrisTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E28709DF03DC4535BB84702E /* libPods-CentrisTests.a */; };
 		960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 960827F917CB8E5D004741FD /* HomeFeedViewController.m */; };
 		9621008917D7795400D60C06 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9621008817D7795400D60C06 /* CoreData.framework */; };
 		9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */; };
@@ -66,7 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		194842E41799B0AB0016A5C0 /* PBXContainerItemProxy */ = {
+		18777D771843B58B00DAB715 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 194842B61799B0AB0016A5C0 /* Project object */;
 			proxyType = 1;
@@ -78,6 +84,10 @@
 /* Begin PBXFileReference section */
 		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
 		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
+		18777D6A1843B58B00DAB715 /* CentrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CentrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		18777D701843B58B00DAB715 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
+		18777D721843B58B00DAB715 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		18777D761843B58B00DAB715 /* CentrisTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "CentrisTests-Prefix.pch"; sourceTree = "<group>"; };
 		18856AD118206DE7009862CA /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
 		18856AD218206DE7009862CA /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		18856AD418206F33009862CA /* CDDataFetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDDataFetcher.h; sourceTree = "<group>"; };
@@ -94,8 +104,16 @@
 		18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "AssignmentFile+Centris.m"; path = "Models/AssignmentFile+Centris.m"; sourceTree = "<group>"; };
 		18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CourseInstance+Centris.h"; path = "Models/CourseInstance+Centris.h"; sourceTree = "<group>"; };
 		18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CourseInstance+Centris.m"; path = "Models/CourseInstance+Centris.m"; sourceTree = "<group>"; };
+		18E0BFFD1845618A009E1329 /* Menu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Menu.h; path = Models/Menu.h; sourceTree = "<group>"; };
+		18E0BFFE1845618A009E1329 /* Menu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Menu.m; path = Models/Menu.m; sourceTree = "<group>"; };
+		18E0C000184561BA009E1329 /* Menu+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Menu+Centris.h"; path = "Models/Menu+Centris.h"; sourceTree = "<group>"; };
+		18E0C001184561BA009E1329 /* Menu+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Menu+Centris.m"; path = "Models/Menu+Centris.m"; sourceTree = "<group>"; };
 		18E6F625182C03CE0073AB9A /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = User.h; path = Models/User.h; sourceTree = "<group>"; };
 		18E6F626182C03CE0073AB9A /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = User.m; path = Models/User.m; sourceTree = "<group>"; };
+		18FAA6EA184651F000CAE495 /* Assignment+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Assignment+Centris_Spec.m"; sourceTree = "<group>"; };
+		18FAA6EB184651F000CAE495 /* AssignmentFile+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "AssignmentFile+Centris_Spec.m"; sourceTree = "<group>"; };
+		18FAA6ED184651F000CAE495 /* NSDate+Helper_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper_Spec.m"; sourceTree = "<group>"; };
+		18FAA6F21846524900CAE495 /* Menu+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Menu+Centris_Spec.m"; sourceTree = "<group>"; };
 		18FCA4ED183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "ScheduleEventUnit+Centris.h"; path = "Models/ScheduleEventUnit+Centris.h"; sourceTree = "<group>"; };
 		18FCA4EE183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "ScheduleEventUnit+Centris.m"; path = "Models/ScheduleEventUnit+Centris.m"; sourceTree = "<group>"; };
 		190CA0EA1816C7FB00BC3046 /* AssignmentTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentTableViewCell.h; sourceTree = "<group>"; };
@@ -115,11 +133,7 @@
 		194842D11799B0AB0016A5C0 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		194842D41799B0AB0016A5C0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		194842D91799B0AB0016A5C0 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		194842DF1799B0AB0016A5C0 /* CentrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CentrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842E01799B0AB0016A5C0 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		194842E81799B0AB0016A5C0 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
-		194842EA1799B0AB0016A5C0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		194842EC1799B0AB0016A5C0 /* CentrisTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CentrisTests.m; sourceTree = "<group>"; };
 		194F9AB5180806790099A3E6 /* NSDate+Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Helper.h"; sourceTree = "<group>"; };
 		194F9AB6180806790099A3E6 /* NSDate+Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Helper.m"; sourceTree = "<group>"; };
 		1959490118350129009686F5 /* AssignmentDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AssignmentDetailViewController.h; sourceTree = "<group>"; };
@@ -179,9 +193,22 @@
 		969C94E418082DDD00356C7C /* KeychainItemWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeychainItemWrapper.h; sourceTree = "<group>"; };
 		969C94E518082DDD00356C7C /* KeychainItemWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeychainItemWrapper.m; sourceTree = "<group>"; };
 		AEEF260E04B34BA2A6F68072 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		BD5C1144E5EA406384D3A988 /* Pods-CentrisTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CentrisTests.xcconfig"; path = "Pods/Pods-CentrisTests.xcconfig"; sourceTree = "<group>"; };
+		E28709DF03DC4535BB84702E /* libPods-CentrisTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-CentrisTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		18777D671843B58B00DAB715 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18777D6B1843B58B00DAB715 /* XCTest.framework in Frameworks */,
+				18777D6D1843B58B00DAB715 /* UIKit.framework in Frameworks */,
+				18777D6C1843B58B00DAB715 /* Foundation.framework in Frameworks */,
+				7C2B85CE2EC94AC99731B899 /* libPods-CentrisTests.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		194842BB1799B0AB0016A5C0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -197,19 +224,31 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		194842DC1799B0AB0016A5C0 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				194842E11799B0AB0016A5C0 /* XCTest.framework in Frameworks */,
-				194842E31799B0AB0016A5C0 /* UIKit.framework in Frameworks */,
-				194842E21799B0AB0016A5C0 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18777D6E1843B58B00DAB715 /* CentrisTests */ = {
+			isa = PBXGroup;
+			children = (
+				18FAA6EA184651F000CAE495 /* Assignment+Centris_Spec.m */,
+				18FAA6EB184651F000CAE495 /* AssignmentFile+Centris_Spec.m */,
+				18FAA6F21846524900CAE495 /* Menu+Centris_Spec.m */,
+				18FAA6ED184651F000CAE495 /* NSDate+Helper_Spec.m */,
+				18777D6F1843B58B00DAB715 /* Supporting Files */,
+			);
+			path = CentrisTests;
+			sourceTree = "<group>";
+		};
+		18777D6F1843B58B00DAB715 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				18777D701843B58B00DAB715 /* CentrisTests-Info.plist */,
+				18777D711843B58B00DAB715 /* InfoPlist.strings */,
+				18777D761843B58B00DAB715 /* CentrisTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		188C7DAA183528BA0030CB09 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -226,14 +265,16 @@
 				1989B65A183CC4510005E44F /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
 				18A630E8183A8DBC00CA29FE /* AssignmentFile.m */,
+				18856AD118206DE7009862CA /* CourseInstance.h */,
+				18856AD218206DE7009862CA /* CourseInstance.m */,
+				18E0BFFD1845618A009E1329 /* Menu.h */,
+				18E0BFFE1845618A009E1329 /* Menu.m */,
 				18A630D21839769B00CA29FE /* ScheduleEvent.h */,
 				18A630D31839769B00CA29FE /* ScheduleEvent.m */,
 				18A630CF183973D200CA29FE /* ScheduleEventUnit.h */,
 				18A630D0183973D200CA29FE /* ScheduleEventUnit.m */,
 				18E6F625182C03CE0073AB9A /* User.h */,
 				18E6F626182C03CE0073AB9A /* User.m */,
-				18856AD118206DE7009862CA /* CourseInstance.h */,
-				18856AD218206DE7009862CA /* CourseInstance.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -243,10 +284,11 @@
 			children = (
 				194842C71799B0AB0016A5C0 /* Centris */,
 				966A499517E9B4CB009C342B /* Libraries */,
-				194842E61799B0AB0016A5C0 /* CentrisTests */,
+				18777D6E1843B58B00DAB715 /* CentrisTests */,
 				194842C01799B0AB0016A5C0 /* Frameworks */,
 				194842BF1799B0AB0016A5C0 /* Products */,
 				AEEF260E04B34BA2A6F68072 /* Pods.xcconfig */,
+				BD5C1144E5EA406384D3A988 /* Pods-CentrisTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -254,7 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				194842BE1799B0AB0016A5C0 /* Centris.app */,
-				194842DF1799B0AB0016A5C0 /* CentrisTests.xctest */,
+				18777D6A1843B58B00DAB715 /* CentrisTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,6 +312,7 @@
 				194842C51799B0AB0016A5C0 /* UIKit.framework */,
 				194842E01799B0AB0016A5C0 /* XCTest.framework */,
 				6E547C56EC8D419DAE2F8654 /* libPods.a */,
+				E28709DF03DC4535BB84702E /* libPods-CentrisTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -297,24 +340,6 @@
 				194842CA1799B0AB0016A5C0 /* InfoPlist.strings */,
 				194842CD1799B0AB0016A5C0 /* main.m */,
 				194842CF1799B0AB0016A5C0 /* Centris-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		194842E61799B0AB0016A5C0 /* CentrisTests */ = {
-			isa = PBXGroup;
-			children = (
-				194842EC1799B0AB0016A5C0 /* CentrisTests.m */,
-				194842E71799B0AB0016A5C0 /* Supporting Files */,
-			);
-			path = CentrisTests;
-			sourceTree = "<group>";
-		};
-		194842E71799B0AB0016A5C0 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				194842E81799B0AB0016A5C0 /* CentrisTests-Info.plist */,
-				194842E91799B0AB0016A5C0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -479,6 +504,8 @@
 				18A630EE183A9E7100CA29FE /* AssignmentFile+Centris.m */,
 				18D8C57E18226F4A00DE92B4 /* CourseInstance+Centris.h */,
 				18D8C57F18226F4A00DE92B4 /* CourseInstance+Centris.m */,
+				18E0C000184561BA009E1329 /* Menu+Centris.h */,
+				18E0C001184561BA009E1329 /* Menu+Centris.m */,
 				9647A94617E9E51700BB2A96 /* ScheduleEvent+Centris.h */,
 				9647A94717E9E51700BB2A96 /* ScheduleEvent+Centris.m */,
 				18FCA4ED183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.h */,
@@ -523,6 +550,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		18777D691843B58B00DAB715 /* CentrisTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 18777D7B1843B58B00DAB715 /* Build configuration list for PBXNativeTarget "CentrisTests" */;
+			buildPhases = (
+				21DBB4DF93A8455CA73DDE63 /* Check Pods Manifest.lock */,
+				18777D661843B58B00DAB715 /* Sources */,
+				18777D671843B58B00DAB715 /* Frameworks */,
+				18777D681843B58B00DAB715 /* Resources */,
+				DD145C2CF2EC433A9B24F475 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				18777D781843B58B00DAB715 /* PBXTargetDependency */,
+			);
+			name = CentrisTests;
+			productName = CentrisTests;
+			productReference = 18777D6A1843B58B00DAB715 /* CentrisTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		194842BD1799B0AB0016A5C0 /* Centris */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 194842F01799B0AB0016A5C0 /* Build configuration list for PBXNativeTarget "Centris" */;
@@ -542,24 +589,6 @@
 			productReference = 194842BE1799B0AB0016A5C0 /* Centris.app */;
 			productType = "com.apple.product-type.application";
 		};
-		194842DE1799B0AB0016A5C0 /* CentrisTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 194842F31799B0AB0016A5C0 /* Build configuration list for PBXNativeTarget "CentrisTests" */;
-			buildPhases = (
-				194842DB1799B0AB0016A5C0 /* Sources */,
-				194842DC1799B0AB0016A5C0 /* Frameworks */,
-				194842DD1799B0AB0016A5C0 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				194842E51799B0AB0016A5C0 /* PBXTargetDependency */,
-			);
-			name = CentrisTests;
-			productName = CentrisTests;
-			productReference = 194842DF1799B0AB0016A5C0 /* CentrisTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -569,6 +598,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Kristinn Svansson";
 				TargetAttributes = {
+					18777D691843B58B00DAB715 = {
+						TestTargetID = 194842BD1799B0AB0016A5C0;
+					};
 					194842BD1799B0AB0016A5C0 = {
 						DevelopmentTeam = 9G9K2ZSW98;
 						SystemCapabilities = {
@@ -576,9 +608,6 @@
 								enabled = 0;
 							};
 						};
-					};
-					194842DE1799B0AB0016A5C0 = {
-						TestTargetID = 194842BD1799B0AB0016A5C0;
 					};
 				};
 			};
@@ -596,12 +625,20 @@
 			projectRoot = "";
 			targets = (
 				194842BD1799B0AB0016A5C0 /* Centris */,
-				194842DE1799B0AB0016A5C0 /* CentrisTests */,
+				18777D691843B58B00DAB715 /* CentrisTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		18777D681843B58B00DAB715 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18777D731843B58B00DAB715 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		194842BC1799B0AB0016A5C0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -613,18 +650,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		194842DD1799B0AB0016A5C0 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				194842EB1799B0AB0016A5C0 /* InfoPlist.strings in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		1C7C7EC7795A416D9BF064E3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		21DBB4DF93A8455CA73DDE63 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -654,9 +698,35 @@
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		DD145C2CF2EC433A9B24F475 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-CentrisTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		18777D661843B58B00DAB715 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				18FAA6EF184651F000CAE495 /* AssignmentFile+Centris_Spec.m in Sources */,
+				18FAA6EE184651F000CAE495 /* Assignment+Centris_Spec.m in Sources */,
+				18FAA6F1184651F000CAE495 /* NSDate+Helper_Spec.m in Sources */,
+				18FAA6F31846524900CAE495 /* Menu+Centris_Spec.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		194842BA1799B0AB0016A5C0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -668,6 +738,7 @@
 				1989B65B183CC4510005E44F /* Assignment.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
 				192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */,
+				18E0C002184561BA009E1329 /* Menu+Centris.m in Sources */,
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				19BAC849184553D400003D05 /* LunchCardTableViewCell.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
@@ -691,6 +762,7 @@
 				19BAC84C1845712E00003D05 /* EventCardTableViewCell.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
+				18E0BFFF1845618A009E1329 /* Menu.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */,
@@ -703,25 +775,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		194842DB1799B0AB0016A5C0 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				194842ED1799B0AB0016A5C0 /* CentrisTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		194842E51799B0AB0016A5C0 /* PBXTargetDependency */ = {
+		18777D781843B58B00DAB715 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 194842BD1799B0AB0016A5C0 /* Centris */;
-			targetProxy = 194842E41799B0AB0016A5C0 /* PBXContainerItemProxy */;
+			targetProxy = 18777D771843B58B00DAB715 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		18777D711843B58B00DAB715 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18777D721843B58B00DAB715 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		194842CA1799B0AB0016A5C0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -738,17 +810,55 @@
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		194842E91799B0AB0016A5C0 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				194842EA1799B0AB0016A5C0 /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		18777D791843B58B00DAB715 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD5C1144E5EA406384D3A988 /* Pods-CentrisTests.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Centris.app/Centris";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CentrisTests/CentrisTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "CentrisTests/CentrisTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		18777D7A1843B58B00DAB715 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BD5C1144E5EA406384D3A988 /* Pods-CentrisTests.xcconfig */;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Centris.app/Centris";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "CentrisTests/CentrisTests-Prefix.pch";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				INFOPLIST_FILE = "CentrisTests/CentrisTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
 		194842EE1799B0AB0016A5C0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -861,49 +971,18 @@
 			};
 			name = Release;
 		};
-		194842F41799B0AB0016A5C0 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Centris.app/Centris";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Centris/Centris-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "CentrisTests/CentrisTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Debug;
-		};
-		194842F51799B0AB0016A5C0 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Centris.app/Centris";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-					"$(SYSTEM_APPS_DIR)/Xcode5-DP3.app/Contents/Developer/Library/Frameworks",
-				);
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Centris/Centris-Prefix.pch";
-				INFOPLIST_FILE = "CentrisTests/CentrisTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = xctest;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		18777D7B1843B58B00DAB715 /* Build configuration list for PBXNativeTarget "CentrisTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				18777D791843B58B00DAB715 /* Debug */,
+				18777D7A1843B58B00DAB715 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		194842B91799B0AB0016A5C0 /* Build configuration list for PBXProject "Centris" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -918,15 +997,6 @@
 			buildConfigurations = (
 				194842F11799B0AB0016A5C0 /* Debug */,
 				194842F21799B0AB0016A5C0 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		194842F31799B0AB0016A5C0 /* Build configuration list for PBXNativeTarget "CentrisTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				194842F41799B0AB0016A5C0 /* Debug */,
-				194842F51799B0AB0016A5C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

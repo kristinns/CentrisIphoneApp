@@ -37,4 +37,8 @@
     // TODO
 }
 
++ (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    // TODO
+}
 @end

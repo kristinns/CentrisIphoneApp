@@ -15,7 +15,8 @@
 
 @implementation Assignment (Centris)
 
-// add assignments to core data
+// For given array of assignments it will put those assignments in core data and remove everything else (if any) that
+// was before. 
 + (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments inManagedObjectContext:(NSManagedObjectContext *)context
 {
     for ( NSDictionary *assignmentInfo in assignments) {
@@ -96,9 +97,11 @@
 {
     assignment.title = assignmentInfo[ASSIGNMENT_TITLE];
     assignment.assignmentDescription = assignmentInfo[ASSIGNMENT_DESCRIPTION];
-    for (NSString *extension in assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS]) {
-        assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:extension];
-        assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:@" "]; // Maybe a bad implementation. Suggestions are well appreciated.
+    if (assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS] != (id)[NSNull null]) {
+        for (NSString *extension in assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS]) {
+            assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:extension];
+            assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:@" "]; // Maybe a bad implementation. Suggestions are well appreciated.
+        }
     }
     assignment.weight = assignmentInfo[ASSIGNMENT_WEIGHT];
     assignment.maxGroupSize = assignmentInfo[ASSIGNMENT_MAX_STUDENTS_IN_GROUP];
@@ -113,7 +116,7 @@
     assignment.handInDate = assignmentInfo[ASSIGNMENT_HANDIN_DATE] == (id)[NSNull null] ? nil : [NSDate convertToDate:assignmentInfo[ASSIGNMENT_HANDIN_DATE] withFormat:nil];
     
     // add the files
-    [AssignmentFile addAssignmentsFileForAssignment:assignment withAssignmentFiles:assignmentInfo[ASSIGNMENT_FILES] inManagedObjectContext:context];
+    [AssignmentFile addAssignmentFilesForAssignment:assignment withAssignmentFiles:assignmentInfo[ASSIGNMENT_FILES] inManagedObjectContext:context];
 }
 
 // will check if the API has removed some assignments. If so, we will remove it to from core data

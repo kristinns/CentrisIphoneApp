@@ -9,6 +9,6 @@
 #import "AssignmentFile.h"
 
 @interface AssignmentFile (Centris)
-+ (void)addAssignmentsFileForAssignment:(Assignment *)assignment withAssignmentFiles:(NSArray *)assignmentsFileInfo inManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)addAssignmentFilesForAssignment:(Assignment *)assignment withAssignmentFiles:(NSArray *)assignmentsFileInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)removeAssignmentFilesForAssignment:(Assignment *)assignment inManagedObjectContext:(NSManagedObjectContext *)context;
 @end
