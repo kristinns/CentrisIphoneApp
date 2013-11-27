@@ -9,11 +9,7 @@
 #import "CourseInstance.h"
 
 @interface CourseInstance (Centris)
-+(CourseInstance *)courseInstanceWithID:(NSInteger)courseID
-				 inManagedObjectContext:(NSManagedObjectContext *) context;
-
-+ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo
-                           inManagedObjectContext:(NSManagedObjectContext *)context;
-
++ (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;
++ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
 @end

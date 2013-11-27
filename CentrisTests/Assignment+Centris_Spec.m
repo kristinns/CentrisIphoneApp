@@ -6,7 +6,6 @@
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "Kiwi.h"
 #import "Assignment+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "NSDate+Helper.h"
