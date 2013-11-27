@@ -78,7 +78,7 @@
         [self fetchScheduledEventsFromAPI];
     }
         
-    self.scheduleEvents = [ScheduleEvent scheduleEventUnitsFromDay:self.datePickerSelectedDate
+    self.scheduleEvents = [ScheduleEvent scheduleEventUnitsForDay:self.datePickerSelectedDate
                                         inManagedObjectContext:[AppFactory managedObjectContext]];
     [self.tableView reloadData];
     

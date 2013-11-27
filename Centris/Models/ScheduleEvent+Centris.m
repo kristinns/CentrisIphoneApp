@@ -17,7 +17,7 @@
 
 @implementation ScheduleEvent (Centris)
 
-+ (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
++ (NSArray *)scheduleEventUnitsForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSDictionary *range = [NSDate dateRangeForTheWholeDay:date];
     
@@ -71,14 +71,14 @@
     [self checkToRemoveScheduleEventsForCentrisScheduleEvents:events inMangedObjectContext:context];
 }
 
-+ (NSArray *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
++ (ScheduleEvent *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", ID];
-    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"eventID = %d", [ID integerValue]];
+    return [[CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                 forKey:@"eventID"
                                          sortAscending:NO
                                          withPredicate:pred
-                                inManagedObjectContext:context];
+                                inManagedObjectContext:context] lastObject];
 }
 
 + (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context
@@ -141,7 +141,7 @@
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
     if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
         for (int i = 0; i < [arrayToBeDeleted count]; i++) {
-            ScheduleEvent *scheduleEvent = [[self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context] lastObject];
+            ScheduleEvent *scheduleEvent = [self eventWithID:arrayToBeDeleted[i] inManagedObjectContext:context];
             [context deleteObject:scheduleEvent];
         }
     }
