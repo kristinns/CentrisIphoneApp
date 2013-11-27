@@ -151,7 +151,7 @@ describe(@"Assignment Category", ^{
         [updateAssignment setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
         [updateAssignment setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
         [updateAssignment setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-        [updateAssignment setObject:@"2013-11-27T23:59:59" forKey:@"DateClosed"]; // put it to the next day
+        [updateAssignment setObject:@"2013-11-01T23:59:59" forKey:@"DateClosed"]; // put it to some random date
         [updateAssignment setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
         [updateAssignment setObject:[NSNull null] forKey:@"GroupID"];
         [updateAssignment setObject:[NSNull null] forKey:@"Grade"];
@@ -159,13 +159,14 @@ describe(@"Assignment Category", ^{
         [updateAssignment setObject:[NSNull null] forKey:@"TeacherMemo"];
         [updateAssignment setObject:[NSNull null] forKey:@"Closes"];
         
-        // first guarantee it has the dateClosed set to 25th
+        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        // first guarantee it has the dateClosed set to today
         Assignment *checkAssignment = [Assignment assignmentWithID:[NSNumber numberWithInteger:2] inManagedObjectContext:context];
-        [[theValue([checkAssignment.dateClosed compare:[NSDate convertToDate:@"2013-11-26T23:59:59" withFormat:nil]] == NSOrderedSame) should] beTrue];
+        [[theValue([checkAssignment.dateClosed compare:range[@"to"]] == NSOrderedSame) should] beTrue];
         
         [Assignment updateAssignmentWithCentrisInfo:updateAssignment inManagedObjectContext:context];
         checkAssignment = [Assignment assignmentWithID:[NSNumber numberWithInteger:2] inManagedObjectContext:context];
-        [[theValue([checkAssignment.dateClosed compare:[NSDate convertToDate:@"2013-11-27T23:59:59" withFormat:nil]] == NSOrderedSame) should] beTrue];
+        [[theValue([checkAssignment.dateClosed compare:[NSDate convertToDate:@"2013-11-01T23:59:59" withFormat:nil]] == NSOrderedSame) should] beTrue];
     });
 });
 

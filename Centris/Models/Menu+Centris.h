@@ -11,4 +11,5 @@
 @interface Menu (Centris)
 + (void)addMenuWithCentrisInfo:(NSArray *)menuInfoWeek inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Menu *)getMenuForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)getMenuForCurrentWeekInManagedObjectContext:(NSManagedObjectContext *)context;
 @end
