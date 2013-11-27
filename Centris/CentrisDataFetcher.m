@@ -32,4 +32,13 @@
     // TODO
 }
 
++ (void)getAssignmentById:(NSInteger)assignmentId courseId:(NSInteger)courseId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    // TODO
+}
+
++ (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    // TODO
+}
 @end

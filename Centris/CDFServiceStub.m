@@ -13,6 +13,32 @@
 
 @implementation CDFServiceStub
 
++ (void)getAssignmentById:(NSInteger)assignmentId courseId:(NSInteger)courseId success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    success(nil, nil);
+}
+
++ (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    NSMutableDictionary *monday = [[NSMutableDictionary alloc] init];
+    [monday setObject:@"2013-11-25T00:00:00" forKey:@"Date"];
+    [monday setObject:@"Gratíneruð ýsa með sveppasósu, hrísgrjónum og fersku salati. Ferskt salat með ofnbökuðu rótargrænmeti og kjúkling með hnetudressingu. Ferskt salat með ofnbökuðu rótargrænmeti og hnetudressingu. Kartöflu og sellerírótar súpa." forKey:@"Menu"];
+    NSMutableDictionary *tuesday = [[NSMutableDictionary alloc] init];
+    [tuesday setObject:@"2013-11-26T00:00:00" forKey:@"Date"];
+    [tuesday setObject:@"Spagetti bolognese með hvítlauksbrauði og fersku salati. Tikka masala kjúklingabaunapottréttur með hrísgrjónum og jógúrtsósu. Indversk linsubaunasúpa með ný bökuðu brauði." forKey:@"Menu"];
+    NSMutableDictionary *wednesday = [[NSMutableDictionary alloc] init];
+    [wednesday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
+    [wednesday setObject:@"Mexikósk kjúklingasúpa með nachos, sýrðum rjóma, osti og ný bökuðu brauði. Grænmetislasagne með hvítlauksbrauði og fersku salati. Sæt kartöflusúpa með rauðu karrý og kókos." forKey:@"Menu"];
+    NSMutableDictionary *thursday = [[NSMutableDictionary alloc] init];
+    [thursday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
+    [thursday setObject:@"Nautakjöt í drekasósu með hrísgrjónum og fersku salati. Val um 4 tegundir af salati -ferskt salat -sterk kryddað búlgur -bakaðar rauðrófur og epli -papriku salat með rauðlauk og feta osti. Hrísgrjónagrautur með kanillsykri og rúsínum." forKey:@"Menu"];
+    NSMutableDictionary *friday = [[NSMutableDictionary alloc] init];
+    [friday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
+    [friday setObject:@"Taco veisla: Natahakk, salassósa, sýrður rjómi, ostur, ferskt salat. Taco veisla: steikt grænmeti með pinto baunum, salsa sósa, sýrður rjómi, ostur og ferskt salat. Sveppasúpa með ný bökuðu brauði. " forKey:@"Menu"];
+    
+    success(nil, @[monday, tuesday, wednesday, thursday, friday]);
+}
+
 + (void)getAssignmentsInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     NSMutableArray *assignments = [[NSMutableArray alloc] init];
@@ -31,13 +57,13 @@
     [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
     [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
     [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-    [assignment1 setObject:@"2013-11-14T23:59:00" forKey:@"DateClosed"];
+    [assignment1 setObject:@"2013-11-25T23:59:00" forKey:@"DateClosed"];
     [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
     [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
     [assignment1 setObject:[NSNull null] forKey:@"Grade"];
-    [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];
+    [assignment1 setObject:[NSNull null] forKey:@"StudentMemo"];    
     [assignment1 setObject:[NSNull null] forKey:@"TeacherMemo"];
-    [assignment1 setObject:[NSNull null] forKey:@"Closes"];
+    [assignment1 setObject:@"2013-10-24T23:44:20" forKey:@"Closes"];
     
     // assignment 2
     NSMutableDictionary *assignment2 = [[NSMutableDictionary alloc] init];
@@ -52,7 +78,7 @@
     [assignment2 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
     [assignment2 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
     [assignment2 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
-    [assignment2 setObject:@"2013-10-27T23:59:00" forKey:@"DateClosed"];
+    [assignment2 setObject:@"2013-11-25T22:00:00" forKey:@"DateClosed"];
     [assignment2 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
     [assignment2 setObject:[NSNumber numberWithInteger:585999] forKey:@"GroupID"];
     [assignment2 setObject:[NSNumber numberWithDouble:7.3] forKey:@"Grade"];
@@ -60,8 +86,54 @@
     [assignment2 setObject:@"Yes it is! But your solution sucked" forKey:@"TeacherMemo"];
     [assignment2 setObject:@"2013-10-23T23:44:20" forKey:@"Closes"];
     
+    // assignment 3
+    NSMutableDictionary *assignment3 = [[NSMutableDictionary alloc] init];
+    [assignment3 setObject:[NSNumber numberWithInteger:21234] forKey:@"ID"];
+    [assignment3 setObject:@"Skilaverkefni 3 - Algorithms" forKey:@"Title"];
+    [assignment3 setObject:@"Do some algorithm that calculates the latency of cat meows when zero gravity is applied to the cats tail." forKey:@"Description"];
+    NSMutableArray *l3 = [[NSMutableArray alloc] init];
+    [l3 addObject:@"txt"];
+    [l3 addObject:@"zip"];
+    [l3 addObject:@"rar"];
+    [assignment3 setObject:l3 forKey:@"AllowedFileExtensions"];
+    [assignment3 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
+    [assignment3 setObject:[NSNumber numberWithInteger:2] forKey:@"MaxStudentsInGroup"];
+    [assignment3 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
+    [assignment3 setObject:@"2013-11-25T23:00:00" forKey:@"DateClosed"];
+    [assignment3 setObject:[NSNumber numberWithInteger:22212] forKey:@"CourseInstanceID"];
+    [assignment3 setObject:[NSNull null] forKey:@"GroupID"];
+    [assignment3 setObject:[NSNull null] forKey:@"Grade"];
+    [assignment3 setObject:[NSNull null] forKey:@"StudentMemo"];
+    [assignment3 setObject:[NSNull null] forKey:@"TeacherMemo"];
+    [assignment3 setObject:[NSNull null] forKey:@"Closes"];
+    
+    // assignment 4
+    NSMutableDictionary *assignment4 = [[NSMutableDictionary alloc] init];
+    [assignment4 setObject:[NSNumber numberWithInteger:21235] forKey:@"ID"];
+    [assignment4 setObject:@"Dæmatímaverkefni 17" forKey:@"Title"];
+    [assignment4 setObject:@"Do something with Java. Burn it, I don't care. Just don't come complaining when you can't pass anything by reference." forKey:@"Description"];
+    NSMutableArray *l4 = [[NSMutableArray alloc] init];
+    [l4 addObject:@"txt"];
+    [l4 addObject:@"zip"];
+    [l4 addObject:@"rar"];
+    [assignment4 setObject:l4 forKey:@"AllowedFileExtensions"];
+    [assignment4 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
+    [assignment4 setObject:[NSNumber numberWithInteger:2] forKey:@"MaxStudentsInGroup"];
+    [assignment4 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
+    [assignment4 setObject:@"2013-11-25T23:59:00" forKey:@"DateClosed"];
+    [assignment4 setObject:[NSNumber numberWithInteger:22220] forKey:@"CourseInstanceID"];
+    [assignment4 setObject:[NSNull null] forKey:@"GroupID"];
+    [assignment4 setObject:[NSNull null] forKey:@"Grade"];
+    [assignment4 setObject:[NSNull null] forKey:@"StudentMemo"];
+    [assignment4 setObject:[NSNull null] forKey:@"TeacherMemo"];
+    [assignment4 setObject:[NSNull null] forKey:@"Closes"];
+    
+    
+    
     [assignments addObject:assignment1];
     [assignments addObject:assignment2];
+    [assignments addObject:assignment3];
+    [assignments addObject:assignment4];
     success(nil, assignments);
 }
 
@@ -200,8 +272,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T08:30:00", @"StartTime",
-						 @"2013-10-27T09:15:00", @"EndTime",
+						 @"2013-11-25T12:20:00", @"StartTime",
+						 @"2013-11-25T13:55:00", @"EndTime",
 						 @"Dæmatími",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -209,8 +281,8 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T09:20:00", @"StartTime",
-						 @"2013-10-27T10:05:00", @"EndTime",
+						 @"2013-11-25T14:00:00", @"StartTime",
+						 @"2013-11-25T15:40:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -218,51 +290,27 @@
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T10:20:00", @"StartTime",
-						 @"2013-10-27T11:05:00", @"EndTime",
+						 @"2013-11-24T19:50:00", @"StartTime",
+						 @"2013-11-24T20:35:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
-    
-    [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-						 @"4", @"ID",
-						 @"22218", @"CourseID",
-						 @"Strjál stærðfræði I", @"CourseName",
-						 @"M106", @"RoomName",
-						 @"2013-10-27T11:10:00", @"StartTime",
-						 @"2013-10-27T11:55:00", @"EndTime",
-						 @"Fyrirlestur",@"TypeOfClass", nil]];
+   
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"5", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T12:20:00", @"StartTime",
-						 @"2013-10-27T13:05:00", @"EndTime",
+						 @"2013-11-25T08:30:00", @"StartTime",
+						 @"2013-11-25T09:15:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
-    [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-						 @"6", @"ID",
-						 @"22219", @"CourseID",
-						 @"Tölvuhögun", @"CourseName",
-						 @"M106", @"RoomName",
-						 @"2013-10-27T13:10:00", @"StartTime",
-						 @"2013-10-27T13:55:00", @"EndTime",
-						 @"Fyrirlestur",@"TypeOfClass", nil]];
+
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"7", @"ID",
 						 @"22220", @"CourseID",
 						 @"Verkefnalausnir", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-27T14:00:00", @"StartTime",
-						 @"2013-10-27T14:45:00", @"EndTime",
+						 @"2013-11-24T09:20:00", @"StartTime",
+						 @"2013-11-24T10:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
-    [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
-						 @"8", @"ID",
-						 @"22220", @"CourseID",
-						 @"Verkefnalausnir", @"CourseName",
-						 @"M106", @"RoomName",
-						 @"2013-10-27T14:55:00", @"StartTime",
-						 @"2013-10-27T15:40:00", @"EndTime",
-						 @"Fyrirlestur",@"TypeOfClass", nil]];
-    
     
     /* Monday */
 	
@@ -271,8 +319,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T09:20:00", @"StartTime",
-						 @"2013-10-28T10:05:00", @"EndTime",
+						 @"2013-11-28T09:20:00", @"StartTime",
+						 @"2013-11-28T10:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -280,8 +328,8 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T10:20:00", @"StartTime",
-						 @"2013-10-28T11:05:00", @"EndTime",
+						 @"2013-11-28T10:20:00", @"StartTime",
+						 @"2013-11-28T11:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -289,40 +337,40 @@
 						 @"22212", @"CourseID",
 						 @"Forritun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T11:10:00", @"StartTime",
-						 @"2013-10-28T11:55:00", @"EndTime",
+						 @"2013-11-28T11:10:00", @"StartTime",
+						 @"2013-11-28T11:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"15", @"ID",
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T12:20:00", @"StartTime",
-						 @"2013-10-28T13:05:00", @"EndTime",
+						 @"2013-11-28T12:20:00", @"StartTime",
+						 @"2013-11-28T13:05:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"16", @"ID",
 						 @"22218", @"CourseID",
 						 @"Strjál stærðfræði I", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T13:10:00", @"StartTime",
-						 @"2013-10-28T13:55:00", @"EndTime",
+						 @"2013-11-28T13:10:00", @"StartTime",
+						 @"2013-11-28T13:55:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"17", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T14:00:00", @"StartTime",
-						 @"2013-10-28T14:45:00", @"EndTime",
+						 @"2013-11-28T14:00:00", @"StartTime",
+						 @"2013-11-28T14:45:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     [schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
 						 @"18", @"ID",
 						 @"22219", @"CourseID",
 						 @"Tölvuhögun", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-10-28T14:55:00", @"StartTime",
-						 @"2013-10-28T15:40:00", @"EndTime",
+						 @"2013-11-28T14:55:00", @"StartTime",
+						 @"2013-11-28T15:40:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     success(nil, schedule);
 }

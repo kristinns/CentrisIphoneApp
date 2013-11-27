@@ -14,7 +14,7 @@
 
 @implementation AssignmentFile (Centris)
 
-+ (void)addAssignmentsFileForAssignment:(Assignment *)assignment withAssignmentFiles:(NSArray *)assignmentsFileInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (void)addAssignmentFilesForAssignment:(Assignment *)assignment withAssignmentFiles:(NSArray *)assignmentsFileInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     // erase all files that exist before (for update purposes)
     [self removeAssignmentFilesForAssignment:assignment inManagedObjectContext:context];
@@ -23,16 +23,20 @@
         file.fileName = fileInfo[ASSIGNMENT_FILE_NAME];
         file.type = fileInfo[ASSIGNMENT_FILE_TYPE];
         file.url = fileInfo[ASSIGNMENT_FILE_URL];
-        file.lastUpdate = [NSDate formatDateString:fileInfo[ASSIGNMENT_FILE_DATE_UPDATED]];
+        file.lastUpdate = [NSDate convertToDate:fileInfo[ASSIGNMENT_FILE_DATE_UPDATED] withFormat:nil];
         file.isInAssignment = assignment;
     }
 }
 
 + (void)removeAssignmentFilesForAssignment:(Assignment *)assignment inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    if (assignment.hasFiles != nil) {
+    if ([assignment.hasFiles count]) {
         for (AssignmentFile *file in assignment.hasFiles) {
             [context deleteObject:file];
+        }
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Couldn't save: %@", error);
         }
     }
 }

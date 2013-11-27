@@ -19,18 +19,9 @@
 
 + (NSArray *)scheduleEventUnitsFromDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:date];
-    [comps setMinute:0];
-    [comps setHour:0];
-    [comps setSecond:0];
-    NSDate *fromDate = [gregorian dateFromComponents:comps];
-    [comps setHour:23];
-    [comps setMinute:59];
-    [comps setSecond:59];
-    NSDate *toDate = [gregorian dateFromComponents:comps];
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:date];
     
-	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", fromDate, toDate ];
+	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     
     NSArray *scheduleEvents = [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                                    forKey:@"starts"
@@ -99,6 +90,41 @@
                                 inManagedObjectContext:context];
 }
 
+// Returns all the NEXT schedule events for that given day. If, however, the time of the date is past 22:00
+// it will return the next events before 11:00 the next day
++ (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSDate *toDay = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [NSDate dateComponentForDate:toDay withCalendar:gregorian];
+    NSDictionary *range = nil;
+    
+    if ([comps hour] > 21) {
+        range = [NSDate dateRangeToNextMorning:toDay];
+    } else {
+        range = [NSDate dateRangeToMidnightFromDate:toDay];
+    }
+    
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"starts"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
+
+// Retrieves all the schedule event units for the current date
++ (NSArray *)scheduleEventUnitsForCurrentDateInMangedObjectContext:(NSManagedObjectContext *)context
+{
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
+    
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"starts"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
 
 #pragma mark - Helper methods
 
@@ -110,7 +136,7 @@
     for (ScheduleEvent *e in eventsInCoreData)
         [setToBeDeleted addObject:e.eventID];
     for (NSDictionary *dic in centrisScheduleEvents)
-        [set addObject:dic[EVENT_ID]];
+        [set addObject: [NSNumber numberWithInteger:[dic[EVENT_ID] integerValue]]];
     [setToBeDeleted minusSet:set];
     NSArray *arrayToBeDeleted = [setToBeDeleted allObjects];
     if ([arrayToBeDeleted count]) { // there are some events that needs to be removed
@@ -123,8 +149,8 @@
 
 + (void)populateScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    event.starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
-    event.ends = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+    event.starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
+    event.ends = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
     event.roomName = eventInfo[EVENT_ROOM_NAME];
     event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
     event.courseName = eventInfo[EVENT_COURSE_NAME];
@@ -135,8 +161,8 @@
 + (NSArray *)splitEventsDownToUnits:(NSDictionary *)eventInfo
 {
     NSMutableArray *splittedEvents = [[NSMutableArray alloc] init];
-    NSDate *starts = [NSDate formatDateString:eventInfo[EVENT_START_TIME]];
-    NSDate *to = [NSDate formatDateString:eventInfo[EVENT_END_TIME]];
+    NSDate *starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
+    NSDate *to = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
     CGFloat length = [to timeIntervalSinceDate:starts];
     if (length <= SCHEDULE_EVENT_LENGTH) {
         [splittedEvents addObject:eventInfo];

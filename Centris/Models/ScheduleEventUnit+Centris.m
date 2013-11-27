@@ -30,9 +30,13 @@
 
 + (void)removeScheduleEventsForScheduleEvent:(ScheduleEvent *)scheduleEvent inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    if (scheduleEvent.hasUnits != nil) {
+    if ([scheduleEvent.hasUnits count]) {
         for (ScheduleEventUnit *unit in scheduleEvent.hasUnits) {
             [context deleteObject:unit];
+        }
+        NSError *error;
+        if (![context save:&error]) {
+            NSLog(@"Couldn't save: %@", error);
         }
     }
 }

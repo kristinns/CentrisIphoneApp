@@ -9,9 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface NSDate (Helper)
-- (NSDate *)dateByAddingMintues:(NSInteger)minutesToAdd;
-- (NSDate *)dateByAddingHours:(NSInteger)hoursToAdd;
-- (NSDate *)dateByAddingDays:(NSInteger)daysToAdd;
-- (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd;
-+ (NSDate *)formatDateString:(NSString *)dateString;
+- (NSDate *)dateByAddingMintues:(NSInteger)minutesToAdd; // tested
+- (NSDate *)dateByAddingHours:(NSInteger)hoursToAdd; // tested
+- (NSDate *)dateByAddingDays:(NSInteger)daysToAdd; // tested
+- (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd; // tested
+
++ (NSDate *)convertToDate:(NSString *)dateString withFormat:(NSString *)format; // tested
++ (NSString *)convertToString:(NSDate *)date withFormat:(NSString *)format; // tested
+
++ (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date; // tested
++ (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date; // tested
++ (NSDictionary *)dateRangeToNextMorning:(NSDate *)date; // tested
++ (NSDateComponents *)dateComponentForDate:(NSDate *)date withCalendar:(NSCalendar *)calendar;
 @end

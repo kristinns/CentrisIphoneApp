@@ -15,7 +15,8 @@
 
 @implementation Assignment (Centris)
 
-// add assignments to core data
+// For given array of assignments it will put those assignments in core data and remove everything else (if any) that
+// was before. 
 + (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments inManagedObjectContext:(NSManagedObjectContext *)context
 {
     for ( NSDictionary *assignmentInfo in assignments) {
@@ -77,30 +78,45 @@
                                 inManagedObjectContext:context];
 }
 
+// Retrieves all assignments that have not been handed in for the current date
++ (NSArray *)assignmentsNotHandedInForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"(dateClosed >= %@) AND (dateClosed <= %@) AND (handInDate = nil)", range[@"from"], range[@"to"]];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
+                                                forKey:@"dateClosed"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
+
+
 #pragma mark - Helper methods
 
 + (void)populateAssignmentFieldsForAssignment:(Assignment *)assignment withAssignmentInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     assignment.title = assignmentInfo[ASSIGNMENT_TITLE];
     assignment.assignmentDescription = assignmentInfo[ASSIGNMENT_DESCRIPTION];
-    for (NSString *extension in assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS]) {
-        assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:extension];
-        assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:@" "]; // Maybe a bad implementation. Suggestions are well appreciated.
+    if (assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS] != (id)[NSNull null]) {
+        for (NSString *extension in assignmentInfo[ASSIGNMENT_ALLOWED_FILE_EXTENSIONS]) {
+            assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:extension];
+            assignment.fileExtensions = [assignment.fileExtensions stringByAppendingString:@" "]; // Maybe a bad implementation. Suggestions are well appreciated.
+        }
     }
     assignment.weight = assignmentInfo[ASSIGNMENT_WEIGHT];
     assignment.maxGroupSize = assignmentInfo[ASSIGNMENT_MAX_STUDENTS_IN_GROUP];
-    assignment.datePublished = [NSDate formatDateString:assignmentInfo[ASSIGNMENT_DATE_PUBLISHED]];
-    assignment.dateClosed = [NSDate formatDateString:assignmentInfo[ASSIGNMENT_DATE_CLOSED]];
+    assignment.datePublished = [NSDate convertToDate:assignmentInfo[ASSIGNMENT_DATE_PUBLISHED] withFormat:nil];
+    assignment.dateClosed = [NSDate convertToDate:assignmentInfo[ASSIGNMENT_DATE_CLOSED] withFormat:nil];
     CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[assignmentInfo[ASSIGNMENT_COURSE_INSTANCE_ID] integerValue] inManagedObjectContext:context];
     assignment.isInCourseInstance = courseInst;
     assignment.groupID = assignmentInfo[ASSIGNMENT_GROUP_ID] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_GROUP_ID] ;
     assignment.grade = assignmentInfo[ASSIGNMENT_GRADE] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_GRADE];
     assignment.studentMemo = assignmentInfo[ASSIGNMENT_STUDENT_MEMO] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_STUDENT_MEMO];
     assignment.teacherMemo = assignmentInfo[ASSIGNMENT_TEACHER_MEMO] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_TEACHER_MEMO];
-    assignment.handInDate = assignmentInfo[ASSIGNMENT_HANDIN_DATE] == (id)[NSNull null] ? nil : [NSDate formatDateString:assignmentInfo[ASSIGNMENT_HANDIN_DATE]];
+    assignment.handInDate = assignmentInfo[ASSIGNMENT_HANDIN_DATE] == (id)[NSNull null] ? nil : [NSDate convertToDate:assignmentInfo[ASSIGNMENT_HANDIN_DATE] withFormat:nil];
     
     // add the files
-    [AssignmentFile addAssignmentsFileForAssignment:assignment withAssignmentFiles:assignmentInfo[ASSIGNMENT_FILES] inManagedObjectContext:context];
+    [AssignmentFile addAssignmentFilesForAssignment:assignment withAssignmentFiles:assignmentInfo[ASSIGNMENT_FILES] inManagedObjectContext:context];
 }
 
 // will check if the API has removed some assignments. If so, we will remove it to from core data

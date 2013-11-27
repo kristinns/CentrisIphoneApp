@@ -30,6 +30,10 @@
 #define ASSIGNMENT_FILE_DATE_UPDATED        @"LastUpdated"
 #define ASSIGNMENT_FILE_TYPE                @"Type"
 #define ASSIGNMENT_FILE_URL                 @"URL"
+// Assignment File Types
+#define ASSIGNMENT_FILE_TYPE_DESCRIPTION    @"DescriptionFile"
+#define ASSIGNMENT_FILE_TYPE_STUDENT        @"SolutionFile"
+#define ASSIGNMENT_FILE_TYPE_TEACHER        @"TeacherFile"
 // Course Key Constants
 #define COURSE_ID                           @"CourseID"
 #define COURSE_INSTANCE_ID                  @"ID"
@@ -65,19 +69,27 @@
 @protocol DataFetcher <NSObject>
 // Get
 + (void)getAssignmentsInSemester:(NSString *)semester
-                                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-+ (void)getAssignmentById:(NSInteger)assignmentId courseId:(NSInteger)courseId
+                         success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getAssignmentById:(NSInteger)assignmentId
+                 courseId:(NSInteger)courseId
                   success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 + (void)getCoursesInSemester:(NSString *)semester
-                                 success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                 failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                     success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                     failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 + (void)getScheduleInSemester:(NSString *)semester
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 // Post
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
-                                success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
-                                failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 @end

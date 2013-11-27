@@ -10,17 +10,13 @@
 
 @interface Assignment (Centris)
 
-+ (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
++ (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;                           // tested
 
-+ (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date
-                        inManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context;                                                   // tested
++ (NSArray *)assignmentsNotHandedInForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context;                          // tested
++ (NSArray *)assignmentsWithDueDateThatExceeds:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;             // tested
 
-+ (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments
-                       inManagedObjectContext:(NSManagedObjectContext *)context;
++ (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments inManagedObjectContext:(NSManagedObjectContext *)context;              // tested
++ (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context;    // tested
 
-+ (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo
-               inManagedObjectContext:(NSManagedObjectContext *)context;
-
-
-+ (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context;
 @end

@@ -47,6 +47,7 @@
 
 - (void)setup
 {
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
     // Add border
     self.topBorder = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.bounds.size.width, TOP_BORDER_HEIGHT)];
     self.topBorder.backgroundColor = [CentrisTheme grayLightColor];
