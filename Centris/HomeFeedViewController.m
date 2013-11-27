@@ -53,8 +53,6 @@
 {
     [super viewDidLoad];
     [self setup];
-    [self setupHomeFeed];
-    [self updateConstraints];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -62,13 +60,6 @@
     [super viewWillAppear:animated];
     [self setupHomeFeed];
     [self updateConstraints];
-}
-
-- (void)viewDidLayoutSubviews
-{
-    // Fix height constraint on borders
-    self.topBorderHeightConstraint.constant = 0.5;
-    self.bottomBorderHeightConstraint.constant = 0.5;
 }
 
 - (void)setup
@@ -83,6 +74,10 @@
     self.textView.contentInset = UIEdgeInsetsMake(0,-5,0,0);
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme grayLightTextColor];
+    
+    // Fix height constraint on borders
+    self.topBorderHeightConstraint.constant = 0.5;
+    self.bottomBorderHeightConstraint.constant = 0.5;
 }
 
 - (void)updateConstraints
@@ -197,14 +192,17 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (self.nextUp != nil && indexPath.section == 0)
+    if (self.nextUp != nil && section == 0)
         return 1;
     
     return [self.taskListForToday count];
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    if LunchCard
+    //         return 120;
+    // Else
+    return 100;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -217,12 +215,12 @@
     sectionHeader.font = [CentrisTheme headingSmallFont];
     sectionHeader.text = @"     Í DAG";
     return sectionHeader;
-
+    
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
-//    EventCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"EventCardTableViewCell"];
+    //    LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
+    //    EventCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"EventCardTableViewCell"];
     
     // First get item
     id rowItem;
