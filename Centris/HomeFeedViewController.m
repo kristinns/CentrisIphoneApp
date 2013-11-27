@@ -19,6 +19,7 @@
 #import "AppFactory.h"
 #import "ScheduleCardTableViewCell.h"
 #import "AssignmentCardTableViewCell.h"
+#import "LunchCardTableViewCell.h"
 
 #pragma mark - Properties
 
@@ -174,10 +175,13 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return 4;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (indexPath.row == 2)
+         return 120;
+    // Else
     return 100;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -198,8 +202,11 @@
     if (indexPath.row == 1) {
         ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
         return tableViewCell;
-    } else {
+    } else if (indexPath.row == 2) {
         AssignmentCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"AssignmentCardTableViewCell"];
+        return tableViewCell;
+    } else {
+        LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
         return tableViewCell;
     }
 }
