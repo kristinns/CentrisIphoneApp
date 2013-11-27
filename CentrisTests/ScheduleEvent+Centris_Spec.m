@@ -98,5 +98,10 @@ describe(@"ScheduleEvent Category", ^{
         [[theValue([checkFinalExams count]) should] equal:theValue(2)];
     });
     
+    it(@"should be able to get schedule event units for certain date", ^{
+        NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate convertToDate:@"2013-11-27T00:00:00" withFormat:nil] inManagedObjectContext:context];
+        [[theValue([checkEventUnits count]) should] equal:theValue(2)];
+    });
+    
 });
 SPEC_END
