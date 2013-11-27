@@ -20,6 +20,7 @@
 #import "ScheduleCardTableViewCell.h"
 #import "AssignmentCardTableViewCell.h"
 #import "LunchCardTableViewCell.h"
+#import "EventCardTableViewCell.h"
 
 #pragma mark - Properties
 
@@ -175,12 +176,12 @@
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 6;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 2)
-         return 120;
+//    if (indexPath.row == 0)
+//         return 120;
     // Else
     return 100;
 }
@@ -199,14 +200,17 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 1) {
-        ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
+    if (indexPath.row == 0) {
+        LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
         return tableViewCell;
-    } else if (indexPath.row == 2) {
+    } else if (indexPath.row == 1) {
         AssignmentCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"AssignmentCardTableViewCell"];
         return tableViewCell;
+    } else if (indexPath.row == 2) {
+        EventCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"EventCardTableViewCell"];
+        return tableViewCell;
     } else {
-        LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
+        ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
         return tableViewCell;
     }
 }

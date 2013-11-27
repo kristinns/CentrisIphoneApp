@@ -45,6 +45,7 @@
 		199F72CE1802FC40009A724A /* DatePickerDayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CD1802FC40009A724A /* DatePickerDayView.m */; };
 		19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */; };
 		19BAC849184553D400003D05 /* LunchCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAC848184553D400003D05 /* LunchCardTableViewCell.m */; };
+		19BAC84C1845712E00003D05 /* EventCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19BAC84B1845712E00003D05 /* EventCardTableViewCell.m */; };
 		19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F45183D726100F34A40 /* libz.dylib */; };
 		19CD49CF1842327A008094D8 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19BD8F3C183D71E300F34A40 /* libTestFlight.a */; };
 		19CD49D3184240D2008094D8 /* ScheduleCardTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19CD49D2184240D2008094D8 /* ScheduleCardTableViewCell.m */; };
@@ -141,6 +142,8 @@
 		19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentCardTableViewCell.m; sourceTree = "<group>"; };
 		19BAC847184553D400003D05 /* LunchCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LunchCardTableViewCell.h; sourceTree = "<group>"; };
 		19BAC848184553D400003D05 /* LunchCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LunchCardTableViewCell.m; sourceTree = "<group>"; };
+		19BAC84A1845712E00003D05 /* EventCardTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventCardTableViewCell.h; sourceTree = "<group>"; };
+		19BAC84B1845712E00003D05 /* EventCardTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventCardTableViewCell.m; sourceTree = "<group>"; };
 		19BD8F3C183D71E300F34A40 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
 		19BD8F3D183D71E300F34A40 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		19BD8F3E183D71E300F34A40 /* release_notes.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = release_notes.md; sourceTree = "<group>"; };
@@ -363,6 +366,8 @@
 				19BAC8451844CA0100003D05 /* AssignmentCardTableViewCell.m */,
 				19BAC847184553D400003D05 /* LunchCardTableViewCell.h */,
 				19BAC848184553D400003D05 /* LunchCardTableViewCell.m */,
+				19BAC84A1845712E00003D05 /* EventCardTableViewCell.h */,
+				19BAC84B1845712E00003D05 /* EventCardTableViewCell.m */,
 			);
 			name = HomeFeedCardViewCells;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
 				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
+				19BAC84C1845712E00003D05 /* EventCardTableViewCell.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
