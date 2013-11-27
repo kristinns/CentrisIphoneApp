@@ -126,6 +126,17 @@
                                 inManagedObjectContext:context];
 }
 
+// Retrieves all the final exams
++ (NSArray *)finalExamsExceedingDate:(NSDate *)date InManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND typeOfClass == 'Lokapróf'", date];
+    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
+                                                forKey:@"starts"
+                                         sortAscending:YES
+                                         withPredicate:pred
+                                inManagedObjectContext:context];
+}
+
 #pragma mark - Helper methods
 
 + (void)checkToRemoveScheduleEventsForCentrisScheduleEvents:(NSArray *)centrisScheduleEvents inMangedObjectContext:(NSManagedObjectContext *)context

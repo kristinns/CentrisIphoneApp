@@ -37,6 +37,12 @@ describe(@"ScheduleEvent Category", ^{
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
         
+        CourseInstance *courseInstance2 = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
+        courseInstance2.id = [NSNumber numberWithInteger:22364];
+        courseInstance2.courseID = @"T-109-INTO";
+        courseInstance2.name = @"Inngangur að tölvunarfræði";
+        courseInstance2.semester = @"20133";
+        
         // Set up dummy event to be ready for testing
         ScheduleEvent *scheduleEvent = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         scheduleEvent.courseName = courseInstance.name;
@@ -59,12 +65,37 @@ describe(@"ScheduleEvent Category", ^{
         scheduleEventUnit2.ends = [NSDate convertToDate:@"2013-11-27T10:05:00" withFormat:nil];
         scheduleEventUnit2.id = @"1_2";
         scheduleEventUnit2.isAUnitOf = scheduleEvent;
+        
+        // Set up dummy final exam to be ready for testing
+        ScheduleEvent *finalExam = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+        finalExam.courseName = courseInstance.name;
+        finalExam.starts = [NSDate convertToDate:@"2013-12-04T09:00:00" withFormat:nil];
+        finalExam.ends = [NSDate convertToDate:@"2013-12-04T12:00:00" withFormat:nil];
+        finalExam.eventID = [NSNumber numberWithInteger:2];
+        finalExam.roomName = @"M101";
+        finalExam.typeOfClass = @"Lokapróf";
+        finalExam.hasCourseInstance = courseInstance;
+        
+        ScheduleEvent *finalExam2 = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+        finalExam2.courseName = courseInstance2.name;
+        finalExam2.starts = [NSDate convertToDate:@"2013-12-11T09:00:00" withFormat:nil];
+        finalExam2.ends = [NSDate convertToDate:@"2013-12-11T12:00:00" withFormat:nil];
+        finalExam2.eventID = [NSNumber numberWithInteger:2];
+        finalExam2.roomName = @"M101";
+        finalExam2.typeOfClass = @"Lokapróf";
+        finalExam2.hasCourseInstance = courseInstance;
+
     });
     
     it(@"should be able to get an event with an id", ^{
         ScheduleEvent *checkEvent = [ScheduleEvent eventWithID:[NSNumber numberWithInteger:1] inManagedObjectContext:context];
         [[checkEvent shouldNot] beNil];
         [[theValue([checkEvent.hasUnits count]) should] equal:theValue(2)];
+    });
+    
+    it(@"should be able to retrieve final exams properly", ^{
+        NSArray *checkFinalExams = [ScheduleEvent finalExamsExceedingDate:[NSDate convertToDate:@"2013-11-27T12:00:00" withFormat:nil] InManagedObjectContext:context];
+        [[theValue([checkFinalExams count]) should] equal:theValue(2)];
     });
     
 });

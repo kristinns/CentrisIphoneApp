@@ -11,10 +11,10 @@
 
 @interface ScheduleEvent (Centris)
 + (ScheduleEvent *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;
-
 + (NSArray *)scheduleEventUnitsForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)eventsInManagedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)scheduleEventUnitsForCurrentDateInMangedObjectContext:(NSManagedObjectContext *)context;
 + (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)finalExamsExceedingDate:(NSDate *)date InManagedObjectContext:(NSManagedObjectContext *)context;
 + (void)addScheduleEventsWithCentrisInfo:(NSArray *)events inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

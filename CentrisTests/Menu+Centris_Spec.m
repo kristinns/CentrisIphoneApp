@@ -13,6 +13,7 @@ SPEC_BEGIN(MenuCentrisSpec)
 
 describe(@"Menu Category ", ^{
     __block NSManagedObjectContext *context = nil;
+    
     beforeAll(^{
         NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil]; // nil makes it retrieve our main bundle
         NSError *error;
@@ -59,12 +60,22 @@ describe(@"Menu Category ", ^{
     it(@"should be able to add menu items to core data", ^{
         NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
         NSMutableDictionary *monday = [[NSMutableDictionary alloc] init];
-        [monday setObject:[NSDate convertToString:[(NSDate* )range[@"from"] dateByAddingDays:2] withFormat:nil] forKey:@"Date"];
+        [monday setObject:[NSDate convertToString:[(NSDate *)range[@"from"] dateByAddingDays:2] withFormat:nil] forKey:@"Date"];
         [monday setObject:@"Kjötbollur" forKey:@"Menu"];
         NSMutableDictionary *tuesday = [[NSMutableDictionary alloc] init];
         [tuesday setObject:[NSDate convertToString:[(NSDate *)range[@"from"] dateByAddingDays:3] withFormat:nil] forKey:@"Date"];
         [tuesday setObject:@"Fiskur" forKey:@"Menu"];
         [Menu addMenuWithCentrisInfo:@[monday, tuesday] inManagedObjectContext:context];
+        NSArray *menu = [Menu getMenuForCurrentWeekInManagedObjectContext:context];
+        [[theValue([menu count]) should] equal:theValue(4)];
+    });
+    
+    it(@"should not be able to duplicate menu item for the same day", ^{
+        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        NSMutableDictionary *customMenu = [[NSMutableDictionary alloc] init];
+        [customMenu setObject:[NSDate convertToString:range[@"from"] withFormat:nil] forKey:@"Date"];
+        [customMenu setObject:@"Leppalúða" forKey:@"Menu"];
+        [Menu addMenuWithCentrisInfo:@[customMenu] inManagedObjectContext:context];
         NSArray *menu = [Menu getMenuForCurrentWeekInManagedObjectContext:context];
         [[theValue([menu count]) should] equal:theValue(4)];
     });
