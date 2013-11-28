@@ -24,6 +24,7 @@
 #import "AssignmentCardTableViewCell.h"
 #import "LunchCardTableViewCell.h"
 #import "EventCardTableViewCell.h"
+#import "DataFetcher.h"
 
 #define TEXTVIEW_MAX_HEIGHT 300
 
@@ -53,6 +54,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    // Get Menu
+    [[AppFactory fetcherFromConfiguration] getMenuWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d Lunch", [responseObject count]);
+        [Menu addMenuWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error getting Lunch");
+    }];
+
     [self setup];
 }
 
@@ -65,7 +74,6 @@
 
 - (void)setup
 {
-    self.taskListForToday = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -109,7 +117,7 @@
     // If the clock is between 11:00 and 13:00, then add Lunch card
     Menu *menu;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 0 &&
+    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 11 &&
         [[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] <= 13) {
         menu = [Menu getMenuForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
     }
@@ -118,6 +126,7 @@
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme blackLightTextColor];
     
+    self.taskListForToday = [[NSMutableArray alloc] init];
     if (menu != nil)
         [self.taskListForToday addObject:menu];
     if ([nextEvents count] != 0)
@@ -205,9 +214,9 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    if LunchCard
-    //         return 120;
-    // Else
+    if ([[self.taskListForToday objectAtIndex:indexPath.row] isKindOfClass:[Menu class]])
+        return 120;
+    
     return 100;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -228,7 +237,6 @@
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    //    LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
     //    EventCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"EventCardTableViewCell"];
     
     // First get item
@@ -240,9 +248,38 @@
     // Then find out what kind of item this is and return the right card for it
     if ([rowItem isKindOfClass:[Assignment class]]) {
         AssignmentCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"AssignmentCardTableViewCell"];
+        Assignment *assignment = rowItem;
+        tableViewCell.courseLabel.text = assignment.isInCourseInstance.name;
+        tableViewCell.titleLabel.text = assignment.title;
+        tableViewCell.weightLabel.text = [NSString stringWithFormat:@"%@%%", assignment.weight];
+        NSInteger secondsToClose = [assignment.dateClosed timeIntervalSinceDate:[NSDate date]];
+        NSInteger hoursToClose = secondsToClose/60/60;
+        NSInteger minutesToClose = secondsToClose/60-hoursToClose*60;
+        tableViewCell.timeUntilClosedLabel.text = [NSString stringWithFormat:@"%d:%d", hoursToClose, minutesToClose];
         return tableViewCell;
     } else if ([rowItem isKindOfClass:[ScheduleEvent class]]) {
         ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
+        ScheduleEvent *scheduleEvent = rowItem;
+        tableViewCell.courseNameLabel.text = scheduleEvent.hasCourseInstance.name;
+        tableViewCell.locationLabel.text = scheduleEvent.roomName;
+        tableViewCell.toTimeLabel.text = [NSDate convertToString:scheduleEvent.starts withFormat:@"HH:mm"];
+        tableViewCell.toTimeLabel.text = [NSDate convertToString:scheduleEvent.ends withFormat:@"HH:mm"];
+        NSInteger secondsToTime = [scheduleEvent.starts timeIntervalSinceDate:[NSDate date]];
+        NSInteger hoursToTime = secondsToTime/60/60;
+        NSInteger minutesToTime = secondsToTime/60-hoursToTime*60;
+        if (hoursToTime != 0) {
+            // Round hours
+            hoursToTime = hoursToTime + (int)round(minutesToTime/60);
+            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir u.þ.b. %d tíma", hoursToTime];
+        }
+        else {
+            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir %d mín", minutesToTime];
+        }
+        return tableViewCell;
+    } else if ([rowItem isKindOfClass:[Menu class]]) {
+        LunchCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"LunchCardTableViewCell"];
+        Menu *menu = rowItem;
+        tableViewCell.textView.text = menu.menu;
         return tableViewCell;
     } else {
         return nil;
