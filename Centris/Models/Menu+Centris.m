@@ -27,11 +27,15 @@
 {
     for (NSDictionary *menuDay in menuInfoWeek)
     {
-        Menu *menu;
-        // todo, check if menu for that day exists.
-        menu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
-        menu.menu = menuDay[@"Menu"];
-        menu.date = [NSDate convertToDate:menuDay[@"Date"] withFormat:nil];
+        
+        Menu *menu = [self getMenuForDay:[NSDate convertToDate:menuDay[@"Date"] withFormat:nil] inManagedObjectContext:context];
+        if (!menu) { // doesn't exist, create one
+            menu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
+            menu.menu = menuDay[@"Menu"];
+            menu.date = [NSDate convertToDate:menuDay[@"Date"] withFormat:nil];
+        } else { // update it's Menu
+            menu.menu = menuDay[@"Menu"];
+        }
     }
 }
 
