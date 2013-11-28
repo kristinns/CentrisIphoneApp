@@ -215,7 +215,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([[self.taskListForToday objectAtIndex:indexPath.row] isKindOfClass:[Menu class]])
-        return 120;
+        return 140;
     
     return 100;
 }
@@ -255,7 +255,7 @@
         NSInteger secondsToClose = [assignment.dateClosed timeIntervalSinceDate:[NSDate date]];
         NSInteger hoursToClose = secondsToClose/60/60;
         NSInteger minutesToClose = secondsToClose/60-hoursToClose*60;
-        tableViewCell.timeUntilClosedLabel.text = [NSString stringWithFormat:@"%d:%d", hoursToClose, minutesToClose];
+        tableViewCell.timeUntilClosedLabel.text = [NSString stringWithFormat:@"%02d:%02d", hoursToClose, minutesToClose];
         return tableViewCell;
     } else if ([rowItem isKindOfClass:[ScheduleEvent class]]) {
         ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];

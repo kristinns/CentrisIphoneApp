@@ -255,6 +255,7 @@
                                                                 <constraint firstItem="TGG-5y-j15" firstAttribute="centerY" secondItem="BcH-2g-A78" secondAttribute="centerY" id="Oiv-Gd-PNR"/>
                                                                 <constraint firstItem="AAa-UM-Etz" firstAttribute="top" secondItem="BcH-2g-A78" secondAttribute="bottom" constant="3" id="Oy7-TI-MRC"/>
                                                                 <constraint firstItem="58r-5f-BLh" firstAttribute="trailing" secondItem="BcH-2g-A78" secondAttribute="trailing" id="RBz-mh-6TB"/>
+                                                                <constraint firstItem="TGG-5y-j15" firstAttribute="leading" secondItem="FRV-17-sZz" secondAttribute="trailing" constant="6" id="WVg-5e-jfn"/>
                                                                 <constraint firstAttribute="height" constant="80" id="Xbe-zF-hII"/>
                                                                 <constraint firstItem="AAa-UM-Etz" firstAttribute="leading" secondItem="BcH-2g-A78" secondAttribute="leading" id="Xud-4f-2VT"/>
                                                                 <constraint firstItem="KZs-5a-0o3" firstAttribute="leading" secondItem="gFU-Gh-GER" secondAttribute="leading" constant="3" id="ZQQ-dZ-4Hm"/>
@@ -264,7 +265,6 @@
                                                                 <constraint firstAttribute="trailing" secondItem="BcH-2g-A78" secondAttribute="trailing" constant="15" id="rCf-MH-FNr"/>
                                                                 <constraint firstItem="TGG-5y-j15" firstAttribute="leading" secondItem="ZrL-OJ-LyL" secondAttribute="leading" constant="71" id="rE0-bD-fBH"/>
                                                                 <constraint firstItem="58r-5f-BLh" firstAttribute="baseline" secondItem="AAa-UM-Etz" secondAttribute="baseline" id="rii-1n-ZnF"/>
-                                                                <constraint firstItem="TGG-5y-j15" firstAttribute="leading" secondItem="gFU-Gh-GER" secondAttribute="trailing" constant="5" id="wer-y0-RpT"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>

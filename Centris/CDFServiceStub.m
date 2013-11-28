@@ -30,10 +30,10 @@
     [wednesday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
     [wednesday setObject:@"Mexikósk kjúklingasúpa með nachos, sýrðum rjóma, osti og ný bökuðu brauði. Grænmetislasagne með hvítlauksbrauði og fersku salati. Sæt kartöflusúpa með rauðu karrý og kókos." forKey:@"Menu"];
     NSMutableDictionary *thursday = [[NSMutableDictionary alloc] init];
-    [thursday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
+    [thursday setObject:@"2013-11-28T00:00:00" forKey:@"Date"];
     [thursday setObject:@"Nautakjöt í drekasósu með hrísgrjónum og fersku salati. Val um 4 tegundir af salati -ferskt salat -sterk kryddað búlgur -bakaðar rauðrófur og epli -papriku salat með rauðlauk og feta osti. Hrísgrjónagrautur með kanillsykri og rúsínum." forKey:@"Menu"];
     NSMutableDictionary *friday = [[NSMutableDictionary alloc] init];
-    [friday setObject:@"2013-11-27T00:00:00" forKey:@"Date"];
+    [friday setObject:@"2013-11-29T00:00:00" forKey:@"Date"];
     [friday setObject:@"Taco veisla: Natahakk, salassósa, sýrður rjómi, ostur, ferskt salat. Taco veisla: steikt grænmeti með pinto baunum, salsa sósa, sýrður rjómi, ostur og ferskt salat. Sveppasúpa með ný bökuðu brauði. " forKey:@"Menu"];
     
     success(nil, @[monday, tuesday, wednesday, thursday, friday]);

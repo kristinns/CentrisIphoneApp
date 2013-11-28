@@ -27,4 +27,12 @@
     self.backgroundColor = [UIColor clearColor];
 }
 
+- (void)setTextView:(UITextView *)textView
+{
+    _textView = textView;
+    _textView.font = [CentrisTheme headingSmallFont];
+    _textView.textColor = [CentrisTheme grayLightTextColor];
+    
+}
+
 @end
