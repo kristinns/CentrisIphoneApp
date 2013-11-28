@@ -18,6 +18,7 @@
 #import "CourseInstance+Centris.h"
 #import "AppFactory.h"
 #import "Assignment.h"
+#import "Menu+Centris.h"
 #import "ScheduleEvent.h"
 #import "ScheduleCardTableViewCell.h"
 #import "AssignmentCardTableViewCell.h"
@@ -41,7 +42,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableViewHeightConstraint;
 
 @property (nonatomic, strong) id nextUp;
-@property (nonatomic, strong) NSArray *taskListForToday;
+@property (nonatomic, strong) NSMutableArray *taskListForToday;
 
 @end
 
@@ -64,6 +65,7 @@
 
 - (void)setup
 {
+    self.taskListForToday = [[NSMutableArray alloc] init];
     self.navigationController.navigationBar.translucent = NO;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -103,23 +105,27 @@
     NSMutableArray *nextAssignments = [[Assignment assignmentsNotHandedInForCurrentDateInManagedObjectContext:context] mutableCopy];
     NSString *assignmentSummaryText = [self summaryTextForAssignments:nextAssignments];
     NSString *scheduleEventSummaryText = [self summaryTextForScheduleEvents:nextEvents];
+    
+    // If the clock is between 11:00 and 13:00, then add Lunch card
+    Menu *menu;
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 0 &&
+        [[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] <= 13) {
+        menu = [Menu getMenuForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
+    }
     self.textView.text = [assignmentSummaryText stringByAppendingString:scheduleEventSummaryText];
     // Fix iOS 7 bug
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme blackLightTextColor];
     
-    // Add to card list
-    // First check if there are any scheduleEvents left for today
-    if ([nextEvents count] != 0) {
-        self.nextUp = nextEvents[0];
-        [nextEvents removeObjectAtIndex:0];
-    } else if ([nextAssignments count] != 0) {
-        self.nextUp = nextAssignments[0];
-        [nextAssignments removeObjectAtIndex:0];
-    }
+    if (menu != nil)
+        [self.taskListForToday addObject:menu];
+    if ([nextEvents count] != 0)
+        [self.taskListForToday addObject:nextEvents[0]];
+    if ([nextAssignments count] != 9)
+        [self.taskListForToday addObjectsFromArray:nextAssignments];
     
-    [nextEvents addObjectsFromArray:nextAssignments];
-    self.taskListForToday = nextEvents;
+    [self.tableView reloadData];
 }
 
 - (NSString *)summaryTextForAssignments:(NSArray *)assignments
@@ -152,7 +158,7 @@
         }
     } else {
         NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
-        if ([comps weekday] == 5) { // FRIDAY
+        if ([comps weekday] == 6) { // FRIDAY
             assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð? ";
         }
     }
@@ -213,7 +219,10 @@
     UILabel *sectionHeader = [[UILabel alloc] init];
     sectionHeader.textColor = [CentrisTheme blackLightTextColor];
     sectionHeader.font = [CentrisTheme headingSmallFont];
-    sectionHeader.text = @"     Í DAG";
+    if (section == 0)
+        sectionHeader.text = @"     NÆST";
+    else
+        sectionHeader.text = @"     Í DAG";
     return sectionHeader;
     
 }

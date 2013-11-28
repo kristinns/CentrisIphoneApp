@@ -57,7 +57,7 @@
     [assignment1 setObject:[NSNumber numberWithInteger:8] forKey:@"Weight"];
     [assignment1 setObject:[NSNumber numberWithInteger:1] forKey:@"MaxStudentsInGroup"];
     [assignment1 setObject:@"2013-10-26T15:00:00" forKey:@"DatePublished"];
-    [assignment1 setObject:@"2013-11-25T23:59:00" forKey:@"DateClosed"];
+    [assignment1 setObject:@"2013-11-28T23:59:00" forKey:@"DateClosed"];
     [assignment1 setObject:[NSNumber numberWithInteger:22363] forKey:@"CourseInstanceID"];
     [assignment1 setObject:[NSNull null] forKey:@"GroupID"];
     [assignment1 setObject:[NSNull null] forKey:@"Grade"];
@@ -99,7 +99,7 @@
     [assignment3 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
     [assignment3 setObject:[NSNumber numberWithInteger:2] forKey:@"MaxStudentsInGroup"];
     [assignment3 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
-    [assignment3 setObject:@"2013-11-25T23:00:00" forKey:@"DateClosed"];
+    [assignment3 setObject:@"2013-11-28T23:59:00" forKey:@"DateClosed"];
     [assignment3 setObject:[NSNumber numberWithInteger:22212] forKey:@"CourseInstanceID"];
     [assignment3 setObject:[NSNull null] forKey:@"GroupID"];
     [assignment3 setObject:[NSNull null] forKey:@"Grade"];
@@ -120,7 +120,7 @@
     [assignment4 setObject:[NSNumber numberWithInteger:2] forKey:@"Weight"];
     [assignment4 setObject:[NSNumber numberWithInteger:2] forKey:@"MaxStudentsInGroup"];
     [assignment4 setObject:@"2013-10-20T15:00:00" forKey:@"DatePublished"];
-    [assignment4 setObject:@"2013-11-25T23:59:00" forKey:@"DateClosed"];
+    [assignment4 setObject:@"2013-11-28T23:59:00" forKey:@"DateClosed"];
     [assignment4 setObject:[NSNumber numberWithInteger:22220] forKey:@"CourseInstanceID"];
     [assignment4 setObject:[NSNull null] forKey:@"GroupID"];
     [assignment4 setObject:[NSNull null] forKey:@"Grade"];
@@ -272,8 +272,8 @@
 						 @"22363", @"CourseID",
 						 @"Inngangur að tölvunarfræði", @"CourseName",
 						 @"M106", @"RoomName",
-						 @"2013-11-25T12:20:00", @"StartTime",
-						 @"2013-11-25T13:55:00", @"EndTime",
+						 @"2013-11-28T12:20:00", @"StartTime",
+						 @"2013-11-28T13:55:00", @"EndTime",
 						 @"Dæmatími",@"TypeOfClass", nil]];
 	
 	[schedule addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
