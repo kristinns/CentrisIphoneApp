@@ -13,7 +13,8 @@ SPEC_BEGIN(MenuCentrisSpec)
 
 describe(@"Menu Category ", ^{
     __block NSManagedObjectContext *context = nil;
-    
+    __block NSDateComponents *customComps = nil;
+    __block NSCalendar *gregorian = nil;
     beforeAll(^{
         NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil]; // nil makes it retrieve our main bundle
         NSError *error;
@@ -29,6 +30,17 @@ describe(@"Menu Category ", ^{
             NSLog(@"Could not set coordinator in Unit Tests");
         }
         
+        // Create some dates so the menus will always be on monday - friday
+        gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents *currComps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
+        customComps = [[NSDateComponents alloc] init];
+        [customComps setWeekday:4];
+        [customComps setYear:[currComps year]];
+        [customComps setWeek:[currComps week]];
+        NSDate *wednesday = [gregorian dateFromComponents:customComps];
+        [customComps setWeekday:5];
+        NSDate *thursday = [gregorian dateFromComponents:customComps];
+        
         // Create some menus in the past
         Menu *customMenu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
         customMenu.date = [NSDate convertToDate:@"2013-11-13T12:00:00" withFormat:nil];
@@ -38,12 +50,11 @@ describe(@"Menu Category ", ^{
         customMenu2.menu = @"Ristaðbrauð með smjöri og sultu";
         
         // create some menus for the current week
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
         Menu *currentWeekMenu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
-        currentWeekMenu.date = range[@"from"];
+        currentWeekMenu.date = wednesday;
         currentWeekMenu.menu = @"Súrsætir hrútspungar";
         Menu *currentWeekMenu2 = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
-        currentWeekMenu2.date = [(NSDate *)range[@"from"] dateByAddingDays:1];
+        currentWeekMenu2.date = thursday;
         currentWeekMenu2.menu = @"Mexíkóskt salsa með mexíkó osti";
     });
     
@@ -58,14 +69,19 @@ describe(@"Menu Category ", ^{
     });
     
     it(@"should be able to add menu items to core data", ^{
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
-        NSMutableDictionary *monday = [[NSMutableDictionary alloc] init];
-        [monday setObject:[NSDate convertToString:[(NSDate *)range[@"from"] dateByAddingDays:2] withFormat:nil] forKey:@"Date"];
-        [monday setObject:@"Kjötbollur" forKey:@"Menu"];
-        NSMutableDictionary *tuesday = [[NSMutableDictionary alloc] init];
-        [tuesday setObject:[NSDate convertToString:[(NSDate *)range[@"from"] dateByAddingDays:3] withFormat:nil] forKey:@"Date"];
-        [tuesday setObject:@"Fiskur" forKey:@"Menu"];
-        [Menu addMenuWithCentrisInfo:@[monday, tuesday] inManagedObjectContext:context];
+        NSMutableDictionary *mondayDic = [[NSMutableDictionary alloc] init];
+        [customComps setWeekday:2]; // monday
+        NSDate *monday = [gregorian dateFromComponents:customComps];
+        [mondayDic setObject:[NSDate convertToString:monday withFormat:nil] forKey:@"Date"];
+        [mondayDic setObject:@"Kjötbollur" forKey:@"Menu"];
+        
+        NSMutableDictionary *tuesdayDic = [[NSMutableDictionary alloc] init];
+        [customComps setWeekday:3]; // tuesday
+        NSDate *tuesday = [gregorian dateFromComponents:customComps];
+        [tuesdayDic setObject:[NSDate convertToString:tuesday withFormat:nil] forKey:@"Date"];
+        [tuesdayDic setObject:@"Fiskur" forKey:@"Menu"];
+        
+        [Menu addMenuWithCentrisInfo:@[mondayDic, tuesdayDic] inManagedObjectContext:context];
         NSArray *menu = [Menu getMenuForCurrentWeekInManagedObjectContext:context];
         [[theValue([menu count]) should] equal:theValue(4)];
     });
