@@ -108,7 +108,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                 forKey:@"starts"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:pred
                                 inManagedObjectContext:context];
 }

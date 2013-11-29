@@ -110,9 +110,11 @@
 {
     NSManagedObjectContext *context = [AppFactory managedObjectContext];
     NSMutableArray *nextEvents = [[ScheduleEvent nextEventForCurrentDateInManagedObjectContext:context] mutableCopy];
+    NSMutableArray *nextFinalExams = [[ScheduleEvent finalExamsExceedingDate:[NSDate date] InManagedObjectContext:context] mutableCopy];
     NSMutableArray *nextAssignments = [[Assignment assignmentsNotHandedInForCurrentDateInManagedObjectContext:context] mutableCopy];
     NSString *assignmentSummaryText = [self summaryTextForAssignments:nextAssignments];
     NSString *scheduleEventSummaryText = [self summaryTextForScheduleEvents:nextEvents];
+    NSString *finalExamSummaryText = [self summaryTextForFinalExams:nextFinalExams];
     
     // If the clock is between 11:00 and 13:00, then add Lunch card
     Menu *menu;
@@ -121,7 +123,7 @@
         [[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] <= 13) {
         menu = [Menu getMenuForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
     }
-    self.textView.text = [assignmentSummaryText stringByAppendingString:scheduleEventSummaryText];
+    self.textView.text = [[assignmentSummaryText stringByAppendingString:scheduleEventSummaryText] stringByAppendingString:finalExamSummaryText];
     // Fix iOS 7 bug
     self.textView.font = [CentrisTheme headingSmallFont];
     self.textView.textColor = [CentrisTheme blackLightTextColor];
@@ -131,16 +133,32 @@
         [self.taskListForToday addObject:menu];
     if ([nextEvents count] != 0)
         [self.taskListForToday addObject:nextEvents[0]];
-    if ([nextAssignments count] != 9)
+    if ([nextAssignments count] != 0)
         [self.taskListForToday addObjectsFromArray:nextAssignments];
+    if ([nextFinalExams count] != 0) {
+        [self.taskListForToday addObject:nextFinalExams[0]];
+        if ([self.taskListForToday count] == 1 && nextFinalExams != nil)
+            [self.taskListForToday addObject:nextFinalExams[1]];
+    }
     
     [self.tableView reloadData];
+}
+
+- (NSString *)summaryTextForFinalExams:(NSArray *)finalExams
+{
+    NSString *finalExamSummary = @"";
+    if ([finalExams count] != 0) {
+        ScheduleEvent *firstFinalExam = finalExams[0];
+        NSInteger secondsToTime = [firstFinalExam.starts timeIntervalSinceDate:[NSDate date]];
+        NSInteger daysToTime = secondsToTime/60/60/24;
+        finalExamSummary = [NSString stringWithFormat:@"%d dagar í næsta lokapróf í %@", daysToTime, firstFinalExam.hasCourseInstance.name];
+    }
+    return finalExamSummary;
 }
 
 - (NSString *)summaryTextForAssignments:(NSArray *)assignments
 {
     NSInteger numberOfAssignments = [assignments count];
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSString *assignmentsSummary = @"";
     if (numberOfAssignments) {
         if (numberOfAssignments > 1) {
@@ -166,10 +184,10 @@
             assignmentsSummary = [assignmentsSummary stringByAppendingString:[NSString stringWithFormat:@"%@. ", assignment.isInCourseInstance.name]];
         }
     } else {
-        NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
-        if ([comps weekday] == 6) { // FRIDAY
-            assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð? ";
-        }
+//        NSDateComponents *comps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
+//        if ([comps weekday] == 6) { // FRIDAY
+//            assignmentsSummary = @"Jey! Engin verkefni sem þarf að skila í kvöld. Á kannski að skella sér í vísindaferð? ";
+//        }
     }
     return assignmentsSummary;
 }
@@ -261,19 +279,24 @@
         ScheduleCardTableViewCell *tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ScheduleCardTableViewCell"];
         ScheduleEvent *scheduleEvent = rowItem;
         tableViewCell.courseNameLabel.text = scheduleEvent.hasCourseInstance.name;
-        tableViewCell.locationLabel.text = scheduleEvent.roomName;
-        tableViewCell.toTimeLabel.text = [NSDate convertToString:scheduleEvent.starts withFormat:@"HH:mm"];
+//        NSDictionary *shortcutForTypeOfClass = @{@"Lokapróf"
+        tableViewCell.locationLabel.text = [NSString stringWithFormat:@"%@ í %@", scheduleEvent.typeOfClass, scheduleEvent.roomName];
+        
+        tableViewCell.fromTimeLabel.text = [NSDate convertToString:scheduleEvent.starts withFormat:@"HH:mm"];
         tableViewCell.toTimeLabel.text = [NSDate convertToString:scheduleEvent.ends withFormat:@"HH:mm"];
         NSInteger secondsToTime = [scheduleEvent.starts timeIntervalSinceDate:[NSDate date]];
+        NSInteger daysToTime = secondsToTime/60/60/24;
         NSInteger hoursToTime = secondsToTime/60/60;
-        NSInteger minutesToTime = secondsToTime/60-hoursToTime*60;
-        if (hoursToTime != 0) {
+        NSInteger minutesToTime = secondsToTime/60;
+        if (daysToTime != 0) {
+            hoursToTime = hoursToTime + (int)round(hoursToTime-minutesToTime/60);
+            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir %d daga", daysToTime];
+        } else if (hoursToTime != 0) {
             // Round hours
-            hoursToTime = hoursToTime + (int)round(minutesToTime/60);
-            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir u.þ.b. %d tíma", hoursToTime];
-        }
-        else {
-            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir %d mín", minutesToTime];
+            hoursToTime = hoursToTime + (int)round(hoursToTime-minutesToTime/60);
+            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir %d tíma", hoursToTime];
+        } else {
+            tableViewCell.timeUntilLabel.text = [NSString stringWithFormat:@"Eftir %d mín", minutesToTime-hoursToTime*60];
         }
         return tableViewCell;
     } else if ([rowItem isKindOfClass:[Menu class]]) {
