@@ -9,6 +9,7 @@
 #import "ScheduleEventUnit+Centris.h"
 #import "ScheduleEvent.h"
 #import "DataFetcher.h"
+#import "NSDate+Helper.h"
 
 @implementation ScheduleEventUnit (Centris)
 
@@ -23,8 +24,8 @@
         eventUnit = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEventUnit" inManagedObjectContext:context];
         eventUnit.isAUnitOf = scheduleEvent;
         eventUnit.id = [NSString stringWithFormat:@"%d_%d", [scheduleEvent.eventID integerValue], ++index];
-        eventUnit.starts = subEvent[EVENT_START_TIME];
-        eventUnit.ends = subEvent[EVENT_END_TIME];
+        eventUnit.starts = [subEvent[EVENT_START_TIME] isKindOfClass:[NSString class]] ? [NSDate convertToDate:subEvent[EVENT_START_TIME] withFormat:nil] : subEvent[EVENT_START_TIME];
+        eventUnit.ends = [subEvent[EVENT_END_TIME] isKindOfClass:[NSString class]] ? [NSDate convertToDate:subEvent[EVENT_END_TIME] withFormat:nil] : subEvent[EVENT_END_TIME];
     }
 }
 
