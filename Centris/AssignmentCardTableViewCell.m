@@ -1,20 +1,20 @@
 //
-//  ScheduleCardTableViewCell.m
+//  AssignmentCardTableViewCell.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 24/11/13.
+//  Created by Kristinn Svansson on 26/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "ScheduleCardTableViewCell.h"
+#import "AssignmentCardTableViewCell.h"
 
-@interface ScheduleCardTableViewCell()
+@interface AssignmentCardTableViewCell()
 @property (weak, nonatomic) IBOutlet UIView *contentView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @end
 
-@implementation ScheduleCardTableViewCell
+@implementation AssignmentCardTableViewCell
 
 - (void)layoutSubviews
 {

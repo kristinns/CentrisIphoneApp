@@ -108,7 +108,7 @@
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
                                                 forKey:@"starts"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:pred
                                 inManagedObjectContext:context];
 }
@@ -175,7 +175,7 @@
     NSDate *starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
     NSDate *to = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
     CGFloat length = [to timeIntervalSinceDate:starts];
-    if (length <= SCHEDULE_EVENT_LENGTH) {
+    if (length <= SCHEDULE_EVENT_LENGTH || (![eventInfo[EVENT_TYPE_OF_CLASS] isEqualToString:@"Fyrirlestur"] && ![eventInfo[EVENT_TYPE_OF_CLASS] isEqualToString:@"Dæmatími"])) {
         [splittedEvents addObject:eventInfo];
         return splittedEvents;
     } else {

@@ -1,20 +1,19 @@
 //
-//  ScheduleCardTableViewCell.m
+//  EventCardTableViewCell.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 24/11/13.
+//  Created by Kristinn Svansson on 27/11/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
-#import "ScheduleCardTableViewCell.h"
+#import "EventCardTableViewCell.h"
 
-@interface ScheduleCardTableViewCell()
-@property (weak, nonatomic) IBOutlet UIView *contentView;
+@interface EventCardTableViewCell()
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *horizontalBorderWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *verticalBorderHeightConstraint;
 @end
 
-@implementation ScheduleCardTableViewCell
+@implementation EventCardTableViewCell
 
 - (void)layoutSubviews
 {
