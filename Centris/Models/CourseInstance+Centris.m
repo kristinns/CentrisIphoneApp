@@ -7,6 +7,7 @@
 //
 
 #import "CourseInstance+Centris.h"
+#import "Assignment+Centris.h"
 #import "CDDataFetcher.h"
 #import "DataFetcher.h"
 
@@ -62,4 +63,66 @@
                                 inManagedObjectContext:context];
 }
 
++ (float)averageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    float average = 0.0;
+    
+    // get instance
+    CourseInstance *courseInstance = [self courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
+    NSSet *assignments = courseInstance.hasAssignments;
+    
+    for (Assignment *assignment in assignments) {
+        if (assignment.grade != nil) {
+            average = average + [assignment.grade floatValue];
+        }
+    }
+    return average / ([assignments count]);
+}
+
++ (float)totalPercentagesFromAssignmentsInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    float percentages = 0.0;
+    CourseInstance *courseInstance = [self courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
+    NSSet *assignments = courseInstance.hasAssignments;
+    for (Assignment *assignment in assignments) {
+        if (assignment.grade != nil) {
+            percentages = percentages + [assignment.weight floatValue];
+        }
+    }
+    return percentages;
+}
+
++ (float)weightedAverageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    float weightedAverage = 0.0;
+    CourseInstance *courseInstance = [self courseInstanceWithID:courseInstanceID inManagedObjectContext:context];
+    for (Assignment *assignment  in courseInstance.hasAssignments) {
+        weightedAverage = weightedAverage + (([assignment.weight floatValue] / 100.0) * [assignment.grade floatValue]);
+    }
+    return weightedAverage;
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

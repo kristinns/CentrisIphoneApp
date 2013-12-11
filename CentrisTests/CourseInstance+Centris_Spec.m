@@ -7,6 +7,8 @@
 //
 
 #import "CourseInstance+Centris.h"
+#import "Assignment+Centris.h"
+#import "NSDate+Helper.h"
 
 SPEC_BEGIN(CourseInstanceCentrisSpec)
 
@@ -34,6 +36,32 @@ describe(@"CourseInstance Category", ^{
         courseInstance.courseID = @"T-111-PROG";
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
+        
+        // Set up dummy assignments to be ready for testing
+        Assignment *assignment1 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
+        assignment1.id = [NSNumber numberWithInteger:1];
+        assignment1.isInCourseInstance = courseInstance;
+        assignment1.title = @"Assignment 1";
+        assignment1.assignmentDescription = @"Some description";
+        assignment1.datePublished = [NSDate convertToDate:@"2013-11-12T14:31:31" withFormat:nil];
+        assignment1.dateClosed = [NSDate convertToDate:@"2013-11-25T14:31:31" withFormat:nil];
+        assignment1.isInCourseInstance = courseInstance;
+        assignment1.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment1.grade = [NSNumber numberWithFloat:8.5];
+        assignment1.weight = [NSNumber numberWithFloat:5];
+        
+        Assignment *assignment2 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
+        assignment2.id = [NSNumber numberWithInteger:1];
+        assignment2.isInCourseInstance = courseInstance;
+        assignment2.title = @"Assignment 1";
+        assignment2.assignmentDescription = @"Some description";
+        assignment2.datePublished = [NSDate convertToDate:@"2013-10-12T14:31:31" withFormat:nil];
+        assignment2.dateClosed = [NSDate convertToDate:@"2013-10-25T14:31:31" withFormat:nil];
+        assignment2.isInCourseInstance = courseInstance;
+        assignment2.handInDate = [NSDate convertToDate:@"2013-10-21T14:31:31" withFormat:nil]; // handed in
+        assignment2.grade = [NSNumber numberWithFloat:10];
+        assignment2.weight = [NSNumber numberWithFloat:10.5];
+
     });
     
     it(@"should be able to retrieve single courseinstance by id", ^{
@@ -59,6 +87,52 @@ describe(@"CourseInstance Category", ^{
         [[theValue([checkResults count]) should] equal:theValue(2)];
 
     });
+    
+    it(@"should be able to get average grade for graded assignments in a course", ^{
+        float avg = [CourseInstance averageGradeInCourseInstance:22363 inManagedObjectContext:context];
+        [[theValue(avg) should] equal:theValue(9.25)];
+    });
+    
+    it(@"should be able to get total percentages for graded assignments in a course", ^{
+        float totalPercentages = [CourseInstance totalPercentagesFromAssignmentsInCourseInstance:22363 inManagedObjectContext:context];
+        [[theValue(totalPercentages) should] equal:theValue(15.5)];
+    });
+    
+    it(@"should be able to get weighted average for graded assignments in a course", ^{
+        float weightedAvg = [CourseInstance weightedAverageGradeInCourseInstance:22363 inManagedObjectContext:context];
+        [[theValue(weightedAvg == 1.475f) should] beTrue];
+    });
 });
 
 SPEC_END
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

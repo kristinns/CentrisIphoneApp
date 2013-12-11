@@ -9,7 +9,12 @@
 #import "CourseInstance.h"
 
 @interface CourseInstance (Centris)
-+ (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;
-+ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
-+ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
++ (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;                         // tested
++ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;         // tested
++ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
+
++ (float)averageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;                     // tested
++ (float)totalPercentagesFromAssignmentsInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;  // tested
++ (float)weightedAverageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;             // tested
 @end
+
