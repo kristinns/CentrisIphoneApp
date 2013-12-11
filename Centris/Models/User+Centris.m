@@ -13,7 +13,7 @@
 @implementation User (Centris)
 
 // Get User from Dictionary and store in context if it's not already in it
-+ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (User *)addUserWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
     User *user = nil;
     

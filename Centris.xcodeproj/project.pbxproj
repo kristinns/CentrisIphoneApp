@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		18120ECF185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ECE185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m */; };
+		18120ED1185910C7001D802F /* User+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ED0185910C7001D802F /* User+Centris_Spec.m */; };
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
 		18777D6B1843B58B00DAB715 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842E01799B0AB0016A5C0 /* XCTest.framework */; };
 		18777D6C1843B58B00DAB715 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
@@ -87,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		18120ECE185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ScheduleEventUnit+Centris_Spec.m"; sourceTree = "<group>"; };
+		18120ED0185910C7001D802F /* User+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Centris_Spec.m"; sourceTree = "<group>"; };
 		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
 		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		18777D6A1843B58B00DAB715 /* CentrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CentrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -245,6 +247,7 @@
 				18FAA6F21846524900CAE495 /* Menu+Centris_Spec.m */,
 				18CAC5311846712D0006E5AA /* ScheduleEvent+Centris_Spec.m */,
 				18120ECE185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m */,
+				18120ED0185910C7001D802F /* User+Centris_Spec.m */,
 				18FAA6ED184651F000CAE495 /* NSDate+Helper_Spec.m */,
 				18777D6F1843B58B00DAB715 /* Supporting Files */,
 			);
@@ -744,6 +747,7 @@
 			files = (
 				18120ECF185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m in Sources */,
 				18CAC53018466D770006E5AA /* CourseInstance+Centris_Spec.m in Sources */,
+				18120ED1185910C7001D802F /* User+Centris_Spec.m in Sources */,
 				18FAA6EF184651F000CAE495 /* AssignmentFile+Centris_Spec.m in Sources */,
 				18FAA6EE184651F000CAE495 /* Assignment+Centris_Spec.m in Sources */,
 				18FAA6F1184651F000CAE495 /* NSDate+Helper_Spec.m in Sources */,

@@ -9,6 +9,6 @@
 #import "User.h"
 
 @interface User (Centris)
-+ (User *)userWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
++ (User *)addUserWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 + (User *)userWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
 @end

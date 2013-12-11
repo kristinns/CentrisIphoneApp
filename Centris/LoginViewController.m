@@ -91,7 +91,7 @@
     [self displayHUDWithText:@"Skrái þig inn"];
     [self updateHUDWithText:@"Sæki notandaupplýsingar" addProgress:0.2];
     [self.dataFetcher loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [User userWithCentrisInfo:responseObject inManagedObjectContext:context];
+        [User addUserWithCentrisInfo:responseObject inManagedObjectContext:context];
         [self storeInKeychainUsername:username andPassword:password];
         
         [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
