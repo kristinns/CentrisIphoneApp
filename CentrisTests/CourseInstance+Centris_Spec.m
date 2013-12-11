@@ -14,6 +14,7 @@ SPEC_BEGIN(CourseInstanceCentrisSpec)
 
 describe(@"CourseInstance Category", ^{
     __block NSManagedObjectContext *context = nil;
+    __block CourseInstance *courseInstance;
     
     beforeAll(^{
         NSManagedObjectModel *managedObjectModel = [NSManagedObjectModel mergedModelFromBundles:nil]; // nil makes it retrieve our main bundle
@@ -31,7 +32,7 @@ describe(@"CourseInstance Category", ^{
         }
         
         // Set up dummy course instance to be ready for testing
-        CourseInstance *courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
+        courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance.id = [NSNumber numberWithInteger:22363];
         courseInstance.courseID = @"T-111-PROG";
         courseInstance.name = @"Forritun";
@@ -89,24 +90,22 @@ describe(@"CourseInstance Category", ^{
     });
     
     it(@"should be able to get average grade for graded assignments in a course", ^{
-        float avg = [CourseInstance averageGradeInCourseInstance:22363 inManagedObjectContext:context];
+        float avg = [courseInstance averageGrade];
         [[theValue(avg) should] equal:theValue(9.25)];
     });
     
     it(@"should be able to get total percentages for graded assignments in a course", ^{
-        float totalPercentages = [CourseInstance totalPercentagesFromAssignmentsInCourseInstance:22363 inManagedObjectContext:context];
+        float totalPercentages = [courseInstance totalPercentagesFromAssignments];
         [[theValue(totalPercentages) should] equal:theValue(15.5)];
     });
     
     it(@"should be able to get weighted average for graded assignments in a course", ^{
-        float weightedAvg = [CourseInstance weightedAverageGradeInCourseInstance:22363 inManagedObjectContext:context];
+        float weightedAvg = [courseInstance weightedAverageGrade];
         [[theValue(weightedAvg == 1.475f) should] beTrue];
     });
 });
 
 SPEC_END
-
-
 
 
 

@@ -241,9 +241,9 @@
 				18FAA6EB184651F000CAE495 /* AssignmentFile+Centris_Spec.m */,
 				18CAC52F18466D770006E5AA /* CourseInstance+Centris_Spec.m */,
 				18FAA6F21846524900CAE495 /* Menu+Centris_Spec.m */,
+				18CAC5311846712D0006E5AA /* ScheduleEvent+Centris_Spec.m */,
 				18FAA6ED184651F000CAE495 /* NSDate+Helper_Spec.m */,
 				18777D6F1843B58B00DAB715 /* Supporting Files */,
-				18CAC5311846712D0006E5AA /* ScheduleEvent+Centris_Spec.m */,
 			);
 			path = CentrisTests;
 			sourceTree = "<group>";

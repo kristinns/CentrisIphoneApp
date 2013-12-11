@@ -13,8 +13,8 @@
 + (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;         // tested
 + (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
 
-+ (float)averageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;                     // tested
-+ (float)totalPercentagesFromAssignmentsInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;  // tested
-+ (float)weightedAverageGradeInCourseInstance:(NSInteger)courseInstanceID inManagedObjectContext:(NSManagedObjectContext *)context;             // tested
+- (float)averageGrade;                                                                                                                          // tested
+- (float)totalPercentagesFromAssignments;                                                                                                       // tested
+- (float)weightedAverageGrade;                                                                                                                  // tested
 @end
 

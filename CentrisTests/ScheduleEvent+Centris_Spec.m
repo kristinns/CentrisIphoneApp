@@ -93,14 +93,23 @@ describe(@"ScheduleEvent Category", ^{
         [[theValue([checkEvent.hasUnits count]) should] equal:theValue(2)];
     });
     
-    it(@"should be able to retrieve final exams properly", ^{
-        NSArray *checkFinalExams = [ScheduleEvent finalExamsExceedingDate:[NSDate convertToDate:@"2013-11-27T12:00:00" withFormat:nil] InManagedObjectContext:context];
-        [[theValue([checkFinalExams count]) should] equal:theValue(2)];
-    });
-    
     it(@"should be able to get schedule event units for certain date", ^{
         NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate convertToDate:@"2013-11-27T00:00:00" withFormat:nil] inManagedObjectContext:context];
         [[theValue([checkEventUnits count]) should] equal:theValue(2)];
+    });
+    
+    it(@"should be able to retrieve all events from core data", ^{
+        NSArray *checkEvents = [ScheduleEvent eventsInManagedObjectContext:context];
+        [[theValue([checkEvents count]) should] equal:theValue(3)];
+    });
+    
+    it(@"should be able to retrieve all event units for the current date", ^{
+        // todo
+    });
+    
+    it(@"should be able to retrieve final exams properly", ^{
+        NSArray *checkFinalExams = [ScheduleEvent finalExamsExceedingDate:[NSDate convertToDate:@"2013-11-27T12:00:00" withFormat:nil] InManagedObjectContext:context];
+        [[theValue([checkFinalExams count]) should] equal:theValue(2)];
     });
     
 });
