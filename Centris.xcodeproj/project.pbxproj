@@ -33,6 +33,7 @@
 		190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 190CA0EB1816C7FB00BC3046 /* AssignmentTableViewCell.m */; };
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
+		193140A61858D11A00473922 /* CourseInstanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -126,6 +127,8 @@
 		192F978C17D746C1007E2694 /* CoreData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreData.xcdatamodel; sourceTree = "<group>"; };
 		192F979117D76B04007E2694 /* User+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "User+Centris.h"; path = "Models/User+Centris.h"; sourceTree = "<group>"; };
 		192F979217D76B04007E2694 /* User+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Centris.m"; path = "Models/User+Centris.m"; sourceTree = "<group>"; };
+		193140A41858D11A00473922 /* CourseInstanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInstanceTableViewCell.h; sourceTree = "<group>"; };
+		193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstanceTableViewCell.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -494,6 +497,8 @@
 		966A499717E9B619009C342B /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				193140A41858D11A00473922 /* CourseInstanceTableViewCell.h */,
+				193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */,
 				19CD49D01842407C008094D8 /* HomeFeedCardViewCells */,
 				19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */,
 				19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */,
@@ -763,6 +768,7 @@
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				19BAC849184553D400003D05 /* LunchCardTableViewCell.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
+				193140A61858D11A00473922 /* CourseInstanceTableViewCell.m in Sources */,
 				18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */,
 				197631B41857949000D71356 /* SemesterViewController.m in Sources */,
 				1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */,

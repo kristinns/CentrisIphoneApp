@@ -69,13 +69,14 @@
     
     // get instance
     NSSet *assignments = self.hasAssignments;
-    
+    NSInteger assignmentWithGradeCount = 0;
     for (Assignment *assignment in assignments) {
         if (assignment.grade != nil) {
             average = average + [assignment.grade floatValue];
+            assignmentWithGradeCount++;
         }
     }
-    return average / ([assignments count]);
+    return average / assignmentWithGradeCount;
 }
 
 - (float)totalPercentagesFromAssignments
