@@ -34,6 +34,7 @@
 		192F978D17D746C1007E2694 /* CoreData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 192F978B17D746C1007E2694 /* CoreData.xcdatamodeld */; };
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
 		193140A61858D11A00473922 /* CourseInstanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */; };
+		193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140A91858FC1D00473922 /* CourseInstanceViewController.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -129,6 +130,8 @@
 		192F979217D76B04007E2694 /* User+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "User+Centris.m"; path = "Models/User+Centris.m"; sourceTree = "<group>"; };
 		193140A41858D11A00473922 /* CourseInstanceTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInstanceTableViewCell.h; sourceTree = "<group>"; };
 		193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstanceTableViewCell.m; sourceTree = "<group>"; };
+		193140A81858FC1D00473922 /* CourseInstanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInstanceViewController.h; sourceTree = "<group>"; };
+		193140A91858FC1D00473922 /* CourseInstanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstanceViewController.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -268,6 +271,15 @@
 				188C7DAC183528F00030CB09 /* ProfileViewController.m */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		193140A71858FBC700473922 /* Course */ = {
+			isa = PBXGroup;
+			children = (
+				193140A81858FC1D00473922 /* CourseInstanceViewController.h */,
+				193140A91858FC1D00473922 /* CourseInstanceViewController.m */,
+			);
+			name = Course;
 			sourceTree = "<group>";
 		};
 		1935C7C317C13B5400D82EC9 /* Models */ = {
@@ -444,6 +456,7 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				193140A71858FBC700473922 /* Course */,
 				197631B11857947500D71356 /* Semester */,
 				188C7DAA183528BA0030CB09 /* Profile */,
 				969C94DA180807C600356C7C /* Login */,
@@ -775,6 +788,7 @@
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */,
+				193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */,
 				18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,

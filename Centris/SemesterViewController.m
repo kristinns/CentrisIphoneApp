@@ -10,6 +10,7 @@
 #import "AppFactory.h"
 #import "CourseInstance+Centris.h"
 #import "CourseInstanceTableViewCell.h"
+#import "CourseInstanceViewController.h"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *courseTableView;
@@ -63,6 +64,15 @@
     cell.gradeLabel.text = totalPercentagesFromAssignments != 0 ? [NSString stringWithFormat:@"%.1f", [courseInstance averageGrade]] : @"";
     cell.gradeDetailLabel.text = [NSString stringWithFormat:@"Meðaleinkunn af %d%%", totalPercentagesFromAssignments];
     return cell;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"courseInstanceSegue"]) {
+        CourseInstance *courseInstance = [self.courseInstances objectAtIndex:self.courseTableView.indexPathForSelectedRow.row];
+        CourseInstanceViewController *destinationViewController = segue.destinationViewController;
+        destinationViewController.courseInstance = courseInstance;
+    }
 }
 
 @end
