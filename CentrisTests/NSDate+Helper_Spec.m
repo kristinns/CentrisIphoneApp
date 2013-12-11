@@ -95,7 +95,7 @@ describe(@"NSDate Helper", ^{
         NSString *dateFromString = [NSDate convertToString:checkDic[@"from"] withFormat:nil];
         NSString *dateToString = [NSDate convertToString:checkDic[@"to"] withFormat:nil];
         [[theValue([dateFromString isEqualToString:@"2013-01-01T12:00:00"]) should] beTrue];
-        [[theValue([dateToString isEqualToString:@"2013-01-02T09:59:59"]) should] beTrue];
+        [[theValue([dateToString isEqualToString:@"2013-01-02T10:05:00"]) should] beTrue];
     });
 });
 
