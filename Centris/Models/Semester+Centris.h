@@ -9,11 +9,11 @@
 #import "Semester.h"
 
 @interface Semester (Centris)
-+ (NSArray *)semestersInManagedObjectContext:(NSManagedObjectContext *)context;
-- (float)averageGrade;
-- (float)progress;
-- (NSInteger)totalEcts;
-- (NSInteger)finishedEcts;
-- (NSInteger)weeksLeft;
-- (NSArray *)bookList;
++ (NSArray *)semestersInManagedObjectContext:(NSManagedObjectContext *)context; // tested
+- (float)weightedAverageGrade;                                                   // tested
+- (float)progressForDate:(NSDate *)date;
+//- (NSInteger)totalEcts;
+//- (NSInteger)finishedEcts;
+//- (NSInteger)weeksLeft;
+//- (NSArray *)bookList;
 @end

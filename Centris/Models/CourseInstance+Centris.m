@@ -82,7 +82,6 @@
 - (float)averageGrade
 {
     float average = 0.0;
-    
     // get instance
     NSSet *assignments = self.hasAssignments;
     NSInteger assignmentWithGradeCount = 0;
@@ -107,13 +106,20 @@
     return percentages;
 }
 
-- (float)weightedAverageGrade
+- (float)aquiredGrade
 {
     float weightedAverage = 0.0;
     for (Assignment *assignment  in self.hasAssignments) {
-        weightedAverage = weightedAverage + (([assignment.weight floatValue] / 100.0) * [assignment.grade floatValue]);
+        if (assignment.grade != nil) {
+            weightedAverage = weightedAverage + (([assignment.weight floatValue] / 100.0) * [assignment.grade floatValue]);
+        }
     }
     return weightedAverage;
+}
+
+- (float)weightedAverageGrade
+{
+    return [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
 }
 
 @end

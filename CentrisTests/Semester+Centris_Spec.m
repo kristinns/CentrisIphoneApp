@@ -10,6 +10,10 @@
 #import "CourseInstance+Centris.h"
 #import "Assignment+Centris.h"
 #import "NSDate+Helper.h"
+#import "ScheduleEvent+Centris.h"
+
+#define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
+
 SPEC_BEGIN(SemesterCentrisSpec)
 describe(@"Semester Category", ^{
     __block NSManagedObjectContext *context = nil;
@@ -43,6 +47,13 @@ describe(@"Semester Category", ^{
         courseInstance.semester = @"20133";
         courseInstance.isInSemester = semester;
         
+        CourseInstance *courseInstance2 = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
+        courseInstance2.id = [NSNumber numberWithInteger:22364];
+        courseInstance2.courseID = @"T-109-INTO";
+        courseInstance2.name = @"Inngangur að tölvunarfræði";
+        courseInstance2.semester = @"20133";
+        courseInstance2.isInSemester = semester;
+        
         // Set up dummy assignments
         Assignment *assignment1 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
         assignment1.id = [NSNumber numberWithInteger:1];
@@ -52,7 +63,8 @@ describe(@"Semester Category", ^{
         assignment1.isInCourseInstance = courseInstance;
         assignment1.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         assignment1.grade = [NSNumber numberWithFloat:8.5f];
-        
+        assignment1.weight = [NSNumber numberWithFloat:12.5f];
+
         Assignment *assignment2 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
         assignment2.id = [NSNumber numberWithInteger:1];
         assignment2.isInCourseInstance = courseInstance;
@@ -61,6 +73,35 @@ describe(@"Semester Category", ^{
         assignment2.isInCourseInstance = courseInstance;
         assignment2.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         assignment2.grade = [NSNumber numberWithFloat:3.3f];
+        assignment2.weight = [NSNumber numberWithFloat:5.0f];
+        
+        // Set up dummy events
+        ScheduleEvent *scheduleEvent = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+        scheduleEvent.courseName = courseInstance.name;
+        scheduleEvent.starts = [NSDate convertToDate:@"2013-08-18T08:30:00" withFormat:nil];
+        scheduleEvent.ends = [NSDate convertToDate:@"2013-08-18T10:05:00" withFormat:nil];
+        scheduleEvent.eventID = [NSNumber numberWithInteger:1];
+        scheduleEvent.roomName = @"M101";
+        scheduleEvent.typeOfClass = @"Fyrirlestur";
+        scheduleEvent.hasCourseInstance = courseInstance;
+        
+        ScheduleEvent *finalExam = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+        finalExam.courseName = courseInstance.name;
+        finalExam.starts = [NSDate convertToDate:@"2013-12-18T09:00:00" withFormat:nil];
+        finalExam.ends = [NSDate convertToDate:@"2013-12-18T12:00:00" withFormat:nil];
+        finalExam.eventID = [NSNumber numberWithInteger:2];
+        finalExam.roomName = @"M101";
+        finalExam.typeOfClass = @"Lokapróf";
+        finalExam.hasCourseInstance = courseInstance;
+        
+        ScheduleEvent *scheduleEvent2 = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
+        scheduleEvent2.courseName = courseInstance2.name;
+        scheduleEvent2.starts = [NSDate convertToDate:@"2013-08-24T08:30:00" withFormat:nil];
+        scheduleEvent2.ends = [NSDate convertToDate:@"2013-08-24T10:05:00" withFormat:nil];
+        scheduleEvent2.eventID = [NSNumber numberWithInteger:1];
+        scheduleEvent2.roomName = @"M101";
+        scheduleEvent2.typeOfClass = @"Fyrirlestur";
+        scheduleEvent2.hasCourseInstance = courseInstance2;
         
     });
     
@@ -69,9 +110,14 @@ describe(@"Semester Category", ^{
         [[theValue([checkSemesters count]) should] equal:theValue(2)];
     });
     
-    it(@"should be able to calculate the average grade for all graded assignments in a semester", ^{
-        NSNumber *checkAverageGrade = [NSNumber numberWithFloat:[semester averageGrade]];
-        [[theValue([checkAverageGrade isEqual:[NSNumber numberWithFloat:5.9f]]) should] beTrue];
+    it(@"should be able to calculate the weighted average grade for all graded assignments in a semester", ^{
+        float checkAverageGrade = [semester weightedAverageGrade];
+        [[theValue(fequal(checkAverageGrade, 5.9f)) should] beTrue];
+    });
+    
+    it(@"should be able to get progress of the semester", ^{
+        float checkProgress = [semester progressForDate:[NSDate convertToDate:@"2013-10-01T12:00:00" withFormat:nil]];
+        [[theValue(fequal(checkProgress, 50.0f)) should] beTrue];
     });
 });
 SPEC_END
