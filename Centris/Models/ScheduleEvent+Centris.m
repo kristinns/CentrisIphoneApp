@@ -90,19 +90,18 @@
                                 inManagedObjectContext:context];
 }
 
-// Returns all the NEXT schedule events for that given day. If, however, the time of the date is past 22:00
+// Returns all the NEXT schedule events for that given day. If, however, the time of the date is past 21:00
 // it will return the next events before 11:00 the next day
-+ (NSArray *)nextEventForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
++ (NSArray *)nextEventForDate:(NSDate *)date InManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDate *toDay = [NSDate date];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [NSDate dateComponentForDate:toDay withCalendar:gregorian];
+    NSDateComponents *comps = [NSDate dateComponentForDate:date withCalendar:gregorian];
     NSDictionary *range = nil;
     
     if ([comps hour] > 21) {
-        range = [NSDate dateRangeToNextMorning:toDay];
+        range = [NSDate dateRangeToNextMorning:date];
     } else {
-        range = [NSDate dateRangeToMidnightFromDate:toDay];
+        range = [NSDate dateRangeToMidnightFromDate:date];
     }
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];

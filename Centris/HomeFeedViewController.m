@@ -109,7 +109,7 @@
 - (void)setupHomeFeed
 {
     NSManagedObjectContext *context = [AppFactory managedObjectContext];
-    NSMutableArray *nextEvents = [[ScheduleEvent nextEventForCurrentDateInManagedObjectContext:context] mutableCopy];
+    NSMutableArray *nextEvents = [[ScheduleEvent nextEventForDate:[NSDate date] InManagedObjectContext:context] mutableCopy];
     NSMutableArray *nextFinalExams = [[ScheduleEvent finalExamsExceedingDate:[NSDate date] InManagedObjectContext:context] mutableCopy];
     NSMutableArray *nextAssignments = [[Assignment assignmentsNotHandedInForCurrentDateInManagedObjectContext:context] mutableCopy];
     NSString *assignmentSummaryText = [self summaryTextForAssignments:nextAssignments];

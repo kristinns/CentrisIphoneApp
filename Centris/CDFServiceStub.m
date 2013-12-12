@@ -147,6 +147,11 @@
     [courseInst1 setObject:@"T-109-INTO" forKey:@"CourseID"];
     [courseInst1 setObject:@"Inngangur að tölvunarfræði" forKey:@"Name"];
     [courseInst1 setObject:@"20113" forKey:@"Semester"];
+    [courseInst1 setObject:@"Some syllabus" forKey:@"Syllabus"];
+    [courseInst1 setObject:@"Some content" forKey:@"Content"];
+    [courseInst1 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+    [courseInst1 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+    [courseInst1 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
     [courseInstArray addObject:courseInst1];
     
     // T-111-PROG
@@ -155,6 +160,11 @@
     [courseInst2 setObject:@"T-111-PROG" forKey:@"CourseID"];
     [courseInst2 setObject:@"Forritun" forKey:@"Name"];
     [courseInst2 setObject:@"20113" forKey:@"Semester"];
+    [courseInst2 setObject:@"Some syllabus" forKey:@"Syllabus"];
+    [courseInst2 setObject:@"Some content" forKey:@"Content"];
+    [courseInst2 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+    [courseInst2 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+    [courseInst2 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
     [courseInstArray addObject:courseInst2];
     
     // T-117-STR1
@@ -163,6 +173,11 @@
     [courseInst3 setObject:@"T-117-STR1" forKey:@"CourseID"];
     [courseInst3 setObject:@"Strjál Stærðfræði I" forKey:@"Name"];
     [courseInst3 setObject:@"20113" forKey:@"Semester"];
+    [courseInst3 setObject:@"Some syllabus" forKey:@"Syllabus"];
+    [courseInst3 setObject:@"Some content" forKey:@"Content"];
+    [courseInst3 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+    [courseInst3 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+    [courseInst3 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
     [courseInstArray addObject:courseInst3];
     
     // T-107-TOLH
@@ -171,6 +186,11 @@
     [courseInst4 setObject:@"T-107-TOLH" forKey:@"CourseID"];
     [courseInst4 setObject:@"Tölvuhögun" forKey:@"Name"];
     [courseInst4 setObject:@"20113" forKey:@"Semester"];
+    [courseInst4 setObject:@"Some syllabus" forKey:@"Syllabus"];
+    [courseInst4 setObject:@"Some content" forKey:@"Content"];
+    [courseInst4 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+    [courseInst4 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+    [courseInst4 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
     [courseInstArray addObject:courseInst4];
     
     // T-110-VERK
@@ -179,6 +199,11 @@
     [courseInst5 setObject:@"T-110-VERK" forKey:@"CourseID"];
     [courseInst5 setObject:@"Verkefnalausnir" forKey:@"Name"];
     [courseInst5 setObject:@"20113" forKey:@"Semester"];
+    [courseInst5 setObject:@"Some syllabus" forKey:@"Syllabus"];
+    [courseInst5 setObject:@"Some content" forKey:@"Content"];
+    [courseInst5 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+    [courseInst5 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+    [courseInst5 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
     [courseInstArray addObject:courseInst5];
     
     // Finally, return courseInstArray

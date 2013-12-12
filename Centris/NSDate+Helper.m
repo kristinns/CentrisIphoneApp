@@ -103,9 +103,9 @@
     [comps setMinute:0];
     [comps setHour:[comps hour]];
     NSDate *fromDate = [gregorian dateFromComponents:comps];
-    [comps setSecond:59];
-    [comps setMinute:59];
-    [comps setHour:9];
+    [comps setSecond:00];
+    [comps setMinute:05];
+    [comps setHour:10];
     [comps setDay:([comps day]) +1];
     NSDate *toDate = [gregorian dateFromComponents:comps];
     [range setObject:fromDate forKey:@"from"];
