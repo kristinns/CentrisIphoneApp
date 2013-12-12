@@ -9,6 +9,7 @@
 #import "Semester+Centris.h"
 #import "CDDataFetcher.h"
 #import "CourseInstance+Centris.h"
+#import "ScheduleEvent+Centris.h"
 
 @implementation Semester (Centris)
 
@@ -21,20 +22,49 @@
                                 inManagedObjectContext:context];
 }
 
-- (float)weightedAverageGrade
+- (float)averageGrade
 {
     NSSet *courseInstances = self.hasCourseInstances;
+    if (![courseInstances count])
+        return 0.0;
     float average = 0.0f;
-    float totalPercentage = 0.0f;
+    NSInteger counter = 0;
     for (CourseInstance *courseInstance in courseInstances) {
-        average = average + ([courseInstance totalPercentagesFromAssignments] / 100.0f * [courseInstance aquiredGrade]);
-        totalPercentage = totalPercentage + [courseInstance totalPercentagesFromAssignments];
+        float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
+        average = average + weightedAverageFromCourseInstance;
+        if (weightedAverageFromCourseInstance)
+            counter++;
     }
-    return average / totalPercentage;
+    return average / counter;
 }
 
 - (float)progressForDate:(NSDate *)date
 {
+    NSDictionary *semesterRange = [self semesterRange];
+    NSInteger totalTime = [semesterRange[@"ends"] timeIntervalSinceDate:semesterRange[@"starts"]];
+    return totalTime == 0 ? 0.0 : [date timeIntervalSinceDate:semesterRange[@"starts"]] / totalTime;
+}
+
+- (NSInteger)totalEcts
+{
+    NSInteger totalECTS = 0;
+    for (CourseInstance *courseInstance in self.hasCourseInstances) {
+        totalECTS = totalECTS + [courseInstance.ects integerValue];
+    }
+    return totalECTS;
+}
+
+- (NSInteger)weeksLeft:(NSDate *)date
+{
+    NSDictionary *semesterRange = [self semesterRange];
+    NSInteger totalTime = [semesterRange[@"ends"] timeIntervalSinceDate:date];
+    return totalTime / (60 * 60 * 24 * 7);
+}
+
+#pragma mark - Helpers
+- (NSDictionary *)semesterRange
+{
+    NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSMutableArray *events = [[NSMutableArray alloc] init];
     NSSet *courseInstances = self.hasCourseInstances;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"starts" ascending:YES]; // smallest date first
@@ -48,7 +78,33 @@
         }
     }
     NSArray *sortedEvents = [events sortedArrayUsingDescriptors:@[sortDescriptor]];
-    return 0.0;
+    NSDate *semesterStarts = ((ScheduleEvent *)[sortedEvents firstObject]).starts;
+    NSDate *semesterEnds = ((ScheduleEvent *)[sortedEvents lastObject]).ends;
+    [range setObject:semesterStarts forKey:@"starts"];
+    [range setObject:semesterEnds forKey:@"ends"];
+    return range;
 }
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

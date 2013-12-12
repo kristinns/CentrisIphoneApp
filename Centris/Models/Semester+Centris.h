@@ -10,10 +10,10 @@
 
 @interface Semester (Centris)
 + (NSArray *)semestersInManagedObjectContext:(NSManagedObjectContext *)context; // tested
-- (float)weightedAverageGrade;                                                   // tested
+- (float)averageGrade;
 - (float)progressForDate:(NSDate *)date;
-//- (NSInteger)totalEcts;
+- (NSInteger)weeksLeft:(NSDate *)date;
+- (NSInteger)totalEcts;
 //- (NSInteger)finishedEcts;
-//- (NSInteger)weeksLeft;
 //- (NSArray *)bookList;
 @end

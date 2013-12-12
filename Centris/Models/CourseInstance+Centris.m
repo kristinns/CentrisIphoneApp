@@ -53,6 +53,7 @@
         courseInstance.content = centrisInfo[COURSE_CONTENT];
         courseInstance.assessmentMethods = centrisInfo[COURSE_ASSESSMENT_METHODS];
         courseInstance.learningOutcome = centrisInfo[COURSE_LEARNING_OUTCOME];
+        courseInstance.ects = centrisInfo[COURSE_ECTS];
     } else {
         return [matches lastObject];
     }

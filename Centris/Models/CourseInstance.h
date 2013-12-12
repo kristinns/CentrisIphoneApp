@@ -13,15 +13,16 @@
 
 @interface CourseInstance : NSManagedObject
 
+@property (nonatomic, retain) NSString * assessmentMethods;
+@property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSString * courseID;
 @property (nonatomic, retain) NSNumber * id;
+@property (nonatomic, retain) NSString * learningOutcome;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * semester;
 @property (nonatomic, retain) NSString * syllabus;
-@property (nonatomic, retain) NSString * content;
-@property (nonatomic, retain) NSString * learningOutcome;
 @property (nonatomic, retain) NSString * teachingMethods;
-@property (nonatomic, retain) NSString * assessmentMethods;
+@property (nonatomic, retain) NSNumber * ects;
 @property (nonatomic, retain) NSSet *hasAssignments;
 @property (nonatomic, retain) NSSet *hasScheduleEvents;
 @property (nonatomic, retain) User *hasUser;

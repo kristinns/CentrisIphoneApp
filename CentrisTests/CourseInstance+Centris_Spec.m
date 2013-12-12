@@ -89,6 +89,7 @@ describe(@"CourseInstance Category", ^{
         [courseInst2 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
         [courseInst2 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
         [courseInst2 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+        [courseInst2 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
 
         [CourseInstance addCourseInstanceWithCentrisInfo:courseInst2 inManagedObjectContext:context];
         NSArray *checkResults = [CourseInstance courseInstancesInManagedObjectContext:context];

@@ -46,6 +46,7 @@ describe(@"Semester Category", ^{
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
         courseInstance.isInSemester = semester;
+        courseInstance.ects = [NSNumber numberWithInteger:6];
         
         CourseInstance *courseInstance2 = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance2.id = [NSNumber numberWithInteger:22364];
@@ -53,6 +54,7 @@ describe(@"Semester Category", ^{
         courseInstance2.name = @"Inngangur að tölvunarfræði";
         courseInstance2.semester = @"20133";
         courseInstance2.isInSemester = semester;
+        courseInstance2.ects = [NSNumber numberWithInteger:6];
         
         // Set up dummy assignments
         Assignment *assignment1 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
@@ -102,7 +104,6 @@ describe(@"Semester Category", ^{
         scheduleEvent2.roomName = @"M101";
         scheduleEvent2.typeOfClass = @"Fyrirlestur";
         scheduleEvent2.hasCourseInstance = courseInstance2;
-        
     });
     
     it(@"should be able to retrieve all semesters in core data", ^{
@@ -110,14 +111,26 @@ describe(@"Semester Category", ^{
         [[theValue([checkSemesters count]) should] equal:theValue(2)];
     });
     
-    it(@"should be able to calculate the weighted average grade for all graded assignments in a semester", ^{
-        float checkAverageGrade = [semester weightedAverageGrade];
-        [[theValue(fequal(checkAverageGrade, 5.9f)) should] beTrue];
+    it(@"should be able to calculate the average of the average weighted grade for all courseinstances in a semester", ^{
+        float checkAverageGrade = [semester averageGrade];
+        NSString *stringCompare = [NSString stringWithFormat:@"%.2f", checkAverageGrade];
+        [[theValue([stringCompare isEqualToString:@"7.01"]) should] beTrue];
     });
     
     it(@"should be able to get progress of the semester", ^{
         float checkProgress = [semester progressForDate:[NSDate convertToDate:@"2013-10-01T12:00:00" withFormat:nil]];
-        [[theValue(fequal(checkProgress, 50.0f)) should] beTrue];
+        NSString *stringCompare = [NSString stringWithFormat:@"%.3f", checkProgress];
+        [[theValue([stringCompare isEqualToString:@"0.361"]) should] beTrue];
+    });
+    
+    it(@"should be able to retrieve total ects for a semseter", ^{
+        NSInteger checkECTS = [semester totalEcts];
+        [[theValue(checkECTS) should] equal:theValue(12)];
+    });
+    
+    it(@"should be able to retrieve how many weeks are left of the semester", ^{
+        NSInteger checkWeeksLeft = [semester weeksLeft:[NSDate convertToDate:@"2013-11-26T12:00:00" withFormat:nil]];
+        [[theValue(checkWeeksLeft) should] equal:theValue(3)];
     });
 });
 SPEC_END
