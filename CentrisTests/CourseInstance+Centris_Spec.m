@@ -82,8 +82,14 @@ describe(@"CourseInstance Category", ^{
         [courseInst2 setObject:@"T-111-PROG" forKey:@"CourseID"];
         [courseInst2 setObject:@"Forritun" forKey:@"Name"];
         [courseInst2 setObject:@"20113" forKey:@"Semester"];
+        [courseInst2 setObject:@"Some syllabus" forKey:@"Syllabus"];
+        [courseInst2 setObject:@"Some content" forKey:@"Content"];
+        [courseInst2 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
+        [courseInst2 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
+        [courseInst2 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+
         
-        [CourseInstance courseInstanceWithCentrisInfo:courseInst2 inManagedObjectContext:context];
+        [CourseInstance addCourseInstanceWithCentrisInfo:courseInst2 inManagedObjectContext:context];
         NSArray *checkResults = [CourseInstance courseInstancesInManagedObjectContext:context];
         [[theValue([checkResults count]) should] equal:theValue(2)];
 
@@ -102,6 +108,11 @@ describe(@"CourseInstance Category", ^{
     it(@"should be able to get weighted average for graded assignments in a course", ^{
         NSNumber *weightedAvg = [NSNumber numberWithFloat:[courseInstance weightedAverageGrade]];
         [[theValue([weightedAvg isEqual:@1.475f]) should] beTrue];
+    });
+    
+    it(@"should be able to get assignments that have been graded in a courseinstance", ^{
+        NSArray *checkAssignments = [courseInstance gradedAssignments];
+        [[theValue([checkAssignments count]) should] equal:theValue(2)];
     });
 });
 

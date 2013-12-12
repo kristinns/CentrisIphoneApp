@@ -31,7 +31,7 @@
 	return instance;
 }
 
-+ (CourseInstance *)courseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context
++ (CourseInstance *)addCourseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;
 {
     CourseInstance *courseInstance = nil;
     
@@ -48,6 +48,11 @@
         courseInstance.courseID = centrisInfo[COURSE_ID];
         courseInstance.name = centrisInfo[COURSE_NAME];
         courseInstance.semester = centrisInfo[COURSE_SEMESTER];
+        courseInstance.syllabus = centrisInfo[COURSE_SYLLABUS];
+        courseInstance.teachingMethods = centrisInfo[COURSE_TEACHING_METHODS];
+        courseInstance.content = centrisInfo[COURSE_CONTENT];
+        courseInstance.assessmentMethods = centrisInfo[COURSE_ASSESSMENT_METHODS];
+        courseInstance.learningOutcome = centrisInfo[COURSE_LEARNING_OUTCOME];
     } else {
         return [matches lastObject];
     }
@@ -61,6 +66,17 @@
                                          sortAscending:NO
                                          withPredicate:nil
                                 inManagedObjectContext:context];
+}
+
+- (NSArray *)gradedAssignments
+{
+    NSMutableArray *gradedAssignments = [[NSMutableArray alloc] init];
+    for (Assignment *assignment in self.hasAssignments) {
+        if (assignment.grade != nil) {
+            [gradedAssignments addObject:assignment];
+        }
+    }
+    return gradedAssignments;
 }
 
 - (float)averageGrade

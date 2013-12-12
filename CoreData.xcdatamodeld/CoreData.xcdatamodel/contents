@@ -26,10 +26,15 @@
         <relationship name="isInAssignment" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Assignment" inverseName="hasFiles" inverseEntity="Assignment" syncable="YES"/>
     </entity>
     <entity name="CourseInstance" representedClassName="CourseInstance" syncable="YES">
+        <attribute name="assessmentMethods" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="learningOutcome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="semester" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="syllabus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="teachingMethods" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="isInCourseInstance" inverseEntity="Assignment" syncable="YES"/>
         <relationship name="hasScheduleEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasCourseInstance" inverseEntity="ScheduleEvent" syncable="YES"/>
         <relationship name="hasUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isInCourseInstance" inverseEntity="User" syncable="YES"/>
@@ -70,12 +75,12 @@
         <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasUser" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Assignment" positionX="144" positionY="21" width="128" height="285"/>
-        <element name="AssignmentFile" positionX="331" positionY="-0" width="128" height="120"/>
-        <element name="CourseInstance" positionX="-11" positionY="18" width="128" height="150"/>
-        <element name="ScheduleEvent" positionX="0" positionY="-180" width="128" height="165"/>
-        <element name="ScheduleEventUnit" positionX="160" positionY="-135" width="128" height="105"/>
-        <element name="User" positionX="-182" positionY="-108" width="128" height="240"/>
-        <element name="Menu" positionX="-182" positionY="162" width="128" height="73"/>
+        <element name="Assignment" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="AssignmentFile" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CourseInstance" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Menu" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEvent" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="ScheduleEventUnit" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="User" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

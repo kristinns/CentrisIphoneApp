@@ -39,6 +39,11 @@
 #define COURSE_INSTANCE_ID                  @"ID"
 #define COURSE_NAME                         @"Name"
 #define COURSE_SEMESTER                     @"Semester"
+#define COURSE_SYLLABUS                     @"Syllabus"
+#define COURSE_TEACHING_METHODS             @"TeachingMethods"
+#define COURSE_CONTENT                      @"Content"
+#define COURSE_ASSESSMENT_METHODS           @"AssessmentMethods"
+#define COURSE_LEARNING_OUTCOME             @"LearningOutcome"
 // User Key Constants
 #define CENTRIS_USER_ID                     @"Person.ID"
 #define CENTRIS_USER_MOBILE_PHONE           @"Person.MobilePhone"

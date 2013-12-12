@@ -98,7 +98,7 @@
         [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             TFLog(@"Got %d courses", [responseObject count]);
             for (NSDictionary *courseInst in responseObject) {
-                [CourseInstance courseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
+                [CourseInstance addCourseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
             }
             
             // Get scheduleEvents

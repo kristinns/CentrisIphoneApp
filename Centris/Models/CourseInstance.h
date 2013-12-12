@@ -2,7 +2,7 @@
 //  CourseInstance.h
 //  Centris
 //
-//  Created by Kristinn Svansson on 28/10/13.
+//  Created by Bjarki Sörens on 12/12/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -17,6 +17,11 @@
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * semester;
+@property (nonatomic, retain) NSString * syllabus;
+@property (nonatomic, retain) NSString * content;
+@property (nonatomic, retain) NSString * learningOutcome;
+@property (nonatomic, retain) NSString * teachingMethods;
+@property (nonatomic, retain) NSString * assessmentMethods;
 @property (nonatomic, retain) NSSet *hasAssignments;
 @property (nonatomic, retain) NSSet *hasScheduleEvents;
 @property (nonatomic, retain) User *hasUser;

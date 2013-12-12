@@ -2,7 +2,7 @@
 //  CourseInstance.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 28/10/13.
+//  Created by Bjarki Sörens on 12/12/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
@@ -18,6 +18,11 @@
 @dynamic id;
 @dynamic name;
 @dynamic semester;
+@dynamic syllabus;
+@dynamic content;
+@dynamic learningOutcome;
+@dynamic teachingMethods;
+@dynamic assessmentMethods;
 @dynamic hasAssignments;
 @dynamic hasScheduleEvents;
 @dynamic hasUser;
