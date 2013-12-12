@@ -13,6 +13,16 @@
 
 @implementation Semester (Centris)
 
++ (Semester *)semesterWithID:(NSString *)semesterID inManagedObjectContext:(NSManagedObjectContext *)context
+{
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id_semester = %@", semesterID];
+    return [[CDDataFetcher fetchObjectsFromDBWithEntity:@"Semester"
+                                                forKey:@"id_semester"
+                                         sortAscending:NO
+                                         withPredicate:pred
+                                inManagedObjectContext:context] lastObject];
+}
+
 + (NSArray *)semestersInManagedObjectContext:(NSManagedObjectContext *)context
 {
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Semester"

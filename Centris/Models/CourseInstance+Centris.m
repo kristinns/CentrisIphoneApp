@@ -7,6 +7,7 @@
 //
 
 #import "CourseInstance+Centris.h"
+#import "Semester+Centris.h"
 #import "Assignment+Centris.h"
 #import "CDDataFetcher.h"
 #import "DataFetcher.h"
@@ -54,6 +55,12 @@
         courseInstance.assessmentMethods = centrisInfo[COURSE_ASSESSMENT_METHODS];
         courseInstance.learningOutcome = centrisInfo[COURSE_LEARNING_OUTCOME];
         courseInstance.ects = centrisInfo[COURSE_ECTS];
+        Semester *semester = [Semester semesterWithID:centrisInfo[COURSE_SEMESTER] inManagedObjectContext:context];
+        if (semester == nil) {
+            semester = [NSEntityDescription insertNewObjectForEntityForName:@"Semester" inManagedObjectContext:context];
+            semester.id_semester = centrisInfo[COURSE_SEMESTER];
+        }
+        courseInstance.isInSemester = semester;
     } else {
         return [matches lastObject];
     }
