@@ -9,6 +9,7 @@
 #import "Semester+Centris.h"
 #import "CDDataFetcher.h"
 #import "CourseInstance+Centris.h"
+#import "ScheduleEvent+Centris.h"
 
 @implementation Semester (Centris)
 
@@ -21,16 +22,20 @@
                                 inManagedObjectContext:context];
 }
 
-- (float)weightedAverageGrade
+- (float)averageGrade
 {
     NSSet *courseInstances = self.hasCourseInstances;
+    if (![courseInstances count])
+        return 0.0;
     float average = 0.0f;
-    float totalPercentage = 0.0f;
+    NSInteger counter = 0;
     for (CourseInstance *courseInstance in courseInstances) {
-        average = average + ([courseInstance totalPercentagesFromAssignments] / 100.0f * [courseInstance aquiredGrade]);
-        totalPercentage = totalPercentage + [courseInstance totalPercentagesFromAssignments];
+        float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
+        average = average + weightedAverageFromCourseInstance;
+        if (weightedAverageFromCourseInstance)
+            counter++;
     }
-    return average / totalPercentage;
+    return average / counter;
 }
 
 - (float)progressForDate:(NSDate *)date
@@ -48,7 +53,10 @@
         }
     }
     NSArray *sortedEvents = [events sortedArrayUsingDescriptors:@[sortDescriptor]];
-    return 0.0;
+    NSDate *semesterStarts = ((ScheduleEvent *)[sortedEvents firstObject]).starts;
+    NSDate *semesterEnds = ((ScheduleEvent *)[sortedEvents lastObject]).ends;
+    NSInteger totalTime = [semesterEnds timeIntervalSinceDate:semesterStarts];
+    return totalTime == 0 ? 0.0 : [date timeIntervalSinceDate:semesterStarts] / totalTime;
 }
 
 @end

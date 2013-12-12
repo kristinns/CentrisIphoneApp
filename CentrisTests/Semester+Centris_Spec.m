@@ -110,14 +110,16 @@ describe(@"Semester Category", ^{
         [[theValue([checkSemesters count]) should] equal:theValue(2)];
     });
     
-    it(@"should be able to calculate the weighted average grade for all graded assignments in a semester", ^{
-        float checkAverageGrade = [semester weightedAverageGrade];
-        [[theValue(fequal(checkAverageGrade, 5.9f)) should] beTrue];
+    it(@"should be able to calculate the average of the average weighted grade for all courseinstances in a semester", ^{
+        float checkAverageGrade = [semester averageGrade];
+        NSString *stringCompare = [NSString stringWithFormat:@"%.2f", checkAverageGrade];
+        [[theValue([stringCompare isEqualToString:@"7.01"]) should] beTrue];
     });
     
     it(@"should be able to get progress of the semester", ^{
         float checkProgress = [semester progressForDate:[NSDate convertToDate:@"2013-10-01T12:00:00" withFormat:nil]];
-        [[theValue(fequal(checkProgress, 50.0f)) should] beTrue];
+        NSString *stringCompare = [NSString stringWithFormat:@"%.3f", checkProgress];
+        [[theValue([stringCompare isEqualToString:@"0.361"]) should] beTrue];
     });
 });
 SPEC_END
