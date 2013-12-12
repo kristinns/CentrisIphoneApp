@@ -11,10 +11,12 @@
 #import "CourseInstance+Centris.h"
 #import "CourseInstanceTableViewCell.h"
 #import "CourseInstanceViewController.h"
+#import "PNChart.h"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *courseTableView;
+@property (nonatomic, weak) IBOutlet UITableView *courseTableView;
 @property (nonatomic, strong) NSArray *courseInstances;
+@property (nonatomic, strong) IBOutlet PNChart *circleChartView;
 
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *courseTableViewHeightConstraint;
@@ -36,6 +38,16 @@
     [self.courseTableView reloadData];
     NSInteger courseTableViewheight = self.courseTableView.contentSize.height;
     self.courseTableViewHeightConstraint.constant = courseTableViewheight;
+    
+    self.circleChartView.type = PNCircleType;
+    self.circleChartView.total = @100;
+    self.circleChartView.current = @60;
+    self.circleChartView.strokeColor = [UIColor whiteColor];//[UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
+    [self.circleChartView strokeChart];
+    self.circleChartView.circleChart.lineWidth = @4;
+    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6] CGColor];
+    self.circleChartView.circleChart.circleBG.fillColor = nil;
+    [self.circleChartView.circleChart strokeChart];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
