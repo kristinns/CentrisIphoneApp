@@ -88,11 +88,9 @@ describe(@"CourseInstance Category", ^{
         [courseInst2 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
         [courseInst2 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
 
-        
         [CourseInstance addCourseInstanceWithCentrisInfo:courseInst2 inManagedObjectContext:context];
         NSArray *checkResults = [CourseInstance courseInstancesInManagedObjectContext:context];
         [[theValue([checkResults count]) should] equal:theValue(2)];
-
     });
     
     it(@"should be able to get average grade for graded assignments in a course", ^{

@@ -10,6 +10,7 @@
 		18120ECF185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ECE185903CE001D802F /* ScheduleEventUnit+Centris_Spec.m */; };
 		18120ED1185910C7001D802F /* User+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ED0185910C7001D802F /* User+Centris_Spec.m */; };
 		18120ED41859C63E001D802F /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ED31859C63E001D802F /* CourseInstance.m */; };
+		18120ED71859CCA8001D802F /* Semester.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120ED61859CCA8001D802F /* Semester.m */; };
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
 		18777D6B1843B58B00DAB715 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842E01799B0AB0016A5C0 /* XCTest.framework */; };
 		18777D6C1843B58B00DAB715 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
@@ -91,6 +92,8 @@
 		18120ED0185910C7001D802F /* User+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+Centris_Spec.m"; sourceTree = "<group>"; };
 		18120ED21859C63E001D802F /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
 		18120ED31859C63E001D802F /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
+		18120ED51859CCA8001D802F /* Semester.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Semester.h; path = Models/Semester.h; sourceTree = "<group>"; };
+		18120ED61859CCA8001D802F /* Semester.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Semester.m; path = Models/Semester.m; sourceTree = "<group>"; };
 		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
 		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
 		18777D6A1843B58B00DAB715 /* CentrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CentrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -276,6 +279,8 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				18120ED51859CCA8001D802F /* Semester.h */,
+				18120ED61859CCA8001D802F /* Semester.m */,
 				18120ED21859C63E001D802F /* CourseInstance.h */,
 				18120ED31859C63E001D802F /* CourseInstance.m */,
 				1989B659183CC4510005E44F /* Assignment.h */,
@@ -772,6 +777,7 @@
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
 				18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */,
 				197631B41857949000D71356 /* SemesterViewController.m in Sources */,
+				18120ED71859CCA8001D802F /* Semester.m in Sources */,
 				1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,

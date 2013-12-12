@@ -38,6 +38,7 @@
         <relationship name="hasAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="isInCourseInstance" inverseEntity="Assignment" syncable="YES"/>
         <relationship name="hasScheduleEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasCourseInstance" inverseEntity="ScheduleEvent" syncable="YES"/>
         <relationship name="hasUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isInCourseInstance" inverseEntity="User" syncable="YES"/>
+        <relationship name="isInSemester" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Semester" inverseName="hasCourseInstances" inverseEntity="Semester" syncable="YES"/>
     </entity>
     <entity name="Menu" representedClassName="Menu" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
@@ -58,6 +59,10 @@
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="starts" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="isAUnitOf" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasUnits" inverseEntity="ScheduleEvent" syncable="YES"/>
+    </entity>
+    <entity name="Semester" representedClassName="Semester" syncable="YES">
+        <attribute name="id_semester" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasCourseInstances" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="isInSemester" inverseEntity="CourseInstance" syncable="YES"/>
     </entity>
     <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="activeECTS" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -82,5 +87,6 @@
         <element name="ScheduleEvent" positionX="0" positionY="0" width="0" height="0"/>
         <element name="ScheduleEventUnit" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>
