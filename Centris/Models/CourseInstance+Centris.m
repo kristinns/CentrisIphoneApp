@@ -119,7 +119,7 @@
 
 - (float)weightedAverageGrade
 {
-    return [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
+    return [self totalPercentagesFromAssignments] == 0 ? 0.0 : [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
 }
 
 @end
