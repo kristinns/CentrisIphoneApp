@@ -11,8 +11,9 @@
 @interface CourseInstance (Centris)
 + (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;                         // tested
 + (CourseInstance *)addCourseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;      // tested
+
 + (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
-- (NSArray *)gradedAssignments;
+- (NSArray *)gradedAssignments;                                                                                                                 // tested
 
 - (float)averageGrade;                                                                                                                          // tested
 - (float)totalPercentagesFromAssignments;                                                                                                       // tested

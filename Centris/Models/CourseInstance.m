@@ -9,6 +9,7 @@
 #import "CourseInstance.h"
 #import "Assignment.h"
 #import "ScheduleEvent.h"
+#import "Semester.h"
 #import "User.h"
 
 
@@ -26,5 +27,6 @@
 @dynamic hasAssignments;
 @dynamic hasScheduleEvents;
 @dynamic hasUser;
+@dynamic isInSemester;
 
 @end

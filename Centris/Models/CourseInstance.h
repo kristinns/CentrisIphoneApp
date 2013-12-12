@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Assignment, ScheduleEvent, User;
+@class Assignment, ScheduleEvent, Semester, User;
 
 @interface CourseInstance : NSManagedObject
 
@@ -25,6 +25,7 @@
 @property (nonatomic, retain) NSSet *hasAssignments;
 @property (nonatomic, retain) NSSet *hasScheduleEvents;
 @property (nonatomic, retain) User *hasUser;
+@property (nonatomic, retain) Semester *isInSemester;
 @end
 
 @interface CourseInstance (CoreDataGeneratedAccessors)

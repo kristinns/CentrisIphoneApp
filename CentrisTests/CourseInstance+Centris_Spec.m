@@ -105,7 +105,7 @@ describe(@"CourseInstance Category", ^{
     
     it(@"should be able to get weighted average for graded assignments in a course", ^{
         NSNumber *weightedAvg = [NSNumber numberWithFloat:[courseInstance weightedAverageGrade]];
-        [[theValue([weightedAvg isEqual:@1.475f]) should] beTrue];
+        [[theValue([weightedAvg isEqual:[NSNumber numberWithFloat:1.475f]]) should] beTrue];
     });
     
     it(@"should be able to get assignments that have been graded in a courseinstance", ^{
