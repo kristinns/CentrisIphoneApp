@@ -46,6 +46,7 @@ describe(@"Semester Category", ^{
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
         courseInstance.isInSemester = semester;
+        courseInstance.ects = [NSNumber numberWithInteger:6];
         
         CourseInstance *courseInstance2 = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance2.id = [NSNumber numberWithInteger:22364];
@@ -53,6 +54,7 @@ describe(@"Semester Category", ^{
         courseInstance2.name = @"Inngangur að tölvunarfræði";
         courseInstance2.semester = @"20133";
         courseInstance2.isInSemester = semester;
+        courseInstance2.ects = [NSNumber numberWithInteger:6];
         
         // Set up dummy assignments
         Assignment *assignment1 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
@@ -120,6 +122,11 @@ describe(@"Semester Category", ^{
         float checkProgress = [semester progressForDate:[NSDate convertToDate:@"2013-10-01T12:00:00" withFormat:nil]];
         NSString *stringCompare = [NSString stringWithFormat:@"%.3f", checkProgress];
         [[theValue([stringCompare isEqualToString:@"0.361"]) should] beTrue];
+    });
+    
+    it(@"should be able to retrieve total ects for a semseter", ^{
+        NSInteger checkECTS = [semester totalEcts];
+        [[theValue(checkECTS) should] equal:theValue(12)];
     });
 });
 SPEC_END

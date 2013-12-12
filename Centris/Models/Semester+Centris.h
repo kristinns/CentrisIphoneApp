@@ -12,7 +12,7 @@
 + (NSArray *)semestersInManagedObjectContext:(NSManagedObjectContext *)context; // tested
 - (float)averageGrade;
 - (float)progressForDate:(NSDate *)date;
-//- (NSInteger)totalEcts;
+- (NSInteger)totalEcts;
 //- (NSInteger)finishedEcts;
 //- (NSInteger)weeksLeft;
 //- (NSArray *)bookList;

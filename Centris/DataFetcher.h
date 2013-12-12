@@ -44,6 +44,7 @@
 #define COURSE_CONTENT                      @"Content"
 #define COURSE_ASSESSMENT_METHODS           @"AssessmentMethods"
 #define COURSE_LEARNING_OUTCOME             @"LearningOutcome"
+#define COURSE_ECTS                         @"ECTS"
 // User Key Constants
 #define CENTRIS_USER_ID                     @"Person.ID"
 #define CENTRIS_USER_MOBILE_PHONE           @"Person.MobilePhone"

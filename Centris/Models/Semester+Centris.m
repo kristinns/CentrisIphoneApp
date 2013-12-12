@@ -59,4 +59,35 @@
     return totalTime == 0 ? 0.0 : [date timeIntervalSinceDate:semesterStarts] / totalTime;
 }
 
+- (NSInteger)totalEcts
+{
+    NSInteger totalECTS = 0;
+    for (CourseInstance *courseInstance in self.hasCourseInstances) {
+        totalECTS = totalECTS + [courseInstance.ects integerValue];
+    }
+    return totalECTS;
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
