@@ -15,15 +15,16 @@
 
 @implementation CourseInstance
 
+@dynamic assessmentMethods;
+@dynamic content;
 @dynamic courseID;
 @dynamic id;
+@dynamic learningOutcome;
 @dynamic name;
 @dynamic semester;
 @dynamic syllabus;
-@dynamic content;
-@dynamic learningOutcome;
 @dynamic teachingMethods;
-@dynamic assessmentMethods;
+@dynamic ects;
 @dynamic hasAssignments;
 @dynamic hasScheduleEvents;
 @dynamic hasUser;
