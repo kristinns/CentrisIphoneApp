@@ -106,6 +106,11 @@ describe(@"Semester Category", ^{
         scheduleEvent2.hasCourseInstance = courseInstance2;
     });
     
+    it(@"should be able to retrieve single semester in core data", ^{
+        Semester *semester = [Semester semesterWithID:@"20133" inManagedObjectContext:context];
+        [[theValue(semester) shouldNot] beNil];
+    });
+    
     it(@"should be able to retrieve all semesters in core data", ^{
         NSArray *checkSemesters = [Semester semestersInManagedObjectContext:context];
         [[theValue([checkSemesters count]) should] equal:theValue(2)];
