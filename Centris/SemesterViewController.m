@@ -12,14 +12,19 @@
 #import "CourseInstanceTableViewCell.h"
 #import "CourseInstanceViewController.h"
 #import "PNChart.h"
+#import "Semester+Centris.h"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
 @property (nonatomic, weak) IBOutlet UITableView *courseTableView;
-@property (nonatomic, strong) NSArray *courseInstances;
 @property (nonatomic, strong) IBOutlet PNChart *circleChartView;
+@property (weak, nonatomic) IBOutlet UIProgressView *semesterProgressView;
 
+@property (nonatomic, strong) NSArray *courseInstances;
+@property (nonatomic, strong) Semester *semester;
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *courseTableViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *semesterGraphViewHeightConstraint;
 @end
 
 @implementation SemesterViewController
@@ -29,6 +34,13 @@
     if (_courseInstances == nil)
         _courseInstances = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
     return _courseInstances;
+}
+
+- (Semester *)semester
+{
+    if (_semester == nil)
+        _semester = [[Semester semestersInManagedObjectContext:[AppFactory managedObjectContext]] lastObject];
+    return _semester;
 }
 
 - (void)viewDidLoad
@@ -48,6 +60,9 @@
     self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6] CGColor];
     self.circleChartView.circleChart.circleBG.fillColor = nil;
     [self.circleChartView.circleChart strokeChart];
+    
+    [self.semesterProgressView setProgress:0.9 animated:YES];
+    [UIProgressView setAnimationDuration:1.0];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

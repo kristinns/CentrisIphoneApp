@@ -40,6 +40,17 @@
 		192F979317D76B04007E2694 /* User+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 192F979217D76B04007E2694 /* User+Centris.m */; };
 		193140A61858D11A00473922 /* CourseInstanceTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */; };
 		193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140A91858FC1D00473922 /* CourseInstanceViewController.m */; };
+		193140C1185A250200473922 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 193140AC185A250200473922 /* LICENSE */; };
+		193140C2185A250200473922 /* PNBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140B0185A250200473922 /* PNBar.m */; };
+		193140C3185A250200473922 /* PNBarChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140B2185A250200473922 /* PNBarChart.m */; };
+		193140C4185A250200473922 /* PNChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140B4185A250200473922 /* PNChart.m */; };
+		193140C5185A250200473922 /* PNChartLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140B6185A250200473922 /* PNChartLabel.m */; };
+		193140C6185A250200473922 /* PNCircleChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140B8185A250200473922 /* PNCircleChart.m */; };
+		193140C7185A250200473922 /* PNColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140BA185A250200473922 /* PNColor.m */; };
+		193140C8185A250200473922 /* PNLineChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140BC185A250200473922 /* PNLineChart.m */; };
+		193140C9185A250200473922 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140BF185A250200473922 /* UICountingLabel.m */; };
+		193140CA185A250200473922 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 193140C0185A250200473922 /* README.md */; };
+		193140CC185A559F00473922 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193140CB185A559F00473922 /* EventKit.framework */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -144,6 +155,25 @@
 		193140A51858D11A00473922 /* CourseInstanceTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstanceTableViewCell.m; sourceTree = "<group>"; };
 		193140A81858FC1D00473922 /* CourseInstanceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseInstanceViewController.h; sourceTree = "<group>"; };
 		193140A91858FC1D00473922 /* CourseInstanceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseInstanceViewController.m; sourceTree = "<group>"; };
+		193140AC185A250200473922 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		193140AF185A250200473922 /* PNBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBar.h; sourceTree = "<group>"; };
+		193140B0185A250200473922 /* PNBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBar.m; sourceTree = "<group>"; };
+		193140B1185A250200473922 /* PNBarChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNBarChart.h; sourceTree = "<group>"; };
+		193140B2185A250200473922 /* PNBarChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNBarChart.m; sourceTree = "<group>"; };
+		193140B3185A250200473922 /* PNChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChart.h; sourceTree = "<group>"; };
+		193140B4185A250200473922 /* PNChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChart.m; sourceTree = "<group>"; };
+		193140B5185A250200473922 /* PNChartLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNChartLabel.h; sourceTree = "<group>"; };
+		193140B6185A250200473922 /* PNChartLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNChartLabel.m; sourceTree = "<group>"; };
+		193140B7185A250200473922 /* PNCircleChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNCircleChart.h; sourceTree = "<group>"; };
+		193140B8185A250200473922 /* PNCircleChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNCircleChart.m; sourceTree = "<group>"; };
+		193140B9185A250200473922 /* PNColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNColor.h; sourceTree = "<group>"; };
+		193140BA185A250200473922 /* PNColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNColor.m; sourceTree = "<group>"; };
+		193140BB185A250200473922 /* PNLineChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PNLineChart.h; sourceTree = "<group>"; };
+		193140BC185A250200473922 /* PNLineChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PNLineChart.m; sourceTree = "<group>"; };
+		193140BE185A250200473922 /* UICountingLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICountingLabel.h; sourceTree = "<group>"; };
+		193140BF185A250200473922 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
+		193140C0185A250200473922 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		193140CB185A559F00473922 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -238,6 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193140CC185A559F00473922 /* EventKit.framework in Frameworks */,
 				19CD49CF1842327A008094D8 /* libTestFlight.a in Frameworks */,
 				19BD8F46183D726100F34A40 /* libz.dylib in Frameworks */,
 				969C94DF18082A3700356C7C /* Security.framework in Frameworks */,
@@ -297,6 +328,56 @@
 			name = Course;
 			sourceTree = "<group>";
 		};
+		193140AB185A250200473922 /* PNChart */ = {
+			isa = PBXGroup;
+			children = (
+				193140AC185A250200473922 /* LICENSE */,
+				193140AD185A250200473922 /* PNChartDemo */,
+				193140C0185A250200473922 /* README.md */,
+			);
+			name = PNChart;
+			path = Centris/Libraries/PNChart;
+			sourceTree = "<group>";
+		};
+		193140AD185A250200473922 /* PNChartDemo */ = {
+			isa = PBXGroup;
+			children = (
+				193140AE185A250200473922 /* PNChart */,
+			);
+			path = PNChartDemo;
+			sourceTree = "<group>";
+		};
+		193140AE185A250200473922 /* PNChart */ = {
+			isa = PBXGroup;
+			children = (
+				193140AF185A250200473922 /* PNBar.h */,
+				193140B0185A250200473922 /* PNBar.m */,
+				193140B1185A250200473922 /* PNBarChart.h */,
+				193140B2185A250200473922 /* PNBarChart.m */,
+				193140B3185A250200473922 /* PNChart.h */,
+				193140B4185A250200473922 /* PNChart.m */,
+				193140B5185A250200473922 /* PNChartLabel.h */,
+				193140B6185A250200473922 /* PNChartLabel.m */,
+				193140B7185A250200473922 /* PNCircleChart.h */,
+				193140B8185A250200473922 /* PNCircleChart.m */,
+				193140B9185A250200473922 /* PNColor.h */,
+				193140BA185A250200473922 /* PNColor.m */,
+				193140BB185A250200473922 /* PNLineChart.h */,
+				193140BC185A250200473922 /* PNLineChart.m */,
+				193140BD185A250200473922 /* ThirdPart */,
+			);
+			path = PNChart;
+			sourceTree = "<group>";
+		};
+		193140BD185A250200473922 /* ThirdPart */ = {
+			isa = PBXGroup;
+			children = (
+				193140BE185A250200473922 /* UICountingLabel.h */,
+				193140BF185A250200473922 /* UICountingLabel.m */,
+			);
+			path = ThirdPart;
+			sourceTree = "<group>";
+		};
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +426,7 @@
 		194842C01799B0AB0016A5C0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				193140CB185A559F00473922 /* EventKit.framework */,
 				19BD8F45183D726100F34A40 /* libz.dylib */,
 				969C94DE18082A3700356C7C /* Security.framework */,
 				9621008817D7795400D60C06 /* CoreData.framework */,
@@ -519,6 +601,7 @@
 		966A499517E9B4CB009C342B /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				193140AB185A250200473922 /* PNChart */,
 				19BD8F3B183D71E300F34A40 /* TestFlightSDK2 */,
 			);
 			name = Libraries;
@@ -699,10 +782,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				193140CA185A250200473922 /* README.md in Resources */,
 				194842DA1799B0AB0016A5C0 /* Images.xcassets in Resources */,
 				966B2D1017FC39F000F3D170 /* Configuration.plist in Resources */,
 				194842CC1799B0AB0016A5C0 /* InfoPlist.strings in Resources */,
 				198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */,
+				193140C1185A250200473922 /* LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -793,6 +878,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
+				193140C4185A250200473922 /* PNChart.m in Sources */,
 				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
 				1989B655183A84B80005E44F /* AssignmentDetailViewFileCell.m in Sources */,
 				1989B65B183CC4510005E44F /* Assignment.m in Sources */,
@@ -802,14 +888,19 @@
 				199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */,
 				19BAC849184553D400003D05 /* LunchCardTableViewCell.m in Sources */,
 				9647A94817E9E51700BB2A96 /* ScheduleEvent+Centris.m in Sources */,
+				193140C9185A250200473922 /* UICountingLabel.m in Sources */,
 				193140A61858D11A00473922 /* CourseInstanceTableViewCell.m in Sources */,
 				18A630E9183A8DBC00CA29FE /* AssignmentFile.m in Sources */,
 				197631B41857949000D71356 /* SemesterViewController.m in Sources */,
 				18120ED71859CCA8001D802F /* Semester.m in Sources */,
 				1959490318350129009686F5 /* AssignmentDetailViewController.m in Sources */,
+				193140C8185A250200473922 /* PNLineChart.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
+				193140C7185A250200473922 /* PNColor.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */,
+				193140C6185A250200473922 /* PNCircleChart.m in Sources */,
+				18120EE21859FD17001D802F /* CourseInstance.m in Sources */,
 				193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */,
 				18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
@@ -819,16 +910,19 @@
 				199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */,
 				18A630EF183A9E7100CA29FE /* AssignmentFile+Centris.m in Sources */,
 				194842D21799B0AB0016A5C0 /* AppDelegate.m in Sources */,
+				193140C3185A250200473922 /* PNBarChart.m in Sources */,
 				19CD49D3184240D2008094D8 /* ScheduleCardTableViewCell.m in Sources */,
 				192F979317D76B04007E2694 /* User+Centris.m in Sources */,
 				194F9AB7180806790099A3E6 /* NSDate+Helper.m in Sources */,
 				190CA0EC1816C7FB00BC3046 /* AssignmentTableViewCell.m in Sources */,
 				19F78A5818269F880085C322 /* CentrisParserDataFetcher.m in Sources */,
+				193140C5185A250200473922 /* PNChartLabel.m in Sources */,
 				19BAC84C1845712E00003D05 /* EventCardTableViewCell.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
 				18E0BFFF1845618A009E1329 /* Menu.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
+				193140C2185A250200473922 /* PNBar.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,

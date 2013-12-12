@@ -71,12 +71,13 @@
 - (NSArray *)gradedAssignments
 {
     NSMutableArray *gradedAssignments = [[NSMutableArray alloc] init];
+    NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
     for (Assignment *assignment in self.hasAssignments) {
         if (assignment.grade != nil) {
             [gradedAssignments addObject:assignment];
         }
     }
-    return gradedAssignments;
+    return [gradedAssignments sortedArrayUsingDescriptors:@[descriptor]];
 }
 
 - (float)averageGrade
@@ -84,14 +85,17 @@
     float average = 0.0;
     // get instance
     NSSet *assignments = self.hasAssignments;
-    NSInteger assignmentWithGradeCount = 0;
+    
+    // prevent zero devision
+    if (![assignments count])
+        return 0.0;
+    
     for (Assignment *assignment in assignments) {
         if (assignment.grade != nil) {
             average = average + [assignment.grade floatValue];
-            assignmentWithGradeCount++;
         }
     }
-    return average / assignmentWithGradeCount;
+    return average / ([assignments count]);
 }
 
 - (float)totalPercentagesFromAssignments

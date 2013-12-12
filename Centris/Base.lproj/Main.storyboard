@@ -1745,6 +1745,9 @@
                         <outlet property="circleChartView" destination="c3L-H6-iXC" id="gkY-tk-zGy"/>
                         <outlet property="courseTableView" destination="vzj-q0-mlp" id="xGr-gV-mma"/>
                         <outlet property="courseTableViewHeightConstraint" destination="9Rg-a4-JRB" id="bxc-zk-64p"/>
+                        <outlet property="semesterGraphViewHeightConstraint" destination="XAG-DO-Gvi" id="hmi-9K-yAX"/>
+                        <outlet property="semesterProgressView" destination="Ufc-CL-cgv" id="d2t-LV-P2w"/>
+                        <outlet property="viewControllerScrollView" destination="I1R-oe-hAY" id="nZO-gL-Y4x"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bLU-m1-pzT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1875,7 +1878,7 @@
                                         <color key="textColor" red="0.25490196079999999" green="0.25490196079999999" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="P17-Lv-eJp">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="P17-Lv-eJp">
                                         <rect key="frame" x="0.0" y="261" width="320" height="167"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1996,7 +1999,7 @@
                                     <constraint firstItem="i2E-tC-dCE" firstAttribute="top" secondItem="bKl-2e-jH2" secondAttribute="top" constant="100" id="qjc-UE-3FO"/>
                                     <constraint firstItem="OGC-tJ-dsm" firstAttribute="leading" secondItem="1TD-m2-lw1" secondAttribute="leading" id="uF0-cW-K0w"/>
                                     <constraint firstItem="9Jg-ev-yWL" firstAttribute="baseline" secondItem="Hps-39-t6p" secondAttribute="baseline" id="ulZ-5K-dge"/>
-                                    <constraint firstAttribute="bottom" secondItem="P17-Lv-eJp" secondAttribute="bottom" constant="75" id="xJY-uD-uYi"/>
+                                    <constraint firstAttribute="bottom" secondItem="P17-Lv-eJp" secondAttribute="bottom" constant="30" id="xJY-uD-uYi"/>
                                     <constraint firstItem="Bmp-bd-Lvb" firstAttribute="leading" secondItem="9Jg-ev-yWL" secondAttribute="leading" id="zdJ-mt-c2C"/>
                                 </constraints>
                             </scrollView>
@@ -2011,6 +2014,8 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" id="ohX-ql-fJW"/>
                     <connections>
+                        <outlet property="averageWeightedCourseGradeLabel" destination="QOX-cR-uJa" id="9lt-2I-Wwq"/>
+                        <outlet property="averageWeightedCourseGradePercentageLabel" destination="XFE-bI-vcT" id="W6l-0f-U5I"/>
                         <outlet property="chartContainerView" destination="kUC-Dj-K0E" id="koP-JJ-wgO"/>
                         <outlet property="circleChartView" destination="9xt-J7-YYL" id="76d-Wh-BW2"/>
                         <outlet property="materialTableView" destination="P17-Lv-eJp" id="ylE-lg-ifk"/>
