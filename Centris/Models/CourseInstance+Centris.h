@@ -16,7 +16,8 @@
 - (NSArray *)gradedAssignments;                                                                                                                 // tested
 
 - (float)averageGrade;                                                                                                                          // tested
+- (float)weightedAverageGrade;
 - (float)totalPercentagesFromAssignments;                                                                                                       // tested
-- (float)weightedAverageGrade;                                                                                                                  // tested
+- (float)aquiredGrade;                                                                                                                          // tested
 @end
 

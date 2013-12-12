@@ -6,6 +6,8 @@
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
+#define fequal(a,b) (fabs((a) - (b)) < FLT_EPSILON)
+
 #import "CourseInstance+Centris.h"
 #import "Assignment+Centris.h"
 #import "NSDate+Helper.h"
@@ -95,17 +97,25 @@ describe(@"CourseInstance Category", ^{
     
     it(@"should be able to get average grade for graded assignments in a course", ^{
         float avg = [courseInstance averageGrade];
-        [[theValue(avg) should] equal:theValue(9.25)];
+        [[theValue(fequal(avg, 9.25f)) should] beTrue];
     });
     
     it(@"should be able to get total percentages for graded assignments in a course", ^{
         float totalPercentages = [courseInstance totalPercentagesFromAssignments];
-        [[theValue(totalPercentages) should] equal:theValue(15.5)];
+        NSString *compareString = [NSString stringWithFormat:@"%.1f", totalPercentages];
+        [[theValue([compareString isEqualToString:@"15.5"]) should] beTrue];
     });
     
-    it(@"should be able to get weighted average for graded assignments in a course", ^{
-        NSNumber *weightedAvg = [NSNumber numberWithFloat:[courseInstance weightedAverageGrade]];
-        [[theValue([weightedAvg isEqual:[NSNumber numberWithFloat:1.475f]]) should] beTrue];
+    it(@"should be able to get aquired grade for graded assignments in a course", ^{
+        float aquiredGrade = [courseInstance aquiredGrade];
+        NSString *compareString = [NSString stringWithFormat:@"%.3f", aquiredGrade];
+        [[theValue([compareString isEqualToString:@"1.475"]) should] beTrue];
+    });
+    
+    it(@"should be able to get weighted average grade for graded assignments in a course", ^{
+        float weightedAverageGrade = [courseInstance weightedAverageGrade];
+        NSString *compareString = [NSString stringWithFormat:@"%.2f", weightedAverageGrade];
+        [[theValue([compareString isEqualToString:@"9.52"]) should] beTrue];
     });
     
     it(@"should be able to get assignments that have been graded in a courseinstance", ^{
