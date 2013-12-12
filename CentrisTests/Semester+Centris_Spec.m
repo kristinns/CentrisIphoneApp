@@ -104,7 +104,6 @@ describe(@"Semester Category", ^{
         scheduleEvent2.roomName = @"M101";
         scheduleEvent2.typeOfClass = @"Fyrirlestur";
         scheduleEvent2.hasCourseInstance = courseInstance2;
-        
     });
     
     it(@"should be able to retrieve all semesters in core data", ^{
@@ -127,6 +126,11 @@ describe(@"Semester Category", ^{
     it(@"should be able to retrieve total ects for a semseter", ^{
         NSInteger checkECTS = [semester totalEcts];
         [[theValue(checkECTS) should] equal:theValue(12)];
+    });
+    
+    it(@"should be able to retrieve how many weeks are left of the semester", ^{
+        NSInteger checkWeeksLeft = [semester weeksLeft:[NSDate convertToDate:@"2013-11-26T12:00:00" withFormat:nil]];
+        [[theValue(checkWeeksLeft) should] equal:theValue(3)];
     });
 });
 SPEC_END

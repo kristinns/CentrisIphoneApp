@@ -40,6 +40,31 @@
 
 - (float)progressForDate:(NSDate *)date
 {
+    NSDictionary *semesterRange = [self semesterRange];
+    NSInteger totalTime = [semesterRange[@"ends"] timeIntervalSinceDate:semesterRange[@"starts"]];
+    return totalTime == 0 ? 0.0 : [date timeIntervalSinceDate:semesterRange[@"starts"]] / totalTime;
+}
+
+- (NSInteger)totalEcts
+{
+    NSInteger totalECTS = 0;
+    for (CourseInstance *courseInstance in self.hasCourseInstances) {
+        totalECTS = totalECTS + [courseInstance.ects integerValue];
+    }
+    return totalECTS;
+}
+
+- (NSInteger)weeksLeft:(NSDate *)date
+{
+    NSDictionary *semesterRange = [self semesterRange];
+    NSInteger totalTime = [semesterRange[@"ends"] timeIntervalSinceDate:date];
+    return totalTime / (60 * 60 * 24 * 7);
+}
+
+#pragma mark - Helpers
+- (NSDictionary *)semesterRange
+{
+    NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
     NSMutableArray *events = [[NSMutableArray alloc] init];
     NSSet *courseInstances = self.hasCourseInstances;
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"starts" ascending:YES]; // smallest date first
@@ -55,17 +80,9 @@
     NSArray *sortedEvents = [events sortedArrayUsingDescriptors:@[sortDescriptor]];
     NSDate *semesterStarts = ((ScheduleEvent *)[sortedEvents firstObject]).starts;
     NSDate *semesterEnds = ((ScheduleEvent *)[sortedEvents lastObject]).ends;
-    NSInteger totalTime = [semesterEnds timeIntervalSinceDate:semesterStarts];
-    return totalTime == 0 ? 0.0 : [date timeIntervalSinceDate:semesterStarts] / totalTime;
-}
-
-- (NSInteger)totalEcts
-{
-    NSInteger totalECTS = 0;
-    for (CourseInstance *courseInstance in self.hasCourseInstances) {
-        totalECTS = totalECTS + [courseInstance.ects integerValue];
-    }
-    return totalECTS;
+    [range setObject:semesterStarts forKey:@"starts"];
+    [range setObject:semesterEnds forKey:@"ends"];
+    return range;
 }
 
 @end
