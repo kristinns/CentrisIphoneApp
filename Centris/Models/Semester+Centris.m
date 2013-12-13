@@ -86,7 +86,6 @@
     return totalTime / (60 * 60 * 24 * 7);
 }
 
-#pragma mark - Helpers
 - (NSDictionary *)semesterRange
 {
     NSMutableDictionary *range = [[NSMutableDictionary alloc] init];
