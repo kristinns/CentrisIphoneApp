@@ -48,17 +48,19 @@
         courseInstance.id = centrisInfo[COURSE_INSTANCE_ID];
         courseInstance.courseID = centrisInfo[COURSE_ID];
         courseInstance.name = centrisInfo[COURSE_NAME];
-        courseInstance.semester = centrisInfo[COURSE_SEMESTER];
+        courseInstance.semester = [centrisInfo[COURSE_SEMESTER] stringValue];
         courseInstance.syllabus = centrisInfo[COURSE_SYLLABUS];
         courseInstance.teachingMethods = centrisInfo[COURSE_TEACHING_METHODS];
         courseInstance.content = centrisInfo[COURSE_CONTENT];
         courseInstance.assessmentMethods = centrisInfo[COURSE_ASSESSMENT_METHODS];
         courseInstance.learningOutcome = centrisInfo[COURSE_LEARNING_OUTCOME];
-        courseInstance.ects = centrisInfo[COURSE_ECTS];
-        Semester *semester = [Semester semesterWithID:centrisInfo[COURSE_SEMESTER] inManagedObjectContext:context];
+        courseInstance.ects = [NSNumber numberWithInt:[centrisInfo[COURSE_ECTS] integerValue]];
+        courseInstance.finalGrade = centrisInfo[COURSE_FINAL_GRADE] != (id)[NSNull null] ? [NSNumber numberWithFloat:[centrisInfo[COURSE_FINAL_GRADE] floatValue]]: nil;
+        courseInstance.status = centrisInfo[COURSE_STATUS];
+        Semester *semester = [Semester semesterWithID:[centrisInfo[COURSE_SEMESTER] stringValue] inManagedObjectContext:context];
         if (semester == nil) {
             semester = [NSEntityDescription insertNewObjectForEntityForName:@"Semester" inManagedObjectContext:context];
-            semester.id_semester = centrisInfo[COURSE_SEMESTER];
+            semester.id_semester = [centrisInfo[COURSE_SEMESTER] stringValue];
         }
         courseInstance.isInSemester = semester;
     } else {

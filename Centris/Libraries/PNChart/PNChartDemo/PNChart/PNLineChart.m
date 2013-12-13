@@ -133,6 +133,11 @@
             
             [progressline stroke];
         }
+        if (index == [_yValues count]-1) {
+            CGPoint nextPoint = CGPointMake(index * xPosition + chartMargin + xPosition, chartCavanHeight - grade * chartCavanHeight+10);
+            [progressline addLineToPoint:nextPoint];
+            [progressline moveToPoint:nextPoint];
+        }
         
         index += 1;
     }

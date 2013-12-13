@@ -13,7 +13,6 @@
 		18120EDD1859F7A4001D802F /* Semester+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120EDC1859F7A4001D802F /* Semester+Centris.m */; };
 		18120EDF1859FC08001D802F /* Semester+Centris_Spec.m in Sources */ = {isa = PBXBuildFile; fileRef = 18120EDE1859FC08001D802F /* Semester+Centris_Spec.m */; };
 		18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 18372E72181C2DA8005CEC18 /* Assignment+Centris.m */; };
-		1876E6CB185A6613002CEC77 /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876E6CA185A6613002CEC77 /* CourseInstance.m */; };
 		18777D6B1843B58B00DAB715 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842E01799B0AB0016A5C0 /* XCTest.framework */; };
 		18777D6C1843B58B00DAB715 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		18777D6D1843B58B00DAB715 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -51,6 +50,7 @@
 		193140C9185A250200473922 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140BF185A250200473922 /* UICountingLabel.m */; };
 		193140CA185A250200473922 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 193140C0185A250200473922 /* README.md */; };
 		193140CC185A559F00473922 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193140CB185A559F00473922 /* EventKit.framework */; };
+		193140D2185ABE2300473922 /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140D1185ABE2300473922 /* CourseInstance.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -112,8 +112,6 @@
 		18120EDE1859FC08001D802F /* Semester+Centris_Spec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Semester+Centris_Spec.m"; sourceTree = "<group>"; };
 		18372E71181C2DA8005CEC18 /* Assignment+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Assignment+Centris.h"; path = "Models/Assignment+Centris.h"; sourceTree = "<group>"; };
 		18372E72181C2DA8005CEC18 /* Assignment+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Assignment+Centris.m"; path = "Models/Assignment+Centris.m"; sourceTree = "<group>"; };
-		1876E6C9185A6613002CEC77 /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
-		1876E6CA185A6613002CEC77 /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		18777D6A1843B58B00DAB715 /* CentrisTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CentrisTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		18777D701843B58B00DAB715 /* CentrisTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CentrisTests-Info.plist"; sourceTree = "<group>"; };
 		18777D721843B58B00DAB715 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -174,6 +172,8 @@
 		193140BF185A250200473922 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		193140C0185A250200473922 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		193140CB185A559F00473922 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		193140D0185ABE2300473922 /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
+		193140D1185ABE2300473922 /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -381,8 +381,8 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1876E6C9185A6613002CEC77 /* CourseInstance.h */,
-				1876E6CA185A6613002CEC77 /* CourseInstance.m */,
+				193140D0185ABE2300473922 /* CourseInstance.h */,
+				193140D1185ABE2300473922 /* CourseInstance.m */,
 				1989B659183CC4510005E44F /* Assignment.h */,
 				1989B65A183CC4510005E44F /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
@@ -880,6 +880,7 @@
 				966B2D1317FC498C00F3D170 /* AppFactory.m in Sources */,
 				193140C4185A250200473922 /* PNChart.m in Sources */,
 				969C94DD180807E100356C7C /* LoginViewController.m in Sources */,
+				193140D2185ABE2300473922 /* CourseInstance.m in Sources */,
 				1989B655183A84B80005E44F /* AssignmentDetailViewFileCell.m in Sources */,
 				1989B65B183CC4510005E44F /* Assignment.m in Sources */,
 				18856AD618206F33009862CA /* CDDataFetcher.m in Sources */,
@@ -900,7 +901,6 @@
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
 				19BAC8461844CA0100003D05 /* AssignmentCardTableViewCell.m in Sources */,
 				193140C6185A250200473922 /* PNCircleChart.m in Sources */,
-				18120EE21859FD17001D802F /* CourseInstance.m in Sources */,
 				193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */,
 				18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,

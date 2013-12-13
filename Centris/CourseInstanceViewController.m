@@ -10,22 +10,39 @@
 #import "PNChart.h"
 #import "CourseInstance+Centris.h"
 #import "Assignment.h"
-#import <EventKit/EventKit.h>
 
 @interface CourseInstanceViewController () <UITableViewDataSource, UITableViewDelegate>
-@property (weak, nonatomic) IBOutlet UITableView *materialTableView;
-@property (weak, nonatomic) IBOutlet PNChart *circleChartView;
-@property (weak, nonatomic) IBOutlet UIView *chartContainerView;
-@property (weak, nonatomic) IBOutlet UILabel *averageWeightedCourseGradeLabel;
-@property (weak, nonatomic) IBOutlet UILabel *averageWeightedCourseGradePercentageLabel;
-
-@property (strong, nonatomic) NSArray *materialTable;
-
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *materialTableViewHeightConstraint;
-
+// Outlets
+@property (weak, nonatomic) IBOutlet UIView *noGradeInfoView;
+@property (nonatomic, weak) IBOutlet UITableView *materialTableView;
+@property (nonatomic, weak) IBOutlet PNChart *circleChartView;
+@property (nonatomic, weak) IBOutlet UIView *chartContainerView;
+@property (nonatomic, weak) IBOutlet UILabel *averageWeightedCourseGradeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *averageWeightedCourseGradePercentageLabel;
+@property (nonatomic, weak) IBOutlet UILabel *acquiredGradeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *averageGradeLabel;
+@property (nonatomic, weak) IBOutlet UILabel *averageGradeFromOtherLabel;
+@property (nonatomic, weak) IBOutlet UILabel *standardDeviationLabel;
+// Constraints
+@property (nonatomic, weak) IBOutlet NSLayoutConstraint *materialTableViewHeightConstraint;
+// Other properties
+@property (nonatomic, strong) NSArray *materialTable;
 @end
 
 @implementation CourseInstanceViewController
+
+#pragma Getters
+- (NSArray *)materialTable
+{
+    if (_materialTable == nil)
+        _materialTable = @[
+                           @{ @"title" : @"Kennsluáætlun", @"content" : @"..." },
+                           @{ @"title" : @"Lýsing", @"content" : @"..." },
+                           @{ @"title" : @"Námsmat", @"content" : @"..." },
+                           @{ @"title" : @"Hæfniviðmið", @"content" : @"..." }
+                           ];
+    return _materialTable;
+}
 
 - (void)viewDidLoad
 {
@@ -35,25 +52,24 @@
 
 - (void)setup
 {
+    // Set tableView delegate and datasource
     self.materialTableView.delegate = self;
     self.materialTableView.dataSource = self;
     
     float totalPercentagesFromAssignments = [self.courseInstance totalPercentagesFromAssignments];
-    
-    self.circleChartView.type = PNCircleType;
-    self.circleChartView.total = @100;
-    self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignments];
-    self.circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
-    [self.circleChartView strokeChart];
-    self.circleChartView.circleChart.lineWidth = @5;
-    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
-    self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
-    [self.circleChartView.circleChart strokeChart];
-    
-    NSArray *gradedAssignments = [self.courseInstance gradedAssignments];
     self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance weightedAverageGrade]];
     self.averageWeightedCourseGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.1f%%", totalPercentagesFromAssignments];
+    self.acquiredGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance aquiredGrade]];
+    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance averageGrade]];
+    self.averageGradeFromOtherLabel.text = @"...";
+    self.standardDeviationLabel.text = @"...";
     
+    [self setupCircleChart];
+    // Configure CircleChart
+    self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignments];
+    [self.circleChartView strokeChart];
+    
+    NSArray *gradedAssignments = [self.courseInstance gradedAssignments];
     if ([gradedAssignments count] != 0) {
         NSMutableArray *yValues = [[NSMutableArray alloc] init];
         NSMutableArray *yLineValues = [[NSMutableArray alloc] init];
@@ -89,18 +105,20 @@
         [barChart strokeChart];
         [self.chartContainerView addSubview:barChart];
         
-        [EKAlarm alarmWithRelativeOffset:5];
-        
-        // LineChart
-        PNChart *lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
-        lineChart.type = PNLineType;
-        lineChart.backgroundColor = [UIColor clearColor];
-        [lineChart setStrokeColor:[UIColor whiteColor]];
-        [lineChart setXLabels:xValues];
-        [lineChart setYValues:yLineValues];
-        [lineChart strokeChart];
-        [self.chartContainerView addSubview:lineChart];
-    }
+        if ([gradedAssignments count] > 1) {
+            // LineChart
+            PNChart *lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
+            lineChart.type = PNLineType;
+            lineChart.backgroundColor = [UIColor clearColor];
+            [lineChart setStrokeColor:[UIColor whiteColor]];
+            [lineChart setXLabels:xValues];
+            [lineChart setYValues:yLineValues];
+            [lineChart strokeChart];
+            [self.chartContainerView addSubview:lineChart];
+
+        }
+    } else
+        self.noGradeInfoView.alpha = 1.0;
     
     self.title = self.courseInstance.name;
     
@@ -108,18 +126,18 @@
     self.materialTableViewHeightConstraint.constant = self.materialTableView.contentSize.height;
 }
 
-- (NSArray *)materialTable
+- (void)setupCircleChart
 {
-    if (_materialTable == nil)
-        _materialTable = @[
-                          @{ @"title" : @"Kennsluáætlun", @"content" : @"..." },
-                          @{ @"title" : @"Lýsing", @"content" : @"..." },
-                          @{ @"title" : @"Námsmat", @"content" : @"..." },
-                          @{ @"title" : @"Hæfniviðmið", @"content" : @"..." }
-                          ];
-    return _materialTable;
+    self.circleChartView.type = PNCircleType;
+    self.circleChartView.total = @100;
+    self.circleChartView.circleChart.lineWidth = @5;
+    self.circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
+    [self.circleChartView strokeChart];
+    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
+    self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
 }
 
+#pragma TableView delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -135,6 +153,15 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"materialTableViewCell"];
     cell.textLabel.text = [[self.materialTable objectAtIndex:indexPath.row] objectForKey:@"title"];
     return cell;
+}
+
+#pragma Segue methods
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"materialSegue"]) {
+        UIViewController *destinationController = [segue destinationViewController];
+        destinationController.title = [[self.materialTable objectAtIndex:self.materialTableView.indexPathForSelectedRow.row] objectForKey:@"title"];
+    }
 }
 
 @end

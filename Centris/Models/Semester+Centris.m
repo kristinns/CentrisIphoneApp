@@ -58,10 +58,25 @@
 - (NSInteger)totalEcts
 {
     NSInteger totalECTS = 0;
-    for (CourseInstance *courseInstance in self.hasCourseInstances) {
+    for (CourseInstance *courseInstance in [self.hasCourseInstances allObjects]) {
         totalECTS = totalECTS + [courseInstance.ects integerValue];
     }
     return totalECTS;
+}
+
+- (float)totalPercentagesFromAssignmentsInSemester
+{
+    NSSet *courseInstances = self.hasCourseInstances;
+    if (![courseInstances count])
+        return 0.0;
+    float totalPercentagesFromAssignmentsInSemester = 0.0f;
+    float counter = 0;
+    for (CourseInstance *courseInstance in courseInstances) {
+        float totalPercentagesFromAssignmentsInCourse = [courseInstance totalPercentagesFromAssignments];
+        totalPercentagesFromAssignmentsInSemester += totalPercentagesFromAssignmentsInCourse;
+        counter++;
+    }
+    return (totalPercentagesFromAssignmentsInSemester / (counter * 100.0f));
 }
 
 - (NSInteger)weeksLeft:(NSDate *)date
@@ -80,7 +95,9 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"starts" ascending:YES]; // smallest date first
     for (CourseInstance *courseInstance in courseInstances) {
         NSArray *scheduleEvents = [courseInstance.hasScheduleEvents sortedArrayUsingDescriptors:@[sortDescriptor]];
-        if ([scheduleEvents count] == 1) {
+        if (![scheduleEvents count]) {
+            continue;
+        } else if ([scheduleEvents count] == 1) {
             [events addObject:[scheduleEvents firstObject]];
         } else {
             [events addObject:[scheduleEvents firstObject]];
