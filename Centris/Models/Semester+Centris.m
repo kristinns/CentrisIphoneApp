@@ -58,7 +58,7 @@
 - (NSInteger)totalEcts
 {
     NSInteger totalECTS = 0;
-    for (CourseInstance *courseInstance in [self.hasCourseInstances allObjects]) {
+    for (CourseInstance *courseInstance in self.hasCourseInstances) {
         totalECTS = totalECTS + [courseInstance.ects integerValue];
     }
     return totalECTS;
