@@ -136,6 +136,30 @@
     return [self totalPercentagesFromAssignments] == 0 ? 0.0 : [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
 }
 
+- (BOOL)isPassed
+{
+    if ([self.status isEqualToString:@"Lokið"] || [self.status isEqualToString:@"Staðið"] ||  [self.status isEqualToString:@"Metið"])
+        return YES;
+    else
+        return NO;
+}
+
+- (BOOL)isFailed
+{
+    if ([self.status isEqualToString:@"Fallin(n)"] || [self.status isEqualToString:@"Fallinn, mætti ekki"] ||  [self.status isEqualToString:@"Ólokið"])
+        return YES;
+    else
+        return NO;
+}
+
+- (BOOL)hasResults
+{
+    if ([self.status isEqualToString:@"Skráð(ur)"])
+        return NO;
+    else
+        return YES;
+}
+
 @end
 
 

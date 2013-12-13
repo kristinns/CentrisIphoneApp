@@ -64,6 +64,16 @@
     return totalECTS;
 }
 
+- (NSInteger)finishedEcts
+{
+    NSInteger finishedEcts = 0;
+    for (CourseInstance *courseInstance in [self.hasCourseInstances allObjects]) {
+        if ([courseInstance isPassed])
+            finishedEcts = finishedEcts + [courseInstance.ects integerValue];
+    }
+    return finishedEcts;
+}
+
 - (float)totalPercentagesFromAssignmentsInSemester
 {
     NSSet *courseInstances = self.hasCourseInstances;

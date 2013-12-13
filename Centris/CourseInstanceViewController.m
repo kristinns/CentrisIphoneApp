@@ -17,6 +17,7 @@
 @property (nonatomic, weak) IBOutlet UITableView *materialTableView;
 @property (nonatomic, weak) IBOutlet PNChart *circleChartView;
 @property (nonatomic, weak) IBOutlet UIView *chartContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *averageWeightedCourseGradeDescriptionLabel;
 @property (nonatomic, weak) IBOutlet UILabel *averageWeightedCourseGradeLabel;
 @property (nonatomic, weak) IBOutlet UILabel *averageWeightedCourseGradePercentageLabel;
 @property (nonatomic, weak) IBOutlet UILabel *acquiredGradeLabel;
@@ -27,6 +28,7 @@
 @property (nonatomic, weak) IBOutlet NSLayoutConstraint *materialTableViewHeightConstraint;
 // Other properties
 @property (nonatomic, strong) NSArray *materialTable;
+@property (nonatomic, strong) PNChart *barChart;
 @end
 
 @implementation CourseInstanceViewController
@@ -55,19 +57,48 @@
     // Set tableView delegate and datasource
     self.materialTableView.delegate = self;
     self.materialTableView.dataSource = self;
+    // Set title
+    self.title = self.courseInstance.name;
     
     float totalPercentagesFromAssignments = [self.courseInstance totalPercentagesFromAssignments];
-    self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance weightedAverageGrade]];
-    self.averageWeightedCourseGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.1f%%", totalPercentagesFromAssignments];
     self.acquiredGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance aquiredGrade]];
     self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance averageGrade]];
     self.averageGradeFromOtherLabel.text = @"...";
     self.standardDeviationLabel.text = @"...";
     
     [self setupCircleChart];
-    // Configure CircleChart
-    self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignments];
+    if ([self.courseInstance hasResults]) {
+        if ([self.courseInstance isPassed]) {
+            // Then percentage of course is 100%
+            self.circleChartView.current = @100;
+            if (self.courseInstance.finalGrade != nil) {
+                self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", self.courseInstance.finalGrade.floatValue];
+                self.averageWeightedCourseGradeDescriptionLabel.text = @"LOKAEINKUNN";
+            } else {
+                self.averageWeightedCourseGradeLabel.text = @"S";
+                self.averageWeightedCourseGradeDescriptionLabel.text = @"STAÐIÐ";
+            }
+            
+            
+        } else {
+            if ([self.courseInstance isFailed])
+                self.averageWeightedCourseGradeLabel.text = @"F";
+            else // Display nothing
+                self.averageWeightedCourseGradeLabel.text = @"";
+            // Display status of course
+            self.averageWeightedCourseGradeDescriptionLabel.text = [self.courseInstance.status uppercaseString];
+        }
+        self.averageWeightedCourseGradePercentageLabel.text = @"";
+        
+    } else {
+        self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance weightedAverageGrade]];
+        self.averageWeightedCourseGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.1f%%", totalPercentagesFromAssignments];
+        // Configure CircleChart
+        self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignments];
+    }
+    // Stroke chart
     [self.circleChartView strokeChart];
+
     
     NSArray *gradedAssignments = [self.courseInstance gradedAssignments];
     if ([gradedAssignments count] != 0) {
@@ -96,14 +127,14 @@
             [xValues addObject:@""];
         }
         // BarChart
-        PNChart *barChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
-        barChart.type = PNBarType;
-        barChart.backgroundColor = [UIColor clearColor];
-        [barChart setStrokeColor:[UIColor colorWithWhite:1 alpha:0.6]];
-        [barChart setXLabels:xValues];
-        [barChart setYValues:yValues];
-        [barChart strokeChart];
-        [self.chartContainerView addSubview:barChart];
+        self.barChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
+        self.barChart.type = PNBarType;
+        self.barChart.backgroundColor = [UIColor clearColor];
+        [self.barChart setStrokeColor:[UIColor colorWithWhite:1 alpha:0.6]];
+        [self.chartContainerView addSubview:self.barChart];
+        [self.barChart setXLabels:xValues];
+        [self.barChart setYValues:yValues];
+        [self.barChart strokeChart];
         
         if ([gradedAssignments count] > 1) {
             // LineChart
@@ -117,10 +148,8 @@
             [self.chartContainerView addSubview:lineChart];
 
         }
-    } else
+    } else if ([self.courseInstance hasResults] == NO)
         self.noGradeInfoView.alpha = 1.0;
-    
-    self.title = self.courseInstance.name;
     
     [self.materialTableView reloadData];
     self.materialTableViewHeightConstraint.constant = self.materialTableView.contentSize.height;

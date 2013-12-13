@@ -1381,40 +1381,6 @@
             </objects>
             <point key="canvasLocation" x="913" y="874"/>
         </scene>
-        <!--Table View Controller - Tilkynningar-->
-        <scene sceneID="he6-Ox-xdc">
-            <objects>
-                <tableViewController id="dSH-56-3ik" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Gpx-Yi-eyr">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" textLabel="1Nw-j3-9E7" style="IBUITableViewCellStyleDefault" id="ZZw-ap-3Qf">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZZw-ap-3Qf" id="xgs-h1-7w2">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Við erum ennþá að vinna í þessu.. :)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1Nw-j3-9E7">
-                                            <rect key="frame" x="15" y="0.0" width="290" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Tilkynningar" id="8G7-qG-RE4"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="r8z-m6-pVq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="913" y="1549"/>
-        </scene>
         <!--Navigation Controller - Áfangar-->
         <scene sceneID="2fb-q7-3Uo">
             <objects>
@@ -1693,6 +1659,7 @@
                                                         </label>
                                                     </subviews>
                                                     <constraints>
+                                                        <constraint firstItem="LuO-TO-k5d" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mYg-0b-nzU" secondAttribute="trailing" constant="10" id="01z-2c-eoX"/>
                                                         <constraint firstItem="nvC-od-3c5" firstAttribute="trailing" secondItem="LuO-TO-k5d" secondAttribute="trailing" id="0Rv-Fz-3Po"/>
                                                         <constraint firstItem="mYg-0b-nzU" firstAttribute="baseline" secondItem="LuO-TO-k5d" secondAttribute="baseline" id="0sr-8J-shm"/>
                                                         <constraint firstItem="mYg-0b-nzU" firstAttribute="leading" secondItem="53f-vp-36U" secondAttribute="leading" constant="15" id="4xr-DK-Bwq"/>
@@ -2103,6 +2070,7 @@
                         <outlet property="acquiredGradeLabel" destination="9Jg-ev-yWL" id="8YB-Y6-gur"/>
                         <outlet property="averageGradeFromOtherLabel" destination="Hps-39-t6p" id="cTl-XZ-Y4J"/>
                         <outlet property="averageGradeLabel" destination="Bmp-bd-Lvb" id="KB6-jJ-lXm"/>
+                        <outlet property="averageWeightedCourseGradeDescriptionLabel" destination="LrU-3g-fUW" id="9pf-nm-KdT"/>
                         <outlet property="averageWeightedCourseGradeLabel" destination="QOX-cR-uJa" id="9lt-2I-Wwq"/>
                         <outlet property="averageWeightedCourseGradePercentageLabel" destination="XFE-bI-vcT" id="W6l-0f-U5I"/>
                         <outlet property="chartContainerView" destination="kUC-Dj-K0E" id="koP-JJ-wgO"/>
@@ -2147,12 +2115,41 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="dSH-56-3ik" kind="relationship" relationship="rootViewController" id="Psk-eq-sA4"/>
+                        <segue destination="xmr-BV-F5A" kind="relationship" relationship="rootViewController" id="6ak-7D-yGO"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Bm-C1-gVe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="506" y="1549"/>
+        </scene>
+        <!--Table View Controller - Tilkynningar-->
+        <scene sceneID="rL9-Db-yGA">
+            <objects>
+                <tableViewController id="xmr-BV-F5A" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oyn-dh-5cV">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="g1b-rH-MjV">
+                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g1b-rH-MjV" id="oP4-Hh-IzM">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="xmr-BV-F5A" id="WaV-LB-UET"/>
+                            <outlet property="delegate" destination="xmr-BV-F5A" id="yRK-Eh-ybH"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Tilkynningar" id="4Ob-Z2-6VF"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ajh-qp-FGg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="913" y="1549"/>
         </scene>
         <!--Navigation Controller - Veitan-->
         <scene sceneID="BvD-NT-oGy">

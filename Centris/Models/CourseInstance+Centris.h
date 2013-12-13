@@ -19,5 +19,8 @@
 - (float)weightedAverageGrade;
 - (float)totalPercentagesFromAssignments;                                                                                                       // tested
 - (float)aquiredGrade;                                                                                                                          // tested
+- (BOOL)isPassed;
+- (BOOL)isFailed;
+- (BOOL)hasResults;
 @end
 

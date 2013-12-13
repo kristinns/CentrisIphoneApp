@@ -13,6 +13,7 @@
 #import "CourseInstanceViewController.h"
 #import "PNChart.h"
 #import "Semester+Centris.h"
+#import "NSDate+Helper.h"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
@@ -70,7 +71,10 @@
     [self.semesterProgressView setProgress:(semesterProgress < 100 ? semesterProgress : 100)];
     self.weeksLeftLabel.text = [NSString stringWithFormat:@"%d", [self.semester weeksLeft:[NSDate date]]];
     self.totalECTSLabel.text = [NSString stringWithFormat:@"%d",[self.semester totalEcts]];
-    self.finishedECTSLabel.text = @"...";
+    self.finishedECTSLabel.text = [NSString stringWithFormat:@"%d", [self.semester finishedEcts]];
+    NSDictionary *semesterDateRange = [self.semester semesterRange];
+    self.semesterStartDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"starts"] withFormat:@"dd. MMMM"] uppercaseString];
+    self.semesterEndDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"ends"] withFormat:@"dd. MMMM"] uppercaseString];
     
     // Chart
     self.circleChartView.type = PNCircleType;
@@ -109,9 +113,15 @@
     CourseInstanceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"courseTableViewCell"];
     cell.titleLabel.text = courseInstance.name;
     cell.detailLabel.text = courseInstance.status;
-    if ([courseInstance.status isEqualToString:@"Lokið"]) {
-        cell.gradeLabel.text = [NSString stringWithFormat:@"%.1f", courseInstance.finalGrade.floatValue];
-        cell.gradeDetailLabel.text = @"Lokaeinkunn";
+    if ([courseInstance isPassed]) {
+        if (courseInstance.finalGrade != nil) {
+            cell.gradeLabel.text = [NSString stringWithFormat:@"%.1f", courseInstance.finalGrade.floatValue];
+            cell.gradeDetailLabel.text = @"Lokaeinkunn";
+        } else {
+            cell.gradeLabel.text = @"Staðið";
+            cell.gradeDetailLabel.text = @"";
+        }
+        
     } else {
         NSInteger totalPercentagesFromAssignments = [courseInstance totalPercentagesFromAssignments];
         if (totalPercentagesFromAssignments != 0) {

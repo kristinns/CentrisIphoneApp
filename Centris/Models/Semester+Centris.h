@@ -17,6 +17,6 @@
 - (NSInteger)weeksLeft:(NSDate *)date;                                          // tested
 - (NSInteger)totalEcts;                                                         // tested
 - (float)totalPercentagesFromAssignmentsInSemester;
-//- (NSInteger)finishedEcts;
+- (NSInteger)finishedEcts;
 //- (NSArray *)bookList;
 @end
