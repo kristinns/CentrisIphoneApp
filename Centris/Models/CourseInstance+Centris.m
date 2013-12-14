@@ -64,7 +64,18 @@
         }
         courseInstance.isInSemester = semester;
     } else {
-        return [matches lastObject];
+        courseInstance = [matches lastObject];
+        courseInstance.courseID = centrisInfo[COURSE_ID];
+        courseInstance.name = centrisInfo[COURSE_NAME];
+        courseInstance.semester = [centrisInfo[COURSE_SEMESTER] stringValue];
+        courseInstance.syllabus = centrisInfo[COURSE_SYLLABUS];
+        courseInstance.teachingMethods = centrisInfo[COURSE_TEACHING_METHODS];
+        courseInstance.content = centrisInfo[COURSE_CONTENT];
+        courseInstance.assessmentMethods = centrisInfo[COURSE_ASSESSMENT_METHODS];
+        courseInstance.learningOutcome = centrisInfo[COURSE_LEARNING_OUTCOME];
+        courseInstance.ects = [NSNumber numberWithInt:[centrisInfo[COURSE_ECTS] integerValue]];
+        courseInstance.finalGrade = centrisInfo[COURSE_FINAL_GRADE] != (id)[NSNull null] ? [NSNumber numberWithFloat:[centrisInfo[COURSE_FINAL_GRADE] floatValue]]: nil;
+        courseInstance.status = centrisInfo[COURSE_STATUS];
     }
     return courseInstance;
 }

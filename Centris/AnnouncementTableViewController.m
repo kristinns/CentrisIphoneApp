@@ -41,12 +41,12 @@
 
 // Will do a fetch request to Core data and add the assignments
 // (if any) to self.assignments
-- (void )fetchAssignmentsFromCoreData
+- (void )fetchAnnouncementsFromCoreData
 {
     if ([self viewNeedsToBeUpdated]) {
         // update last updated
         [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ANNOUNCEMENTTVC_LAST_UPDATED];
-        [self fetchAssignmentsFromAPI];
+        [self fetchAnnouncementsFromAPI];
     }
     self.announcements = [Announcement announcementsInManagedObjectContext:[AppFactory managedObjectContext]];
     [self.tableView reloadData];
@@ -54,7 +54,7 @@
 
 // Will do a fetch request to the API for assignments
 // and add the assignments (if any) to self.assignments
-- (void)fetchAssignmentsFromAPI
+- (void)fetchAnnouncementsFromAPI
 {
     [self.dataFetcher getAnnouncementWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d announcements", [responseObject count]);
@@ -63,7 +63,7 @@
 
         }
         // call success block if any
-        [self fetchAssignmentsFromCoreData];
+        [self fetchAnnouncementsFromCoreData];
         [self.refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error getting announcements");
@@ -99,9 +99,9 @@
 {
     [super viewDidLoad];
     self.navigationController.navigationBar.translucent = NO;
-    // Uncomment the following line to preserve selection between presentations.
+    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
     self.clearsSelectionOnViewWillAppear = NO;
-    [self fetchAssignmentsFromCoreData];
+    [self fetchAnnouncementsFromCoreData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -110,7 +110,15 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)userDidRefresh
+{
+    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ANNOUNCEMENTTVC_LAST_UPDATED];
+    [self fetchAnnouncementsFromAPI];
+}
+
 #pragma mark - Table view data source
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
