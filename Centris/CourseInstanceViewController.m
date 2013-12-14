@@ -61,8 +61,12 @@
     self.title = self.courseInstance.name;
     
     float totalPercentagesFromAssignments = [self.courseInstance totalPercentagesFromAssignments];
-    self.acquiredGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance aquiredGrade]];
-    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance averageGrade]];
+    float acquiredGrade = [self.courseInstance aquiredGrade];
+    // If acquiredGrade is zero and courseInstance has result, then just print, then there is no need to display zero
+    self.acquiredGradeLabel.text = ((int)acquiredGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", acquiredGrade];
+    float averageGrade = [self.courseInstance averageGrade];
+    // If averageGrade is zero and courseInstance has result, then there is no need to display zero
+    self.averageGradeLabel.text = ((int)averageGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", averageGrade];
     self.averageGradeFromOtherLabel.text = @"...";
     self.standardDeviationLabel.text = @"...";
     
@@ -159,9 +163,9 @@
 {
     self.circleChartView.type = PNCircleType;
     self.circleChartView.total = @100;
-    self.circleChartView.circleChart.lineWidth = @5;
     self.circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
     [self.circleChartView strokeChart];
+    self.circleChartView.circleChart.lineWidth = @2;
     self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
     self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
 }
