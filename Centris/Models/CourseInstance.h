@@ -2,14 +2,14 @@
 //  CourseInstance.h
 //  Centris
 //
-//  Created by Kristinn Svansson on 13/12/13.
+//  Created by Kristinn Svansson on 14/12/13.
 //  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Assignment, ScheduleEvent, Semester, User;
+@class Announcement, Assignment, ScheduleEvent, Semester, User;
 
 @interface CourseInstance : NSManagedObject
 
@@ -17,18 +17,19 @@
 @property (nonatomic, retain) NSString * content;
 @property (nonatomic, retain) NSString * courseID;
 @property (nonatomic, retain) NSNumber * ects;
+@property (nonatomic, retain) NSNumber * finalGrade;
 @property (nonatomic, retain) NSNumber * id;
 @property (nonatomic, retain) NSString * learningOutcome;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * semester;
+@property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * syllabus;
 @property (nonatomic, retain) NSString * teachingMethods;
-@property (nonatomic, retain) NSNumber * finalGrade;
-@property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSSet *hasAssignments;
 @property (nonatomic, retain) NSSet *hasScheduleEvents;
 @property (nonatomic, retain) User *hasUser;
 @property (nonatomic, retain) Semester *isInSemester;
+@property (nonatomic, retain) Announcement *hasAnnouncements;
 @end
 
 @interface CourseInstance (CoreDataGeneratedAccessors)

@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="3401" systemVersion="13A603" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Announcement" representedClassName="Announcement" syncable="YES">
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dateInserted" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="read" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="isInCourseInstance" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CourseInstance" inverseName="hasAnnouncements" inverseEntity="CourseInstance" syncable="YES"/>
+    </entity>
     <entity name="Assignment" representedClassName="Assignment" syncable="YES">
         <attribute name="assignmentDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseInstanceID" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -38,6 +46,7 @@
         <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="syllabus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teachingMethods" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="hasAnnouncements" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Announcement" inverseName="isInCourseInstance" inverseEntity="Announcement" syncable="YES"/>
         <relationship name="hasAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="isInCourseInstance" inverseEntity="Assignment" syncable="YES"/>
         <relationship name="hasScheduleEvents" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ScheduleEvent" inverseName="hasCourseInstance" inverseEntity="ScheduleEvent" syncable="YES"/>
         <relationship name="hasUser" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" inverseName="isInCourseInstance" inverseEntity="User" syncable="YES"/>
@@ -91,5 +100,6 @@
         <element name="ScheduleEventUnit" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Semester" positionX="0" positionY="0" width="0" height="0"/>
         <element name="User" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Announcement" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

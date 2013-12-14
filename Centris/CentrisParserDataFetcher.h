@@ -26,6 +26,8 @@
 + (void)getScheduleInSemester:(NSString *)semester
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
++ (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // Post
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

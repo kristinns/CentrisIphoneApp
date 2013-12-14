@@ -72,7 +72,12 @@
 #define EVENT_TYPE_OF_CLASS                 @"TypeOfClass"
 #define EVENT_COURSE_NAME                   @"CourseName"
 #define EVENT_COURSE_INSTANCE_ID            @"CourseID"
-
+// Announcement Key Constants
+#define ANNOUNCEMENT_TITLE                  @"Title"
+#define ANNOUNCEMENT_ID                     @"ID"
+#define ANNOUNCEMENT_CONTENT                @"Content"
+#define ANNOUNCEMENT_DATE_INSERTED          @"DateInserted"
+#define ANNOUNCEMENT_COURSE_ID              @"CourseID"
 
 @protocol DataFetcher <NSObject>
 // Get
@@ -95,6 +100,9 @@
 
 + (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                    failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
++ (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 // Post
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
