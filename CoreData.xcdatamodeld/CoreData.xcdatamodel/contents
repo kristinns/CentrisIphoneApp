@@ -30,10 +30,12 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="courseID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="ects" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="finalGrade" optional="YES" attributeType="Float" defaultValueString="0" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="learningOutcome" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="semester" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="syllabus" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="teachingMethods" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="hasAssignments" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Assignment" inverseName="isInCourseInstance" inverseEntity="Assignment" syncable="YES"/>
