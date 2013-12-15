@@ -67,7 +67,7 @@
         courseInstance = [matches lastObject];
         courseInstance.courseID = centrisInfo[COURSE_ID];
         courseInstance.name = centrisInfo[COURSE_NAME];
-        courseInstance.semester = [centrisInfo[COURSE_SEMESTER] stringValue];
+        courseInstance.semester = centrisInfo[COURSE_SEMESTER];
         courseInstance.syllabus = centrisInfo[COURSE_SYLLABUS];
         courseInstance.teachingMethods = centrisInfo[COURSE_TEACHING_METHODS];
         courseInstance.content = centrisInfo[COURSE_CONTENT];
