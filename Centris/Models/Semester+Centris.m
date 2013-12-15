@@ -94,7 +94,7 @@
 {
     NSDictionary *semesterRange = [self semesterRange];
     NSInteger totalTime = [semesterRange[@"ends"] timeIntervalSinceDate:date];
-    return totalTime / (60 * 60 * 24 * 7);
+    return MAX(0, totalTime / (60 * 60 * 24 * 7));
 }
 
 - (NSDictionary *)semesterRange

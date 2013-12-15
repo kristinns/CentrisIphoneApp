@@ -14,6 +14,10 @@
 #import "PNChart.h"
 #import "Semester+Centris.h"
 #import "NSDate+Helper.h"
+#import "DataFetcher.h"
+#import "Assignment+Centris.h"
+
+#define COURSEINSTANCES_LAST_UPDATED @"AnnouncementTVCLastUpdate"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
@@ -31,6 +35,8 @@
 
 @property (nonatomic, strong) NSArray *courseInstances;
 @property (nonatomic, strong) Semester *semester;
+@property (nonatomic, strong) id<DataFetcher> dataFetcher;
+@property (nonatomic) BOOL isRefreshing;
 // Constraints
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *courseTableViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *semesterGraphViewHeightConstraint;
@@ -54,7 +60,26 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.dataFetcher = [AppFactory fetcherFromConfiguration];
 	self.navigationController.navigationBar.translucent = NO;
+    self.courseTableView.scrollEnabled = YES;
+    // Setup chart
+    self.circleChartView.type = PNCircleType;
+    self.circleChartView.total = @100;
+    self.circleChartView.strokeColor = [UIColor whiteColor];
+    self.circleChartView.current = [NSNumber numberWithFloat:[self.semester totalPercentagesFromAssignmentsInSemester] * 100];
+    [self.circleChartView strokeChart];
+    [self setup];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([self viewNeedsToBeUpdated])
+        [self userDidRefresh];
+}
+
+- (void)setup
+{
     // Force reloading in tableView to get correct contentSize
     [self.courseTableView reloadData];
     NSInteger courseTableViewheight = self.courseTableView.contentSize.height;
@@ -77,15 +102,60 @@
     self.semesterEndDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"ends"] withFormat:@"dd. MMMM"] uppercaseString];
     
     // Chart
-    self.circleChartView.type = PNCircleType;
-    self.circleChartView.total = @100;
-    self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignmentsInSemester];
-    self.circleChartView.strokeColor = [UIColor whiteColor];
-    [self.circleChartView strokeChart];
+    
     self.circleChartView.circleChart.lineWidth = @4;
     self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6] CGColor];
     self.circleChartView.circleChart.circleBG.fillColor = nil;
     [self.circleChartView.circleChart strokeChart];
+    self.isRefreshing = NO;
+
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -60)
+        [self userDidRefresh];
+}
+
+- (void)userDidRefresh
+{
+    if (!self.isRefreshing) {
+        self.isRefreshing = YES;
+        [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Got %d courses", [responseObject count]);
+            for (NSDictionary *courseInst in responseObject) {
+                [CourseInstance addCourseInstanceWithCentrisInfo:courseInst inManagedObjectContext:[AppFactory managedObjectContext]];
+            }
+            // Fetch assignments
+            [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d assignments", [responseObject count]);
+                [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+                // call success block if any
+                self.courseInstances = nil;
+                self.semester = nil;
+                [self setup];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting assignments");
+            }];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error getting courses in SemesterView");
+        }];
+        
+    }
+}
+
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma TableView delegate methods

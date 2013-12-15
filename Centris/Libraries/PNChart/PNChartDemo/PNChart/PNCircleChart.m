@@ -65,7 +65,7 @@
     //Add circle params
     
     _circle.lineWidth   = [_lineWidth floatValue];
-    _circleBG.lineWidth   = [_lineWidth floatValue];
+    _circleBG.lineWidth   = [_lineWidth floatValue]-0.5;
     _circleBG.strokeEnd   = 1.0;
     _circle.strokeColor = _strokeColor.CGColor;
     

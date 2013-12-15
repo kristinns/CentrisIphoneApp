@@ -9,7 +9,11 @@
 #import "CourseInstanceViewController.h"
 #import "PNChart.h"
 #import "CourseInstance+Centris.h"
-#import "Assignment.h"
+#import "CourseInstance+Centris.h"
+#import "AppFactory.h"
+#import "Assignment+Centris.h"
+
+#define COURSEINSTANCES_LAST_UPDATED @"AnnouncementTVCLastUpdate"
 
 @interface CourseInstanceViewController () <UITableViewDataSource, UITableViewDelegate>
 // Outlets
@@ -29,6 +33,9 @@
 // Other properties
 @property (nonatomic, strong) NSArray *materialTable;
 @property (nonatomic, strong) PNChart *barChart;
+@property (nonatomic, strong) PNChart *lineChart;
+@property (nonatomic) BOOL isRefreshing;
+@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @end
 
 @implementation CourseInstanceViewController
@@ -49,7 +56,14 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.dataFetcher = [AppFactory fetcherFromConfiguration];
 	[self setup];
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    if ([self viewNeedsToBeUpdated])
+        [self userDidRefresh];
 }
 
 - (void)setup
@@ -61,8 +75,12 @@
     self.title = self.courseInstance.name;
     
     float totalPercentagesFromAssignments = [self.courseInstance totalPercentagesFromAssignments];
-    self.acquiredGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance aquiredGrade]];
-    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance averageGrade]];
+    float acquiredGrade = [self.courseInstance aquiredGrade];
+    // If acquiredGrade is zero and courseInstance has result, then just print, then there is no need to display zero
+    self.acquiredGradeLabel.text = ((int)acquiredGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", acquiredGrade];
+    float averageGrade = [self.courseInstance averageGrade];
+    // If averageGrade is zero and courseInstance has result, then there is no need to display zero
+    self.averageGradeLabel.text = ((int)averageGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", averageGrade];
     self.averageGradeFromOtherLabel.text = @"...";
     self.standardDeviationLabel.text = @"...";
     
@@ -138,14 +156,16 @@
         
         if ([gradedAssignments count] > 1) {
             // LineChart
-            PNChart *lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
-            lineChart.type = PNLineType;
-            lineChart.backgroundColor = [UIColor clearColor];
-            [lineChart setStrokeColor:[UIColor whiteColor]];
-            [lineChart setXLabels:xValues];
-            [lineChart setYValues:yLineValues];
-            [lineChart strokeChart];
-            [self.chartContainerView addSubview:lineChart];
+            [self.lineChart removeFromSuperview];
+            self.lineChart = nil;
+            self.lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
+            self.lineChart.type = PNLineType;
+            self.lineChart.backgroundColor = [UIColor clearColor];
+            [self.lineChart setStrokeColor:[UIColor whiteColor]];
+            [self.lineChart setXLabels:xValues];
+            [self.lineChart setYValues:yLineValues];
+            [self.lineChart strokeChart];
+            [self.chartContainerView addSubview:self.lineChart];
 
         }
     } else if ([self.courseInstance hasResults] == NO)
@@ -153,17 +173,64 @@
     
     [self.materialTableView reloadData];
     self.materialTableViewHeightConstraint.constant = self.materialTableView.contentSize.height;
+    self.isRefreshing = NO;
 }
 
 - (void)setupCircleChart
 {
     self.circleChartView.type = PNCircleType;
     self.circleChartView.total = @100;
-    self.circleChartView.circleChart.lineWidth = @5;
     self.circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
     [self.circleChartView strokeChart];
+    self.circleChartView.circleChart.lineWidth = @2;
     self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
     self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y < -60)
+        [self userDidRefresh];
+}
+
+- (void)userDidRefresh
+{
+    if (!self.isRefreshing) {
+        self.isRefreshing = YES;
+        [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Got %d courses", [responseObject count]);
+            for (NSDictionary *courseInst in responseObject) {
+                [CourseInstance addCourseInstanceWithCentrisInfo:courseInst inManagedObjectContext:[AppFactory managedObjectContext]];
+            }
+            // Fetch assignments
+            [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d assignments", [responseObject count]);
+                [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+                // Refresh courseInstance
+                self.courseInstance = [CourseInstance courseInstanceWithID:self.courseInstance.id.integerValue inManagedObjectContext:[AppFactory managedObjectContext]];
+                [self setup];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting assignments");
+            }];
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error getting courses in SemesterView");
+        }];
+        
+    }
+}
+
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 #pragma TableView delegate methods
