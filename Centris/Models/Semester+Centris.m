@@ -48,6 +48,7 @@
     return average / counter;
 }
 
+
 - (float)progressForDate:(NSDate *)date
 {
     NSDictionary *semesterRange = [self semesterRange];

@@ -87,7 +87,7 @@
     return gradedAssignments;
 }
 
-- (float)averageGrade
+- (float )averageGrade
 {
     float average = 0.0;
     // get instance
@@ -105,7 +105,7 @@
     return average / ([assignments count]);
 }
 
-- (float)totalPercentagesFromAssignments
+- (float )totalPercentagesFromAssignments
 {
     float percentages = 0.0;
     NSSet *assignments = self.hasAssignments;
@@ -117,7 +117,7 @@
     return percentages;
 }
 
-- (float)aquiredGrade
+- (float )aquiredGrade
 {
     float weightedAverage = 0.0;
     for (Assignment *assignment  in self.hasAssignments) {
@@ -128,7 +128,7 @@
     return weightedAverage;
 }
 
-- (float)weightedAverageGrade
+- (float )weightedAverageGrade
 {
     return [self totalPercentagesFromAssignments] == 0 ? 0.0 : [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
 }
