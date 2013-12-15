@@ -25,8 +25,8 @@
                                                      withPredicate:pred
                                             inManagedObjectContext:context];
 
-    NSString *assertFailMessage = [NSString stringWithFormat:@"there should only be one courseinstance with cousreid: %d", courseID];
-    NSAssert([matches count ] == 1, assertFailMessage);
+//    NSString *assertFailMessage = [NSString stringWithFormat:@"there should only be one courseinstance with cousreid: %d", courseID];
+//    NSAssert([matches count ] == 1, assertFailMessage);
     instance = [matches lastObject];
 	
 	return instance;
@@ -48,7 +48,7 @@
         courseInstance.id = centrisInfo[COURSE_INSTANCE_ID];
         courseInstance.courseID = centrisInfo[COURSE_ID];
         courseInstance.name = centrisInfo[COURSE_NAME];
-        courseInstance.semester = [centrisInfo[COURSE_SEMESTER] stringValue];
+        courseInstance.semester = centrisInfo[COURSE_SEMESTER];
         courseInstance.syllabus = centrisInfo[COURSE_SYLLABUS];
         courseInstance.teachingMethods = centrisInfo[COURSE_TEACHING_METHODS];
         courseInstance.content = centrisInfo[COURSE_CONTENT];
@@ -57,10 +57,10 @@
         courseInstance.ects = [NSNumber numberWithInt:[centrisInfo[COURSE_ECTS] integerValue]];
         courseInstance.finalGrade = centrisInfo[COURSE_FINAL_GRADE] != (id)[NSNull null] ? [NSNumber numberWithFloat:[centrisInfo[COURSE_FINAL_GRADE] floatValue]]: nil;
         courseInstance.status = centrisInfo[COURSE_STATUS];
-        Semester *semester = [Semester semesterWithID:[centrisInfo[COURSE_SEMESTER] stringValue] inManagedObjectContext:context];
+        Semester *semester = [Semester semesterWithID:centrisInfo[COURSE_SEMESTER] inManagedObjectContext:context];
         if (semester == nil) {
             semester = [NSEntityDescription insertNewObjectForEntityForName:@"Semester" inManagedObjectContext:context];
-            semester.id_semester = [centrisInfo[COURSE_SEMESTER] stringValue];
+            semester.id_semester = centrisInfo[COURSE_SEMESTER];
         }
         courseInstance.isInSemester = semester;
     } else {

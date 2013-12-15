@@ -1382,11 +1382,11 @@
             </objects>
             <point key="canvasLocation" x="913" y="874"/>
         </scene>
-        <!--Navigation Controller - Áfangar-->
+        <!--Navigation Controller - Önnin-->
         <scene sceneID="2fb-q7-3Uo">
             <objects>
                 <navigationController definesPresentationContext="YES" id="eZ6-3e-xOq" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Áfangar" image="more-icon" id="OOg-y9-9nv"/>
+                    <tabBarItem key="tabBarItem" title="Önnin" image="more-icon" id="OOg-y9-9nv"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="kRK-B4-LVU">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -1706,7 +1706,7 @@
                                     <constraint firstAttribute="centerX" secondItem="xyN-GX-kuu" secondAttribute="centerX" id="n3l-MR-jqX"/>
                                     <constraint firstItem="onV-6M-TMH" firstAttribute="top" secondItem="I1R-oe-hAY" secondAttribute="top" id="nno-el-bJe"/>
                                     <constraint firstItem="onV-6M-TMH" firstAttribute="leading" secondItem="cKo-HJ-FfR" secondAttribute="leading" id="pow-7f-SOo"/>
-                                    <constraint firstAttribute="bottom" secondItem="vzj-q0-mlp" secondAttribute="bottom" constant="43" id="xev-l4-fHr"/>
+                                    <constraint firstAttribute="bottom" secondItem="vzj-q0-mlp" secondAttribute="bottom" id="xev-l4-fHr"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="Ba1-2K-np2" id="UWW-mm-oFS"/>
@@ -1722,7 +1722,13 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <navigationItem key="navigationItem" title="Haustönn 2013" id="3bD-DZ-6Q0"/>
+                    <navigationItem key="navigationItem" title="Haustönn 2013" id="3bD-DZ-6Q0">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="MKD-Kl-gRG">
+                            <connections>
+                                <segue destination="cRK-oL-YTP" kind="modal" id="p4r-du-xZj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="averageGradeLabel" destination="FpG-2s-dcK" id="e19-p0-raH"/>
                         <outlet property="averageGradePercentageLabel" destination="DJw-J9-3if" id="iX2-Hv-yiS"/>
@@ -2122,12 +2128,12 @@
         <scene sceneID="rL9-Db-yGA">
             <objects>
                 <tableViewController id="xmr-BV-F5A" customClass="AnnouncementTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oyn-dh-5cV">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Oyn-dh-5cV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="AnnouncementTableViewCell" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnnouncementCell" rowHeight="95" id="g1b-rH-MjV" customClass="AnnouncementTableViewCell">
+                            <tableViewCell contentMode="scaleToFill" restorationIdentifier="AnnouncementTableViewCell" selectionStyle="none" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AnnouncementCell" rowHeight="95" id="g1b-rH-MjV" customClass="AnnouncementTableViewCell">
                                 <rect key="frame" x="0.0" y="86" width="320" height="95"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="g1b-rH-MjV" id="oP4-Hh-IzM">
@@ -2192,7 +2198,13 @@
                             <outlet property="delegate" destination="xmr-BV-F5A" id="yRK-Eh-ybH"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Tilkynningar" id="4Ob-Z2-6VF"/>
+                    <navigationItem key="navigationItem" title="Tilkynningar" id="4Ob-Z2-6VF">
+                        <barButtonItem key="rightBarButtonItem" image="profile-icon" id="zCb-dE-InN">
+                            <connections>
+                                <segue destination="cRK-oL-YTP" kind="modal" id="zZ0-p7-lvS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="ezY-Oq-3up">
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
@@ -2343,6 +2355,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5o8-79-b56"/>
+        <segue reference="p4r-du-xZj"/>
     </inferredMetricsTieBreakers>
 </document>

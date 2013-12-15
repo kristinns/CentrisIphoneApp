@@ -137,9 +137,9 @@
     static NSString *CellIdentifier = @"AnnouncementCell";
     AnnouncementTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     Announcement *announcement = [self.announcements objectAtIndex:indexPath.row];
-    cell.titleLabel.text = announcement.title;
+    cell.titleLabel.text = announcement.title.length != 0 ? announcement.title : @"Enginn titill";
     cell.courseNameLabel.text = ((CourseInstance *)announcement.isInCourseInstance).name;
-    cell.dateLabel.text = [NSDate convertToString:announcement.dateInserted withFormat:@"dd.MM"];
+    cell.dateLabel.text = [NSDate convertToString:announcement.dateInserted withFormat:@"dd.MMM"];
     NSString *content = [announcement.content stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     cell.contentLabel.text = [content substringToIndex:MIN(content.length, MAX_ANNOUNCEMENT_CONTENT_LENGTH)];
     
