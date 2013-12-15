@@ -203,7 +203,7 @@
         NSDateComponents *eventComps = [NSDate dateComponentForDate:nextEvent.starts withCalendar:gregorian];
         // check if it's in the morning
         if ([eventComps day] != [compsNow day]) {
-            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm]"], nextEvent.roomName]];
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm"], nextEvent.roomName]];
         } else {
             scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm"], nextEvent.roomName]];
         }

@@ -41,4 +41,9 @@
 {
     // TODO
 }
+
++ (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    // TODO
+}
 @end
