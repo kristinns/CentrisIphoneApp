@@ -54,7 +54,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.todayLabel.text = [NSDate convertToString:[NSDate date] withFormat:@"EEEE dd. MMMM"];
+    self.todayLabel.text = [[NSDate convertToString:[NSDate date] withFormat:@"EEEE dd. MMMM"] capitalizedString];
     // Get Menu
     [[AppFactory fetcherFromConfiguration] getMenuWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d Lunch", [responseObject count]);
