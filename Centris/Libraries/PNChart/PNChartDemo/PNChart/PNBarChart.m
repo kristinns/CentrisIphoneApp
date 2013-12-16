@@ -22,7 +22,7 @@
         // Initialization code
         self.backgroundColor = [UIColor whiteColor];
         self.clipsToBounds = YES;
-	
+        self.yValueMax = 10;
     }
     
     return self;
@@ -50,7 +50,7 @@
         max = 5;
     }
     
-    _yValueMax = (int)max;
+    _yValueMax = 10;//(int)max;
     
     NSLog(@"Y Max is %d", _yValueMax );
 

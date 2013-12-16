@@ -54,7 +54,7 @@
         max = 5;
     }
     
-    _yValueMax = (int)max;
+    _yValueMax = 10;//(int)max;
     
 //    float level = max /[yLabels count];
 //	
@@ -108,7 +108,7 @@
     CGFloat chartCavanHeight = self.frame.size.height - chartMargin * 2;
     
     float grade = (float)firstValue / (float)_yValueMax;
-    [progressline moveToPoint:CGPointMake((chartMargin + xPosition * 0.5), chartCavanHeight - grade * chartCavanHeight+20)];//xPosition, chartCavanHeight - grade * chartCavanHeight - 10)];
+    [progressline moveToPoint:CGPointMake((chartMargin + xPosition * 0.5), chartCavanHeight+10 - grade * chartCavanHeight)];//xPosition, chartCavanHeight - grade * chartCavanHeight - 10)];
     [progressline setLineWidth:3.0];
     [progressline setLineCapStyle:kCGLineCapRound];
     [progressline setLineJoinStyle:kCGLineJoinRound];
@@ -126,7 +126,7 @@
 //            float grade = (float)value / (float)_yValueMax;
 //            
 //            PNBar * bar = [[PNBar alloc] initWithFrame:CGRectMake((index *  _xLabelWidth + chartMargin + _xLabelWidth * 0.25), chartMargin, _xLabelWidth * 0.5, chartCavanHeight)];
-            CGPoint nextPoint = CGPointMake((index * xPosition + chartMargin + xPosition * 0.5), chartCavanHeight - grade * chartCavanHeight+10);
+            CGPoint nextPoint = CGPointMake((index * xPosition + chartMargin + xPosition * 0.5), chartCavanHeight+10 - grade * chartCavanHeight);
             NSLog(@"%f, %f", nextPoint.x, nextPoint.y);
             [progressline addLineToPoint:nextPoint];
             [progressline moveToPoint:nextPoint];
@@ -134,7 +134,7 @@
             [progressline stroke];
         }
         if (index == [_yValues count]-1) {
-            CGPoint nextPoint = CGPointMake(index * xPosition + chartMargin + xPosition, chartCavanHeight - grade * chartCavanHeight+10);
+            CGPoint nextPoint = CGPointMake(index * xPosition + chartMargin + xPosition, chartCavanHeight+10 - grade * chartCavanHeight);
             [progressline addLineToPoint:nextPoint];
             [progressline moveToPoint:nextPoint];
         }
