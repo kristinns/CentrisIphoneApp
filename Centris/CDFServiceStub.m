@@ -388,6 +388,7 @@
     [courseInst1 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
     [courseInst1 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
     [courseInst1 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+    [courseInst1 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
     [courseInstArray addObject:courseInst1];
     
     // T-111-PROG
@@ -401,6 +402,7 @@
     [courseInst2 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
     [courseInst2 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
     [courseInst2 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+    [courseInst2 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
     [courseInstArray addObject:courseInst2];
     
     // T-117-STR1
@@ -414,7 +416,9 @@
     [courseInst3 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
     [courseInst3 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
     [courseInst3 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+    [courseInst3 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
     [courseInstArray addObject:courseInst3];
+
     
     // T-107-TOLH
     NSMutableDictionary *courseInst4 = [[NSMutableDictionary alloc] init];
@@ -427,6 +431,7 @@
     [courseInst4 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
     [courseInst4 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
     [courseInst4 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+    [courseInst4 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
     [courseInstArray addObject:courseInst4];
     
     // T-110-VERK
@@ -440,6 +445,7 @@
     [courseInst5 setObject:@"Some assessment methods" forKey:@"AssessmentMethods"];
     [courseInst5 setObject:@"Some learning outcome" forKey:@"LearningOutcome"];
     [courseInst5 setObject:@"Some teaching methods" forKey:@"TeachingMethods"];
+    [courseInst5 setObject:[NSNumber numberWithInteger:6] forKey:@"ECTS"];
     [courseInstArray addObject:courseInst5];
     
     // Finally, return courseInstArray
