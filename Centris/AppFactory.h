@@ -18,4 +18,5 @@
 + (KeychainItemWrapper *)keychainItemWrapper;
 + (NSManagedObjectContext *)managedObjectContext;
 + (NSUserDefaults *)sharedDefaults;
++ (UIStoryboard *)mainStoryboard;
 @end

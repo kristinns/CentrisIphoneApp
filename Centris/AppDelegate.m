@@ -9,6 +9,11 @@
 #import <AFNetworking/AFNetworkActivityIndicatorManager.h>
 #import "TestFlight.h"
 
+#define TAB_BAR_VIEW_CONTROLLER_IDENTIFIER @"TabBarViewController"
+#define SELECTED_TAB 2
+#define LOGIN_VIEW_CONTROLLER_IDENTIFIER @"LoginViewController"
+#define TESTFLIGHT_APP_CODE @"42b8e02a-a292-4dd7-a5ab-012898ca6dbd"
+
 @interface AppDelegate()
 @property (nonatomic, strong) NSString *url;
 @end
@@ -17,29 +22,27 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    NSString *user = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
-    [TestFlight addCustomEnvironmentInformation:user forKey:@"user"];
-    [TestFlight takeOff:@"42b8e02a-a292-4dd7-a5ab-012898ca6dbd"];
-//	UITabBarController *tabController = (UITabBarController *)self.window.rootViewController;
-//	[tabController setSelectedIndex:2]; // Veitan
+    // Register with TestFlight
+    [TestFlight takeOff:TESTFLIGHT_APP_CODE];
+    
+    // Display LoginController if user is not logged in
 	UIViewController *rootViewController = (UIViewController *)self.window.rootViewController;
-	if ([rootViewController isKindOfClass:[LoginViewController class]]) {
+	if ([rootViewController isKindOfClass:[UITabBarController class]]) {
         NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
         User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
-        if (user)
-            [self didFinishLoginWithValidUser];
+        if (user == nil) { // Open LoginController if user is not logged in
+            rootViewController = [[AppFactory mainStoryboard] instantiateViewControllerWithIdentifier:LOGIN_VIEW_CONTROLLER_IDENTIFIER];
+        } else { // Else open tab for Veitan
+            UITabBarController *tabBarController = (UITabBarController *)rootViewController;
+            [tabBarController setSelectedIndex:SELECTED_TAB];
+        }
 	}
-    // Debug
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-//	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-//    [self.window setRootViewController:tabBarController];
-
-	
+    
     // White status bar
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     [[UINavigationBar appearance] setTitleTextAttributes:@{
                                                            NSForegroundColorAttributeName: [UIColor whiteColor],
-                                                           NSFontAttributeName: [CentrisTheme headingMediumFont]
+                                                        NSFontAttributeName: [CentrisTheme headingMediumFont]
                                                            }];
     [[UINavigationBar appearance] setBarTintColor:[CentrisTheme redColor]];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
@@ -50,9 +53,10 @@
     return YES;
 }
 
-#pragma mark - UIAlertView
+#pragma mark - App Beta update methods
 - (void)checkForUpdate
 {
+    /* This method is only for TestFlight, this will be removed when app is finished */
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://centris.nfsu.is/app_version/"
       parameters:nil
@@ -73,6 +77,7 @@
              NSLog(@"Error version number");
          }];
 }
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
@@ -85,18 +90,16 @@
 #pragma mark - Login Delegates
 -(void)didFinishLoginWithValidUser
 {
-    [TestFlight passCheckpoint:@"Got to the HomeFeed"];
+    [TestFlight passCheckpoint:@"User logged in successfully"];
     [self saveContext];
-	UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-	UITabBarController *tabBarController = [storyboard instantiateViewControllerWithIdentifier:@"TabBarController"];
-	[tabBarController setSelectedIndex:2]; // Veitan
+    UITabBarController *tabBarController = [[AppFactory mainStoryboard]  instantiateViewControllerWithIdentifier:TAB_BAR_VIEW_CONTROLLER_IDENTIFIER];
+	[tabBarController setSelectedIndex:SELECTED_TAB]; // Veitan
 	[self.window setRootViewController:tabBarController];
 }
 
 #pragma mark - Logout delegates
 -(void)didLogOutUser
 {
-    [TestFlight passCheckpoint:@"Logged out"];
     [self saveContext];
     // Remove database file, not sure if this is the right way
     NSArray *entities = @[@"Assignment", @"ScheduleEvent", @"AssignmentFile", @"CourseInstance", @"ScheduleEventUnit", @"User"];
@@ -118,11 +121,12 @@
         }
 
     }
+    
+    [TestFlight passCheckpoint:@"User logged out successfully"];
 
     // Destroy username from keychain
     [[AppFactory keychainItemWrapper] setObject:@"" forKey:(__bridge id)(kSecAttrAccount)];
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    LoginViewController *loginViewController = [[AppFactory mainStoryboard] instantiateViewControllerWithIdentifier:LOGIN_VIEW_CONTROLLER_IDENTIFIER];
     [self.window setRootViewController:loginViewController];
 }
 							

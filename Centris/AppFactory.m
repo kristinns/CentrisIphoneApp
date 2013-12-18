@@ -78,4 +78,9 @@ static NSManagedObjectContext *sharedManagedObjectContext = nil;
     return [NSUserDefaults standardUserDefaults];
 }
 
++ (UIStoryboard *)mainStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
+}
+
 @end
