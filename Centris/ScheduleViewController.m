@@ -58,7 +58,7 @@
 - (id<DataFetcher>)dataFetcher
 {
     if(!_dataFetcher)
-        _dataFetcher = [AppFactory fetcherFromConfiguration];
+        _dataFetcher = [AppFactory dataFetcher];
     return _dataFetcher;
 }
 

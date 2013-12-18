@@ -31,7 +31,8 @@
         NSString *username = [[AppFactory keychainItemWrapper] objectForKey:(__bridge id)(kSecAttrAccount)];
         User *user = [User userWithUsername:username inManagedObjectContext:[AppFactory managedObjectContext]];
         if (user == nil) { // Open LoginController if user is not logged in
-            rootViewController = [[AppFactory mainStoryboard] instantiateViewControllerWithIdentifier:LOGIN_VIEW_CONTROLLER_IDENTIFIER];
+            UITabBarController *tabBarController = [[AppFactory mainStoryboard] instantiateViewControllerWithIdentifier:LOGIN_VIEW_CONTROLLER_IDENTIFIER];
+            [self.window setRootViewController:tabBarController];
         } else { // Else open tab for Veitan
             UITabBarController *tabBarController = (UITabBarController *)rootViewController;
             [tabBarController setSelectedIndex:SELECTED_TAB];
@@ -146,8 +147,8 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    [self checkForUpdate];
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [self checkForUpdate];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application

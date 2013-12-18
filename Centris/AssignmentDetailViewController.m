@@ -213,7 +213,7 @@
 - (void)fetchAssignmentFromAPI
 {
     CourseInstance *courseInstance = self.assignment.isInCourseInstance;
-    [[AppFactory fetcherFromConfiguration] getAssignmentById:[self.assignment.id integerValue] courseId:[courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AppFactory dataFetcher] getAssignmentById:[self.assignment.id integerValue] courseId:[courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got assignment %@", [responseObject objectForKey:@"Title"]);
         // Add assignment to core data
         [Assignment updateAssignmentWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];      // Update our assignment

@@ -56,7 +56,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataFetcher = [AppFactory fetcherFromConfiguration];
+    self.dataFetcher = [AppFactory dataFetcher];
 	[self setup];
 }
 

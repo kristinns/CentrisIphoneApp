@@ -14,7 +14,7 @@
 
 @interface AppFactory : NSObject
 
-+ (id<DataFetcher>)fetcherFromConfiguration;
++ (id<DataFetcher>)dataFetcher;
 + (KeychainItemWrapper *)keychainItemWrapper;
 + (NSManagedObjectContext *)managedObjectContext;
 + (NSUserDefaults *)sharedDefaults;

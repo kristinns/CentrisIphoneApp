@@ -60,7 +60,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataFetcher = [AppFactory fetcherFromConfiguration];
+    self.dataFetcher = [AppFactory dataFetcher];
 	self.navigationController.navigationBar.translucent = NO;
     self.courseTableView.scrollEnabled = YES;
     // Setup chart
