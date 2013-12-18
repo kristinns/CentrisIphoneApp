@@ -139,7 +139,7 @@
     Announcement *announcement = [self.announcements objectAtIndex:indexPath.row];
     cell.titleLabel.text = announcement.title.length != 0 ? announcement.title : @"Enginn titill";
     cell.courseNameLabel.text = ((CourseInstance *)announcement.isInCourseInstance).name;
-    cell.dateLabel.text = [NSDate convertToString:announcement.dateInserted withFormat:@"dd.MMM"];
+    cell.dateLabel.text = [announcement.dateInserted stringFromDateWithFormat:@"dd.MMM"];
     NSString *content = [announcement.content stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
     cell.contentLabel.text = [content substringToIndex:MIN(content.length, MAX_ANNOUNCEMENT_CONTENT_LENGTH)];
     

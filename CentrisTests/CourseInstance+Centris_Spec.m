@@ -46,10 +46,10 @@ describe(@"CourseInstance Category", ^{
         assignment1.isInCourseInstance = courseInstance;
         assignment1.title = @"Assignment 1";
         assignment1.assignmentDescription = @"Some description";
-        assignment1.datePublished = [NSDate convertToDate:@"2013-11-12T14:31:31" withFormat:nil];
-        assignment1.dateClosed = [NSDate convertToDate:@"2013-11-25T14:31:31" withFormat:nil];
+        assignment1.datePublished = [NSDate dateFromString:@"2013-11-12T14:31:31" withFormat:nil];
+        assignment1.dateClosed = [NSDate dateFromString:@"2013-11-25T14:31:31" withFormat:nil];
         assignment1.isInCourseInstance = courseInstance;
-        assignment1.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment1.handInDate = [NSDate dateFromString:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         assignment1.grade = [NSNumber numberWithFloat:8.5];
         assignment1.weight = [NSNumber numberWithFloat:5];
         
@@ -58,10 +58,10 @@ describe(@"CourseInstance Category", ^{
         assignment2.isInCourseInstance = courseInstance;
         assignment2.title = @"Assignment 1";
         assignment2.assignmentDescription = @"Some description";
-        assignment2.datePublished = [NSDate convertToDate:@"2013-10-12T14:31:31" withFormat:nil];
-        assignment2.dateClosed = [NSDate convertToDate:@"2013-10-25T14:31:31" withFormat:nil];
+        assignment2.datePublished = [NSDate dateFromString:@"2013-10-12T14:31:31" withFormat:nil];
+        assignment2.dateClosed = [NSDate dateFromString:@"2013-10-25T14:31:31" withFormat:nil];
         assignment2.isInCourseInstance = courseInstance;
-        assignment2.handInDate = [NSDate convertToDate:@"2013-10-21T14:31:31" withFormat:nil]; // handed in
+        assignment2.handInDate = [NSDate dateFromString:@"2013-10-21T14:31:31" withFormat:nil]; // handed in
         assignment2.grade = [NSNumber numberWithFloat:10];
         assignment2.weight = [NSNumber numberWithFloat:10.5];
 

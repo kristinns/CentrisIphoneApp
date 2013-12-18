@@ -32,7 +32,7 @@ describe(@"Menu Category ", ^{
         
         // Create some dates so the menus will always be on monday - friday
         gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents *currComps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
+        NSDateComponents *currComps = [[NSDate date] dateComponentForDateWithCalendar:gregorian];
         customComps = [[NSDateComponents alloc] init];
         [customComps setWeekday:4];
         [customComps setYear:[currComps year]];
@@ -43,10 +43,10 @@ describe(@"Menu Category ", ^{
         
         // Create some menus in the past
         Menu *customMenu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
-        customMenu.date = [NSDate convertToDate:@"2013-11-13T12:00:00" withFormat:nil];
+        customMenu.date = [NSDate dateFromString:@"2013-11-13T12:00:00" withFormat:nil];
         customMenu.menu = @"Hakkabuff í pítusósu";
         Menu *customMenu2 = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
-        customMenu2.date = [NSDate convertToDate:@"2013-11-14T12:00:00" withFormat:nil];
+        customMenu2.date = [NSDate dateFromString:@"2013-11-14T12:00:00" withFormat:nil];
         customMenu2.menu = @"Ristaðbrauð með smjöri og sultu";
         
         // create some menus for the current week
@@ -59,7 +59,7 @@ describe(@"Menu Category ", ^{
     });
     
     it(@"should be able to retrieve the menu for a given day", ^{
-        Menu *menu = [Menu getMenuForDay:[NSDate convertToDate:@"2013-11-13T00:00:00" withFormat:nil] inManagedObjectContext:context];
+        Menu *menu = [Menu getMenuForDay:[NSDate dateFromString:@"2013-11-13T00:00:00" withFormat:nil] inManagedObjectContext:context];
         [[menu shouldNot] beNil];
     });
     
@@ -72,13 +72,13 @@ describe(@"Menu Category ", ^{
         NSMutableDictionary *mondayDic = [[NSMutableDictionary alloc] init];
         [customComps setWeekday:2]; // monday
         NSDate *monday = [gregorian dateFromComponents:customComps];
-        [mondayDic setObject:[NSDate convertToString:monday withFormat:nil] forKey:@"Date"];
+        [mondayDic setObject:[monday stringFromDateWithFormat:nil] forKey:@"Date"];
         [mondayDic setObject:@"Kjötbollur" forKey:@"Menu"];
         
         NSMutableDictionary *tuesdayDic = [[NSMutableDictionary alloc] init];
         [customComps setWeekday:3]; // tuesday
         NSDate *tuesday = [gregorian dateFromComponents:customComps];
-        [tuesdayDic setObject:[NSDate convertToString:tuesday withFormat:nil] forKey:@"Date"];
+        [tuesdayDic setObject:[tuesday stringFromDateWithFormat:nil] forKey:@"Date"];
         [tuesdayDic setObject:@"Fiskur" forKey:@"Menu"];
         
         [Menu addMenuWithCentrisInfo:@[mondayDic, tuesdayDic] inManagedObjectContext:context];
@@ -87,9 +87,9 @@ describe(@"Menu Category ", ^{
     });
     
     it(@"should not be able to duplicate menu item for the same day", ^{
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
         NSMutableDictionary *customMenu = [[NSMutableDictionary alloc] init];
-        [customMenu setObject:[NSDate convertToString:range[@"from"] withFormat:nil] forKey:@"Date"];
+        [customMenu setObject:[range[@"from"] stringFromDateWithFormat:nil] forKey:@"Date"];
         [customMenu setObject:@"Leppalúða" forKey:@"Menu"];
         [Menu addMenuWithCentrisInfo:@[customMenu] inManagedObjectContext:context];
         NSArray *menu = [Menu getMenuForCurrentWeekInManagedObjectContext:context];

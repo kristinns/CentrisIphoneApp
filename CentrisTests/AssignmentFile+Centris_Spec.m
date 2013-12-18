@@ -38,7 +38,7 @@ describe(@"AssignmentFile Category", ^{
         courseInstance.semester = @"20133";
         
         // Create a date range that is always available
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
         
         // Set up dummy assignments to be ready for testing
         assignment = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
@@ -49,7 +49,7 @@ describe(@"AssignmentFile Category", ^{
         assignment.datePublished = range[@"from"];
         assignment.dateClosed = [(NSDate *)range[@"to"] dateByAddingDays:5];
         assignment.isInCourseInstance = courseInstance;
-        assignment.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment.handInDate = [NSDate dateFromString:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
     });
     
     it(@"should be able to add assignmentfiles to assignment", ^{

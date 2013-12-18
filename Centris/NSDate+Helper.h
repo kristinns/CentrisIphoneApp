@@ -14,11 +14,11 @@
 - (NSDate *)dateByAddingDays:(NSInteger)daysToAdd; // tested
 - (NSDate *)dateByAddingWeeks:(NSInteger)weeksToAdd; // tested
 
-+ (NSDate *)convertToDate:(NSString *)dateString withFormat:(NSString *)format; // tested
-+ (NSString *)convertToString:(NSDate *)date withFormat:(NSString *)format; // tested
++ (NSDate *)dateFromString:(NSString *)dateString withFormat:(NSString *)format; // tested
+- (NSString *)stringFromDateWithFormat:(NSString *)format; // tested
 
-+ (NSDictionary *)dateRangeForTheWholeDay:(NSDate *)date; // tested
-+ (NSDictionary *)dateRangeToMidnightFromDate:(NSDate *)date; // tested
-+ (NSDictionary *)dateRangeToNextMorning:(NSDate *)date; // tested
-+ (NSDateComponents *)dateComponentForDate:(NSDate *)date withCalendar:(NSCalendar *)calendar;
+- (NSDictionary *)dateRangeForTheWholeDay; // tested
+- (NSDictionary *)dateRangeToMidnightFromDate; // tested
+- (NSDictionary *)dateRangeToNextMorning; // tested
+- (NSDateComponents *)dateComponentForDateWithCalendar:(NSCalendar *)calendar;
 @end

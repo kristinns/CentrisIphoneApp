@@ -26,7 +26,7 @@
     [super viewDidLoad];
     if (self.announcement != nil) {
         self.titleLabel.text = self.announcement.title.length != 0 ? self.announcement.title : @"Enginn titill";
-        self.dateLabel.text = [NSDate convertToString:self.announcement.dateInserted withFormat:@"d. MMMM YYYY"];
+        self.dateLabel.text = [self.announcement.dateInserted stringFromDateWithFormat:@"d. MMMM YYYY"];
         self.courseLabel.text = ((CourseInstance *)self.announcement.isInCourseInstance).name;
         self.contentTextView.text = self.announcement.content;
         self.contentTextView.contentInset = UIEdgeInsetsMake(0,-5,0,0);

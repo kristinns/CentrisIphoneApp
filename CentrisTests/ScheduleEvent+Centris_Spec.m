@@ -29,7 +29,7 @@ describe(@"ScheduleEvent Category", ^{
         } else {
             NSLog(@"Could not set coordinator in Unit Tests");
         }
-        range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        range = [[NSDate date] dateRangeForTheWholeDay];
         // Set up dummy course instance to be ready for testing
         CourseInstance *courseInstance = [NSEntityDescription insertNewObjectForEntityForName:@"CourseInstance" inManagedObjectContext:context];
         courseInstance.id = [NSNumber numberWithInteger:22363];
@@ -47,8 +47,8 @@ describe(@"ScheduleEvent Category", ^{
         // Set up dummy event to be ready for testing
         ScheduleEvent *scheduleEvent = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         scheduleEvent.courseName = courseInstance.name;
-        scheduleEvent.starts = [NSDate convertToDate:@"2013-11-27T08:30:00" withFormat:nil];
-        scheduleEvent.ends = [NSDate convertToDate:@"2013-11-27T10:05:00" withFormat:nil];
+        scheduleEvent.starts = [NSDate dateFromString:@"2013-11-27T08:30:00" withFormat:nil];
+        scheduleEvent.ends = [NSDate dateFromString:@"2013-11-27T10:05:00" withFormat:nil];
         scheduleEvent.eventID = [NSNumber numberWithInteger:1];
         scheduleEvent.roomName = @"M101";
         scheduleEvent.typeOfClass = @"Fyrirlestur";
@@ -56,14 +56,14 @@ describe(@"ScheduleEvent Category", ^{
         
         // set up dummy event units to be ready for testing
         ScheduleEventUnit *scheduleEventUnit = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEventUnit" inManagedObjectContext:context];
-        scheduleEventUnit.starts = [NSDate convertToDate:@"2013-11-27T08:30:00" withFormat:nil];
-        scheduleEventUnit.ends = [NSDate convertToDate:@"2013-11-27T09:15:00" withFormat:nil];
+        scheduleEventUnit.starts = [NSDate dateFromString:@"2013-11-27T08:30:00" withFormat:nil];
+        scheduleEventUnit.ends = [NSDate dateFromString:@"2013-11-27T09:15:00" withFormat:nil];
         scheduleEventUnit.id = @"1_1";
         scheduleEventUnit.isAUnitOf = scheduleEvent;
         
         ScheduleEventUnit *scheduleEventUnit2 = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEventUnit" inManagedObjectContext:context];
-        scheduleEventUnit2.starts = [NSDate convertToDate:@"2013-11-27T09:20:00" withFormat:nil];
-        scheduleEventUnit2.ends = [NSDate convertToDate:@"2013-11-27T10:05:00" withFormat:nil];
+        scheduleEventUnit2.starts = [NSDate dateFromString:@"2013-11-27T09:20:00" withFormat:nil];
+        scheduleEventUnit2.ends = [NSDate dateFromString:@"2013-11-27T10:05:00" withFormat:nil];
         scheduleEventUnit2.id = @"1_2";
         scheduleEventUnit2.isAUnitOf = scheduleEvent;
         
@@ -116,8 +116,8 @@ describe(@"ScheduleEvent Category", ^{
         // Set up dummy final exam to be ready for testing
         ScheduleEvent *finalExam = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         finalExam.courseName = courseInstance.name;
-        finalExam.starts = [NSDate convertToDate:@"2013-12-04T09:00:00" withFormat:nil];
-        finalExam.ends = [NSDate convertToDate:@"2013-12-04T12:00:00" withFormat:nil];
+        finalExam.starts = [NSDate dateFromString:@"2013-12-04T09:00:00" withFormat:nil];
+        finalExam.ends = [NSDate dateFromString:@"2013-12-04T12:00:00" withFormat:nil];
         finalExam.eventID = [NSNumber numberWithInteger:2];
         finalExam.roomName = @"M101";
         finalExam.typeOfClass = @"Lokapróf";
@@ -125,8 +125,8 @@ describe(@"ScheduleEvent Category", ^{
         
         ScheduleEvent *finalExam2 = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         finalExam2.courseName = courseInstance2.name;
-        finalExam2.starts = [NSDate convertToDate:@"2013-12-10T09:00:00" withFormat:nil];
-        finalExam2.ends = [NSDate convertToDate:@"2013-12-10T12:00:00" withFormat:nil];
+        finalExam2.starts = [NSDate dateFromString:@"2013-12-10T09:00:00" withFormat:nil];
+        finalExam2.ends = [NSDate dateFromString:@"2013-12-10T12:00:00" withFormat:nil];
         finalExam2.eventID = [NSNumber numberWithInteger:2];
         finalExam2.roomName = @"M101";
         finalExam2.typeOfClass = @"Lokapróf";
@@ -141,7 +141,7 @@ describe(@"ScheduleEvent Category", ^{
     });
     
     it(@"should be able to get schedule event units for certain date", ^{
-        NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate convertToDate:@"2013-11-27T00:00:00" withFormat:nil] inManagedObjectContext:context];
+        NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate dateFromString:@"2013-11-27T00:00:00" withFormat:nil] inManagedObjectContext:context];
         [[theValue([checkEventUnits count]) should] equal:theValue(2)];
     });
     
@@ -163,7 +163,7 @@ describe(@"ScheduleEvent Category", ^{
     });
     
     it(@"should be able to retrieve final exams properly", ^{
-        NSArray *checkFinalExams = [ScheduleEvent finalExamsExceedingDate:[NSDate convertToDate:@"2013-11-27T12:00:00" withFormat:nil] InManagedObjectContext:context];
+        NSArray *checkFinalExams = [ScheduleEvent finalExamsExceedingDate:[NSDate dateFromString:@"2013-11-27T12:00:00" withFormat:nil] InManagedObjectContext:context];
         [[theValue([checkFinalExams count]) should] equal:theValue(2)];
     });
     
@@ -178,7 +178,7 @@ describe(@"ScheduleEvent Category", ^{
                              @"2013-11-28T13:55:00", @"EndTime",
                              @"Dæmatími",@"TypeOfClass", nil]];
         [ScheduleEvent addScheduleEventsWithCentrisInfo:events inManagedObjectContext:context];
-        NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate convertToDate:@"2013-11-28T12:00:00" withFormat:nil] inManagedObjectContext:context];
+        NSArray *checkEventUnits = [ScheduleEvent scheduleEventUnitsForDay:[NSDate dateFromString:@"2013-11-28T12:00:00" withFormat:nil] inManagedObjectContext:context];
         [[theValue([checkEventUnits count]) should] equal:theValue(2)];
     });
     

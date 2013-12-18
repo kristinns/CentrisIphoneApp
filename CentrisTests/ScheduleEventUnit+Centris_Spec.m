@@ -40,8 +40,8 @@ describe(@"ScheduleEventUnit Category", ^{
         // Set up dummy event to be ready for testing
         scheduleEvent = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         scheduleEvent.courseName = courseInstance.name;
-        scheduleEvent.starts = [NSDate convertToDate:@"2013-11-27T08:30:00" withFormat:nil];
-        scheduleEvent.ends = [NSDate convertToDate:@"2013-11-27T10:05:00" withFormat:nil];
+        scheduleEvent.starts = [NSDate dateFromString:@"2013-11-27T08:30:00" withFormat:nil];
+        scheduleEvent.ends = [NSDate dateFromString:@"2013-11-27T10:05:00" withFormat:nil];
         scheduleEvent.eventID = [NSNumber numberWithInteger:1];
         scheduleEvent.roomName = @"M101";
         scheduleEvent.typeOfClass = @"Fyrirlestur";

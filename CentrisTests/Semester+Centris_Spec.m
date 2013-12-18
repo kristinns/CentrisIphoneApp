@@ -63,7 +63,7 @@ describe(@"Semester Category", ^{
         assignment1.title = @"Assignment 1";
         assignment1.assignmentDescription = @"Some description";
         assignment1.isInCourseInstance = courseInstance;
-        assignment1.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment1.handInDate = [NSDate dateFromString:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         assignment1.grade = [NSNumber numberWithFloat:8.5f];
         assignment1.weight = [NSNumber numberWithFloat:12.5f];
 
@@ -73,15 +73,15 @@ describe(@"Semester Category", ^{
         assignment2.title = @"Assignment 2";
         assignment2.assignmentDescription = @"Some description";
         assignment2.isInCourseInstance = courseInstance;
-        assignment2.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment2.handInDate = [NSDate dateFromString:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         assignment2.grade = [NSNumber numberWithFloat:3.3f];
         assignment2.weight = [NSNumber numberWithFloat:5.0f];
         
         // Set up dummy events
         ScheduleEvent *scheduleEvent = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         scheduleEvent.courseName = courseInstance.name;
-        scheduleEvent.starts = [NSDate convertToDate:@"2013-08-18T08:30:00" withFormat:nil];
-        scheduleEvent.ends = [NSDate convertToDate:@"2013-08-18T10:05:00" withFormat:nil];
+        scheduleEvent.starts = [NSDate dateFromString:@"2013-08-18T08:30:00" withFormat:nil];
+        scheduleEvent.ends = [NSDate dateFromString:@"2013-08-18T10:05:00" withFormat:nil];
         scheduleEvent.eventID = [NSNumber numberWithInteger:1];
         scheduleEvent.roomName = @"M101";
         scheduleEvent.typeOfClass = @"Fyrirlestur";
@@ -89,8 +89,8 @@ describe(@"Semester Category", ^{
         
         ScheduleEvent *finalExam = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         finalExam.courseName = courseInstance.name;
-        finalExam.starts = [NSDate convertToDate:@"2013-12-18T09:00:00" withFormat:nil];
-        finalExam.ends = [NSDate convertToDate:@"2013-12-18T12:00:00" withFormat:nil];
+        finalExam.starts = [NSDate dateFromString:@"2013-12-18T09:00:00" withFormat:nil];
+        finalExam.ends = [NSDate dateFromString:@"2013-12-18T12:00:00" withFormat:nil];
         finalExam.eventID = [NSNumber numberWithInteger:2];
         finalExam.roomName = @"M101";
         finalExam.typeOfClass = @"Lokapróf";
@@ -98,8 +98,8 @@ describe(@"Semester Category", ^{
         
         ScheduleEvent *scheduleEvent2 = [NSEntityDescription insertNewObjectForEntityForName:@"ScheduleEvent" inManagedObjectContext:context];
         scheduleEvent2.courseName = courseInstance2.name;
-        scheduleEvent2.starts = [NSDate convertToDate:@"2013-08-24T08:30:00" withFormat:nil];
-        scheduleEvent2.ends = [NSDate convertToDate:@"2013-08-24T10:05:00" withFormat:nil];
+        scheduleEvent2.starts = [NSDate dateFromString:@"2013-08-24T08:30:00" withFormat:nil];
+        scheduleEvent2.ends = [NSDate dateFromString:@"2013-08-24T10:05:00" withFormat:nil];
         scheduleEvent2.eventID = [NSNumber numberWithInteger:1];
         scheduleEvent2.roomName = @"M101";
         scheduleEvent2.typeOfClass = @"Fyrirlestur";
@@ -123,7 +123,7 @@ describe(@"Semester Category", ^{
     });
     
     it(@"should be able to get progress of the semester", ^{
-        float checkProgress = [semester progressForDate:[NSDate convertToDate:@"2013-10-01T12:00:00" withFormat:nil]];
+        float checkProgress = [semester progressForDate:[NSDate dateFromString:@"2013-10-01T12:00:00" withFormat:nil]];
         NSString *stringCompare = [NSString stringWithFormat:@"%.3f", checkProgress];
         [[theValue([stringCompare isEqualToString:@"0.361"]) should] beTrue];
     });
@@ -134,7 +134,7 @@ describe(@"Semester Category", ^{
     });
     
     it(@"should be able to retrieve how many weeks are left of the semester", ^{
-        NSInteger checkWeeksLeft = [semester weeksLeft:[NSDate convertToDate:@"2013-11-26T12:00:00" withFormat:nil]];
+        NSInteger checkWeeksLeft = [semester weeksLeft:[NSDate dateFromString:@"2013-11-26T12:00:00" withFormat:nil]];
         [[theValue(checkWeeksLeft) should] equal:theValue(3)];
     });
 });

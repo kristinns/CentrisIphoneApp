@@ -81,7 +81,7 @@
 // Retrieves all assignments that have not been handed in for the current date
 + (NSArray *)assignmentsNotHandedInForCurrentDateInManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"(dateClosed >= %@) AND (dateClosed <= %@) AND (handInDate = nil)", range[@"from"], range[@"to"]];
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Assignment"
                                                 forKey:@"dateClosed"
@@ -105,15 +105,15 @@
     }
     assignment.weight = assignmentInfo[ASSIGNMENT_WEIGHT];
     assignment.maxGroupSize = assignmentInfo[ASSIGNMENT_MAX_STUDENTS_IN_GROUP];
-    assignment.datePublished = [NSDate convertToDate:assignmentInfo[ASSIGNMENT_DATE_PUBLISHED] withFormat:nil];
-    assignment.dateClosed = [NSDate convertToDate:assignmentInfo[ASSIGNMENT_DATE_CLOSED] withFormat:nil];
+    assignment.datePublished = [NSDate dateFromString:assignmentInfo[ASSIGNMENT_DATE_PUBLISHED] withFormat:nil];
+    assignment.dateClosed = [NSDate dateFromString:assignmentInfo[ASSIGNMENT_DATE_CLOSED] withFormat:nil];
     CourseInstance *courseInst = [CourseInstance courseInstanceWithID:[assignmentInfo[ASSIGNMENT_COURSE_INSTANCE_ID] integerValue] inManagedObjectContext:context];
     assignment.isInCourseInstance = courseInst;
     assignment.groupID = assignmentInfo[ASSIGNMENT_GROUP_ID] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_GROUP_ID] ;
     assignment.grade = assignmentInfo[ASSIGNMENT_GRADE] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_GRADE];
     assignment.studentMemo = assignmentInfo[ASSIGNMENT_STUDENT_MEMO] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_STUDENT_MEMO];
     assignment.teacherMemo = assignmentInfo[ASSIGNMENT_TEACHER_MEMO] == (id)[NSNull null] ? nil : assignmentInfo[ASSIGNMENT_TEACHER_MEMO];
-    assignment.handInDate = assignmentInfo[ASSIGNMENT_HANDIN_DATE] == (id)[NSNull null] ? nil : [NSDate convertToDate:assignmentInfo[ASSIGNMENT_HANDIN_DATE] withFormat:nil];
+    assignment.handInDate = assignmentInfo[ASSIGNMENT_HANDIN_DATE] == (id)[NSNull null] ? nil : [NSDate dateFromString:assignmentInfo[ASSIGNMENT_HANDIN_DATE] withFormat:nil];
     
     // add the files
     [AssignmentFile addAssignmentFilesForAssignment:assignment withAssignmentFiles:assignmentInfo[ASSIGNMENT_FILES] inManagedObjectContext:context];

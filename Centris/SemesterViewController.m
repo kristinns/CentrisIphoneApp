@@ -98,8 +98,8 @@
     self.totalECTSLabel.text = [NSString stringWithFormat:@"%d",[self.semester totalEcts]];
     self.finishedECTSLabel.text = [NSString stringWithFormat:@"%d", [self.semester finishedEcts]];
     NSDictionary *semesterDateRange = [self.semester semesterRange];
-    self.semesterStartDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"starts"] withFormat:@"dd. MMMM"] uppercaseString];
-    self.semesterEndDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"ends"] withFormat:@"dd. MMMM"] uppercaseString];
+    self.semesterStartDateLabel.text = [[[semesterDateRange objectForKey:@"starts"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
+    self.semesterEndDateLabel.text = [[[semesterDateRange objectForKey:@"ends"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
     
     // Chart
     
