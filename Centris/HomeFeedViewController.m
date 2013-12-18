@@ -120,7 +120,7 @@
     // If the clock is between 11:00 and 13:00, then add Lunch card
     Menu *menu;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 11 &&
+    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 10 &&
         [[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] <= 13) {
         menu = [Menu getMenuForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
     }

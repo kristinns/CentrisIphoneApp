@@ -93,7 +93,7 @@
     self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromAssignmentsInSemester];
     self.semesterProgressLabel.text = semesterProgress < 100 ? [NSString stringWithFormat:@"%.0f%%", semesterProgress] : @"Lokið";
     // Progress view with max 100
-    [self.semesterProgressView setProgress:(semesterProgress < 100 ? semesterProgress : 100)];
+    [self.semesterProgressView setProgress:(semesterProgress < 100 ? semesterProgress/100 : 100)];
     self.weeksLeftLabel.text = [NSString stringWithFormat:@"%d", [self.semester weeksLeft:[NSDate date]]];
     self.totalECTSLabel.text = [NSString stringWithFormat:@"%d",[self.semester totalEcts]];
     self.finishedECTSLabel.text = [NSString stringWithFormat:@"%d", [self.semester finishedEcts]];

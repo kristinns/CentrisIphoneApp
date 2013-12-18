@@ -22,6 +22,8 @@
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 + (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success
                    failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
++ (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 // Post
 + (void)loginUserWithUsername:(NSString *)email andPassword:(NSString *)password
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success

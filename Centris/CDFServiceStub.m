@@ -693,7 +693,7 @@
 						 @"22220", @"CourseID",
 						 @"Verkefnalausnir", @"CourseName",
 						 @"M201", @"RoomName",
-						 @"2013-12-17T13:10:00", @"StartTime",
+						 @"2013-12-17T14:55:00", @"StartTime",
 						 @"2013-12-17T16:30:00", @"EndTime",
 						 @"Fyrirlestur",@"TypeOfClass", nil]];
     
@@ -871,6 +871,43 @@
 
 + (void )getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    success(nil, nil);
+    NSMutableArray *announcements = [[NSMutableArray alloc] init];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @1, @"ID",
+                              @"Smáviðbót sem gleymdist.", @"Title",
+                              @"22218", @"CourseID",
+                              @"Komið þið sæl.\nPrófsýning fyrir sjúkra- og endurtektarpróf verður haldin í stofu M112 fimmtudaginn 19. janúar 2012 kl. 12-13.\nKveðja, Halldór.", @"Content",
+                              @"2011-12-15T00:00:00", @"DateInserted", nil]];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @2, @"ID",
+                              @"Prófsýning fyrir sjúkra- og endurtektarpróf ", @"Title",
+                              @"22218", @"CourseID",
+                              @"Lokaprófið er komið inn á námskeiðsvefinn undir \"Annað efni\".", @"Content",
+                              @"2011-12-15T00:00:00", @"DateInserted", nil]];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @3, @"ID",
+                              @"Prófsýning", @"Title",
+                              @"22218", @"CourseID",
+                              @"Komið þið sæl.\nEinkunnir í námskeiðinu hafa verið sendar til kennslusviðs, sem væntanlega birtir þær í fyrramálið. \nPrófsýning verður á þriðjudaginn 20. desember í sal V101, kl. 11:30-12:30.  Ég verð hins vegar erlendis til mánudags, þannig að það þýðir ekki að beina fyrirspurnum til mín fyrr en í prófsýningunni. \nBestu kveðjur, Halldór.", @"Content",
+                              @"2011-12-15T00:00:00", @"DateInserted", nil]];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @4, @"ID",
+                              @"Lokaeinkunn tilbúin", @"Title",
+                              @"22212", @"CourseID",
+                              @"Lokaeinkunn í Forritun liggur núna fyrir.\nAthugið að útreiknað vegið meðaltal í MySchool er ekki (endilega) rétt þar sem MySchool getur ekki tekið tillit til þess að einungis hluti verkefna (t.d. 5 af 6) gildi til einkunna eða að hluti verkefna komi aðeins til hækkunar.   Lokaeinkunnin sem þið sjáið er því einkunn sem reiknuð er út af mér og miðast við einkunnir og vægi prófsins, skilaverkefnanna og dæmatímaverkefnanna.\nKveðjur, Hrafn.", @"Content",
+                              @"2011-12-15T00:00:00", @"DateInserted", nil]];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @5, @"ID",
+                              @"Einkunn og prófsýning", @"Title",
+                              @"22212", @"CourseID",
+                              @"Lokaeinkunn í Forritun liggur núna fyrir.\nAthugið að útreiknað vegið meðaltal í MySchool er ekki (endilega) rétt þar sem MySchool getur ekki tekið tillit til þess að einungis hluti verkefna (t.d. 5 af 6) gildi til einkunna eða að hluti verkefna komi aðeins til hækkunar.   Lokaeinkunnin sem þið sjáið er því einkunn sem reiknuð er út af mér og miðast við einkunnir og vægi prófsins, skilaverkefnanna og dæmatímaverkefnanna.\nKveðjur, Hrafn.", @"Content",
+                              @"2011-12-14T00:00:00", @"DateInserted", nil]];
+    [announcements addObject:[[NSDictionary alloc] initWithObjectsAndKeys:
+                              @6, @"ID",
+                              @"Niðurstaða úr prófinu", @"Title",
+                              @"22212", @"CourseID",
+                              @"Einkunnir úr öllum verkefnum hafa verið birtar.  Niðurstöður úr prófinu og lokaeinkunn úr námskeiðinu verða birtar á miðvikudaginn 14. desember - það þýðir ekkert að senda mér póst og biðja um einkunnina fyrr :-)  Til upplýsinga eru hér helstu niðurstöður úr prófinu sjálfu:\n\n    160 nemendur tóku prófið\n    49 nemendur féllu (30,6%)\n    Meðaltalið var 6,0\n    44 nemendur (27,5%) náðu >= 8,0\n    23 nemendur (14,4%) náðu >= 9,0\n    3 nemendur náðu 10,0.\n\nÉg hef einnig tekið saman árangur í prófinu miðað við \"full skil\" og ekki full skil.  Nemandi fær full skil ef meðaleinkunn hans í skilaverkefnum (5 af 6) er >= 8,0 og meðaleinkunn í dæmatímaverkefnum (9 af 12) er >= 8,0.\n\n    88 nemendur, sem tóku próf, voru með full skil.  Meðaleinkunn þeirra í prófinu var 7,6.\n    72 nemendur, sem tóku próf, voru ekki með full skil.  Meðaleinkunn þeirra í prófinu var 4,1.\n\nÞað er ánægjulegt að sjá hversu margir náðu virkilega góðum árangri í prófinu.  14,4% nemenda eru með >=9,0 og það er hátt í tvöfalt hærra hlutfall en náðist í fyrra.  Jafnframt er einnig hærra hlutfall nemenda með >= 8,0 samanborið við prófið frá því í fyrra.  Vissulega er fallshlutfallið hátt en það er þó minna en í fyrra - 30,6% nú vs. 32,5% í fyrra.\nKveðjur, Hrafn.", @"Content",
+                              @"2011-12-12T00:00:00", @"DateInserted", nil]];
+    success(nil, announcements);
 }
 @end
