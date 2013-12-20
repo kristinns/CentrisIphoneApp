@@ -38,21 +38,21 @@
     if (![courseInstances count])
         return 0.0;
     float average = 0.0f;
-    float counter = 0.0f;
+    float totalECTS = 0.0f;
     for (CourseInstance *courseInstance in courseInstances) {
         if ([courseInstance hasFinalResults]) {
             if (courseInstance.finalGrade != nil) {
-                average += [courseInstance.finalGrade floatValue];
-                counter++;
+                average += [courseInstance.finalGrade floatValue] * [courseInstance.ects floatValue];
+                totalECTS += [courseInstance.ects floatValue];
             }
         } else {
             float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
-            average = average + weightedAverageFromCourseInstance;
+            average += weightedAverageFromCourseInstance * [courseInstance.ects floatValue];
             if (weightedAverageFromCourseInstance)
-                counter++;
+                totalECTS+= [courseInstance.ects floatValue];
         }
     }
-    return average / counter;
+    return average / totalECTS;
 }
 
 

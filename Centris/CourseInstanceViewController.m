@@ -12,8 +12,9 @@
 #import "CourseInstance+Centris.h"
 #import "AppFactory.h"
 #import "Assignment+Centris.h"
+#import "WebViewController.h"
 
-#define COURSEINSTANCES_LAST_UPDATED @"AnnouncementTVCLastUpdate"
+#define COURSEINSTANCES_LAST_UPDATED @"SemesterVCLastUpdate"
 
 @interface CourseInstanceViewController () <UITableViewDataSource, UITableViewDelegate>
 // Outlets
@@ -42,19 +43,7 @@
 
 @implementation CourseInstanceViewController
 
-#pragma Getters
-- (NSArray *)materialTable
-{
-    if (_materialTable == nil)
-        _materialTable = @[
-                           @{ @"title" : @"Kennsluáætlun", @"content" : @"..." },
-                           @{ @"title" : @"Lýsing", @"content" : @"..." },
-                           @{ @"title" : @"Námsmat", @"content" : @"..." },
-                           @{ @"title" : @"Hæfniviðmið", @"content" : @"..." }
-                           ];
-    return _materialTable;
-}
-
+#pragma - Properties
 - (PNChart *)lineChart
 {
     if (_lineChart == nil) {
@@ -79,6 +68,30 @@
     return _barChart;
 }
 
+- (void)setCircleChartView:(PNChart *)circleChartView
+{
+    _circleChartView = circleChartView;
+    _circleChartView.type = PNCircleType;
+    _circleChartView.total = @100;
+    _circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
+    [_circleChartView strokeChart];
+    _circleChartView.circleChart.lineWidth = @2;
+    _circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
+    _circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
+}
+
+- (NSArray *)materialTable
+{
+    if (_materialTable == nil)
+        _materialTable = @[
+                           @{ @"title" : @"Kennsluáætlun", @"content" : self.courseInstance.syllabus ? self.courseInstance.syllabus : @"" },
+                           @{ @"title" : @"Lýsing", @"content" : self.courseInstance.content ? self.courseInstance.content : @"" },
+                           @{ @"title" : @"Námsmat", @"content" : self.courseInstance.assessmentMethods ? self.courseInstance.assessmentMethods : @"" },
+                           @{ @"title" : @"Hæfniviðmið", @"content" : self.courseInstance.learningOutcome ? self.courseInstance.learningOutcome : @"" }
+                           ];
+    return _materialTable;
+}
+
 - (NSArray *)gradedAssignments
 {
     if (_gradedAssignments == nil) {
@@ -87,13 +100,13 @@
     return _gradedAssignments;
 }
 
+#pragma mark - UIViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.dataFetcher = [AppFactory dataFetcher];
-    [self setupCircleChart];
     self.drawBarChart = YES;
-	[self setup];
+	[self setupOutlets];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -102,7 +115,18 @@
         [self userDidRefresh];
 }
 
-- (void)setup
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"materialSegue"]) {
+        WebViewController *destinationController = [segue destinationViewController];
+        NSDictionary *material = [self.materialTable objectAtIndex:self.materialTableView.indexPathForSelectedRow.row];
+        destinationController.title = [material objectForKey:@"title"];
+        destinationController.htmlContent = [material objectForKey:@"content"];
+    }
+}
+
+#pragma mark - Setup
+- (void)setupOutlets
 {
     // Set tableView delegate and datasource
     self.materialTableView.delegate = self;
@@ -126,7 +150,7 @@
             }
         }
     }
-    
+    // Setup averageWeightedCourseGrade
     if ([self.courseInstance hasFinalResults]) {
         // If courseInstance has final results and final grade
         if (self.courseInstance.finalGrade != nil) {
@@ -187,17 +211,8 @@
     self.isRefreshing = NO;
 }
 
-- (void)setupCircleChart
-{
-    self.circleChartView.type = PNCircleType;
-    self.circleChartView.total = @100;
-    self.circleChartView.strokeColor = [UIColor colorWithRed:65/255.0 green:65/255.0 blue:65/255.0 alpha:1.0];
-    [self.circleChartView strokeChart];
-    self.circleChartView.circleChart.lineWidth = @2;
-    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
-    self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
-}
-
+#pragma mark - Refresh Control
+/* TODO: This should happen in the models */
 - (void)userDidRefresh
 {
     if (!self.isRefreshing) {
@@ -213,7 +228,8 @@
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
                 // Refresh courseInstance
                 self.courseInstance = [CourseInstance courseInstanceWithID:self.courseInstance.id.integerValue inManagedObjectContext:[AppFactory managedObjectContext]];
-                [self setup];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSEINSTANCES_LAST_UPDATED];
+                [self setupOutlets];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
             }];
@@ -238,7 +254,7 @@
     }
 }
 
-#pragma TableView delegate methods
+#pragma mark -  UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -254,15 +270,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"materialTableViewCell"];
     cell.textLabel.text = [[self.materialTable objectAtIndex:indexPath.row] objectForKey:@"title"];
     return cell;
-}
-
-#pragma Segue methods
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([[segue identifier] isEqualToString:@"materialSegue"]) {
-        UIViewController *destinationController = [segue destinationViewController];
-        destinationController.title = [[self.materialTable objectAtIndex:self.materialTableView.indexPathForSelectedRow.row] objectForKey:@"title"];
-    }
 }
 
 @end

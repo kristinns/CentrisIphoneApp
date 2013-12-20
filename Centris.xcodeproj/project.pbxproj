@@ -50,6 +50,7 @@
 		193140C9185A250200473922 /* UICountingLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 193140BF185A250200473922 /* UICountingLabel.m */; };
 		193140CA185A250200473922 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 193140C0185A250200473922 /* README.md */; };
 		193140CC185A559F00473922 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 193140CB185A559F00473922 /* EventKit.framework */; };
+		1945CEF91863D9C600E9C02E /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1945CEF81863D9C600E9C02E /* WebViewController.m */; };
 		194842C21799B0AB0016A5C0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C11799B0AB0016A5C0 /* Foundation.framework */; };
 		194842C41799B0AB0016A5C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C31799B0AB0016A5C0 /* CoreGraphics.framework */; };
 		194842C61799B0AB0016A5C0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 194842C51799B0AB0016A5C0 /* UIKit.framework */; };
@@ -177,6 +178,8 @@
 		193140BF185A250200473922 /* UICountingLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICountingLabel.m; sourceTree = "<group>"; };
 		193140C0185A250200473922 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
 		193140CB185A559F00473922 /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
+		1945CEF71863D9C600E9C02E /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		1945CEF81863D9C600E9C02E /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		194842BE1799B0AB0016A5C0 /* Centris.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Centris.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		194842C11799B0AB0016A5C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		194842C31799B0AB0016A5C0 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -418,6 +421,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		1945CEF61863D99A00E9C02E /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				1945CEF71863D9C600E9C02E /* WebViewController.h */,
+				1945CEF81863D9C600E9C02E /* WebViewController.m */,
+			);
+			name = Reusable;
+			sourceTree = "<group>";
+		};
 		194842B51799B0AB0016A5C0 = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +595,7 @@
 		966A499017E9B2DD009C342B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				1945CEF61863D99A00E9C02E /* Reusable */,
 				19828852185BEB8000265F9D /* Announcements */,
 				193140A71858FBC700473922 /* Course */,
 				197631B11857947500D71356 /* Semester */,
@@ -941,6 +954,7 @@
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
 				1982886D185BF4AC00265F9D /* Announcement.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
+				1945CEF91863D9C600E9C02E /* WebViewController.m in Sources */,
 				1982886A185BF29F00265F9D /* Announcement+Centris.m in Sources */,
 				18120EDD1859F7A4001D802F /* Semester+Centris.m in Sources */,
 				18A630D1183973D200CA29FE /* ScheduleEventUnit.m in Sources */,
