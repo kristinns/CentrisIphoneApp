@@ -17,7 +17,7 @@
 #import "DataFetcher.h"
 #import "Assignment+Centris.h"
 
-#define COURSEINSTANCES_LAST_UPDATED @"AnnouncementTVCLastUpdate"
+#define COURSEINSTANCES_LAST_UPDATED @"SemesterVCLastUpdate"
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
@@ -43,6 +43,7 @@
 @end
 
 @implementation SemesterViewController
+
 #pragma Getters
 - (NSArray *)courseInstances
 {
@@ -57,21 +58,25 @@
         _semester = [[Semester semestersInManagedObjectContext:[AppFactory managedObjectContext]] lastObject];
     return _semester;
 }
+
+- (void)setupCircleChart
+{
+    self.circleChartView.type = PNCircleType;
+    self.circleChartView.total = @100;
+    self.circleChartView.strokeColor = [UIColor whiteColor];
+    self.circleChartView.circleChart.lineWidth = @4;
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.dataFetcher = [AppFactory dataFetcher];
 	self.navigationController.navigationBar.translucent = NO;
     self.courseTableView.scrollEnabled = YES;
-    // Setup chart
-    self.circleChartView.type = PNCircleType;
-    self.circleChartView.total = @100;
-    self.circleChartView.strokeColor = [UIColor whiteColor];
-    self.circleChartView.current = [NSNumber numberWithFloat:[self.semester totalPercentagesFromAssignmentsInSemester] * 100];
-    [self.circleChartView strokeChart];
+    [self setupCircleChart];
     [self setup];
 }
 
+#pragma Controller initializers
 - (void)viewDidAppear:(BOOL)animated
 {
     if ([self viewNeedsToBeUpdated])
@@ -80,6 +85,8 @@
 
 - (void)setup
 {
+    self.isRefreshing = NO;
+    
     // Force reloading in tableView to get correct contentSize
     [self.courseTableView reloadData];
     NSInteger courseTableViewheight = self.courseTableView.contentSize.height;
@@ -93,7 +100,7 @@
     self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromAssignmentsInSemester];
     self.semesterProgressLabel.text = semesterProgress < 100 ? [NSString stringWithFormat:@"%.0f%%", semesterProgress] : @"Lokið";
     // Progress view with max 100
-    [self.semesterProgressView setProgress:(semesterProgress < 100 ? semesterProgress/100 : 100)];
+    [self.semesterProgressView setProgress:(semesterProgress < 1 ? semesterProgress/100 : 1)];
     self.weeksLeftLabel.text = [NSString stringWithFormat:@"%d", [self.semester weeksLeft:[NSDate date]]];
     self.totalECTSLabel.text = [NSString stringWithFormat:@"%d",[self.semester totalEcts]];
     self.finishedECTSLabel.text = [NSString stringWithFormat:@"%d", [self.semester finishedEcts]];
@@ -101,21 +108,18 @@
     self.semesterStartDateLabel.text = [[[semesterDateRange objectForKey:@"starts"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
     self.semesterEndDateLabel.text = [[[semesterDateRange objectForKey:@"ends"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
     
-    // Chart
-    
-    self.circleChartView.circleChart.lineWidth = @4;
-    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6] CGColor];
-    self.circleChartView.circleChart.circleBG.fillColor = nil;
-    [self.circleChartView.circleChart strokeChart];
-    self.isRefreshing = NO;
-
+    // CircleChart
+    if ([self.circleChartView.current integerValue] != [[NSNumber numberWithFloat:totalPercentagesFromAssignmentsInSemester] integerValue]) {
+        self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignmentsInSemester];
+        [self.circleChartView strokeChart];
+    }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y < -60)
-        [self userDidRefresh];
-}
+//- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+//{
+//    if (scrollView.contentOffset.y < -60)
+//        [self userDidRefresh];
+//}
 
 - (void)userDidRefresh
 {
@@ -130,7 +134,7 @@
             [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d assignments", [responseObject count]);
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
-                // call success block if any
+                // Set courseInstances and semester to nil to force update
                 self.courseInstances = nil;
                 self.semester = nil;
                 [self setup];
@@ -149,9 +153,9 @@
 {
     NSDate *now = [NSDate date];
     NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
-    if (!lastUpdated) { // does not exists, so the view should better update.
+    if (!lastUpdated) { // Does not exists, so the view should better update.
         return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // Check if it is time to update
         return YES;
     } else {
         return NO;
@@ -176,7 +180,7 @@
 {
     return 64;
 }
-
+/* TODO: Refactor this method */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseInstance *courseInstance = [self.courseInstances objectAtIndex:indexPath.row];

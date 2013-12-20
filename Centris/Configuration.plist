@@ -6,5 +6,7 @@
 	<string>CentrisLogin</string>
 	<key>DataFetcher</key>
 	<string>CentrisParserDataFetcher</string>
+	<key>defaultUpdateTimeIntervalSeconds</key>
+	<integer>600</integer>
 </dict>
 </plist>

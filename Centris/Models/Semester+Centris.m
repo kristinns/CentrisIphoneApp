@@ -38,12 +38,19 @@
     if (![courseInstances count])
         return 0.0;
     float average = 0.0f;
-    NSInteger counter = 0;
+    float counter = 0.0f;
     for (CourseInstance *courseInstance in courseInstances) {
-        float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
-        average = average + weightedAverageFromCourseInstance;
-        if (weightedAverageFromCourseInstance)
-            counter++;
+        if ([courseInstance hasFinalResults]) {
+            if (courseInstance.finalGrade != nil) {
+                average += [courseInstance.finalGrade floatValue];
+                counter++;
+            }
+        } else {
+            float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
+            average = average + weightedAverageFromCourseInstance;
+            if (weightedAverageFromCourseInstance)
+                counter++;
+        }
     }
     return average / counter;
 }

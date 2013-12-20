@@ -36,6 +36,8 @@
 @property (nonatomic, strong) PNChart *lineChart;
 @property (nonatomic) BOOL isRefreshing;
 @property (nonatomic, strong) id<DataFetcher> dataFetcher;
+@property (nonatomic, strong) NSArray *gradedAssignments;
+@property (nonatomic) BOOL drawBarChart;
 @end
 
 @implementation CourseInstanceViewController
@@ -53,10 +55,44 @@
     return _materialTable;
 }
 
+- (PNChart *)lineChart
+{
+    if (_lineChart == nil) {
+        _lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
+        _lineChart.type = PNLineType;
+        _lineChart.backgroundColor = [UIColor clearColor];
+        [_lineChart setStrokeColor:[UIColor whiteColor]];
+        [_chartContainerView addSubview:self.lineChart];
+    }
+    return _lineChart;
+}
+
+- (PNChart *)barChart
+{
+    if (_barChart == nil) {
+        _barChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
+        _barChart.type = PNBarType;
+        _barChart.backgroundColor = [UIColor clearColor];
+        [_barChart setStrokeColor:[UIColor colorWithWhite:1 alpha:0.6]];
+        [self.chartContainerView addSubview:_barChart];
+    }
+    return _barChart;
+}
+
+- (NSArray *)gradedAssignments
+{
+    if (_gradedAssignments == nil) {
+        _gradedAssignments = [self.courseInstance gradedAssignmentsWithNonZeroWeight];
+    }
+    return _gradedAssignments;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     self.dataFetcher = [AppFactory dataFetcher];
+    [self setupCircleChart];
+    self.drawBarChart = YES;
 	[self setup];
 }
 
@@ -73,103 +109,78 @@
     self.materialTableView.dataSource = self;
     // Set title
     self.title = self.courseInstance.name;
+    // Values for bar chart and line chart
+    NSMutableArray *yValues = [[NSMutableArray alloc] init];
+    NSMutableArray *xValues = [[NSMutableArray alloc] init];
+    // Check if grades have changed, if they have changed, then redraw barChart
+    NSArray *temporaryGradedAssignments = [self.courseInstance gradedAssignmentsWithNonZeroWeight];
+    // First check if the count is the same
+    if ([temporaryGradedAssignments count] != [self.gradedAssignments count]) {
+        self.drawBarChart = YES;
+    } else {
+        // Also check if the grades are the same
+        for (int i=0; i < [temporaryGradedAssignments count]; i++) {
+            if ([((Assignment *)self.gradedAssignments[i]).grade integerValue] != [((Assignment *)temporaryGradedAssignments[i]).grade integerValue]) {
+                self.drawBarChart = YES;
+                break;
+            }
+        }
+    }
     
-    float totalPercentagesFromAssignments = [self.courseInstance totalPercentagesFromAssignments];
-    float acquiredGrade = [self.courseInstance aquiredGrade];
-    // If acquiredGrade is zero and courseInstance has result, then just print, then there is no need to display zero
-    self.acquiredGradeLabel.text = ((int)acquiredGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", acquiredGrade];
-    float averageGrade = [self.courseInstance averageGrade];
-    // If averageGrade is zero and courseInstance has result, then there is no need to display zero
-    self.averageGradeLabel.text = ((int)averageGrade) == 0 && [self.courseInstance hasResults] ? @"..." : [NSString stringWithFormat:@"%.1f", averageGrade];
+    if ([self.courseInstance hasFinalResults]) {
+        // If courseInstance has final results and final grade
+        if (self.courseInstance.finalGrade != nil) {
+            self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance.finalGrade floatValue]];
+            self.averageWeightedCourseGradeDescriptionLabel.text = @"LOKAEINKUNN";
+            self.averageWeightedCourseGradePercentageLabel.text = @"";
+        } else { // If courseInstance has final results but not final grade
+            self.averageWeightedCourseGradeLabel.text = self.courseInstance.status;
+            self.averageWeightedCourseGradePercentageLabel.text = @"";
+            self.averageWeightedCourseGradeDescriptionLabel.text = @"";
+        }
+    } else {
+        if ([self.gradedAssignments count] == 0) {
+            self.noGradeInfoView.alpha = 1.0;
+            self.averageWeightedCourseGradeLabel.text = @"...";
+            self.averageWeightedCourseGradeDescriptionLabel.text = @"MEÐALTAL";
+            self.averageWeightedCourseGradePercentageLabel.text = @"AF 0%";
+        } else { // Else if we have graded assignments
+            self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance weightedAverageGrade]];
+            self.averageWeightedCourseGradeDescriptionLabel.text = @"MEÐALTAL";
+            self.averageWeightedCourseGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.1f%%", [self.courseInstance totalPercentagesFromAssignments]];
+        }
+    }
+    self.acquiredGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance acquiredGrade]];
+    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance averageGrade]];
     self.averageGradeFromOtherLabel.text = @"...";
     self.standardDeviationLabel.text = @"...";
     
-    [self setupCircleChart];
-    if ([self.courseInstance hasResults]) {
-        if ([self.courseInstance isPassed]) {
-            // Then percentage of course is 100%
-            self.circleChartView.current = @100;
-            if (self.courseInstance.finalGrade != nil) {
-                self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", self.courseInstance.finalGrade.floatValue];
-                self.averageWeightedCourseGradeDescriptionLabel.text = @"LOKAEINKUNN";
-            } else {
-                self.averageWeightedCourseGradeLabel.text = @"S";
-                self.averageWeightedCourseGradeDescriptionLabel.text = @"STAÐIÐ";
-            }
-            
-            
-        } else {
-            if ([self.courseInstance isFailed])
-                self.averageWeightedCourseGradeLabel.text = @"F";
-            else // Display nothing
-                self.averageWeightedCourseGradeLabel.text = @"";
-            // Display status of course
-            self.averageWeightedCourseGradeDescriptionLabel.text = [self.courseInstance.status uppercaseString];
-        }
-        self.averageWeightedCourseGradePercentageLabel.text = @"";
-        
-    } else {
-        self.averageWeightedCourseGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.courseInstance weightedAverageGrade]];
-        self.averageWeightedCourseGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.1f%%", totalPercentagesFromAssignments];
-        // Configure CircleChart
-        self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignments];
+    float totalPercentagesFromAssignment = [self.courseInstance totalPercentagesFromAssignments];
+    // Redraw if percentage has changed
+    if (self.circleChartView.current == nil || [self.circleChartView.current integerValue] != [[NSNumber numberWithFloat:[self.courseInstance totalPercentagesFromAssignments]] integerValue]) {
+        self.circleChartView.current = [NSNumber numberWithFloat:totalPercentagesFromAssignment];
+        [self.circleChartView strokeChart];
     }
-    // Stroke chart
-    [self.circleChartView strokeChart];
-
-    
-    NSArray *gradedAssignments = [self.courseInstance gradedAssignments];
-    if ([gradedAssignments count] != 0) {
-        NSMutableArray *yValues = [[NSMutableArray alloc] init];
-        NSMutableArray *yLineValues = [[NSMutableArray alloc] init];
-        NSMutableArray *xValues = [[NSMutableArray alloc] init];
-        float averageGrade = 0;
-        float percentageSum = 0;
-        int i = 0;
-        for (Assignment *assignment in gradedAssignments) {
-            i++;
-            // If grade is bigger than 10, then display 10
-            [yValues addObject:assignment.grade.integerValue < 10 ? assignment.grade : @10];
-            if (totalPercentagesFromAssignments != 0)
-                averageGrade += assignment.grade.floatValue * assignment.weight.floatValue/100.0;
-            else
-                averageGrade += assignment.grade.floatValue;
-            percentageSum += assignment.weight.floatValue/100.0;
-            NSNumber *currentAverageGrade;
-            if (totalPercentagesFromAssignments != 0)
-            currentAverageGrade = [NSNumber numberWithFloat:averageGrade / percentageSum];
-            else
-                currentAverageGrade = [NSNumber numberWithFloat:averageGrade / i];
-            [yLineValues addObject:currentAverageGrade.floatValue < 10 ? currentAverageGrade : @10];
-            // xValues is not used, it's just needs to be set for PNChart
+    // Only draw barChart if there are any grades
+    if (([self.gradedAssignments count] != 0) && self.drawBarChart == YES) {
+        for (Assignment *assignment in self.gradedAssignments) {
+            [yValues addObject:[NSNumber numberWithFloat:[assignment.grade floatValue]]];
             [xValues addObject:@""];
         }
         // BarChart
-        self.barChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
-        self.barChart.type = PNBarType;
-        self.barChart.backgroundColor = [UIColor clearColor];
-        [self.barChart setStrokeColor:[UIColor colorWithWhite:1 alpha:0.6]];
-        [self.chartContainerView addSubview:self.barChart];
         [self.barChart setXLabels:xValues];
         [self.barChart setYValues:yValues];
         [self.barChart strokeChart];
         
-        if ([gradedAssignments count] > 1) {
+        if ([self.gradedAssignments count] > 1) {
             // LineChart
-            [self.lineChart removeFromSuperview];
-            self.lineChart = nil;
-            self.lineChart = [[PNChart alloc] initWithFrame:self.chartContainerView.frame];
-            self.lineChart.type = PNLineType;
-            self.lineChart.backgroundColor = [UIColor clearColor];
-            [self.lineChart setStrokeColor:[UIColor whiteColor]];
             [self.lineChart setXLabels:xValues];
+            NSArray *yLineValues = [self.courseInstance averageGradeDevelopment];
             [self.lineChart setYValues:yLineValues];
             [self.lineChart strokeChart];
-            [self.chartContainerView addSubview:self.lineChart];
-
         }
-    } else if ([self.courseInstance hasResults] == NO)
-        self.noGradeInfoView.alpha = 1.0;
+        self.drawBarChart = NO;
+    }
     
     [self.materialTableView reloadData];
     self.materialTableViewHeightConstraint.constant = self.materialTableView.contentSize.height;
@@ -185,12 +196,6 @@
     self.circleChartView.circleChart.lineWidth = @2;
     self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:236/255.0 green:236/255.0 blue:236/255.0 alpha:1.0] CGColor];
     self.circleChartView.circleChart.circleBG.fillColor = [[UIColor whiteColor] CGColor];
-}
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y < -60)
-        [self userDidRefresh];
 }
 
 - (void)userDidRefresh
@@ -224,9 +229,9 @@
 {
     NSDate *now = [NSDate date];
     NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
-    if (!lastUpdated) { // does not exists, so the view should better update.
+    if (!lastUpdated) { // Does not exists, so the view should better update.
         return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // Check if it's time to update
         return YES;
     } else {
         return NO;

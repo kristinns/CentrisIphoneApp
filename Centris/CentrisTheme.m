@@ -30,6 +30,10 @@
 {
     return [UIColor colorWithRed:64.0/255.0 green:64.0/255.0 blue:65.0/255.0 alpha:1];
 }
++ (UIColor *)blackColor
+{
+    return [UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6];
+}
 
 + (UIFont *)headingBigFont
 {

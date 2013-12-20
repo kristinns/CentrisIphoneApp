@@ -25,8 +25,6 @@
                                                      withPredicate:pred
                                             inManagedObjectContext:context];
 
-//    NSString *assertFailMessage = [NSString stringWithFormat:@"there should only be one courseinstance with cousreid: %d", courseID];
-//    NSAssert([matches count ] == 1, assertFailMessage);
     instance = [matches lastObject];
 	
 	return instance;
@@ -89,62 +87,76 @@
                                 inManagedObjectContext:context];
 }
 
-- (NSArray *)gradedAssignments
+- (NSArray *)gradedAssignmentsWithNonZeroWeight
 {
     NSMutableArray *gradedAssignments = [[NSMutableArray alloc] init];
     NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
     for (Assignment *assignment in self.hasAssignments) {
-        if (assignment.grade != nil) {
+        if (assignment.grade != nil && [assignment.weight integerValue] != 0) {
             [gradedAssignments addObject:assignment];
         }
     }
     return [gradedAssignments sortedArrayUsingDescriptors:@[descriptor]];
 }
 
-- (float )averageGrade
+- (float)averageGrade
 {
     float average = 0.0;
-    // get instance
-    NSSet *assignments = self.hasAssignments;
+    NSArray *assignments = [self gradedAssignmentsWithNonZeroWeight];
     
-    // prevent zero devision
+    // Prevent zero devision
     if (![assignments count])
         return 0.0;
     
-    for (Assignment *assignment in assignments) {
-        if (assignment.grade != nil) {
-            average = average + [assignment.grade floatValue];
-        }
-    }
-    return average / ([assignments count]);
+    for (Assignment *assignment in assignments)
+        average = average + [assignment.grade floatValue];
+    
+    return average / [assignments count];
 }
 
-- (float )totalPercentagesFromAssignments
+- (NSArray *)averageGradeDevelopment
 {
-    float percentages = 0.0;
-    NSSet *assignments = self.hasAssignments;
-    for (Assignment *assignment in assignments) {
-        if (assignment.grade != nil) {
-            percentages = percentages + [assignment.weight floatValue];
+    NSMutableArray *averageGradeDevelopment = [[NSMutableArray alloc] init];
+    
+    NSArray *gradedAssignments = [self gradedAssignmentsWithNonZeroWeight];
+    if ([gradedAssignments count] != 0) {
+        float averageGrade = 0;
+        float weightSum = 0;
+        for (Assignment *assignment in gradedAssignments) {
+            averageGrade += [assignment.grade floatValue] * [assignment.weight floatValue];
+            weightSum += [assignment.weight floatValue];
+            float averageGradeAtThisTime = averageGrade / weightSum;
+            [averageGradeDevelopment addObject:[NSNumber numberWithFloat:averageGradeAtThisTime]];
         }
     }
+    // Return non mutable copy of averageGradeDevelopment
+    return [averageGradeDevelopment copy];
+}
+    
+- (float)totalPercentagesFromAssignments
+{
+    if ([self hasFinalResults] && [self isPassed])
+        return 100.0;
+    
+    float percentages = 0.0;
+    NSArray *assignments = [self gradedAssignmentsWithNonZeroWeight];
+    for (Assignment *assignment in assignments)
+            percentages = percentages + [assignment.weight floatValue];
     return percentages;
 }
 
-- (float )aquiredGrade
+- (float)acquiredGrade
 {
     float weightedAverage = 0.0;
-    for (Assignment *assignment  in self.hasAssignments) {
-        if (assignment.grade != nil) {
-            weightedAverage = weightedAverage + (([assignment.weight floatValue] / 100.0) * [assignment.grade floatValue]);
-        }
-    }
+    NSArray *gradedAssignments = [self gradedAssignmentsWithNonZeroWeight];
+    for (Assignment *assignment  in gradedAssignments)
+            weightedAverage += ([assignment.weight floatValue] / 100.0) * [assignment.grade floatValue];
     return weightedAverage;
 }
 
-- (float )weightedAverageGrade
+- (float)weightedAverageGrade
 {
-    return [self totalPercentagesFromAssignments] == 0 ? 0.0 : [self aquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
+    return [self totalPercentagesFromAssignments] == 0 ? 0.0 : [self acquiredGrade] / ([self totalPercentagesFromAssignments] / 100.0f);
 }
 
 - (BOOL)isPassed
@@ -163,7 +175,7 @@
         return NO;
 }
 
-- (BOOL)hasResults
+- (BOOL)hasFinalResults
 {
     if ([self.status isEqualToString:@"Skráð(ur)"])
         return NO;

@@ -2007,8 +2007,9 @@
                                             <constraint firstAttribute="centerX" secondItem="QOX-cR-uJa" secondAttribute="centerX" id="9vj-la-L5d"/>
                                             <constraint firstItem="9xt-J7-YYL" firstAttribute="top" secondItem="i2E-tC-dCE" secondAttribute="top" id="FWN-S8-Kyz"/>
                                             <constraint firstItem="LrU-3g-fUW" firstAttribute="centerX" secondItem="XFE-bI-vcT" secondAttribute="centerX" id="Mlw-ju-BMh"/>
-                                            <constraint firstAttribute="centerY" secondItem="QOX-cR-uJa" secondAttribute="centerY" constant="10" id="NHv-xM-yDU"/>
+                                            <constraint firstAttribute="centerY" secondItem="QOX-cR-uJa" secondAttribute="centerY" priority="702" id="NHv-xM-yDU"/>
                                             <constraint firstAttribute="height" constant="115" id="ThG-2G-mq3"/>
+                                            <constraint firstAttribute="bottom" secondItem="XFE-bI-vcT" secondAttribute="bottom" constant="24" id="VDw-Pn-MTr"/>
                                             <constraint firstAttribute="width" constant="115" id="Z6e-Kf-oP0"/>
                                             <constraint firstItem="9xt-J7-YYL" firstAttribute="leading" secondItem="i2E-tC-dCE" secondAttribute="leading" id="a89-Tn-2zB"/>
                                             <constraint firstAttribute="trailing" secondItem="9xt-J7-YYL" secondAttribute="trailing" id="kOk-n8-bY1"/>
@@ -2355,6 +2356,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="p4r-du-xZj"/>
+        <segue reference="YSS-QB-Ftm"/>
     </inferredMetricsTieBreakers>
 </document>

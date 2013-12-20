@@ -108,7 +108,7 @@ describe(@"CourseInstance Category", ^{
     });
     
     it(@"should be able to get aquired grade for graded assignments in a course", ^{
-        float aquiredGrade = [courseInstance aquiredGrade];
+        float aquiredGrade = [courseInstance acquiredGrade];
         NSString *compareString = [NSString stringWithFormat:@"%.3f", aquiredGrade];
         [[theValue([compareString isEqualToString:@"1.475"]) should] beTrue];
     });
@@ -120,7 +120,7 @@ describe(@"CourseInstance Category", ^{
     });
     
     it(@"should be able to get assignments that have been graded in a courseinstance", ^{
-        NSArray *checkAssignments = [courseInstance gradedAssignments];
+        NSArray *checkAssignments = [courseInstance gradedAssignmentsWithNonZeroWeight];
         [[theValue([checkAssignments count]) should] equal:theValue(2)];
     });
 });

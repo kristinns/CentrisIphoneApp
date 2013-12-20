@@ -34,7 +34,7 @@
         _circleBG.lineCap = kCALineCapRound;
         _circleBG.fillColor   = [UIColor clearColor].CGColor;
         _circleBG.lineWidth   = [_lineWidth floatValue];
-        _circleBG.strokeColor = PNLightYellow.CGColor;
+        _circleBG.strokeColor = [UIColor colorWithRed:217/255.0 green:140/255.0 blue:147/255.0 alpha:1.0].CGColor;
         _circleBG.strokeEnd   = 1.0;
         _circleBG.zPosition = -1;
         

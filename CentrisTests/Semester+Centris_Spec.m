@@ -45,6 +45,7 @@ describe(@"Semester Category", ^{
         courseInstance.courseID = @"T-111-PROG";
         courseInstance.name = @"Forritun";
         courseInstance.semester = @"20133";
+        courseInstance.status = @"Skráð(ur)";
         courseInstance.isInSemester = semester;
         courseInstance.ects = [NSNumber numberWithInteger:6];
         
@@ -53,6 +54,7 @@ describe(@"Semester Category", ^{
         courseInstance2.courseID = @"T-109-INTO";
         courseInstance2.name = @"Inngangur að tölvunarfræði";
         courseInstance2.semester = @"20133";
+        courseInstance2.status = @"Skráð(ur)";
         courseInstance2.isInSemester = semester;
         courseInstance2.ects = [NSNumber numberWithInteger:6];
         
