@@ -34,7 +34,7 @@
 {
     CourseInstance *courseInstance = nil;
     
-    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", centrisInfo[@"ID"]];
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"id = %@", [NSNumber numberWithInteger:[centrisInfo[@"ID"] integerValue]]];
     NSArray *matches = [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
                                                             forKey:@"id"
                                                      sortAscending:NO

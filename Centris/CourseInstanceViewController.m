@@ -14,8 +14,6 @@
 #import "Assignment+Centris.h"
 #import "WebViewController.h"
 
-#define COURSEINSTANCES_LAST_UPDATED @"SemesterVCLastUpdate"
-
 @interface CourseInstanceViewController () <UITableViewDataSource, UITableViewDelegate>
 // Outlets
 @property (weak, nonatomic) IBOutlet UIView *noGradeInfoView;
@@ -228,7 +226,7 @@
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
                 // Refresh courseInstance
                 self.courseInstance = [CourseInstance courseInstanceWithID:self.courseInstance.id.integerValue inManagedObjectContext:[AppFactory managedObjectContext]];
-                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSEINSTANCES_LAST_UPDATED];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSE_INSTANCE_LAST_UPDATE];
                 [self setupOutlets];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
@@ -244,7 +242,7 @@
 - (BOOL)viewNeedsToBeUpdated
 {
     NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSE_INSTANCE_LAST_UPDATE];
     if (!lastUpdated) { // Does not exists, so the view should better update.
         return YES;
     } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // Check if it's time to update

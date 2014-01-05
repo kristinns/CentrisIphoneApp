@@ -19,8 +19,6 @@
 
 #define COURSE_INSTANCE_ROW_HEIGT 64.0
 
-#define COURSEINSTANCES_LAST_UPDATED @"SemesterVCLastUpdate"
-
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
 @property (nonatomic, weak) IBOutlet UITableView *courseTableView;
@@ -112,8 +110,8 @@
     // Setup outlets
     self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.semester averageGrade]];
     float semesterProgress = [self.semester progressForDate:[NSDate date]] * 100;
-    float totalPercentagesFromAssignmentsInSemester = [self.semester totalPercentagesFromAssignmentsInSemester] * 100;
-    self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromAssignmentsInSemester];
+    float totalPercentagesFromGradesInSemester = [self.semester totalPercentagesFromGradesInSemester] * 100;
+    self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromGradesInSemester];
     self.semesterProgressLabel.text = semesterProgress < 100 ? [NSString stringWithFormat:@"%.0f%%", semesterProgress] : @"Lokið";
     // Progress view with max 100
     [self.semesterProgressView setProgress:(semesterProgress < 1 ? semesterProgress/100 : 1)];
@@ -125,8 +123,8 @@
     self.semesterEndDateLabel.text = [[[semesterDateRange objectForKey:@"ends"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
     
     // CircleChart
-    if ([self.circleChartView.circleChart.current integerValue] != [[NSNumber numberWithFloat:totalPercentagesFromAssignmentsInSemester] integerValue]) {
-        self.circleChartView.circleChart.current = [NSNumber numberWithFloat:totalPercentagesFromAssignmentsInSemester];
+    if ([self.circleChartView.circleChart.current integerValue] != [[NSNumber numberWithFloat:totalPercentagesFromGradesInSemester] integerValue]) {
+        self.circleChartView.circleChart.current = [NSNumber numberWithFloat:totalPercentagesFromGradesInSemester];
         [self.circleChartView.circleChart strokeChart];
     }
 }
@@ -149,7 +147,7 @@
                 // Set courseInstances and semester to nil to force update
                 self.courseInstances = nil;
                 self.semester = nil;
-                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSEINSTANCES_LAST_UPDATED];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSE_INSTANCE_LAST_UPDATE];
                 [self setupOutlets];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
@@ -165,7 +163,7 @@
 - (BOOL)viewNeedsToBeUpdated
 {
     NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSE_INSTANCE_LAST_UPDATE];
     if (!lastUpdated) { // Does not exists, so the view should better update.
         return YES;
     } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // Check if it is time to update

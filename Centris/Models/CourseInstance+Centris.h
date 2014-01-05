@@ -8,6 +8,8 @@
 
 #import "CourseInstance.h"
 
+#define COURSE_INSTANCE_LAST_UPDATE @"CourseInstanceLastUpdate"
+
 @interface CourseInstance (Centris)
 + (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;                         // tested
 + (CourseInstance *)addCourseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;      // tested

@@ -16,7 +16,7 @@
 - (float)progressForDate:(NSDate *)date;                                        // tested
 - (NSInteger)weeksLeft:(NSDate *)date;                                          // tested
 - (NSInteger)totalEcts;                                                         // tested
-- (float)totalPercentagesFromAssignmentsInSemester;
+- (float)totalPercentagesFromGradesInSemester;
 - (NSInteger)finishedEcts;
 //- (NSArray *)bookList;
 @end

@@ -82,19 +82,19 @@
     return finishedEcts;
 }
 
-- (float)totalPercentagesFromAssignmentsInSemester
+- (float)totalPercentagesFromGradesInSemester
 {
     NSSet *courseInstances = self.hasCourseInstances;
     if (![courseInstances count])
         return 0.0;
     float totalPercentagesFromAssignmentsInSemester = 0.0f;
-    float counter = 0;
+    float totalEcts = 0;
     for (CourseInstance *courseInstance in courseInstances) {
         float totalPercentagesFromAssignmentsInCourse = [courseInstance totalPercentagesFromAssignments];
-        totalPercentagesFromAssignmentsInSemester += totalPercentagesFromAssignmentsInCourse;
-        counter++;
+        totalPercentagesFromAssignmentsInSemester += totalPercentagesFromAssignmentsInCourse * [courseInstance.ects floatValue];
+        totalEcts += [courseInstance.ects floatValue];
     }
-    return (totalPercentagesFromAssignmentsInSemester / (counter * 100.0f));
+    return (totalPercentagesFromAssignmentsInSemester / (totalEcts * 100.0f));
 }
 
 - (NSInteger)weeksLeft:(NSDate *)date
