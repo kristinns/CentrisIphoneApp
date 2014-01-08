@@ -8,6 +8,8 @@
 
 #import "Announcement.h"
 
+#define ANNOUNCEMENTS_LAST_UPDATED @"AnnouncementsLastUpdate"
+
 @interface Announcement (Centris)
 + (Announcement *)announcementWithID:(NSInteger)announcementID inManagedObjectContext:(NSManagedObjectContext *)context;
 + (Announcement *)addAnnouncementWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;

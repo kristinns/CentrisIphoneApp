@@ -82,7 +82,7 @@
 {
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
                                                 forKey:@"name"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:nil
                                 inManagedObjectContext:context];
 }

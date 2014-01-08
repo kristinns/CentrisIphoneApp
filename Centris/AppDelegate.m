@@ -103,7 +103,7 @@
 {
     [self saveContext];
     // Remove database file, not sure if this is the right way
-    NSArray *entities = @[@"Assignment", @"ScheduleEvent", @"AssignmentFile", @"CourseInstance", @"ScheduleEventUnit", @"User"];
+    NSArray *entities = @[@"Assignment", @"ScheduleEvent", @"AssignmentFile", @"CourseInstance", @"ScheduleEventUnit", @"User", @"Announcement"];
     for (NSString *entityDescription in entities) {
         NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
         NSEntityDescription *entity = [NSEntityDescription entityForName:entityDescription inManagedObjectContext:[AppFactory managedObjectContext]];

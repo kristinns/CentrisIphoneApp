@@ -19,13 +19,11 @@
 #define ROW_HEIGHT 61.0
 #define SECTION_HEIGHT 26.0
 #define PADDING_VERTICAL 15.0
-#define ASSIGNMENTTVC_LAST_UPDATED @"AssignmentTVCLastUpdate"
-#pragma mark - Interface
 
+#pragma mark - Interface
 @interface AssignmentsTableViewController () <UITableViewDataSource>
 @property (nonatomic, strong) NSArray *assignments;
 @property (nonatomic, strong) NSArray *courses;
-@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSDate *lastUpdated;
 @property (nonatomic) BOOL allAssignments;
 @end
@@ -38,8 +36,7 @@
     [self.tableView reloadData];
 }
 
-#pragma mark - Getters
-// Getter for assignmentCourses, uses lazy instantiation
+#pragma mark - Properties
 - (NSArray *)courses
 {
     // Get data from CentrisDataFetcher
@@ -48,7 +45,6 @@
     return _courses;
 }
 
-// Getter for assignments, uses lazy instantiation
 - (NSArray *)assignments
 {
     // Get data from CentrisDataFetcher
@@ -57,15 +53,7 @@
     return _assignments;
 }
 
-- (id<DataFetcher>)dataFetcher
-{
-	if (!_dataFetcher)
-		_dataFetcher = [AppFactory dataFetcher];
-	return _dataFetcher;
-}
-
-#pragma mark - Setup
-
+#pragma mark - UIViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -83,69 +71,24 @@
     [self fetchAssignmentsFromCoreData];
 }
 
-#pragma mark - Methods
-
-// Will do a fetch request to Core data and add the assignments
-// (if any) to self.assignments
-- (void )fetchAssignmentsFromCoreData
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([self viewNeedsToBeUpdated]) {
-        // update last updated
-        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENTTVC_LAST_UPDATED];
-        [self fetchAssignmentsFromAPI];
-    }
-    if (self.allAssignments == YES) {
-        self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
-    } else {
-        NSDate *today = [NSDate date];
-        self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
-                                                  inManagedObjectContext:[AppFactory managedObjectContext]];
-    }
-    [self.tableView reloadData];
-}
-
-// Will do a fetch request to the API for assignments
-// and add the assignments (if any) to self.assignments
-- (void)fetchAssignmentsFromAPI
-{
-    [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got %d assignments", [responseObject count]);
-        [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
-        // call success block if any
-        [self fetchAssignmentsFromCoreData];
-        [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error getting assignments");
-        [self.refreshControl endRefreshing];
-    }];
-}
-
-// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
-// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
-- (BOOL)viewNeedsToBeUpdated
-{
-    NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:ASSIGNMENTTVC_LAST_UPDATED];
-    if (!lastUpdated) { // does not exists, so the view should better update.
-        return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
-        return YES;
-    } else {
-        return NO;
+    if([segue.identifier isEqualToString:@"assignmentDetailViewSegue"]) {
+        AssignmentDetailViewController *assignmentDetailViewController = [segue destinationViewController];
+        Assignment *selectedAssignment;
+        if (self.allAssignments) {
+            CourseInstance *selectedCourseInstance = [self.courses objectAtIndex:self.tableView.indexPathForSelectedRow.section];
+            NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
+            NSArray *sortedAssignmentList = [selectedCourseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
+            selectedAssignment = [sortedAssignmentList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        } else {
+            selectedAssignment = [self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row];
+        }
+        assignmentDetailViewController.assignment = selectedAssignment;
     }
 }
 
-#pragma mark - Table delegate methods
-
--(void)userDidRefresh
-{
-    [TestFlight passCheckpoint:@"User did refresh Assignment list"];
-    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENTTVC_LAST_UPDATED];
-    [self fetchAssignmentsFromAPI];
-}
-
-#pragma mark - Table methods
-
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (self.allAssignments == NO)
@@ -199,6 +142,7 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (self.allAssignments == YES)
@@ -229,23 +173,63 @@
         return nil;
 }
 
-#pragma mark - Segue methods
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - Refresh Control
+// Will do a fetch request to Core data and add the assignments
+// (if any) to self.assignments
+- (void )fetchAssignmentsFromCoreData
 {
-    if([segue.identifier isEqualToString:@"assignmentDetailViewSegue"]) {
-        AssignmentDetailViewController *assignmentDetailViewController = [segue destinationViewController];
-        Assignment *selectedAssignment;
-        if (self.allAssignments) {
-            CourseInstance *selectedCourseInstance = [self.courses objectAtIndex:self.tableView.indexPathForSelectedRow.section];
-            NSSortDescriptor *descriptor = [NSSortDescriptor sortDescriptorWithKey:@"dateClosed" ascending:YES];
-            NSArray *sortedAssignmentList = [selectedCourseInstance.hasAssignments sortedArrayUsingDescriptors:[NSArray arrayWithObject:descriptor]];
-            selectedAssignment = [sortedAssignmentList objectAtIndex:self.tableView.indexPathForSelectedRow.row];
-        } else {
-            selectedAssignment = [self.assignments objectAtIndex:self.tableView.indexPathForSelectedRow.row];
-        }
-        assignmentDetailViewController.assignment = selectedAssignment;
+    if ([self viewNeedsToBeUpdated]) {
+        // update last updated
+        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENT_LAST_UPDATED];
+        [self fetchAssignmentsFromAPI];
     }
+    if (self.allAssignments == YES) {
+        self.assignments = [Assignment assignmentsInManagedObjectContext:[AppFactory managedObjectContext]];
+    } else {
+        NSDate *today = [NSDate date];
+        self.assignments = [Assignment assignmentsWithDueDateThatExceeds:today
+                                                  inManagedObjectContext:[AppFactory managedObjectContext]];
+    }
+    [self.tableView reloadData];
+}
+
+// Will do a fetch request to the API for assignments
+// and add the assignments (if any) to self.assignments
+- (void)fetchAssignmentsFromAPI
+{
+    [self.refreshControl beginRefreshing];
+    [[AppFactory dataFetcher] getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d assignments", [responseObject count]);
+        [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+        // call success block if any
+        [self fetchAssignmentsFromCoreData];
+        [self.refreshControl endRefreshing];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error getting assignments");
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
+// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:ASSIGNMENT_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
+-(void)userDidRefresh
+{
+    [TestFlight passCheckpoint:@"User did refresh Assignment list"];
+    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENT_LAST_UPDATED];
+    [self fetchAssignmentsFromAPI];
 }
 
 @end

@@ -148,6 +148,7 @@
                 self.courseInstances = nil;
                 self.semester = nil;
                 [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSE_INSTANCE_LAST_UPDATE];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENT_LAST_UPDATED];
                 [self setupOutlets];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");

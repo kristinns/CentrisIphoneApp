@@ -8,8 +8,9 @@
 
 #import "Assignment.h"
 
-@interface Assignment (Centris)
+#define ASSIGNMENT_LAST_UPDATED @"AssignmentsLastUpdate"
 
+@interface Assignment (Centris)
 + (Assignment *)assignmentWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;                           // tested
 
 + (NSArray *)assignmentsInManagedObjectContext:(NSManagedObjectContext *)context;                                                   // tested
@@ -18,5 +19,4 @@
 
 + (void)addAssignmentsWithCentrisInfo:(NSArray *)assignments inManagedObjectContext:(NSManagedObjectContext *)context;              // tested
 + (void)updateAssignmentWithCentrisInfo:(NSDictionary *)assignmentInfo inManagedObjectContext:(NSManagedObjectContext *)context;    // tested
-
 @end

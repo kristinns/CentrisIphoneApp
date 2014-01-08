@@ -9,6 +9,8 @@
 #import "ScheduleEvent.h"
 #import "ScheduleEventUnit.h"
 
+#define SCHEDULE_LAST_UPDATED @"ScheduleLastUpdate"
+
 @interface ScheduleEvent (Centris)
 + (ScheduleEvent *)eventWithID:(NSNumber *)ID inManagedObjectContext:(NSManagedObjectContext *)context;                 // tested
 + (NSArray *)scheduleEventUnitsForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context;          // tested

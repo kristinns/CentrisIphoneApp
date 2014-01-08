@@ -18,11 +18,9 @@
 
 #define ROW_HEIGHT 61.0
 #define SEPERATOR_HEIGHT 26.0
-#define SCHEDULEVC_LAST_UPDATED @"ScheduleVCLastUpdate"
 
 @interface ScheduleViewController ()
 @property (nonatomic, weak) IBOutlet UITableView *tableView;
-@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) NSArray *scheduleEvents;
 @property (nonatomic, weak) IBOutlet DatePickerView *datePickerView;
 @property (nonatomic, strong) NSDate *datePickerDate;
@@ -33,8 +31,7 @@
 
 @implementation ScheduleViewController
 
-#pragma mark - Outlets
-
+#pragma mark - IBAction
 - (IBAction)GoBackToToday:(id)sender {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *comps = [gregorian components:NSWeekdayCalendarUnit fromDate:self.datePickerToday];
@@ -46,20 +43,12 @@
     [self fetchScheduleEventsFromCoreData];
 }
 
-#pragma mark - Getters and setters
-
+#pragma mark - Properties
 - (NSArray *)scheduleEvents
 {
     if (!_scheduleEvents)
         _scheduleEvents = [[NSArray alloc] init];
     return _scheduleEvents;
-}
-
-- (id<DataFetcher>)dataFetcher
-{
-    if(!_dataFetcher)
-        _dataFetcher = [AppFactory dataFetcher];
-    return _dataFetcher;
 }
 
 -(UIRefreshControl *)refreshControl
@@ -69,66 +58,37 @@
     return _refreshControl;
 }
 
-#pragma mark - Methods
-- (void )fetchScheduleEventsFromCoreData
+#pragma mark - UIViewController
+- (void)viewDidLoad
 {
-    if ([self viewNeedsToBeUpdated]) {
-        // update last updated
-        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULEVC_LAST_UPDATED];
-        [self fetchScheduledEventsFromAPI];
-    }
-        
-    self.scheduleEvents = [ScheduleEvent scheduleEventUnitsForDay:self.datePickerSelectedDate
-                                        inManagedObjectContext:[AppFactory managedObjectContext]];
-    [self.tableView reloadData];
+    [super viewDidLoad];
+    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:self.refreshControl];
+    self.scheduleEvents = [[NSMutableArray alloc] init];
+    self.navigationController.navigationBar.translucent = NO;
+    self.title = @"Stundaskrá";
+    self.tableView.dataSource = self;
+    self.tableView.delegate = self;
+    self.datePickerView.delegate = self;
+    // Set start date to Sunday this week
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit fromDate:[NSDate date]];
+    [comps setMinute:0];
+    [comps setHour:0];
+    [comps setSecond:0];
+    NSInteger weekday = [comps weekday]-1;
+    self.datePickerToday = [gregorian dateFromComponents:comps];
+    self.datePickerSelectedDate = self.datePickerToday;
+    self.datePickerDate = [[self.datePickerSelectedDate dateByAddingDays:-weekday] dateByAddingWeeks:-1];
     
+    [self fetchScheduleEventsFromCoreData];
+    [self updateDatePicker];
 }
 
-// Function that calls the API and stores events in Core data
-- (void)fetchScheduledEventsFromAPI
-{
-    [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got %d scheduleEvents", [responseObject count]);
-        [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
-        [self fetchScheduleEventsFromCoreData];
-        [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error");
-        [self.refreshControl endRefreshing];
-    }];
-}
-
-// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
-// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
-- (BOOL)viewNeedsToBeUpdated
-{
-    NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:SCHEDULEVC_LAST_UPDATED];
-    if (!lastUpdated) { // does not exists, so the view should better update.
-        return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
-        return YES;
-    } else {
-        return NO;
-    }
-}
-
-#pragma mark - Table methods
-
+#pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [self.scheduleEvents count];
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row != [self.scheduleEvents count]-1) {
-        NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
-        if (minutes != 0) {
-            return ROW_HEIGHT + SEPERATOR_HEIGHT;
-        }
-    }
-    return ROW_HEIGHT;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,6 +128,62 @@
     return cell;
 }
 
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row != [self.scheduleEvents count]-1) {
+        NSInteger minutes = [self breakMinutesForRowAtIndexPath:indexPath];
+        if (minutes != 0) {
+            return ROW_HEIGHT + SEPERATOR_HEIGHT;
+        }
+    }
+    return ROW_HEIGHT;
+}
+
+#pragma mark - Refresh Control
+- (void )fetchScheduleEventsFromCoreData
+{
+    if ([self viewNeedsToBeUpdated]) {
+        // update last updated
+        [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULE_LAST_UPDATED];
+        [self fetchScheduledEventsFromAPI];
+    }
+    
+    self.scheduleEvents = [ScheduleEvent scheduleEventUnitsForDay:self.datePickerSelectedDate
+                                           inManagedObjectContext:[AppFactory managedObjectContext]];
+    [self.tableView reloadData];
+    
+}
+
+// Function that calls the API and stores events in Core data
+- (void)fetchScheduledEventsFromAPI
+{
+    [[AppFactory dataFetcher] getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"Got %d scheduleEvents", [responseObject count]);
+        [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
+        [self fetchScheduleEventsFromCoreData];
+        [self.refreshControl endRefreshing];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error");
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+// Will compare current date to the saved date in NSUserDefaults. If that date is older than 2 hours it will return YES.
+// If that date in NSUserDefaults does not exists, it will return YES. Otherwiese, NO.
+- (BOOL)viewNeedsToBeUpdated
+{
+    NSDate *now = [NSDate date];
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:SCHEDULE_LAST_UPDATED];
+    if (!lastUpdated) { // does not exists, so the view should better update.
+        return YES;
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 - (NSInteger)breakMinutesForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     ScheduleEvent *scheduleEvent = [self.scheduleEvents objectAtIndex:indexPath.row];
@@ -180,44 +196,14 @@
     return minutes;
 }
 
-#pragma mark - Table delegate methods
-
 -(void)userDidRefresh
 {
     [TestFlight passCheckpoint:@"User did refresh schedule view"];
-    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULEVC_LAST_UPDATED];
+    [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULE_LAST_UPDATED];
     [self fetchScheduledEventsFromAPI];
 }
 
-#pragma mark - Setup
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-    [self.refreshControl addTarget:self action:@selector(userDidRefresh) forControlEvents:UIControlEventValueChanged];
-    [self.tableView addSubview:self.refreshControl];
-    self.scheduleEvents = [[NSMutableArray alloc] init];
-    self.navigationController.navigationBar.translucent = NO;
-    self.title = @"Stundaskrá";
-    self.tableView.dataSource = self;
-    self.tableView.delegate = self;
-    self.datePickerView.delegate = self;
-    // Set start date to Sunday this week
-    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [gregorian components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit|NSWeekdayCalendarUnit fromDate:[NSDate date]];
-    [comps setMinute:0];
-    [comps setHour:0];
-    [comps setSecond:0];
-    NSInteger weekday = [comps weekday]-1;
-    self.datePickerToday = [gregorian dateFromComponents:comps];
-    self.datePickerSelectedDate = self.datePickerToday;
-    self.datePickerDate = [[self.datePickerSelectedDate dateByAddingDays:-weekday] dateByAddingWeeks:-1];
-    
-    [self fetchScheduleEventsFromCoreData];
-    [self updateDatePicker];
-}
-
-#pragma mark - DatePicker delegate methods
-
+#pragma mark - DatePickerViewDelegateProtocol
 - (void)datePickerDidScrollToRight:(BOOL)right
 {
     [TestFlight passCheckpoint:@"Scrolled datepicker"];
@@ -236,6 +222,7 @@
 	
 }
 
+#pragma mark - Custom datepicker methods
 - (NSString *)weekDayFromInteger:(NSInteger)weekdayInteger
 {
     NSArray *weekDays = @[@"S", @"M", @"Þ", @"M", @"F", @"F", @"L"];
