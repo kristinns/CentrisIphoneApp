@@ -2,8 +2,8 @@
 //  Announcement.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 14/12/13.
-//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
+//  Created by Kristinn Svansson on 11/01/14.
+//  Copyright (c) 2014 Kristinn Svansson. All rights reserved.
 //
 
 #import "Announcement.h"
@@ -12,11 +12,11 @@
 
 @implementation Announcement
 
-@dynamic title;
-@dynamic dateInserted;
 @dynamic content;
-@dynamic read;
+@dynamic dateInserted;
 @dynamic id;
+@dynamic read;
+@dynamic title;
 @dynamic isInCourseInstance;
 
 @end

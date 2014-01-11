@@ -2,8 +2,8 @@
 //  CourseInstance.m
 //  Centris
 //
-//  Created by Kristinn Svansson on 14/12/13.
-//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
+//  Created by Kristinn Svansson on 11/01/14.
+//  Copyright (c) 2014 Kristinn Svansson. All rights reserved.
 //
 
 #import "CourseInstance.h"
@@ -28,10 +28,10 @@
 @dynamic status;
 @dynamic syllabus;
 @dynamic teachingMethods;
+@dynamic hasAnnouncements;
 @dynamic hasAssignments;
 @dynamic hasScheduleEvents;
 @dynamic hasUser;
 @dynamic isInSemester;
-@dynamic hasAnnouncements;
 
 @end

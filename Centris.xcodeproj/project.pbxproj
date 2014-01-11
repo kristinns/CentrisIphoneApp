@@ -63,14 +63,14 @@
 		197631B41857949000D71356 /* SemesterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 197631B31857949000D71356 /* SemesterViewController.m */; };
 		1982885B185BEC3F00265F9D /* AnnouncementTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982885A185BEC3F00265F9D /* AnnouncementTableViewController.m */; };
 		1982885E185BECAB00265F9D /* AnnouncementTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982885D185BECAB00265F9D /* AnnouncementTableViewCell.m */; };
-		19828864185BF21500265F9D /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 19828863185BF21500265F9D /* CourseInstance.m */; };
 		1982886A185BF29F00265F9D /* Announcement+Centris.m in Sources */ = {isa = PBXBuildFile; fileRef = 19828869185BF29F00265F9D /* Announcement+Centris.m */; };
-		1982886D185BF4AC00265F9D /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982886C185BF4AC00265F9D /* Announcement.m */; };
 		19828870185C053600265F9D /* AnnouncementDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1982886F185C053600265F9D /* AnnouncementDetailViewController.m */; };
 		19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 19879C7417AF13C400FBC672 /* ScheduleTableViewCell.m */; };
 		1989B655183A84B80005E44F /* AssignmentDetailViewFileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B654183A84B80005E44F /* AssignmentDetailViewFileCell.m */; };
 		1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B657183AC0A50005E44F /* AssignmentFileViewController.m */; };
 		1989B65B183CC4510005E44F /* Assignment.m in Sources */ = {isa = PBXBuildFile; fileRef = 1989B65A183CC4510005E44F /* Assignment.m */; };
+		198A74EB1880E3A700F80B3B /* CourseInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 198A74EA1880E3A700F80B3B /* CourseInstance.m */; };
+		198A74EE1880E3A800F80B3B /* Announcement.m in Sources */ = {isa = PBXBuildFile; fileRef = 198A74ED1880E3A800F80B3B /* Announcement.m */; };
 		198CCDC2181EAD8A00B2EE65 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 194842D31799B0AB0016A5C0 /* Main.storyboard */; };
 		199F72C71802E16F009A724A /* ScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72C61802E16F009A724A /* ScheduleViewController.m */; };
 		199F72CB1802F9AB009A724A /* DatePickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 199F72CA1802F9AB009A724A /* DatePickerView.m */; };
@@ -203,12 +203,8 @@
 		1982885A185BEC3F00265F9D /* AnnouncementTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementTableViewController.m; sourceTree = "<group>"; };
 		1982885C185BECAB00265F9D /* AnnouncementTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementTableViewCell.h; sourceTree = "<group>"; };
 		1982885D185BECAB00265F9D /* AnnouncementTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementTableViewCell.m; sourceTree = "<group>"; };
-		19828862185BF21500265F9D /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
-		19828863185BF21500265F9D /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
 		19828868185BF29F00265F9D /* Announcement+Centris.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Announcement+Centris.h"; path = "Models/Announcement+Centris.h"; sourceTree = "<group>"; };
 		19828869185BF29F00265F9D /* Announcement+Centris.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Announcement+Centris.m"; path = "Models/Announcement+Centris.m"; sourceTree = "<group>"; };
-		1982886B185BF4AC00265F9D /* Announcement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Announcement.h; path = Models/Announcement.h; sourceTree = "<group>"; };
-		1982886C185BF4AC00265F9D /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Announcement.m; path = Models/Announcement.m; sourceTree = "<group>"; };
 		1982886E185C053600265F9D /* AnnouncementDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnnouncementDetailViewController.h; sourceTree = "<group>"; };
 		1982886F185C053600265F9D /* AnnouncementDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnnouncementDetailViewController.m; sourceTree = "<group>"; };
 		19879C7317AF13C400FBC672 /* ScheduleTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleTableViewCell.h; sourceTree = "<group>"; };
@@ -219,6 +215,10 @@
 		1989B657183AC0A50005E44F /* AssignmentFileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AssignmentFileViewController.m; sourceTree = "<group>"; };
 		1989B659183CC4510005E44F /* Assignment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Assignment.h; path = Models/Assignment.h; sourceTree = "<group>"; };
 		1989B65A183CC4510005E44F /* Assignment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Assignment.m; path = Models/Assignment.m; sourceTree = "<group>"; };
+		198A74E91880E3A700F80B3B /* CourseInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CourseInstance.h; path = Models/CourseInstance.h; sourceTree = "<group>"; };
+		198A74EA1880E3A700F80B3B /* CourseInstance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CourseInstance.m; path = Models/CourseInstance.m; sourceTree = "<group>"; };
+		198A74EC1880E3A800F80B3B /* Announcement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Announcement.h; path = Models/Announcement.h; sourceTree = "<group>"; };
+		198A74ED1880E3A800F80B3B /* Announcement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Announcement.m; path = Models/Announcement.m; sourceTree = "<group>"; };
 		199F72C51802E16F009A724A /* ScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleViewController.h; sourceTree = "<group>"; };
 		199F72C61802E16F009A724A /* ScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleViewController.m; sourceTree = "<group>"; };
 		199F72C91802F9AB009A724A /* DatePickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerView.h; sourceTree = "<group>"; };
@@ -399,10 +399,10 @@
 		1935C7C317C13B5400D82EC9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				1982886B185BF4AC00265F9D /* Announcement.h */,
-				1982886C185BF4AC00265F9D /* Announcement.m */,
-				19828862185BF21500265F9D /* CourseInstance.h */,
-				19828863185BF21500265F9D /* CourseInstance.m */,
+				198A74EC1880E3A800F80B3B /* Announcement.h */,
+				198A74ED1880E3A800F80B3B /* Announcement.m */,
+				198A74E91880E3A700F80B3B /* CourseInstance.h */,
+				198A74EA1880E3A700F80B3B /* CourseInstance.m */,
 				1989B659183CC4510005E44F /* Assignment.h */,
 				1989B65A183CC4510005E44F /* Assignment.m */,
 				18A630E7183A8DBC00CA29FE /* AssignmentFile.h */,
@@ -944,6 +944,7 @@
 				193140C8185A250200473922 /* PNLineChart.m in Sources */,
 				1982885E185BECAB00265F9D /* AnnouncementTableViewCell.m in Sources */,
 				18E6F627182C03CE0073AB9A /* User.m in Sources */,
+				198A74EB1880E3A700F80B3B /* CourseInstance.m in Sources */,
 				193140C7185A250200473922 /* PNColor.m in Sources */,
 				19828870185C053600265F9D /* AnnouncementDetailViewController.m in Sources */,
 				19F62CDE17AC3EB700EEF08C /* CentrisDataFetcher.m in Sources */,
@@ -952,7 +953,6 @@
 				193140AA1858FC1D00473922 /* CourseInstanceViewController.m in Sources */,
 				18FCA4EF183AD1CF00AD9CCE /* ScheduleEventUnit+Centris.m in Sources */,
 				19879C7517AF13C400FBC672 /* ScheduleTableViewCell.m in Sources */,
-				1982886D185BF4AC00265F9D /* Announcement.m in Sources */,
 				966B2D0E17FC28D000F3D170 /* CDFServiceStub.m in Sources */,
 				1945CEF91863D9C600E9C02E /* WebViewController.m in Sources */,
 				1982886A185BF29F00265F9D /* Announcement+Centris.m in Sources */,
@@ -971,13 +971,13 @@
 				19BAC84C1845712E00003D05 /* EventCardTableViewCell.m in Sources */,
 				18372E73181C2DA8005CEC18 /* Assignment+Centris.m in Sources */,
 				1989B658183AC0A50005E44F /* AssignmentFileViewController.m in Sources */,
+				198A74EE1880E3A800F80B3B /* Announcement.m in Sources */,
 				18E0BFFF1845618A009E1329 /* Menu.m in Sources */,
 				188C7DAD183528F00030CB09 /* ProfileViewController.m in Sources */,
 				193140C2185A250200473922 /* PNBar.m in Sources */,
 				966A498F17E9ADB4009C342B /* CentrisTheme.m in Sources */,
 				18A630D41839769B00CA29FE /* ScheduleEvent.m in Sources */,
 				960827FA17CB8E5D004741FD /* HomeFeedViewController.m in Sources */,
-				19828864185BF21500265F9D /* CourseInstance.m in Sources */,
 				969C94E618082DDD00356C7C /* KeychainItemWrapper.m in Sources */,
 				19F62CDB17AC057100EEF08C /* AssignmentsTableViewController.m in Sources */,
 				18D8C58018226F4A00DE92B4 /* CourseInstance+Centris.m in Sources */,
