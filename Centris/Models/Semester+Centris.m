@@ -27,7 +27,7 @@
 {
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Semester"
                                                 forKey:@"id_semester"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:nil
                                 inManagedObjectContext:context];
 }
@@ -124,8 +124,10 @@
     NSArray *sortedEvents = [events sortedArrayUsingDescriptors:@[sortDescriptor]];
     NSDate *semesterStarts = ((ScheduleEvent *)[sortedEvents firstObject]).starts;
     NSDate *semesterEnds = ((ScheduleEvent *)[sortedEvents lastObject]).ends;
-    [range setObject:semesterStarts forKey:@"starts"];
-    [range setObject:semesterEnds forKey:@"ends"];
+    if (semesterStarts != nil)
+        [range setObject:semesterStarts forKey:@"starts"];
+    if (semesterEnds != nil)
+        [range setObject:semesterEnds forKey:@"ends"];
     return range;
 }
 

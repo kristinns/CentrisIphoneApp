@@ -14,7 +14,7 @@
 + (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;                         // tested
 + (CourseInstance *)addCourseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;      // tested
 
-+ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
++ (NSArray *)courseInstancesInSemester:(Semester *)semester inManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
 - (NSArray *)gradedAssignmentsWithNonZeroWeight;                                                                                                // tested
 - (float)averageGrade;                                                                                                                          // tested
 - (NSArray *)averageGradeDevelopment;

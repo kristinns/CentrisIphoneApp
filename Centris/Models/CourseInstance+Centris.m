@@ -78,13 +78,11 @@
     return courseInstance;
 }
 
-+ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;
++ (NSArray *)courseInstancesInSemester:(Semester *)semester inManagedObjectContext:(NSManagedObjectContext *)context;
 {
-    return [CDDataFetcher fetchObjectsFromDBWithEntity:@"CourseInstance"
-                                                forKey:@"name"
-                                         sortAscending:YES
-                                         withPredicate:nil
-                                inManagedObjectContext:context];
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES];
+    NSArray *sortedCourseInstances = [semester.hasCourseInstances sortedArrayUsingDescriptors:@[sortDescriptor]];
+    return sortedCourseInstances;
 }
 
 - (NSArray *)gradedAssignmentsWithNonZeroWeight

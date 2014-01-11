@@ -7,6 +7,7 @@
 
 #import "AssignmentsTableViewController.h"
 #import "Assignment+Centris.h"
+#import "Semester+Centris.h"
 #import "CourseInstance.h"
 #import "AppFactory.h"
 #import "DataFetcher.h"
@@ -40,8 +41,11 @@
 - (NSArray *)courses
 {
     // Get data from CentrisDataFetcher
-    if (!_courses)
-        _courses = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
+    if (!_courses) {
+        // Get courses from last semester
+        Semester *semester = [[Semester semestersInManagedObjectContext:[AppFactory managedObjectContext]] lastObject];
+        _courses = [CourseInstance courseInstancesInSemester:semester inManagedObjectContext:[AppFactory managedObjectContext]];
+    }
     return _courses;
 }
 

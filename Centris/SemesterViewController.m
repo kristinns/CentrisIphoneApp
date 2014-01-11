@@ -16,6 +16,7 @@
 #import "NSDate+Helper.h"
 #import "DataFetcher.h"
 #import "Assignment+Centris.h"
+#import "TestFlight.h"
 
 #define COURSE_INSTANCE_ROW_HEIGT 64.0
 
@@ -47,8 +48,9 @@
 #pragma mark -  Properties
 - (NSArray *)courseInstances
 {
-    if (_courseInstances == nil)
-        _courseInstances = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
+    if (_courseInstances == nil) {
+        _courseInstances = [CourseInstance courseInstancesInSemester:self.semester inManagedObjectContext:[AppFactory managedObjectContext]];
+    }
     return _courseInstances;
 }
 
@@ -108,11 +110,20 @@
     self.courseTableViewHeightConstraint.constant = courseTableViewheight;
     
     // Setup outlets
-    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.1f", [self.semester averageGrade]];
-    float semesterProgress = [self.semester progressForDate:[NSDate date]] * 100;
+    float averageGrade = [self.semester averageGrade];
     float totalPercentagesFromGradesInSemester = [self.semester totalPercentagesFromGradesInSemester] * 100;
+    self.averageGradeLabel.text = totalPercentagesFromGradesInSemester != 0 ? [NSString stringWithFormat:@"%.1f", averageGrade] : @"...";
     self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromGradesInSemester];
-    self.semesterProgressLabel.text = semesterProgress < 100 ? [NSString stringWithFormat:@"%.0f%%", semesterProgress] : @"Lokið";
+    
+    float semesterProgress = [self.semester progressForDate:[NSDate date]] * 100;
+    if (semesterProgress < 100) {
+        if (semesterProgress > 0)
+            self.semesterProgressLabel.text = [NSString stringWithFormat:@"%.0f%%", semesterProgress];
+        else
+            self.semesterProgressLabel.text = @"0%";
+    } else
+        self.semesterProgressLabel.text = @"Lokið";
+    
     // Progress view with max 100
     [self.semesterProgressView setProgress:(semesterProgress < 1 ? semesterProgress/100 : 1)];
     self.weeksLeftLabel.text = [NSString stringWithFormat:@"%d", [self.semester weeksLeft:[NSDate date]]];
