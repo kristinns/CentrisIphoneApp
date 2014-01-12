@@ -7,7 +7,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AppFactory.h"
 
-#define CENTRIS_API_URL @"http://192.168.1.65:9500/api/v1"
+#define CENTRIS_API_URL @"http://centris2.nfsu.is/api/v1"
 
 @interface CentrisParserDataFetcher()
 @end
@@ -105,7 +105,11 @@
 
 + (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    // TODO
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/lunch/"]
+       parameters:[self userCredentialsObject]
+          success:success
+          failure:failure];
 }
 
 @end
