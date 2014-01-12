@@ -13,23 +13,23 @@
 @end
 
 @implementation WebViewController
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+#pragma mark - Properties
+- (void)setHtmlContent:(NSString *)htmlContent
 {
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+    _htmlContent = htmlContent;
+    [self.webView loadHTMLString:self.htmlContent baseURL:nil];
 }
-
+#pragma mark - UIViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self.webView loadHTMLString:self.htmlContent baseURL:nil];
-	// Do any additional setup after loading the view.
+    if (self.showProgressHud) {
+        self.progressHud = [[HTProgressHUD alloc] init];
+        self.progressHud.text = [@"Sæki " stringByAppendingString:self.title];
+        [self.progressHud showInView:self.view];
+    }
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];

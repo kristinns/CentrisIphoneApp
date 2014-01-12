@@ -53,8 +53,8 @@
 
 -(UIRefreshControl *)refreshControl
 {
-    if (!_refreshControl)
-        _refreshControl = [[UIRefreshControl alloc] init];
+//    if (!_refreshControl)
+//        _refreshControl = [[UIRefreshControl alloc] init];
     return _refreshControl;
 }
 

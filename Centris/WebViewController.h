@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <HTProgressHUD/HTProgressHUD.h>
 
 @interface WebViewController : UIViewController
 @property (nonatomic, strong) NSString *htmlContent;
+@property (strong, nonatomic) HTProgressHUD *progressHud;
+@property (nonatomic) BOOL showProgressHud;
 @end

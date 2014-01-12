@@ -107,10 +107,11 @@
 	[self setupOutlets];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     if ([self viewNeedsToBeUpdated])
         [self userDidRefresh];
+    [self.materialTableView deselectRowAtIndexPath:self.materialTableView.indexPathForSelectedRow animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -120,6 +121,30 @@
         NSDictionary *material = [self.materialTable objectAtIndex:self.materialTableView.indexPathForSelectedRow.row];
         destinationController.title = [material objectForKey:@"title"];
         destinationController.htmlContent = [material objectForKey:@"content"];
+        
+        // Update courseInstanceMaterial, this temporary, should happen in CoreData categories instead..
+        NSString *courseInstanceMaterialLastUpdateConfigString = [NSString stringWithFormat:@"courseInstanceMaterialLastUpdated%@", self.courseInstance.id];
+        NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:courseInstanceMaterialLastUpdateConfigString];
+        if (!lastUpdated || [[NSDate date] timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) {
+            destinationController.showProgressHud = YES;
+            [[AppFactory dataFetcher] getCourseMaterialsForCourseID:[self.courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d materials", [responseObject count]);
+                self.courseInstance.syllabus = [responseObject objectForKey:@"Syllabus"];
+                self.courseInstance.assessmentMethods = [responseObject objectForKey:@"AssessmentMethods"];
+                self.courseInstance.content = [responseObject objectForKey:@"Content"];
+                self.courseInstance.learningOutcome = [responseObject objectForKey:@"LearningOutcome"];
+                self.courseInstance.teachingMethods = [responseObject objectForKey:@"TeachingMethods"];
+                self.materialTable = nil;
+                NSDictionary *material = [self.materialTable objectAtIndex:self.materialTableView.indexPathForSelectedRow.row];
+                destinationController.htmlContent = [material objectForKey:@"content"];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:courseInstanceMaterialLastUpdateConfigString];
+                [destinationController.progressHud hide];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting materials");
+            }];
+        }
+        
     }
 }
 

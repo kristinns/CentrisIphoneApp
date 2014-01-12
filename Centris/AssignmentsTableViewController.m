@@ -73,6 +73,7 @@
 {
     [super viewWillAppear:animated];
     [self fetchAssignmentsFromCoreData];
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -152,7 +153,7 @@
     if (self.allAssignments == YES)
         return SECTION_HEIGHT;
     else
-        return 0;
+        return 0.5;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

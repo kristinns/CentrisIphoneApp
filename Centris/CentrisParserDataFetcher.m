@@ -7,7 +7,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AppFactory.h"
 
-#define CENTRIS_API_URL @"http://centris.nfsu.is"
+#define CENTRIS_API_URL @"http://192.168.1.65:9500/api/v1"
 
 @interface CentrisParserDataFetcher()
 @end
@@ -64,6 +64,15 @@
          failure:failure];
 }
 
++ (void)getCourseMaterialsForCourseID:(NSInteger)courseInstanceID success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:[NSString stringWithFormat:@"/courses/%d/materials/", courseInstanceID]]
+       parameters:[self userCredentialsObject]
+          success:success
+          failure:failure];
+}
+
 + (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
@@ -96,11 +105,7 @@
 
 + (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/schedules/"]
-       parameters:[self userCredentialsObject]
-          success:success
-          failure:failure];
+    // TODO
 }
 
 @end

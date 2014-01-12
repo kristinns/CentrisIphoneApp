@@ -82,10 +82,11 @@
     [self setupOutlets];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     if ([self viewNeedsToBeUpdated])
         [self userDidRefresh];
+    [self.courseTableView deselectRowAtIndexPath:self.courseTableView.indexPathForSelectedRow animated:YES];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -205,7 +206,7 @@
     CourseInstance *courseInstance = [self.courseInstances objectAtIndex:indexPath.row];
     CourseInstanceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"courseTableViewCell"];
     cell.titleLabel.text = courseInstance.name;
-    cell.detailLabel.text = courseInstance.status;
+    cell.detailLabel.text = [NSString stringWithFormat:@"%@ ects, %@", courseInstance.ects, courseInstance.status];
     if ([courseInstance isPassed]) {
         if (courseInstance.finalGrade != nil) {
             cell.gradeLabel.text = [NSString stringWithFormat:@"%.1f", courseInstance.finalGrade.floatValue];
