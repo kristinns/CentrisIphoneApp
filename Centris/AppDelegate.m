@@ -59,7 +59,7 @@
 {
     /* This method is only for TestFlight, this will be removed when app is finished */
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://centris.nfsu.is/app_version/"
+    [manager GET:@"http://centris2.nfsu.is/api/v1/app_version/"
       parameters:nil
          success:^(AFHTTPRequestOperation *operation, id responseObject) {
              NSLog(@"Version %@, %@", [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"], [responseObject objectForKey:@"Version"]);
