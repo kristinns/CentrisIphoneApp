@@ -8,19 +8,21 @@
 
 #import "CourseInstance.h"
 
+#define COURSE_INSTANCE_LAST_UPDATE @"CourseInstanceLastUpdate"
+
 @interface CourseInstance (Centris)
 + (CourseInstance *)courseInstanceWithID:(NSInteger)courseID inManagedObjectContext:(NSManagedObjectContext *) context;                         // tested
 + (CourseInstance *)addCourseInstanceWithCentrisInfo:(NSDictionary *)centrisInfo inManagedObjectContext:(NSManagedObjectContext *)context;      // tested
 
-+ (NSArray *)courseInstancesInManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
-- (NSArray *)gradedAssignments;                                                                                                                 // tested
-
++ (NSArray *)courseInstancesInSemester:(Semester *)semester inManagedObjectContext:(NSManagedObjectContext *)context;                                                           // tested
+- (NSArray *)gradedAssignmentsWithNonZeroWeight;                                                                                                // tested
 - (float)averageGrade;                                                                                                                          // tested
+- (NSArray *)averageGradeDevelopment;
 - (float)weightedAverageGrade;
 - (float)totalPercentagesFromAssignments;                                                                                                       // tested
-- (float)aquiredGrade;                                                                                                                          // tested
+- (float)acquiredGrade;                                                                                                                          // tested
 - (BOOL)isPassed;
 - (BOOL)isFailed;
-- (BOOL)hasResults;
+- (BOOL)hasFinalResults;
 @end
 

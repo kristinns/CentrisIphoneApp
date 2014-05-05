@@ -16,8 +16,9 @@
 #import "NSDate+Helper.h"
 #import "DataFetcher.h"
 #import "Assignment+Centris.h"
+#import "TestFlight.h"
 
-#define COURSEINSTANCES_LAST_UPDATED @"AnnouncementTVCLastUpdate"
+#define COURSE_INSTANCE_ROW_HEIGT 64.0
 
 @interface SemesterViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *viewControllerScrollView;
@@ -43,11 +44,13 @@
 @end
 
 @implementation SemesterViewController
-#pragma Getters
+
+#pragma mark -  Properties
 - (NSArray *)courseInstances
 {
-    if (_courseInstances == nil)
-        _courseInstances = [CourseInstance courseInstancesInManagedObjectContext:[AppFactory managedObjectContext]];
+    if (_courseInstances == nil) {
+        _courseInstances = [CourseInstance courseInstancesInSemester:self.semester inManagedObjectContext:[AppFactory managedObjectContext]];
+    }
     return _courseInstances;
 }
 
@@ -57,29 +60,50 @@
         _semester = [[Semester semestersInManagedObjectContext:[AppFactory managedObjectContext]] lastObject];
     return _semester;
 }
+
+- (void)setCircleChartView:(PNChart *)circleChartView
+{
+    _circleChartView = circleChartView;
+    _circleChartView.type = PNCircleType;
+    _circleChartView.total = @100;
+    _circleChartView.strokeColor = [UIColor whiteColor];
+    [_circleChartView strokeChart];
+    _circleChartView.circleChart.lineWidth = @4;
+    _circleChartView.circleChart.circleBG.strokeColor = [UIColor colorWithRed:217/255.0 green:140/255.0 blue:147/255.0 alpha:1.0].CGColor;
+}
+
+#pragma mark - UIViewController
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.dataFetcher = [AppFactory fetcherFromConfiguration];
+    self.dataFetcher = [AppFactory dataFetcher];
 	self.navigationController.navigationBar.translucent = NO;
     self.courseTableView.scrollEnabled = YES;
-    // Setup chart
-    self.circleChartView.type = PNCircleType;
-    self.circleChartView.total = @100;
-    self.circleChartView.strokeColor = [UIColor whiteColor];
-    self.circleChartView.current = [NSNumber numberWithFloat:[self.semester totalPercentagesFromAssignmentsInSemester] * 100];
-    [self.circleChartView strokeChart];
-    [self setup];
+    [self setupOutlets];
 }
 
-- (void)viewDidAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     if ([self viewNeedsToBeUpdated])
         [self userDidRefresh];
+    [self.courseTableView deselectRowAtIndexPath:self.courseTableView.indexPathForSelectedRow animated:YES];
 }
 
-- (void)setup
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([[segue identifier] isEqualToString:@"courseInstanceSegue"]) {
+        CourseInstance *courseInstance = [self.courseInstances objectAtIndex:self.courseTableView.indexPathForSelectedRow.row];
+        CourseInstanceViewController *destinationViewController = segue.destinationViewController;
+        destinationViewController.courseInstance = courseInstance;
+    }
+}
+
+#pragma mark - Setup
+
+- (void)setupOutlets
+{
+    self.isRefreshing = NO;
+    
     // Force reloading in tableView to get correct contentSize
     [self.courseTableView reloadData];
     NSInteger courseTableViewheight = self.courseTableView.contentSize.height;
@@ -87,36 +111,38 @@
     self.courseTableViewHeightConstraint.constant = courseTableViewheight;
     
     // Setup outlets
-    self.averageGradeLabel.text = [NSString stringWithFormat:@"%.0f", [self.semester averageGrade]];
+    float averageGrade = [self.semester averageGrade];
+    float totalPercentagesFromGradesInSemester = [self.semester totalPercentagesFromGradesInSemester] * 100;
+    self.averageGradeLabel.text = totalPercentagesFromGradesInSemester != 0 ? [NSString stringWithFormat:@"%.1f", averageGrade] : @"...";
+    self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromGradesInSemester];
+    
     float semesterProgress = [self.semester progressForDate:[NSDate date]] * 100;
-    float totalPercentagesFromAssignmentsInSemester = [self.semester totalPercentagesFromAssignmentsInSemester] * 100;
-    self.averageGradePercentageLabel.text = [NSString stringWithFormat:@"AF %.0f%%", totalPercentagesFromAssignmentsInSemester];
-    self.semesterProgressLabel.text = semesterProgress < 100 ? [NSString stringWithFormat:@"%.0f%%", semesterProgress] : @"Lokið";
+    if (semesterProgress < 100) {
+        if (semesterProgress > 0)
+            self.semesterProgressLabel.text = [NSString stringWithFormat:@"%.0f%%", semesterProgress];
+        else
+            self.semesterProgressLabel.text = @"0%";
+    } else
+        self.semesterProgressLabel.text = @"Lokið";
+    
     // Progress view with max 100
-    [self.semesterProgressView setProgress:(semesterProgress < 100 ? semesterProgress/100 : 100)];
+    [self.semesterProgressView setProgress:(semesterProgress < 1 ? semesterProgress/100 : 1)];
     self.weeksLeftLabel.text = [NSString stringWithFormat:@"%d", [self.semester weeksLeft:[NSDate date]]];
     self.totalECTSLabel.text = [NSString stringWithFormat:@"%d",[self.semester totalEcts]];
     self.finishedECTSLabel.text = [NSString stringWithFormat:@"%d", [self.semester finishedEcts]];
     NSDictionary *semesterDateRange = [self.semester semesterRange];
-    self.semesterStartDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"starts"] withFormat:@"dd. MMMM"] uppercaseString];
-    self.semesterEndDateLabel.text = [[NSDate convertToString:[semesterDateRange objectForKey:@"ends"] withFormat:@"dd. MMMM"] uppercaseString];
+    self.semesterStartDateLabel.text = [[[semesterDateRange objectForKey:@"starts"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
+    self.semesterEndDateLabel.text = [[[semesterDateRange objectForKey:@"ends"] stringFromDateWithFormat:@"dd. MMMM"] uppercaseString];
     
-    // Chart
-    
-    self.circleChartView.circleChart.lineWidth = @4;
-    self.circleChartView.circleChart.circleBG.strokeColor = [[UIColor colorWithRed:223/255.0 green:222/255.0 blue:222/255.0 alpha:0.6] CGColor];
-    self.circleChartView.circleChart.circleBG.fillColor = nil;
-    [self.circleChartView.circleChart strokeChart];
-    self.isRefreshing = NO;
-
+    // CircleChart
+    if ([self.circleChartView.circleChart.current integerValue] != [[NSNumber numberWithFloat:totalPercentagesFromGradesInSemester] integerValue]) {
+        self.circleChartView.circleChart.current = [NSNumber numberWithFloat:totalPercentagesFromGradesInSemester];
+        [self.circleChartView.circleChart strokeChart];
+    }
 }
 
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView
-{
-    if (scrollView.contentOffset.y < -60)
-        [self userDidRefresh];
-}
-
+#pragma mark - Refresh control
+/* TODO: This should happen in the models */
 - (void)userDidRefresh
 {
     if (!self.isRefreshing) {
@@ -130,10 +156,12 @@
             [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Got %d assignments", [responseObject count]);
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
-                // call success block if any
+                // Set courseInstances and semester to nil to force update
                 self.courseInstances = nil;
                 self.semester = nil;
-                [self setup];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSE_INSTANCE_LAST_UPDATE];
+                [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENT_LAST_UPDATED];
+                [self setupOutlets];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 NSLog(@"Error getting assignments");
             }];
@@ -148,17 +176,17 @@
 - (BOOL)viewNeedsToBeUpdated
 {
     NSDate *now = [NSDate date];
-    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSEINSTANCES_LAST_UPDATED];
-    if (!lastUpdated) { // does not exists, so the view should better update.
+    NSDate *lastUpdated = [[AppFactory sharedDefaults] objectForKey:COURSE_INSTANCE_LAST_UPDATE];
+    if (!lastUpdated) { // Does not exists, so the view should better update.
         return YES;
-    } else if ([now timeIntervalSinceDate:lastUpdated] >= (2.0f * 60 * 60)) { // if the time since is more than 2 hours
+    } else if ([now timeIntervalSinceDate:lastUpdated] >= [[[AppFactory configuration] objectForKey:@"defaultUpdateTimeIntervalSeconds"] integerValue]) { // Check if it is time to update
         return YES;
     } else {
         return NO;
     }
 }
 
-#pragma TableView delegate methods
+#pragma mark - UITableViewDataSource
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -169,20 +197,16 @@
     if (tableView == self.courseTableView)
         return self.courseInstances.count;
     else
-        return 3;
+        return 0;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 64;
-}
-
+/* TODO: Refactor this method */
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     CourseInstance *courseInstance = [self.courseInstances objectAtIndex:indexPath.row];
     CourseInstanceTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"courseTableViewCell"];
     cell.titleLabel.text = courseInstance.name;
-    cell.detailLabel.text = courseInstance.status;
+    cell.detailLabel.text = [NSString stringWithFormat:@"%@ ects, %@", courseInstance.ects, courseInstance.status];
     if ([courseInstance isPassed]) {
         if (courseInstance.finalGrade != nil) {
             cell.gradeLabel.text = [NSString stringWithFormat:@"%.1f", courseInstance.finalGrade.floatValue];
@@ -206,14 +230,10 @@
     return cell;
 }
 
-#pragma segue method
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+#pragma mark - UITableViewDelegate
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if ([[segue identifier] isEqualToString:@"courseInstanceSegue"]) {
-        CourseInstance *courseInstance = [self.courseInstances objectAtIndex:self.courseTableView.indexPathForSelectedRow.row];
-        CourseInstanceViewController *destinationViewController = segue.destinationViewController;
-        destinationViewController.courseInstance = courseInstance;
-    }
+    return COURSE_INSTANCE_ROW_HEIGT;
 }
 
 @end

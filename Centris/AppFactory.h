@@ -14,8 +14,10 @@
 
 @interface AppFactory : NSObject
 
-+ (id<DataFetcher>)fetcherFromConfiguration;
++ (NSDictionary *)configuration;
++ (id<DataFetcher>)dataFetcher;
 + (KeychainItemWrapper *)keychainItemWrapper;
 + (NSManagedObjectContext *)managedObjectContext;
 + (NSUserDefaults *)sharedDefaults;
++ (UIStoryboard *)mainStoryboard;
 @end

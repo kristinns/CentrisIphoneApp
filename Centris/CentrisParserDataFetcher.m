@@ -7,7 +7,7 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AppFactory.h"
 
-#define CENTRIS_API_URL @"http://centris.nfsu.is"
+#define CENTRIS_API_URL @"http://centris2.nfsu.is/api/v1"
 
 @interface CentrisParserDataFetcher()
 @end
@@ -27,7 +27,7 @@
 + (void)getAssignmentsInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://centris.nfsu.is/assignments/"
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/assignments/"]
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -38,7 +38,7 @@
                   failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:[NSString stringWithFormat:@"http://centris.nfsu.is/assignments/%d/%d/", courseId, assignmentId]
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:[NSString stringWithFormat:@"/assignments/%d/%d/", courseId, assignmentId]]
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -58,17 +58,26 @@
 + (void)getCoursesInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://centris.nfsu.is/courses/"
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/courses/"]
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
+}
+
++ (void)getCourseMaterialsForCourseID:(NSInteger)courseInstanceID success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:[NSString stringWithFormat:@"/courses/%d/materials/", courseInstanceID]]
+       parameters:[self userCredentialsObject]
+          success:success
+          failure:failure];
 }
 
 + (void)getAnnouncementWithSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://centris.nfsu.is/notifications/"
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/notifications/"]
        parameters:[self userCredentialsObject]
           success:success
           failure:failure];
@@ -77,7 +86,7 @@
 + (void)getScheduleInSemester:(NSString *)semester success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://centris.nfsu.is/schedules/"
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/schedules/"]
       parameters:[self userCredentialsObject]
          success:success
          failure:failure];
@@ -88,7 +97,7 @@
 {
     NSDictionary *userCred = @{@"email":email, @"password":password};
 	AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://centris.nfsu.is/user/"
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/user/"]
       parameters:userCred
          success:success
          failure:failure];
@@ -96,7 +105,11 @@
 
 + (void)getMenuWithSuccess:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure
 {
-    // TODO
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:[CENTRIS_API_URL stringByAppendingString:@"/lunch/"]
+       parameters:[self userCredentialsObject]
+          success:success
+          failure:failure];
 }
 
 @end

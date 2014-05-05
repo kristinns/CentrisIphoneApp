@@ -39,7 +39,7 @@ describe(@"Assignment Category", ^{
         courseInstance.semester = @"20133";
         
         // Create a date range that is always available
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
         
         // Set up dummy assignments to be ready for testing
         Assignment *assignment1 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
@@ -50,7 +50,7 @@ describe(@"Assignment Category", ^{
         assignment1.datePublished = range[@"from"];
         assignment1.dateClosed = [(NSDate *)range[@"to"] dateByAddingDays:5];
         assignment1.isInCourseInstance = courseInstance;
-        assignment1.handInDate = [NSDate convertToDate:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
+        assignment1.handInDate = [NSDate dateFromString:@"2013-11-21T14:31:31" withFormat:nil]; // handed in
         
         Assignment *assignment2 = [NSEntityDescription insertNewObjectForEntityForName:@"Assignment" inManagedObjectContext:context];
         assignment2.id = [NSNumber numberWithInteger:2];
@@ -158,14 +158,14 @@ describe(@"Assignment Category", ^{
         [updateAssignment setObject:[NSNull null] forKey:@"TeacherMemo"];
         [updateAssignment setObject:[NSNull null] forKey:@"Closes"];
         
-        NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+        NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
         // first guarantee it has the dateClosed set to today
         Assignment *checkAssignment = [Assignment assignmentWithID:[NSNumber numberWithInteger:2] inManagedObjectContext:context];
         [[theValue([checkAssignment.dateClosed compare:range[@"to"]] == NSOrderedSame) should] beTrue];
         
         [Assignment updateAssignmentWithCentrisInfo:updateAssignment inManagedObjectContext:context];
         checkAssignment = [Assignment assignmentWithID:[NSNumber numberWithInteger:2] inManagedObjectContext:context];
-        [[theValue([checkAssignment.dateClosed compare:[NSDate convertToDate:@"2013-11-01T23:59:59" withFormat:nil]] == NSOrderedSame) should] beTrue];
+        [[theValue([checkAssignment.dateClosed compare:[NSDate dateFromString:@"2013-11-01T23:59:59" withFormat:nil]] == NSOrderedSame) should] beTrue];
     });
 });
 

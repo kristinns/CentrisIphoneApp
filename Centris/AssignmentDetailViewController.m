@@ -102,7 +102,7 @@
     self.gradeLabel.text = self.assignment.grade != nil ? [NSString stringWithFormat:@"%.1f", [self.assignment.grade floatValue]] : @"";
     self.descriptionTextView.text = @"";
     self.teacherCommentTextView.text = @"";
-    self.handinDateLabel.text = [NSDate convertToString:self.assignment.handInDate withFormat:@"dd'. 'MMM HH':'mm'"];
+    self.handinDateLabel.text = [self.assignment.handInDate stringFromDateWithFormat:@"dd'. 'MMM HH':'mm'"];
     self.descriptionDateLabel.text = @"";
     self.teacherCommentDateLabel.text = @"";
     self.HUD = [[HTProgressHUD alloc] init];
@@ -213,7 +213,7 @@
 - (void)fetchAssignmentFromAPI
 {
     CourseInstance *courseInstance = self.assignment.isInCourseInstance;
-    [[AppFactory fetcherFromConfiguration] getAssignmentById:[self.assignment.id integerValue] courseId:[courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AppFactory dataFetcher] getAssignmentById:[self.assignment.id integerValue] courseId:[courseInstance.id integerValue] success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got assignment %@", [responseObject objectForKey:@"Title"]);
         // Add assignment to core data
         [Assignment updateAssignmentWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];      // Update our assignment

@@ -19,7 +19,7 @@
 
 + (NSArray *)scheduleEventUnitsForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDictionary *range = [NSDate dateRangeForTheWholeDay:date];
+    NSDictionary *range = [date dateRangeForTheWholeDay];
     
 	NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     
@@ -95,13 +95,13 @@
 + (NSArray *)nextEventForDate:(NSDate *)date InManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *comps = [NSDate dateComponentForDate:date withCalendar:gregorian];
+    NSDateComponents *comps = [date dateComponentForDateWithCalendar:gregorian];
     NSDictionary *range = nil;
     
     if ([comps hour] > 21) {
-        range = [NSDate dateRangeToNextMorning:date];
+        range = [date dateRangeToNextMorning];
     } else {
-        range = [NSDate dateRangeToMidnightFromDate:date];
+        range = [date dateRangeToMidnightFromDate];
     }
     
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
@@ -115,7 +115,7 @@
 // Retrieves all the schedule event units for the current date
 + (NSArray *)scheduleEventUnitsForCurrentDateInMangedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDictionary *range = [NSDate dateRangeForTheWholeDay:[NSDate date]];
+    NSDictionary *range = [[NSDate date] dateRangeForTheWholeDay];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"starts >= %@ AND ends <= %@", range[@"from"], range[@"to"]];
     
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"ScheduleEvent"
@@ -159,8 +159,8 @@
 
 + (void)populateScheduleEventFieldsForScheduleEvent:(ScheduleEvent *)event withEventInfo:(NSDictionary *)eventInfo inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    event.starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
-    event.ends = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
+    event.starts = [NSDate dateFromString:eventInfo[EVENT_START_TIME] withFormat:nil];
+    event.ends = [NSDate dateFromString:eventInfo[EVENT_END_TIME] withFormat:nil];
     event.roomName = eventInfo[EVENT_ROOM_NAME];
     event.typeOfClass = eventInfo[EVENT_TYPE_OF_CLASS];
     event.courseName = eventInfo[EVENT_COURSE_NAME];
@@ -171,8 +171,8 @@
 + (NSArray *)splitEventsDownToUnits:(NSDictionary *)eventInfo
 {
     NSMutableArray *splittedEvents = [[NSMutableArray alloc] init];
-    NSDate *starts = [NSDate convertToDate:eventInfo[EVENT_START_TIME] withFormat:nil];
-    NSDate *to = [NSDate convertToDate:eventInfo[EVENT_END_TIME] withFormat:nil];
+    NSDate *starts = [NSDate dateFromString:eventInfo[EVENT_START_TIME] withFormat:nil];
+    NSDate *to = [NSDate dateFromString:eventInfo[EVENT_END_TIME] withFormat:nil];
     CGFloat length = [to timeIntervalSinceDate:starts];
     if (length <= SCHEDULE_EVENT_LENGTH || (![eventInfo[EVENT_TYPE_OF_CLASS] isEqualToString:@"Fyrirlestur"] && ![eventInfo[EVENT_TYPE_OF_CLASS] isEqualToString:@"Dæmatími"])) {
         [splittedEvents addObject:eventInfo];

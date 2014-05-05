@@ -13,6 +13,7 @@
 + (UIColor *)grayLightColor;
 + (UIColor *)blackLightTextColor;
 + (UIColor *)grayLightTextColor;
++ (UIColor *)blackColor;
 
 + (UIFont *)headingBigFont;
 + (UIFont *)headingMediumFont;

@@ -54,9 +54,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.todayLabel.text = [[NSDate convertToString:[NSDate date] withFormat:@"EEEE dd. MMMM"] capitalizedString];
+    self.todayLabel.text = [[[NSDate date] stringFromDateWithFormat:@"EEEE dd. MMMM"] capitalizedString];
     // Get Menu
-    [[AppFactory fetcherFromConfiguration] getMenuWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AppFactory dataFetcher] getMenuWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSLog(@"Got %d Lunch", [responseObject count]);
         [Menu addMenuWithCentrisInfo:responseObject inManagedObjectContext:[AppFactory managedObjectContext]];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -120,8 +120,8 @@
     // If the clock is between 11:00 and 13:00, then add Lunch card
     Menu *menu;
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    if ([[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] >= 10 &&
-        [[NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian] hour] <= 13) {
+    if ([[[NSDate date] dateComponentForDateWithCalendar:gregorian] hour] >= 10 &&
+        [[[NSDate date] dateComponentForDateWithCalendar:gregorian] hour] <= 13) {
         menu = [Menu getMenuForDay:[NSDate date] inManagedObjectContext:[AppFactory managedObjectContext]];
     }
     self.textView.text = [[assignmentSummaryText stringByAppendingString:scheduleEventSummaryText] stringByAppendingString:finalExamSummaryText];
@@ -197,16 +197,16 @@
 {
     NSInteger numberOfEvents = [scheduleEvents count];
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *compsNow = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
+    NSDateComponents *compsNow = [[NSDate date] dateComponentForDateWithCalendar:gregorian];
     NSString *scheduleEventSummary = @"";
     if (numberOfEvents) {
         ScheduleEvent *nextEvent = (ScheduleEvent *)[scheduleEvents lastObject];
-        NSDateComponents *eventComps = [NSDate dateComponentForDate:nextEvent.starts withCalendar:gregorian];
+        NSDateComponents *eventComps = [nextEvent.starts dateComponentForDateWithCalendar:gregorian];
         // check if it's in the morning
         if ([eventComps day] != [compsNow day]) {
-            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm"], nextEvent.roomName]];
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér í fyrramálið klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [nextEvent.starts stringFromDateWithFormat:@"HH':'mm"], nextEvent.roomName]];
         } else {
-            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [NSDate convertToString:nextEvent.starts withFormat:@"HH':'mm"], nextEvent.roomName]];
+            scheduleEventSummary = [scheduleEventSummary stringByAppendingString:[NSString stringWithFormat:@"%@ er næsti tími hjá þér klukkan %@ í stofu %@. ", nextEvent.hasCourseInstance.name, [nextEvent.starts stringFromDateWithFormat:@"HH':'mm"], nextEvent.roomName]];
         }
     } // else it is a weekend or the schoolday is over. Might be a good idea to find a witty text about this situation.
     return scheduleEventSummary;
@@ -283,8 +283,8 @@
 //        NSDictionary *shortcutForTypeOfClass = @{@"Lokapróf"
         tableViewCell.locationLabel.text = [NSString stringWithFormat:@"%@ í %@", scheduleEvent.typeOfClass, scheduleEvent.roomName];
         
-        tableViewCell.fromTimeLabel.text = [NSDate convertToString:scheduleEvent.starts withFormat:@"HH:mm"];
-        tableViewCell.toTimeLabel.text = [NSDate convertToString:scheduleEvent.ends withFormat:@"HH:mm"];
+        tableViewCell.fromTimeLabel.text = [scheduleEvent.starts stringFromDateWithFormat:@"HH:mm"];
+        tableViewCell.toTimeLabel.text = [scheduleEvent.ends stringFromDateWithFormat:@"HH:mm"];
         NSInteger secondsToTime = [scheduleEvent.starts timeIntervalSinceDate:[NSDate date]];
         NSInteger daysToTime = secondsToTime/60/60/24;
         NSInteger hoursToTime = secondsToTime/60/60;

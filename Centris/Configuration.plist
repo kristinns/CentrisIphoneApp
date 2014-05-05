@@ -5,6 +5,10 @@
 	<key>KeychainFile</key>
 	<string>CentrisLogin</string>
 	<key>DataFetcher</key>
-	<string>CDFServiceStub</string>
+	<string>CentrisParserDataFetcher</string>
+	<key>defaultUpdateTimeIntervalSeconds</key>
+	<integer>600</integer>
+	<key>lessImportantUpdateTimeIntervalSeconds</key>
+	<string>86400</string>
 </dict>
 </plist>

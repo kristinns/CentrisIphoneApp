@@ -93,7 +93,9 @@
 + (void)getCoursesInSemester:(NSString *)semester
                      success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                      failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
-
++ (void)getCourseMaterialsForCourseID:(NSInteger)courseInstanceID
+                   success:(void (^)(AFHTTPRequestOperation *, id))success
+                   failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
 + (void)getScheduleInSemester:(NSString *)semester
                       success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success
                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;

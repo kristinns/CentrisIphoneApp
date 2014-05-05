@@ -27,7 +27,7 @@
 {
     return [CDDataFetcher fetchObjectsFromDBWithEntity:@"Semester"
                                                 forKey:@"id_semester"
-                                         sortAscending:NO
+                                         sortAscending:YES
                                          withPredicate:nil
                                 inManagedObjectContext:context];
 }
@@ -38,14 +38,21 @@
     if (![courseInstances count])
         return 0.0;
     float average = 0.0f;
-    NSInteger counter = 0;
+    float totalECTS = 0.0f;
     for (CourseInstance *courseInstance in courseInstances) {
-        float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
-        average = average + weightedAverageFromCourseInstance;
-        if (weightedAverageFromCourseInstance)
-            counter++;
+        if ([courseInstance hasFinalResults]) {
+            if (courseInstance.finalGrade != nil) {
+                average += [courseInstance.finalGrade floatValue] * [courseInstance.ects floatValue];
+                totalECTS += [courseInstance.ects floatValue];
+            }
+        } else {
+            float weightedAverageFromCourseInstance = [courseInstance weightedAverageGrade];
+            average += weightedAverageFromCourseInstance * [courseInstance.ects floatValue];
+            if (weightedAverageFromCourseInstance)
+                totalECTS+= [courseInstance.ects floatValue];
+        }
     }
-    return average / counter;
+    return average / totalECTS;
 }
 
 
@@ -75,19 +82,19 @@
     return finishedEcts;
 }
 
-- (float)totalPercentagesFromAssignmentsInSemester
+- (float)totalPercentagesFromGradesInSemester
 {
     NSSet *courseInstances = self.hasCourseInstances;
     if (![courseInstances count])
         return 0.0;
     float totalPercentagesFromAssignmentsInSemester = 0.0f;
-    float counter = 0;
+    float totalEcts = 0;
     for (CourseInstance *courseInstance in courseInstances) {
         float totalPercentagesFromAssignmentsInCourse = [courseInstance totalPercentagesFromAssignments];
-        totalPercentagesFromAssignmentsInSemester += totalPercentagesFromAssignmentsInCourse;
-        counter++;
+        totalPercentagesFromAssignmentsInSemester += totalPercentagesFromAssignmentsInCourse * [courseInstance.ects floatValue];
+        totalEcts += [courseInstance.ects floatValue];
     }
-    return (totalPercentagesFromAssignmentsInSemester / (counter * 100.0f));
+    return (totalPercentagesFromAssignmentsInSemester / (totalEcts * 100.0f));
 }
 
 - (NSInteger)weeksLeft:(NSDate *)date
@@ -117,8 +124,10 @@
     NSArray *sortedEvents = [events sortedArrayUsingDescriptors:@[sortDescriptor]];
     NSDate *semesterStarts = ((ScheduleEvent *)[sortedEvents firstObject]).starts;
     NSDate *semesterEnds = ((ScheduleEvent *)[sortedEvents lastObject]).ends;
-    [range setObject:semesterStarts forKey:@"starts"];
-    [range setObject:semesterEnds forKey:@"ends"];
+    if (semesterStarts != nil)
+        [range setObject:semesterStarts forKey:@"starts"];
+    if (semesterEnds != nil)
+        [range setObject:semesterEnds forKey:@"ends"];
     return range;
 }
 

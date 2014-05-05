@@ -12,6 +12,7 @@
 #import "User+Centris.h"
 #import "CourseInstance+Centris.h"
 #import "ScheduleEvent+Centris.h"
+#import "Announcement+Centris.h"
 #import "Assignment+Centris.h"
 #import <HTProgressHUD/HTProgressHUD.h>
 #import "HTProgressHUDFadeZoomAnimation.h"
@@ -22,7 +23,6 @@
 @property (nonatomic, weak) IBOutlet UITextField *emailInput;
 @property (nonatomic, weak) IBOutlet UITextField *passwordInput;
 @property (nonatomic, weak) IBOutlet UIButton *loginButton;
-@property (nonatomic, strong) id<DataFetcher> dataFetcher;
 @property (nonatomic, strong) HTProgressHUD *HUD;
 @property (nonatomic) NSInteger threadCounter;
 @end
@@ -31,12 +31,6 @@
 @implementation LoginViewController
 
 #pragma mark - Getters
-- (id<DataFetcher>)dataFetcher
-{
-    if(!_dataFetcher)
-        _dataFetcher = [AppFactory fetcherFromConfiguration];
-    return _dataFetcher;
-}
 
 // Lazy instantiate
 - (HTProgressHUD *)HUD
@@ -90,12 +84,12 @@
     
     [self displayHUDWithText:@"Skrái þig inn"];
     [self updateHUDWithText:@"Sæki notandaupplýsingar" addProgress:0.2];
-    [self.dataFetcher loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[AppFactory dataFetcher] loginUserWithUsername:username andPassword:password success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [User addUserWithCentrisInfo:responseObject inManagedObjectContext:context];
         [self storeInKeychainUsername:username andPassword:password];
         
         [self updateHUDWithText:@"Sæki áfanga" addProgress:0.2];
-        [self.dataFetcher getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[AppFactory dataFetcher] getCoursesInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
             TFLog(@"Got %d courses", [responseObject count]);
             for (NSDictionary *courseInst in responseObject) {
                 [CourseInstance addCourseInstanceWithCentrisInfo:courseInst inManagedObjectContext:context];
@@ -103,7 +97,7 @@
             
             // Get scheduleEvents
             [self updateHUDWithText:@"Sæki stundatöflu" addProgress:0.2];
-            [self.dataFetcher getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[AppFactory dataFetcher] getScheduleInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 TFLog(@"Got %d scheduleEvents", [responseObject count]);
                 [ScheduleEvent addScheduleEventsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
@@ -114,7 +108,7 @@
             }];
             
             // Get assignments
-            [self.dataFetcher getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            [[AppFactory dataFetcher] getAssignmentsInSemester:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 TFLog(@"Got %d assignments", [responseObject count]);
                 [Assignment addAssignmentsWithCentrisInfo:responseObject inManagedObjectContext:context];
                 [self delegateFinishedLoggingInWithValidUser];
@@ -123,6 +117,18 @@
                 [self hideHUD];
                 [self promptUserWithMessage:@"Villa kom upp við að sækja áfanga :(. Endilega reyndu aftur" title:@"Villa" cancelButtonTitle:@"Ókei"];
             }];
+            
+            // Get announcements
+            [[AppFactory dataFetcher] getAnnouncementWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Got %d announcements", [responseObject count]);
+                for (NSDictionary *announcementDict in responseObject) {
+                    [Announcement addAnnouncementWithCentrisInfo:announcementDict inManagedObjectContext:[AppFactory managedObjectContext]];
+                }
+                [self delegateFinishedLoggingInWithValidUser];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error getting announcements");
+            }];
+
             
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -197,12 +203,16 @@
 
 - (void)delegateFinishedLoggingInWithValidUser
 {
-    if (self.threadCounter < 1)
+    if (self.threadCounter < 2)
         self.threadCounter++;
     else {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self hideHUD];
             id<LoginViewControllerDelegate> appDelegate = (id<LoginViewControllerDelegate>)[[UIApplication sharedApplication] delegate];
+            [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:COURSE_INSTANCE_LAST_UPDATE];
+            [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ASSIGNMENT_LAST_UPDATED];
+            [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:SCHEDULE_LAST_UPDATED];
+            [[AppFactory sharedDefaults] setObject:[NSDate date] forKey:ANNOUNCEMENTS_LAST_UPDATED];
             [appDelegate didFinishLoginWithValidUser];
         });
     }

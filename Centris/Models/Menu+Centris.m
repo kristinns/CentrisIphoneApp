@@ -14,7 +14,7 @@
 @implementation Menu (Centris)
 + (Menu *)getMenuForDay:(NSDate *)date inManagedObjectContext:(NSManagedObjectContext *)context
 {
-    NSDictionary *range = [NSDate dateRangeForTheWholeDay:date];
+    NSDictionary *range = [date dateRangeForTheWholeDay];
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"date >= %@ AND date <= %@", range[@"from"], range[@"to"]];
     return [[CDDataFetcher fetchObjectsFromDBWithEntity:@"Menu"
                                                 forKey:@"date"
@@ -28,11 +28,11 @@
     for (NSDictionary *menuDay in menuInfoWeek)
     {
         
-        Menu *menu = [self getMenuForDay:[NSDate convertToDate:menuDay[@"Date"] withFormat:nil] inManagedObjectContext:context];
+        Menu *menu = [self getMenuForDay:[NSDate dateFromString:menuDay[@"Date"] withFormat:nil] inManagedObjectContext:context];
         if (!menu) { // doesn't exist, create one
             menu = [NSEntityDescription insertNewObjectForEntityForName:@"Menu" inManagedObjectContext:context];
             menu.menu = menuDay[@"Menu"];
-            menu.date = [NSDate convertToDate:menuDay[@"Date"] withFormat:nil];
+            menu.date = [NSDate dateFromString:menuDay[@"Date"] withFormat:nil];
         } else { // update it's Menu
             menu.menu = menuDay[@"Menu"];
         }
@@ -42,7 +42,7 @@
 + (NSArray *)getMenuForCurrentWeekInManagedObjectContext:(NSManagedObjectContext *)context
 {
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *currComps = [NSDate dateComponentForDate:[NSDate date] withCalendar:gregorian];
+    NSDateComponents *currComps = [[NSDate date] dateComponentForDateWithCalendar:gregorian];
     NSDateComponents *customComps = [[NSDateComponents alloc] init];
     [customComps setWeekday:1];
     [customComps setYear:[currComps year]];

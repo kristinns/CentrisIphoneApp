@@ -49,7 +49,7 @@
         announcement.title = centrisInfo[ANNOUNCEMENT_TITLE];
         announcement.content = centrisInfo[ANNOUNCEMENT_CONTENT];
         announcement.read = NO;
-        announcement.dateInserted = [NSDate convertToDate:centrisInfo[ANNOUNCEMENT_DATE_INSERTED] withFormat:nil];
+        announcement.dateInserted = [NSDate dateFromString:centrisInfo[ANNOUNCEMENT_DATE_INSERTED] withFormat:nil];
         announcement.isInCourseInstance = [CourseInstance courseInstanceWithID:[centrisInfo[ANNOUNCEMENT_COURSE_ID] integerValue] inManagedObjectContext:context];
     } else {
         return [matches lastObject];

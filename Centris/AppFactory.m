@@ -10,32 +10,40 @@
 
 @implementation AppFactory
 
-static KeychainItemWrapper *sharedKeychainItemWrapper = nil;
-static NSManagedObjectContext *sharedManagedObjectContext = nil;
+static KeychainItemWrapper *_sharedKeychainItemWrapper = nil;
+static NSManagedObjectContext *_sharedManagedObjectContext = nil;
+static id<DataFetcher> _sharedDataFetcher = nil;
 
 + (NSDictionary *)configuration
 {
 	return [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"Configuration" ofType:@"plist"]];
 }
 
-+ (id<DataFetcher>)fetcherFromConfiguration
++ (id<DataFetcher>)dataFetcher
 {
-	NSString *className = [[self configuration] objectForKey:@"DataFetcher"];
-	return (id<DataFetcher>)[NSClassFromString(className) class];
+    if (!_sharedDataFetcher) {
+        static dispatch_once_t pred;
+        dispatch_once(&pred, ^{
+            NSString *className = [[self configuration] objectForKey:@"DataFetcher"];
+            _sharedDataFetcher = (id<DataFetcher>)[NSClassFromString(className) class];
+        });
+    }
+        return _sharedDataFetcher;
+	
 }
 
 + (KeychainItemWrapper *)keychainItemWrapper {
-    if (!sharedKeychainItemWrapper) {
+    if (!_sharedKeychainItemWrapper) {
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
-            sharedKeychainItemWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:[self keychainFromConfiguration] accessGroup:nil];
+            _sharedKeychainItemWrapper = [[KeychainItemWrapper alloc] initWithIdentifier:[self keychainFromConfiguration] accessGroup:nil];
         });
     }
-    return sharedKeychainItemWrapper;
+    return _sharedKeychainItemWrapper;
 }
 
 + (NSManagedObjectContext *)managedObjectContext {
-    if (!sharedManagedObjectContext) {
+    if (!_sharedManagedObjectContext) {
         static dispatch_once_t pred;
         dispatch_once(&pred, ^{
             // Get application document directory
@@ -58,14 +66,14 @@ static NSManagedObjectContext *sharedManagedObjectContext = nil;
             }
 
             if (coordinator != nil) {
-                sharedManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-                [sharedManagedObjectContext setPersistentStoreCoordinator:coordinator];
+                _sharedManagedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+                [_sharedManagedObjectContext setPersistentStoreCoordinator:coordinator];
             } else {
                 // Handle error
             }
         });
     }
-    return sharedManagedObjectContext;
+    return _sharedManagedObjectContext;
 }
 
 + (NSString *)keychainFromConfiguration
@@ -76,6 +84,11 @@ static NSManagedObjectContext *sharedManagedObjectContext = nil;
 + (NSUserDefaults *)sharedDefaults
 {
     return [NSUserDefaults standardUserDefaults];
+}
+
++ (UIStoryboard *)mainStoryboard
+{
+    return [UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]];
 }
 
 @end

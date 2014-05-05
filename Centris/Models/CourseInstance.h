@@ -2,8 +2,8 @@
 //  CourseInstance.h
 //  Centris
 //
-//  Created by Kristinn Svansson on 14/12/13.
-//  Copyright (c) 2013 Kristinn Svansson. All rights reserved.
+//  Created by Kristinn Svansson on 11/01/14.
+//  Copyright (c) 2014 Kristinn Svansson. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,14 +25,19 @@
 @property (nonatomic, retain) NSString * status;
 @property (nonatomic, retain) NSString * syllabus;
 @property (nonatomic, retain) NSString * teachingMethods;
+@property (nonatomic, retain) NSSet *hasAnnouncements;
 @property (nonatomic, retain) NSSet *hasAssignments;
 @property (nonatomic, retain) NSSet *hasScheduleEvents;
 @property (nonatomic, retain) User *hasUser;
 @property (nonatomic, retain) Semester *isInSemester;
-@property (nonatomic, retain) Announcement *hasAnnouncements;
 @end
 
 @interface CourseInstance (CoreDataGeneratedAccessors)
+
+- (void)addHasAnnouncementsObject:(Announcement *)value;
+- (void)removeHasAnnouncementsObject:(Announcement *)value;
+- (void)addHasAnnouncements:(NSSet *)values;
+- (void)removeHasAnnouncements:(NSSet *)values;
 
 - (void)addHasAssignmentsObject:(Assignment *)value;
 - (void)removeHasAssignmentsObject:(Assignment *)value;
