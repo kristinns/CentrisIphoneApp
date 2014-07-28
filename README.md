@@ -1,5 +1,9 @@
 CentrisIphoneApp
 ================
+![](http://i.imgur.com/2q1KJVv.png "")
+![](http://i.imgur.com/F3ZhZB9.png "")
+
+
 Build
 ----------------
 1. Clone this repo
